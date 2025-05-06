@@ -1,0 +1,102 @@
+@use "sass:color";
+
+// Brand Colors
+$gold: #D4AF37;
+$gold-dark: color.adjust($gold, $lightness: -15%);
+$gold-light: color.adjust($gold, $lightness: 15%);
+
+$primary-color: #D4AF37;
+$background-color: transparent;
+$transition-duration: 0.3s;
+
+// Base Colors
+$black: #000;
+$white: #fff;
+$dark: #1a1a1a;
+$background-color: #000;
+
+// Layout Dimensions
+$topbar-height: 40px;
+$navbar-height: 80px;
+$container-max-width: 1200px;
+
+// Typography
+$font-family-base: 'Poppins', sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+// Font Sizes
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Spacing
+$spacing-base: 1rem;
+$spacing-xs: $spacing-base * 0.25;
+$spacing-sm: $spacing-base * 0.5;
+$spacing-md: $spacing-base;
+$spacing-lg: $spacing-base * 1.5;
+$spacing-xl: $spacing-base * 2;
+$spacing-xxl: $spacing-base * 3;
+
+// Border Radius
+$border-radius-sm: 0.25rem;
+$border-radius: 0.5rem;
+$border-radius-lg: 1rem;
+
+// Transitions
+$transition-base: all 0.3s ease;
+$transition-fast: all 0.15s ease;
+$transition-slow: all 0.45s ease;
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+// Z-indices
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-topbar: 1040;
+$z-index-navbar: 1050;
+$z-index-modal: 1060;
+$z-index-popover: 1070;
+$z-index-tooltip: 1080;
+
+// Component Specific
+$navbar-background: rgba($black, 0.95);
+$navbar-border-color: $gold;
+$navbar-link-color: $gold;
+$navbar-link-hover-color: $gold-light;
+
+$topbar-background: $black;
+$topbar-border-color: rgba($gold, 0.15);
+$topbar-text-color: $gold;
+
+// Gradients
+$gold-gradient: linear-gradient(to right, 
+  rgba($gold, 0.4),
+  rgba($gold, 0.8),
+  rgba($gold, 0.4)
+); 

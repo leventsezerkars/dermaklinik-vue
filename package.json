@@ -1,0 +1,32 @@
+{
+  "name": "dermaklinik-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
+    "@vueuse/core": "^10.7.2",
+    "@vueuse/head": "^1.0.0",
+    "aos": "^2.3.4",
+    "axios": "^1.6.7",
+    "bootstrap": "^5.3.2",
+    "swiper": "^11.2.6",
+    "vue": "^3.5.13",
+    "vue-meta": "^3.0.0-alpha.10",
+    "vue-router": "^4.2.5",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "sass": "^1.71.1",
+    "vite": "^6.2.0"
+  }
+}

@@ -1,0 +1,192 @@
+@use "sass:color";
+@use "@/assets/styles/variables" as *;
+
+.navbar {
+  position: fixed !important;
+  top: $topbar-height;
+  left: 0;
+  right: 0;
+  z-index: $z-index-navbar;
+  min-height: $navbar-height;
+  background-color: $navbar-background;
+  border-bottom: 1px solid $navbar-border-color;
+  transition: transform $transition-base;
+
+  
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .navbar-brand {
+    color: $navbar-link-color;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+
+    img {
+      height: 40px;
+      width: auto;
+      transition: transform $transition-base;
+      opacity: 0.98;
+    }
+
+    .brand-text {
+      font-size: $font-size-xl;
+      margin-left: $spacing-base;
+      color: $navbar-link-color;
+      letter-spacing: 0.5px;
+      font-weight: $font-weight-semibold;
+      opacity: 0.98;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      .brand-text {
+        opacity: 1;
+      }
+    }
+  }
+
+  .navbar-toggler {
+    border: 1px solid rgba($gold, 0.15);
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23D4AF37' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      opacity: 0.95;
+    }
+  }
+
+  .navbar-nav {
+    .nav-item {
+      position: relative;
+      margin: 0 0.25rem;
+
+      .nav-link {
+        color: $gold;
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+        opacity: 0.95;
+
+        &:hover {
+          color: color.adjust($gold, $lightness: 10%);
+          opacity: 1;
+        }
+
+        &.dropdown-toggle::after {
+          vertical-align: middle;
+          margin-left: 0.5rem;
+          border-top-width: 0.3em;
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    background-color: $background-color;
+    border: 1px solid rgba($gold, 0.1);
+    border-radius: 0;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    min-width: 230px;
+    animation: fadeIn 0.3s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, 
+        rgba($gold, 0.02),
+        rgba($gold, 0.15),
+        rgba($gold, 0.02)
+      );
+    }
+
+    .dropdown-item {
+      color: $gold;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      opacity: 0.95;
+
+      &:hover {
+        background-color: rgba($gold, 0.08);
+        color: color.adjust($gold, $lightness: 10%);
+        padding-left: 2rem;
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    .navbar-collapse {
+      background-color: $background-color;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      border: 1px solid rgba($gold, 0.1);
+    }
+
+    .navbar-nav {
+      .nav-item {
+        margin: 0;
+
+        .nav-link {
+          padding: 0.75rem 0;
+        }
+      }
+    }
+
+    .dropdown-menu {
+      border: none;
+      background-color: transparent;
+      padding: 0 0 0 1rem;
+      margin: 0;
+
+      &::after {
+        display: none;
+      }
+
+      .dropdown-item {
+        padding: 0.5rem 1rem;
+        color: $gold;
+
+        &:hover {
+          background-color: transparent;
+          color: color.adjust($gold, $lightness: 10%);
+          padding-left: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

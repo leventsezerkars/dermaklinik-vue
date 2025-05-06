@@ -1,0 +1,42 @@
+@use '@/assets/styles/variables' as *;
+
+.home {
+  overflow-x: hidden;
+}
+
+/* Global Styles */
+:root {
+  --primary-color: #007bff;
+  --primary-color-rgb: 0, 123, 255;
+  --dark-color: #212529;
+  --gray-300: #dee2e6;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+}
+
+body {
+  font-family: $font-family-base;
+  line-height: $line-height-base;
+  color: $dark;
+}
+
+/* Responsive Adjustments */
+@media (max-width: $breakpoint-lg) {
+  .service-category {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .hero-section {
+    min-height: 500px;
+  }
+  
+  .services-section {
+    padding: $spacing-xl 0;
+  }
+  
+  .contact-section {
+    padding: $spacing-xl 0;
+  }
+} 
