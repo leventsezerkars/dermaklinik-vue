@@ -7,7 +7,7 @@
       </div>
 
       <!-- Cilt Gençleştirme ve Yenileme -->
-      <div class="service-category mb-5">
+      <div class="service-category mb-5" id="genel">
         <div class="row align-items-center">
           <div class="col-lg-6" data-aos="fade-right">
             <div class="service-category-content">
@@ -68,7 +68,7 @@
       </div>
 
       <!-- Estetik Uygulamalar -->
-      <div class="service-category mb-5">
+      <div class="service-category mb-5" id="estetik">
         <div class="row align-items-center flex-row-reverse">
           <div class="col-lg-6" data-aos="fade-left">
             <div class="service-category-content">
@@ -129,7 +129,7 @@
       </div>
 
       <!-- Saç ve Kaş Uygulamaları -->
-      <div class="service-category">
+      <div class="service-category" id="lazer">
         <div class="row align-items-center">
           <div class="col-lg-6" data-aos="fade-right">
             <div class="service-category-content">

@@ -10,12 +10,6 @@
                 <span class="brand-text">DOÇ. DR. MEHMET ÜNAL</span>
               </div>
               <p class="mt-3">20 yıllık tecrübemizle modern dermatoloji çözümleri sunuyoruz. Sağlıklı ve güzel bir cilt için yanınızdayız.</p>
-              <div class="footer-social">
-                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-              </div>
             </div>
           </div>
           <div class="col-lg-2 col-md-6 mb-4">
@@ -23,10 +17,10 @@
               <h4>Hızlı Bağlantılar</h4>
               <ul>
                 <li><router-link to="/">Ana Sayfa</router-link></li>
-                <li><router-link to="/hakkimizda">Hakkımızda</router-link></li>
-                <li><router-link to="/hizmetler">Hizmetler</router-link></li>
-                <li><router-link to="/galeri">Galeri</router-link></li>
-                <li><router-link to="/iletisim">İletişim</router-link></li>
+                <li><router-link to="#hakkimizda">Hakkımızda</router-link></li>
+                <li><router-link to="#hizmetler">Hizmetler</router-link></li>
+                <li><router-link to="#galeri">Galeri</router-link></li>
+                <li><router-link to="#contact">İletişim</router-link></li>
               </ul>
             </div>
           </div>
@@ -34,11 +28,9 @@
             <div class="footer-links">
               <h4>Hizmetlerimiz</h4>
               <ul>
-                <li><router-link to="/hizmetler/genel-dermatoloji">Genel Dermatoloji</router-link></li>
-                <li><router-link to="/hizmetler/estetik-dermatoloji">Estetik Dermatoloji</router-link></li>
-                <li><router-link to="/hizmetler/lazer-tedavileri">Lazer Tedavileri</router-link></li>
-                <li><router-link to="/hizmetler/sac-tedavileri">Saç Tedavileri</router-link></li>
-                <li><router-link to="/hizmetler/prp-tedavisi">PRP Tedavisi</router-link></li>
+                <li><router-link to="#genel">Genel Dermatoloji</router-link></li>
+                <li><router-link to="#estetik">Estetik Dermatoloji</router-link></li>
+                <li><router-link to="#lazer">Lazer Tedavileri</router-link></li>
               </ul>
             </div>
           </div>

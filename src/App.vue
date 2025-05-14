@@ -5,7 +5,6 @@ import TopBar from './components/layout/TopBar.vue'
 import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
 import WhatsAppButton from './components/common/WhatsAppButton.vue'
-import SocialButtons from './components/common/SocialButtons.vue'
 
 const store = useStore()
 
@@ -22,7 +21,6 @@ onMounted(() => {
   </main>
   <Footer />
   <WhatsAppButton />
-  <SocialButtons />
 </template>
 
 <style lang="scss">
