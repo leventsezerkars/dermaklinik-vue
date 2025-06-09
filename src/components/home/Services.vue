@@ -38,7 +38,7 @@
                     <i class="fa-solid fa-syringe"></i>
                   </div>
                   <div class="service-content">
-                    <h4>Siği ve Ben Tedavileri</h4>
+                    <h4>Siğil ve Ben Tedavileri</h4>
                     <p>Ciltteki istenmeyen oluşumları güvenle ve iz bırakmadan gideriyoruz.</p>
                   </div>
                 </div>
