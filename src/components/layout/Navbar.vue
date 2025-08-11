@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg" >
     <div class="container">
       <router-link class="navbar-brand d-flex align-items-center" to="/">
-        <img src="/images/logo.png" alt="Doç. Dr. Mehmet Ünal Logo" height="40">
+        <img src="/images/logo_beyaz.png" alt="Doç. Dr. Mehmet Ünal Logo" height="70">
         <span class="ms-3 brand-text">DOÇ. DR. MEHMET ÜNAL</span>
       </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,15 +18,15 @@
               Genel Dermatoloji
             </router-link>
             <ul class="dropdown-menu">
-              <li><router-link class="dropdown-item" to="/hizmetler/akne-tedavisi">Akne (Sivilce)</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/rozasea-tedavisi">Rosasea(Gül) Hastalığı</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/sac-dokulmesi">Saç Tedavileri</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/tirnak-hastaliklari">Tırnak Hastalıkları</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/sigil-ben-tedavisi">Siğil ve Ben Tedavileri</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/akne-sivilce-tedavisi">Akne (Sivilce) Tedavisi</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/rosacea-gul-hastaligi-tedavisi">Rosacea (Gül) Hastalığı Tedavisi</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/sac-dokulmesi-ve-sac-tedavileri">Saç Dökülmesi ve Saç Tedavileri</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/sigil-ben-tedavisi">Siğil (Ben) Tedavisi</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/tirnak-hastaliklari-ve-tedavisi">Tırnak Hastalıkları ve Tedavisi</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/deri-enfeksiyonlari">Deri Enfeksiyonları</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/mantar-tedavisi">Mantar Enfeksiyonları</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/egzama-tedavisi">Alerji/Egzama Türleri</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/urtiker-tedavisi">Ürtiker (Kurdeşen)</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/mantar-enfeksiyonlari">Mantar Enfeksiyonları</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/alerji-ve-egzama-turleri">Alerji/Egzama Türleri</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/urtiker-kurdesen">Ürtiker (Kurdeşen)</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/dermatit">Dermatit</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/alerjik-hastaliklar">Alerjik Hastalıklar</router-link></li>
             </ul>
@@ -36,14 +36,15 @@
               Estetik Dermatoloji
             </router-link>
             <ul class="dropdown-menu">
-              <li><router-link class="dropdown-item" to="/hizmetler/botoks">Botoks Uygulamaları</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/dolgu">Dolgu Uygulamaları</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/kok-hucre-tedavisi">Regenera Activa (Kök Hücre Tedavisi)</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/prp-tedavisi">PRP Tedavisi</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/mezoterapiler">Mezoterapiler</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/botoks-uygulamasi">Botoks Uygulamaları</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/dolgu-uygulamasi">Dolgu Uygulamaları</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/regenera-activa-kok-hucre-tedavisi">Regenera Activa (Kök Hücre Tedavisi)</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/prp-platelet-rich-plasma-tedavisi">PRP (Platelet Rich Plasma) Tedavisi</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/mezoterapi-uygulamasi">Mezoterapiler</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/leke-tedavisi">Leke Tedavileri</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/akne-iz-tedavisi">Akne İz Tedavisi</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/yara-iz-tedavisi">Yara İz Tedavisi</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/sivi-yuz-germe">Sıvı Yüz Germe</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/medikal-cilt-bakimi">Medikal Cilt Bakımı</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/iple-yuz-askilama">İple Yüz Askılama</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/kilcal-damar-tedavisi">Kılcal Damar Tedavisi</router-link></li>
@@ -54,12 +55,12 @@
               Lazer Tedavileri
             </router-link>
             <ul class="dropdown-menu">
-              <li><router-link class="dropdown-item" to="/hizmetler/veloce-bb-lazer">Veloce BB Light</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/fraksiyonel-lazer">Fraksiyonel Karbondioksit Lazer</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/altin-igne">Altın İğne</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/aqua-peel">Aqua-Peel Cilt Bakımı</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/veloce-bb-light">Veloce BB LİGHT</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/fraksiyonel-karbondioksit-co2-lazer">Fraksiyonel Karbondioksit (CO2) Lazer</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/secret-altin-igne-fraksiyonel-radyofrekans">Secret Altın İğne (Fraksiyonel Radyo Frekans)</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/aqua-peel-medikal-cilt-bakimi">Aqua-Peel Medikal Cilt Bakımı</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/piko-saniye-lazer">Piko Saniye Lazer</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/hifu">HI-FU (Ameliyatsız Yüz Germe)</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/hifu-ameliyatsiz-yuz-germe">HI-FU (Ameliyatsız Yüz Germe)</router-link></li>
             </ul>
           </li>
           <li class="nav-item">

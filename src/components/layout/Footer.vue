@@ -6,7 +6,7 @@
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="footer-info">
               <div class="footer-logo">
-                <img src="/images/logo.png" alt="Logo" height="40">
+                <img src="/images/logo_beyaz.png" alt="Logo" height="70">
                 <span class="brand-text">DOÇ. DR. MEHMET ÜNAL</span>
               </div>
               <p class="mt-3">20 yıllık tecrübemizle modern dermatoloji çözümleri sunuyoruz. Sağlıklı ve güzel bir cilt için yanınızdayız.</p>

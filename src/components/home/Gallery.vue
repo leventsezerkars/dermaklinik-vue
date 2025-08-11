@@ -33,7 +33,7 @@
         >
           <swiper-slide>
             <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/modern-medical-clinic-reception_23-2149482335.jpg" alt="Modern Klinik">
+              <img :src="images.clinic10" alt="Modern Klinik">
               <div class="gallery-item-title">
                 <h4>Modern Klinik Ortamımız</h4>
               </div>
@@ -41,23 +41,7 @@
           </swiper-slide>
           <swiper-slide>
             <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/doctor-examining-patient-dermatology-clinic_23-2149482337.jpg" alt="Muayene Odası">
-              <div class="gallery-item-title">
-                <h4>Konforlu Muayene Odalarımız</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/cosmetologist-making-beauty-procedures-client_23-2149214483.jpg" alt="Estetik Ünite">
-              <div class="gallery-item-title">
-                <h4>Estetik Uygulama Ünitemiz</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/beautician-doing-beauty-procedures-client_23-2149214480.jpg" alt="Lazer Tedavi">
+              <img :src="images.clinic1" alt="Lazer Tedavi">
               <div class="gallery-item-title">
                 <h4>Lazer Tedavi Ünitemiz</h4>
               </div>
@@ -65,7 +49,15 @@
           </swiper-slide>
           <swiper-slide>
             <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/modern-clinic-waiting-room-reception_23-2149482339.jpg" alt="Bekleme Salonu">
+              <img :src="images.clinic6" alt="Lazer Tedavi">
+              <div class="gallery-item-title">
+                <h4>Lazer Tedavi Ünitemiz</h4>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="gallery-item">
+              <img :src="images.clinic7" alt="Bekleme Salonu">
               <div class="gallery-item-title">
                 <h4>Ferah Bekleme Salonumuz</h4>
               </div>
@@ -73,25 +65,57 @@
           </swiper-slide>
           <swiper-slide>
             <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/cosmetologist-making-mesotherapy-injection_23-2149252125.jpg" alt="Mezoterapi">
+              <img :src="images.clinic8" alt="Bekleme Salonu">
               <div class="gallery-item-title">
-                <h4>Mezoterapi Ünitemiz</h4>
+                <h4>Ferah Bekleme Salonumuz</h4>
               </div>
             </div>
           </swiper-slide>
           <swiper-slide>
             <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/dermatologist-examining-patient-skin_23-2149482334.jpg" alt="Cilt Analizi">
+              <img :src="images.clinic9" alt="Bekleme Salonu">
               <div class="gallery-item-title">
-                <h4>Cilt Analiz Ünitemiz</h4>
+                <h4>Ferah Bekleme Salonumuz</h4>
               </div>
             </div>
           </swiper-slide>
           <swiper-slide>
             <div class="gallery-item">
-              <img src="https://img.freepik.com/free-photo/doctor-patient-dermatology-consultation_23-2149482338.jpg" alt="Konsültasyon">
+              <img :src="images.clinic3" alt="Tedavi Odası">
               <div class="gallery-item-title">
-                <h4>Konsültasyon Odamız</h4>
+                <h4>Muayene Odamız</h4>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="gallery-item">
+              <img :src="images.clinic4" alt="Tedavi Odası">
+              <div class="gallery-item-title">
+                <h4>Tedavi Odalarımız</h4>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="gallery-item">
+              <img :src="images.clinic5" alt="Tedavi Odası">
+              <div class="gallery-item-title">
+                <h4>Tedavi Odalarımız</h4>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="gallery-item">
+              <img :src="images.clinic12" alt="Muayene Odası">
+              <div class="gallery-item-title">
+                <h4>Kliniğimizin Genel Görünümü</h4>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="gallery-item">
+              <img :src="images.clinic11" alt="Estetik Ünite">
+              <div class="gallery-item-title">
+                <h4>Kliniğimizin Genel Görünümü</h4>
               </div>
             </div>
           </swiper-slide>
@@ -111,6 +135,22 @@ import 'swiper/css/navigation'
 const SwiperAutoplay = Autoplay
 const SwiperPagination = Pagination
 const SwiperNavigation = Navigation
+
+// Resimleri import et
+const images = {
+  clinic1: new URL('/images/clinic_images/DSCF4172.JPG', import.meta.url).href,
+  clinic2: new URL('/images/clinic_images/DSCF4217.JPG', import.meta.url).href,
+  clinic3: new URL('/images/clinic_images/DSCF4218.JPG', import.meta.url).href,
+  clinic4: new URL('/images/clinic_images/DSCF4231.JPG', import.meta.url).href,
+  clinic5: new URL('/images/clinic_images/DSCF4235.JPG', import.meta.url).href,
+  clinic6: new URL('/images/clinic_images/DSCF4254.JPG', import.meta.url).href,
+  clinic7: new URL('/images/clinic_images/DSCF4267.JPG', import.meta.url).href,
+  clinic8: new URL('/images/clinic_images/DSCF4268.JPG', import.meta.url).href,
+  clinic9: new URL('/images/clinic_images/DSCF4285.JPG', import.meta.url).href,
+  clinic10: new URL('/images/clinic_images/DSCF4295.JPG', import.meta.url).href,
+  clinic11: new URL('/images/clinic_images/DSCF4301.JPG', import.meta.url).href,
+  clinic12: new URL('/images/clinic_images/DSCF4303.JPG', import.meta.url).href
+}
 </script>
 
 <style lang="scss">

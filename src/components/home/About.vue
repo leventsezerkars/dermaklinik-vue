@@ -50,13 +50,19 @@
                 <p>Hasta Memnuniyeti</p>
               </div>
             </div>
+            <div class="about-cta">
+              <router-link to="/hakkimizda-detay" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-arrow-right me-2"></i>
+                Daha Fazla
+              </router-link>
+            </div>
           </div>
         </div>
         <div class="col-lg-6" data-aos="fade-left">
           <div class="about-image-wrapper">
             <div class="about-image-main">
               <img 
-                src="https://cdn.sanity.io/images/2cn7zstj/production/3d5c52c8003d6057fcaacecf446405be27a3692d-768x1024.jpg" 
+                src="/images/dr_mu.jpg" 
                 alt="Doktor"
                 loading="lazy"
               >

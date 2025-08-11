@@ -37,19 +37,6 @@
 
             <div class="accordion-item" data-aos="fade-up">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                  Hangi sigorta kurumları ile çalışıyorsunuz?
-                </button>
-              </h2>
-              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                  Özel sağlık sigortaları ve anlaşmalı kurumlar hakkında detaylı bilgi için kliniğimizi arayabilirsiniz. Birçok sigorta kurumu ile anlaşmamız bulunmaktadır.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-aos="fade-up">
-              <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
                   Tedavi süreleri ne kadar sürüyor?
                 </button>

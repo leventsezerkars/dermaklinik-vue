@@ -2,8 +2,8 @@
   <section id="anasayfa" class="hero-section">
     <div class="swiper hero-slider">
       <div class="swiper-wrapper">
-        <!-- Slide 1: Genel Dermatoloji -->
-        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3');">
+        <!-- Slide 1: Cilt Sağlığı ve Dermatoloji -->
+        <div class="swiper-slide" style="background-image: url('images/woman1.jpg');">
           <div class="container">
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
@@ -19,14 +19,33 @@
             </div>
           </div>
         </div>
-        <!-- Slide 2: Modern Tedaviler -->
-        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');">
+        
+        <!-- Slide 2: Cilt Bakımı ve Tedavi -->
+        <div class="swiper-slide" style="background-image: url('images/woman2.jpg');">
           <div class="container">
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
                 <div class="hero-content">
                   <h1>Cilt Sağlığınız Bizim Uzmanlık Alanımız</h1>
                   <p class="lead">En son teknoloji cihazlarla etkili sonuçlar</p>
+                  <div class="hero-buttons">
+                    <a href="#randevu" class="btn btn-primary me-3">Randevu Al</a>
+                    <a href="#hizmetler" class="btn btn-outline-light">Hizmetlerimiz</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Estetik Dermatoloji -->
+        <div class="swiper-slide" style="background-image: url('images/woman3.jpg');">
+          <div class="container">
+            <div class="row h-100 align-items-center">
+              <div class="col-lg-6" data-aos="fade-right">
+                <div class="hero-content">
+                  <h1>Doğal Güzelliğinizi Ortaya Çıkarın</h1>
+                  <p class="lead">Güvenli ve etkili estetik dermatoloji uygulamaları</p>
                   <div class="hero-buttons">
                     <a href="#randevu" class="btn btn-primary me-3">Randevu Al</a>
                     <a href="#hizmetler" class="btn btn-outline-light">Hizmetlerimiz</a>

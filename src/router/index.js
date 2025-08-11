@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import BlogView from '../views/BlogView.vue'
 import BlogDetailView from '../views/BlogDetailView.vue'
 import ServiceDetailView from '../views/ServiceDetailView.vue'
+import AboutDetailView from '../views/AboutDetailView.vue'
 
 const routes = [
   {
@@ -19,6 +20,20 @@ const routes = [
         {
           property: 'og:description',
           content: 'Konya\'da profesyonel dermatoloji ve estetik hizmetleri. Modern teknoloji ve uzman kadro ile hizmetinizdeyiz.'
+        }
+      ]
+    }
+  },
+  {
+    path: '/hakkimizda-detay',
+    name: 'aboutDetail',
+    component: AboutDetailView,
+    meta: {
+      title: 'Hakkımızda - Doç. Dr. Mehmet Ünal',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'Doç. Dr. Mehmet Ünal hakkında detaylı bilgi. Dermatoloji uzmanı, deneyimleri, eğitimi ve kliniğimiz hakkında bilgi alın.'
         }
       ]
     }
