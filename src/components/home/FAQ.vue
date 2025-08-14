@@ -2,8 +2,8 @@
   <section id="sss" class="faq-section">
     <div class="container">
       <div class="section-title text-center" data-aos="fade-up">
-        <h2>Sıkça Sorulan Sorular</h2>
-        <p>Merak ettiğiniz soruların cevapları</p>
+        <h2>{{ $t('home.faq.title') }}</h2>
+        <p>{{ $t('home.faq.subtitle') }}</p>
       </div>
 
       <div class="row justify-content-center">
@@ -12,12 +12,12 @@
             <div class="accordion-item" data-aos="fade-up">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                  Randevu almak için ne yapmam gerekiyor?
+                  {{ $t('home.faq.questions.appointment.question') }}
                 </button>
               </h2>
               <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                  Randevu almak için WhatsApp hattımızdan, telefon numaramızdan veya web sitemizdeki randevu formundan bize ulaşabilirsiniz. Size en uygun günü ve saati belirleyerek randevunuzu oluşturabiliriz.
+                  {{ $t('home.faq.questions.appointment.answer') }}
                 </div>
               </div>
             </div>
@@ -25,12 +25,12 @@
             <div class="accordion-item" data-aos="fade-up">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                  İlk muayene ücreti ne kadar?
+                  {{ $t('home.faq.questions.examinationFee.question') }}
                 </button>
               </h2>
               <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                  Muayene ücretlerimiz hakkında güncel bilgi almak için bize ulaşabilirsiniz. Farklı tedavi seçenekleri için özel fiyat politikamız bulunmaktadır.
+                  {{ $t('home.faq.questions.examinationFee.answer') }}
                 </div>
               </div>
             </div>
@@ -38,12 +38,12 @@
             <div class="accordion-item" data-aos="fade-up">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                  Tedavi süreleri ne kadar sürüyor?
+                  {{ $t('home.faq.questions.treatmentDuration.question') }}
                 </button>
               </h2>
               <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                  Tedavi süreleri, uygulanacak tedavi yöntemine ve kişinin durumuna göre değişiklik gösterebilir. Detaylı bilgi için muayene sonrası doktorunuz size özel bir tedavi planı oluşturacaktır.
+                  {{ $t('home.faq.questions.treatmentDuration.answer') }}
                 </div>
               </div>
             </div>

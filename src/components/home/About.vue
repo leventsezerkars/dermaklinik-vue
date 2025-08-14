@@ -4,17 +4,17 @@
       <div class="row align-items-center">
         <div class="col-lg-6" data-aos="fade-right">
           <div class="about-content">
-            <span class="subtitle">HAKKIMIZDA</span>
-            <h2>{{ new Date().getFullYear() - 2002 }} Yıllık Tecrübe ile Dermatoloji Uzmanınız</h2>
-            <p class="lead">Modern teknolojiler ve uzman kadromuzla, cilt sağlığınız için en iyi çözümleri sunuyoruz.</p>
+            <span class="subtitle">{{ $t('common.about') }}</span>
+            <h2>{{ $t('home.about.title', { years: experienceYears }) }}</h2>
+            <p class="lead">{{ $t('home.about.description') }}</p>
             <div class="about-features">
               <div class="feature-item">
                 <div class="feature-icon">
                   <i class="fas fa-user-md"></i>
                 </div>
                 <div class="feature-text">
-                  <h4>Uzman Kadro</h4>
-                  <p>Alanında uzman ve deneyimli ekibimizle hizmetinizdeyiz.</p>
+                  <h4>{{ $t('home.about.features.expertStaff.title') }}</h4>
+                  <p>{{ $t('home.about.features.expertStaff.description') }}</p>
                 </div>
               </div>
               <div class="feature-item">
@@ -22,8 +22,8 @@
                   <i class="fas fa-clinic-medical"></i>
                 </div>
                 <div class="feature-text">
-                  <h4>Modern Klinik</h4>
-                  <p>En son teknoloji cihazlar ve steril ortamda tedavi imkanı.</p>
+                  <h4>{{ $t('home.about.features.modernClinic.title') }}</h4>
+                  <p>{{ $t('home.about.features.modernClinic.description') }}</p>
                 </div>
               </div>
               <div class="feature-item">
@@ -31,29 +31,29 @@
                   <i class="fas fa-heart"></i>
                 </div>
                 <div class="feature-text">
-                  <h4>Hasta Memnuniyeti</h4>
-                  <p>Yüksek hasta memnuniyeti ile güvenilir hizmet.</p>
+                  <h4>{{ $t('home.about.features.patientSatisfaction.title') }}</h4>
+                  <p>{{ $t('home.about.features.patientSatisfaction.description') }}</p>
                 </div>
               </div>
             </div>
             <div class="about-stats">
               <div class="stat-item">
                 <h3>1000+</h3>
-                <p>Başarılı İşlem</p>
+                <p>{{ $t('home.about.stats.successfulProcedures') }}</p>
               </div>
               <div class="stat-item">
                 <h3>7/24</h3>
-                <p>İletişim Desteği</p>
+                <p>{{ $t('home.about.stats.communicationSupport') }}</p>
               </div>
               <div class="stat-item">
                 <h3>%98</h3>
-                <p>Hasta Memnuniyeti</p>
+                <p>{{ $t('home.about.stats.patientSatisfaction') }}</p>
               </div>
             </div>
             <div class="about-cta">
               <router-link to="/hakkimizda-detay" class="btn btn-outline-primary btn-lg">
                 <i class="fas fa-arrow-right me-2"></i>
-                Daha Fazla
+                {{ $t('common.learnMore') }}
               </router-link>
             </div>
           </div>
@@ -69,7 +69,7 @@
             </div>
             <div class="about-experience">
               <h3>50+</h3>
-              <p>Sertifika<br>Eğitim</p>
+              <p v-html="$t('home.about.certificates')"></p>
             </div>
           </div>
         </div>
@@ -79,9 +79,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+
+// Dinamik yıl hesaplaması - 2002'den başlayarak
+const experienceYears = computed(() => {
+  const currentYear = new Date().getFullYear()
+  return currentYear - 2002
+})
 
 onMounted(() => {
   AOS.init({
@@ -89,7 +95,6 @@ onMounted(() => {
     once: true
   })
 })
-
 </script>
 
 <style lang="scss">

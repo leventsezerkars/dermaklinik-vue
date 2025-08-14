@@ -8,11 +8,11 @@
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
                 <div class="hero-content">
-                  <h1>Cildiniz İçin Bilim ve Estetiği Buluşturuyoruz</h1>
-                  <p class="lead">Uzman kadromuzla sizlere en iyi dermatolojik hizmeti sunuyoruz</p>
+                  <h1>{{ $t('home.hero.slide1.title') }}</h1>
+                  <p class="lead">{{ $t('home.hero.slide1.subtitle') }}</p>
                   <div class="hero-buttons">
-                    <a href="#randevu" class="btn btn-primary me-3">Randevu Al</a>
-                    <a href="#hizmetler" class="btn btn-outline-light">Hizmetlerimiz</a>
+                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
+                    <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
                   </div>
                 </div>
               </div>
@@ -26,11 +26,11 @@
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
                 <div class="hero-content">
-                  <h1>Cilt Sağlığınız Bizim Uzmanlık Alanımız</h1>
-                  <p class="lead">En son teknoloji cihazlarla etkili sonuçlar</p>
+                  <h1>{{ $t('home.hero.slide2.title') }}</h1>
+                  <p class="lead">{{ $t('home.hero.slide2.subtitle') }}</p>
                   <div class="hero-buttons">
-                    <a href="#randevu" class="btn btn-primary me-3">Randevu Al</a>
-                    <a href="#hizmetler" class="btn btn-outline-light">Hizmetlerimiz</a>
+                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
+                    <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
                   </div>
                 </div>
               </div>
@@ -44,11 +44,11 @@
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
                 <div class="hero-content">
-                  <h1>Doğal Güzelliğinizi Ortaya Çıkarın</h1>
-                  <p class="lead">Güvenli ve etkili estetik dermatoloji uygulamaları</p>
+                  <h1>{{ $t('home.hero.slide3.title') }}</h1>
+                  <p class="lead">{{ $t('home.hero.slide3.subtitle') }}</p>
                   <div class="hero-buttons">
-                    <a href="#randevu" class="btn btn-primary me-3">Randevu Al</a>
-                    <a href="#hizmetler" class="btn btn-outline-light">Hizmetlerimiz</a>
+                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
+                    <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
                   </div>
                 </div>
               </div>

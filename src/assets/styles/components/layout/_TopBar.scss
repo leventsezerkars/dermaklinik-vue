@@ -3,13 +3,13 @@
 
 .top-bar {
   background-color: rgb(0, 0, 0);
-  padding: 0.25rem 0;
+  padding: 0.2rem 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: $z-index-topbar;
-  height: $topbar-height;
+  z-index: 9998; // Çok yüksek z-index
+  height: 40px; // Height'ı kısalttım
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba($gold, 0.15);
@@ -36,13 +36,13 @@
     transition: color 0.3s ease;
     display: inline-flex;
     align-items: center;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     opacity: 0.95;
 
     i {
       color: $gold;
       margin-right: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       opacity: 0.95;
     }
 
@@ -57,20 +57,57 @@
     margin: 0;
   }
 
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-    padding: 0.5rem 0;
-    height: auto;
+  // Dil seçici için özel stiller
+  .language-selector {
+    margin-left: 0.5rem;
+    position: relative; // Z-index için position relative
+    
+    .dropdown-toggle {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: $gold;
+      min-height: 28px;
+      
+      &:hover {
+        background: rgba(212, 175, 55, 0.2);
+        border-color: rgba(212, 175, 55, 0.5);
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+      }
+    }
+    
+    // Dropdown menü için ek z-index ayarı
+    .dropdown-menu {
+      z-index: 9999 !important; // Çok yüksek z-index
+      position: absolute !important; // Position absolute zorunlu
+    }
+  }
 
-    .col-md-6:last-child {
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+    padding: 0.3rem 0;
+    height: auto;
+    min-height: 35px;
+
+    .col-md-4 {
       text-align: center !important;
-      margin-top: 0.25rem;
+      margin-top: 0.2rem;
+    }
+
+    .col-md-3 {
+      text-align: center !important;
+      margin-top: 0.2rem;
     }
 
     a, span {
       display: block;
-      margin: 0.25rem 0;
-      font-size: 0.8rem;
+      margin: 0.2rem 0;
+      font-size: 0.75rem;
+    }
+    
+    .language-selector {
+      margin: 0.2rem auto;
+      display: inline-block;
     }
   }
 } 

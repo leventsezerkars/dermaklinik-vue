@@ -4,40 +4,40 @@
       <div class="row g-4">
         <div class="col-lg-6">
           <div class="contact-form-wrapper">
-            <h2>Doktorunuza Sorun</h2>
-            <p>Sorularınız için formu doldurun, en kısa sürede size dönüş yapalım.</p>
+            <h2>{{ $t('home.contact.form.title') }}</h2>
+            <p>{{ $t('home.contact.form.subtitle') }}</p>
             <form class="contact-form" @submit.prevent="handleSubmit">
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" v-model="form.firstName" placeholder="Adınız">
+                    <input type="text" class="form-control" v-model="form.firstName" :placeholder="$t('home.contact.form.firstName')">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" v-model="form.lastName" placeholder="Soyadınız">
+                    <input type="text" class="form-control" v-model="form.lastName" :placeholder="$t('home.contact.form.lastName')">
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <input type="email" class="form-control" v-model="form.email" placeholder="E-posta Adresiniz">
+                <input type="email" class="form-control" v-model="form.email" :placeholder="$t('home.contact.form.email')">
               </div>
               <div class="form-group">
-                <input type="tel" class="form-control" v-model="form.phone" placeholder="Telefon Numaranız">
+                <input type="tel" class="form-control" v-model="form.phone" :placeholder="$t('home.contact.form.phone')">
               </div>
               <div class="form-group">
                 <select class="form-select" v-model="form.service">
-                  <option value="">Hizmet Seçiniz</option>
-                  <option value="genel">Genel Dermatoloji</option>
-                  <option value="estetik">Estetik Dermatoloji</option>
-                  <option value="lazer">Lazer Tedavileri</option>
-                  <option value="sac">Saç Tedavileri</option>
+                  <option value="">{{ $t('home.contact.form.selectService') }}</option>
+                  <option value="genel">{{ $t('header.generalDermatology') }}</option>
+                  <option value="estetik">{{ $t('header.aestheticDermatology') }}</option>
+                  <option value="lazer">{{ $t('header.laserTreatments') }}</option>
+                  <option value="sac">{{ $t('home.contact.form.hairTreatments') }}</option>
                 </select>
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="5" v-model="form.message" placeholder="Mesajınız"></textarea>
+                <textarea class="form-control" rows="5" v-model="form.message" :placeholder="$t('home.contact.form.message')"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Gönder</button>
+              <button type="submit" class="btn btn-primary">{{ $t('home.contact.form.send') }}</button>
             </form>
           </div>
         </div>
@@ -58,12 +58,12 @@
                    target="_blank" 
                    class="btn btn-primary">
                   <i class="fas fa-directions"></i>
-                  <span>Yol Tarifi Al</span>
+                  <span>{{ $t('home.contact.map.getDirections') }}</span>
                 </a>
                 <a href="tel:+905465297677" 
                    class="btn btn-outline-primary">
                   <i class="fas fa-phone"></i>
-                  <span>Hemen Ara</span>
+                  <span>{{ $t('home.contact.map.callNow') }}</span>
                 </a>
               </div>
             </div>

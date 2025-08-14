@@ -2,13 +2,13 @@
   <div class="top-bar text-white py-1" :class="{ 'scrolled': isScrolled }">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-md-6">
+        <div class="col-md-7">
           <span>
             <i class="fas fa-clock me-2"></i>
-            Pazartesi - Cumartesi: 09:00 - 21:00
+            {{ $t('common.mondaySaturday') }}: {{ $t('common.timeRangeExtended') }}
           </span>
         </div>
-        <div class="col-md-6 text-end">
+        <div class="col-md-4 text-end">
           <a href="tel:+905465297677" class="me-3">
             <i class="fas fa-phone me-2"></i>
             +90 546 529 76 77
@@ -18,6 +18,9 @@
             dr.munal1101@gmail.com
           </a>
         </div>
+        <div class="col-md-1 text-end">
+          <LanguageSelector />
+        </div>
       </div>
     </div>
   </div>
@@ -25,6 +28,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import LanguageSelector from '@/components/common/LanguageSelector.vue'
 
 const isScrolled = ref(false)
 

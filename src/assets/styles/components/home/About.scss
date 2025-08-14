@@ -33,6 +33,8 @@
       margin-bottom: 1.5rem;
       color: #D4AF37;
       line-height: 1.2;
+      word-wrap: break-word;
+      hyphens: auto;
     }
 
     .lead {
@@ -73,22 +75,27 @@
           justify-content: center;
           color: #111111;
           font-size: 1.5rem;
+          flex-shrink: 0;
         }
 
         .feature-text {
           flex: 1;
+          min-width: 0;
 
           h4 {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: #D4AF37;
+            word-wrap: break-word;
           }
 
           p {
             font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.8);
             margin: 0;
+            line-height: 1.5;
+            word-wrap: break-word;
           }
         }
       }
@@ -96,29 +103,34 @@
 
     .about-stats {
       display: flex;
-      justify-content: flex-start;
-      gap: 3rem;
+      justify-content: space-between;
+      gap: 1rem;
       margin-top: 2rem;
+      flex-wrap: nowrap;
 
       .stat-item {
         text-align: center;
-        padding: 1rem 2rem;
+        padding: 0.8rem 1rem;
         background: rgba(212, 175, 55, 0.1);
         border: 1px solid rgba(212, 175, 55, 0.2);
-        border-radius: 10px;
+        border-radius: 8px;
+        flex: 1;
+        min-width: 0;
 
         h3 {
-          font-size: 2.5rem;
+          font-size: 2rem;
           font-weight: 700;
           color: #D4AF37;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.3rem;
         }
 
         p {
-          font-size: 1rem;
+          font-size: 0.85rem;
           color: rgba(255, 255, 255, 0.8);
           margin: 0;
-          white-space: nowrap;
+          white-space: normal;
+          word-wrap: break-word;
+          line-height: 1.2;
         }
       }
     }
@@ -193,6 +205,7 @@
       border-radius: 10px;
       text-align: center;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      max-width: 150px;
 
       h3 {
         font-size: 2.5rem;
@@ -205,6 +218,7 @@
         margin: 0;
         line-height: 1.4;
         font-weight: 600;
+        word-wrap: break-word;
       }
     }
   }
@@ -233,14 +247,43 @@
 @media (max-width: 768px) {
   .about-section {
     .about-content {
-      .about-stats {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
+      h2 {
+        font-size: 2rem;
       }
 
-      .stat-item {
-        width: 100%;
+      .about-features {
+        .feature-item {
+          padding: 1rem;
+          
+          .feature-text {
+            h4 {
+              font-size: 1.1rem;
+            }
+            
+            p {
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+
+      .about-stats {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0.5rem;
+        
+        .stat-item {
+          padding: 0.6rem 0.5rem;
+          
+          h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+          }
+          
+          p {
+            font-size: 0.75rem;
+          }
+        }
       }
 
       .about-cta {
@@ -255,10 +298,23 @@
       }
     }
 
-    .about-experience {
+    .about-image-wrapper {
       padding: 1rem;
-      bottom: 1rem;
-      right: 1rem;
+      
+      .about-experience {
+        padding: 1rem;
+        bottom: 1rem;
+        right: 1rem;
+        max-width: 120px;
+        
+        h3 {
+          font-size: 2rem;
+        }
+        
+        p {
+          font-size: 0.9rem;
+        }
+      }
     }
   }
 } 

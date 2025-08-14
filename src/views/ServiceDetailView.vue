@@ -7,10 +7,10 @@
           <div class="breadcrumb">
             <router-link to="/" class="breadcrumb-link">
               <i class="fas fa-home"></i>
-              <span>Ana Sayfa</span>
+              <span>{{ $t('serviceDetail.breadcrumb.home') }}</span>
             </router-link>
             <i class="fas fa-chevron-right separator"></i>
-            <span class="current-page">{{ currentService?.category || 'Hizmet' }}</span>
+            <span class="current-page">{{ currentService?.category || $t('serviceDetail.breadcrumb.service') }}</span>
           </div>
           
           <div class="service-meta" v-if="currentService">
@@ -34,15 +34,15 @@
               <div class="content-meta">
                 <div class="meta-item">
                   <i class="fas fa-user-md"></i>
-                  <span>Uzman Dermatolog</span>
+                  <span>{{ $t('serviceDetail.meta.expertDermatologist') }}</span>
                 </div>
                 <div class="meta-item">
                   <i class="fas fa-calendar-alt"></i>
-                  <span>Güncel</span>
+                  <span>{{ $t('serviceDetail.meta.updated') }}</span>
                 </div>
                 <div class="meta-item">
                   <i class="fas fa-eye"></i>
-                  <span>Profesyonel Tedavi</span>
+                  <span>{{ $t('serviceDetail.meta.professionalTreatment') }}</span>
                 </div>
               </div>
             </header>
@@ -53,7 +53,7 @@
                   <i class="fas fa-stethoscope"></i>
                 </div>
                 <p class="intro-text">
-                  Bu sayfada {{ currentService.title.toLowerCase() }} hakkında detaylı bilgi bulabilir, tedavi süreçlerini öğrenebilir ve uzman ekibimizle iletişime geçebilirsiniz.
+                  {{ $t('serviceDetail.introText', { title: currentService.title.toLowerCase() }) }}
                 </p>
               </div>
 
@@ -65,12 +65,12 @@
                 <div class="not-found-icon">
                   <i class="fas fa-search"></i>
                 </div>
-                <h2>Hizmet Bulunamadı</h2>
-                <p>Aradığınız hizmet bulunamadı. Lütfen ana sayfaya dönün veya farklı bir hizmet seçin.</p>
+                <h2>{{ $t('serviceDetail.notFound.title') }}</h2>
+                <p>{{ $t('serviceDetail.notFound.description') }}</p>
                 <div class="not-found-actions">
                   <router-link to="/" class="btn btn-primary">
                     <i class="fas fa-home me-2"></i>
-                    Ana Sayfaya Dön
+                    {{ $t('serviceDetail.notFound.homeLink') }}
                   </router-link>
                 </div>
               </div>
@@ -83,32 +83,32 @@
             <div class="sidebar-card contact-card">
               <div class="card-header">
                 <i class="fas fa-calendar-check"></i>
-                <h3>Hızlı Randevu</h3>
+                <h3>{{ $t('serviceDetail.sidebar.quickAppointment.title') }}</h3>
               </div>
               <div class="card-content">
-                <p>Uzman dermatologlarımızla görüşmek için hemen randevu alın</p>
+                <p>{{ $t('serviceDetail.sidebar.quickAppointment.description') }}</p>
                 <div class="contact-stats">
                   <div class="stat-item">
                     <i class="fas fa-clock"></i>
-                    <span>Hızlı Yanıt</span>
+                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.quickResponse') }}</span>
                   </div>
                   <div class="stat-item">
                     <i class="fas fa-user-md"></i>
-                    <span>Uzman Kadro</span>
+                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.expertStaff') }}</span>
                   </div>
                   <div class="stat-item">
                     <i class="fas fa-star"></i>
-                    <span>Güvenilir Hizmet</span>
+                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.reliableService') }}</span>
                   </div>
                 </div>
                 <div class="contact-actions">
                   <a href="https://wa.me/905465297677" class="btn btn-primary btn-full">
                     <i class="fas fa-calendar-alt me-2"></i>
-                    Randevu Alın
+                    {{ $t('serviceDetail.sidebar.quickAppointment.actions.bookAppointment') }}
                   </a>
                   <a href="tel:+905465297677" class="btn btn-outline btn-full">
                     <i class="fas fa-phone me-2"></i>
-                    Hemen Ara
+                    {{ $t('serviceDetail.sidebar.quickAppointment.actions.callNow') }}
                   </a>
                 </div>
               </div>
@@ -118,7 +118,7 @@
             <div class="sidebar-card related-services" v-if="currentService">
               <div class="card-header">
                 <i class="fas fa-link"></i>
-                <h3>İlgili Hizmetler</h3>
+                <h3>{{ $t('serviceDetail.sidebar.relatedServices.title') }}</h3>
               </div>
               <div class="card-content">
                 <div class="related-list">
@@ -144,35 +144,35 @@
             <div class="sidebar-card contact-info">
               <div class="card-header">
                 <i class="fas fa-info-circle"></i>
-                <h3>İletişim Bilgileri</h3>
+                <h3>{{ $t('serviceDetail.sidebar.contactInfo.title') }}</h3>
               </div>
               <div class="card-content">
                 <div class="info-item">
                   <i class="fas fa-map-marker-alt"></i>
                   <div>
-                    <strong>Adres</strong>
+                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.address') }}</strong>
                     <span> Ateşbaz Veli Mahallesi, Yeni Meram Cd. No:83 D:4, 42090 Meram / Konya</span>
                   </div>
                 </div>
                 <div class="info-item">
                   <i class="fas fa-phone"></i>
                   <div>
-                    <strong>Telefon</strong>
+                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.phone') }}</strong>
                     <span>+90 546 529 76 77</span>
                   </div>
                 </div>
                 <div class="info-item">
                   <i class="fas fa-envelope"></i>
                   <div>
-                    <strong>E-posta</strong>
+                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.email') }}</strong>
                     <span>dr.munal1101@gmail.com</span>
                   </div>
                 </div>
                 <div class="info-item">
                   <i class="fas fa-clock"></i>
                   <div>
-                    <strong>Çalışma Saatleri</strong>
-                    <span>Pazartesi - Cumartesi: 09:00 - 21:00</span>
+                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.workingHours') }}</strong>
+                    <span>{{ $t('serviceDetail.sidebar.contactInfo.workingHoursValue') }}</span>
                   </div>
                 </div>
               </div>
@@ -265,14 +265,240 @@ const services = ref([
     category: 'Genel Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Rosacea Nedir?</h4>
-        <p>Rosacea, genellikle yüzün merkezinde kızarıklık, damar genişlemeleri ve iltihaplı lezyonlarla kendini gösteren kronik bir cilt hastalığıdır. Erken evrelerde yanma, batma ve kızarıklık görülürken, ilerleyen evrelerde kızarıklık zamanla kalıcı hale gelir ve kişinin sosyal hayatını olumsuz etkileyebilir.</p>
+        <h4>Rosacea (Gül Hastalığı) Nedir?</h4>
+        <p>Rosacea, yüzün merkezinde kızarıklık, damar genişlemeleri ve iltihaplı lezyonlarla kendini gösteren kronik bir cilt hastalığıdır. Bu hastalık, genellikle 30-50 yaş arası yetişkinlerde görülür ve kadınlarda daha sık rastlanır. Rosacea, sadece estetik bir problem değil, aynı zamanda cilt sağlığını da etkileyen önemli bir dermatolojik durumdur.</p>
         
-        <h4>Rosacea İçin Lazer Destekli Çözümler</h4>
-        <p>Rosacea tedavisinde kliniğimizde hem topikal ilaçlar hem de lazer tedavileri uygulanmaktadır. Özellikle damar lazeri ile genişlemiş kılcal damarlar hedeflenerek kızarıklık azaltılır ve cilt tonu dengelenir. Lazer ışığı, ciltteki inflamasyonu azaltır ve daha sağlıklı bir görünüm kazandırır.</p>
+        <h4>Rosacea Belirtileri ve Evreleri</h4>
+        <p>Rosacea, farklı evrelerde farklı belirtilerle kendini gösterir:</p>
         
-        <h4>Rosacea'da Uzman Yaklaşım</h4>
-        <p>Kliniğimizde dermatoloji uzmanımız eşliğinde rosacea şikayetlerinizi değerlendiriyor, lazer sistemleri dahil olmak üzere kombine tedavi yöntemleri sunuyoruz. Bu sayede daha hızlı ve kalıcı sonuçlar elde ediyoruz.</p>
+        <h5>Erken Evre (Pre-rosacea)</h5>
+        <ul>
+          <li>Yüzde geçici kızarıklık ve yanma hissi</li>
+          <li>Güneş, sıcak, baharatlı yiyecekler ve alkol ile tetiklenen ataklar</li>
+          <li>Hassas ve reaktif cilt</li>
+        </ul>
+        
+        <h5>Vasküler Rosacea</h5>
+        <ul>
+          <li>Kalıcı kızarıklık ve damar genişlemeleri</li>
+          <li>Yüzde sıcaklık hissi ve yanma</li>
+          <li>Gözlerde kuruluk ve hassasiyet</li>
+        </ul>
+        
+        <h5>İnflamatuar Rosacea</h5>
+        <ul>
+          <li>Kırmızı papüller ve püstüller</li>
+          <li>Yüzde şişlik ve ödem</li>
+          <li>Göz çevresinde iltihap</li>
+        </ul>
+        
+        <h5>İleri Evre Rosacea</h5>
+        <ul>
+          <li>Rinofima (burunda kalınlaşma)</li>
+          <li>Kalıcı damar genişlemeleri</li>
+          <li>Cilt kalınlaşması ve nodüller</li>
+        </ul>
+        
+        <h4>Rosacea Nedenleri ve Tetikleyicileri</h4>
+        <p>Rosacea'nın kesin nedeni bilinmemekle birlikte, birçok faktör hastalığın gelişiminde rol oynar:</p>
+        
+        <h5>Genetik Faktörler</h5>
+        <ul>
+          <li>Aile öyküsünde rosacea olan kişilerde risk artar</li>
+          <li>Belirli genetik yatkınlıklar</li>
+          <li>Irksal faktörler (açık tenli kişilerde daha sık)</li>
+        </ul>
+        
+        <h5>Çevresel Tetikleyiciler</h5>
+        <ul>
+          <li>Güneş ışınları ve UV radyasyon</li>
+          <li>Sıcak hava ve nem</li>
+          <li>Rüzgar ve soğuk hava</li>
+          <li>Stres ve duygusal faktörler</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Faktörleri</h5>
+        <ul>
+          <li>Baharatlı ve sıcak yiyecekler</li>
+          <li>Alkol tüketimi</li>
+          <li>Kafeinli içecekler</li>
+          <li>Yoğun egzersiz</li>
+        </ul>
+        
+        <h4>Rosacea Tanısı</h4>
+        <p>Rosacea tanısı, dermatolog muayenesi ile konulur. Tanı sürecinde şu adımlar izlenir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Yüzdeki lezyonların değerlendirilmesi</li>
+          <li>Damar genişlemelerinin tespiti</li>
+          <li>Cilt kalınlığının ölçülmesi</li>
+          <li>Göz muayenesi (oküler rosacea için)</li>
+        </ul>
+        
+        <h5>Hasta Öyküsü</h5>
+        <ul>
+          <li>Belirtilerin başlangıç zamanı</li>
+          <li>Tetikleyici faktörlerin belirlenmesi</li>
+          <li>Aile öyküsü</li>
+          <li>Önceki tedaviler</li>
+        </ul>
+        
+        <h5>Diferansiyel Tanı</h5>
+        <ul>
+          <li>Akne vulgaris ile ayrımı</li>
+          <li>Seboreik dermatit ile karıştırılmaması</li>
+          <li>Lupus eritematozus ile ayırımı</li>
+        </ul>
+        
+        <h4>Modern Rosacea Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde rosacea tedavisi için en güncel ve etkili yöntemleri kullanıyoruz. Tedavi planı, hastalığın evresine, şiddetine ve hastanın ihtiyaçlarına göre kişiselleştirilir.</p>
+        
+        <h4>Topikal Tedaviler</h4>
+        <p>Rosacea'nın erken evrelerinde topikal tedaviler etkili sonuçlar verir:</p>
+        
+        <h5>Metronidazol</h5>
+        <p>Antibiyotik özelliği olan bu ilaç, rosacea'daki inflamasyonu azaltır ve kızarıklığı hafifletir. %0.75 ve %1 konsantrasyonlarda kullanılır.</p>
+        
+        <h5>İvermektin</h5>
+        <p>Demodex akarlarına karşı etkili olan bu ilaç, rosacea semptomlarını azaltır ve cildi yatıştırır.</p>
+        
+        <h5>Azelaik Asit</h5>
+        <p>%15 ve %20 konsantrasyonlarda kullanılan bu asit, inflamasyonu azaltır ve cilt tonunu iyileştirir.</p>
+        
+        <h5>Brimonidin</h5>
+        <p>Vazokonstriktör etkisi ile damar genişlemelerini azaltır ve kızarıklığı geçici olarak hafifletir.</p>
+        
+        <h4>Sistemik Tedaviler</h4>
+        <p>Orta ve şiddetli rosacea vakalarında sistemik tedaviler gerekebilir:</p>
+        
+        <h5>Oral Antibiyotikler</h5>
+        <ul>
+          <li>Doksisiklin: En sık kullanılan antibiyotik</li>
+          <li>Minosiklin: Alternatif antibiyotik seçeneği</li>
+          <li>Azitromisin: Kısa süreli tedaviler için</li>
+        </ul>
+        
+        <h5>İzotretinoin</h5>
+        <p>Şiddetli ve dirençli rosacea vakalarında düşük dozlarda kullanılır. Uzun süreli remisyon sağlar.</p>
+        
+        <h4>Lazer ve Işık Tedavileri</h4>
+        <p>Rosacea tedavisinde lazer ve ışık tedavileri özellikle damar genişlemeleri ve kızarıklık için etkilidir:</p>
+        
+        <h5>Pulsed Dye Laser (PDL)</h5>
+        <p>Genişlemiş kılcal damarları hedef alarak kızarıklığı azaltır. 3-6 seans arası uygulanır.</p>
+        
+        <h5>Intense Pulsed Light (IPL)</h5>
+        <p>Farklı dalga boylarında ışık kullanarak hem damarları hem de pigmentasyonu tedavi eder.</p>
+        
+        <h5>Nd:YAG Lazer</h5>
+        <p>Derin damarları hedef alarak kalıcı sonuçlar verir.</p>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>Topikal tedavi + Lazer tedavisi</li>
+          <li>Sistemik tedavi + Topikal tedavi</li>
+          <li>Lazer + IPL kombinasyonu</li>
+          <li>Medikal tedavi + Yaşam tarzı değişiklikleri</li>
+        </ul>
+        
+        <h4>Rosacea'da Yaşam Tarzı Değişiklikleri</h4>
+        <p>Rosacea tedavisinde başarılı sonuçlar almak için yaşam tarzı değişiklikleri çok önemlidir:</p>
+        
+        <h5>Cilt Bakımı</h5>
+        <ul>
+          <li>Nazik temizleyiciler kullanın</li>
+          <li>Alkolsüz ve parfümsüz ürünler tercih edin</li>
+          <li>Güneş koruyucu kullanımı şarttır (SPF 30+)</li>
+          <li>Fiziksel peeling'den kaçının</li>
+        </ul>
+        
+        <h5>Beslenme Önerileri</h5>
+        <ul>
+          <li>Baharatlı yiyeceklerden kaçının</li>
+          <li>Sıcak içecekleri soğutarak için</li>
+          <li>Alkol tüketimini sınırlayın</li>
+          <li>Histamin içeren gıdalardan uzak durun</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Güneşten korunun</li>
+          <li>Ekstrem sıcak ve soğuktan kaçının</li>
+          <li>Stres yönetimi yapın</li>
+          <li>Düzenli uyku düzeni oluşturun</li>
+        </ul>
+        
+        <h4>Rosacea Tedavi Sonuçları</h4>
+        <p>Rosacea tedavisinde sonuçlar genellikle 4-8 hafta içinde görülmeye başlar:</p>
+        
+        <h5>Kısa Vadeli Sonuçlar (1-2 ay)</h5>
+        <ul>
+          <li>Kızarıklıkta azalma</li>
+          <li>İnflamasyonun hafiflemesi</li>
+          <li>Yanma ve batma hissinin azalması</li>
+          <li>Cilt hassasiyetinde iyileşme</li>
+        </ul>
+        
+        <h5>Uzun Vadeli Sonuçlar (3-6 ay)</h5>
+        <ul>
+          <li>Damar genişlemelerinde belirgin azalma</li>
+          <li>Kalıcı kızarıklığın hafiflemesi</li>
+          <li>Atak sıklığında azalma</li>
+          <li>Genel cilt görünümünde iyileşme</li>
+        </ul>
+        
+        <h4>Rosacea Tedavi Sonrası Bakım</h4>
+        <p>Rosacea tedavisi sonrası düzenli bakım ve takip çok önemlidir:</p>
+        
+        <h5>Düzenli Kontroller</h5>
+        <ul>
+          <li>3-6 ayda bir dermatolog kontrolü</li>
+          <li>Tedavi etkinliğinin değerlendirilmesi</li>
+          <li>Gerekirse tedavi planının güncellenmesi</li>
+        </ul>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Güneş koruyucu kullanımının sürdürülmesi</li>
+          <li>Tetikleyici faktörlerden kaçınma</li>
+          <li>Düzenli cilt bakımı</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h4>Rosacea Komplikasyonları</h4>
+        <p>Rosacea tedavi edilmediğinde çeşitli komplikasyonlar gelişebilir:</p>
+        
+        <h5>Oküler Rosacea</h5>
+        <ul>
+          <li>Göz kuruluğu ve yanma</li>
+          <li>Konjonktivit</li>
+          <li>Kornea hasarı (nadir)</li>
+          <li>Görme bozuklukları</li>
+        </ul>
+        
+        <h5>Rinofima</h5>
+        <ul>
+          <li>Burunda kalınlaşma</li>
+          <li>Şekil bozukluğu</li>
+          <li>Estetik kaygılar</li>
+          <li>Nefes alma güçlüğü</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde rosacea tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Rosacea konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel lazer ve ışık tedavi sistemleri</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+          <li><strong>Uzun Vadeli Sonuçlar:</strong> Kalıcı iyileşme hedefi</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Rosacea, doğru tedavi ve yaşam tarzı değişiklikleri ile kontrol altına alınabilen bir hastalıktır. Kliniğimizde uzman ekibimizle birlikte, size en uygun rosacea tedavi planını hazırlayarak, kızarıklık, damar genişlemeleri ve inflamasyon gibi şikayetlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, rosacea ile yaşamayı öğrenmenize yardımcı oluyoruz.</p>
       </div>
     `
   },
@@ -397,17 +623,293 @@ const services = ref([
     category: 'Genel Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Siğil Nedir?</h4>
-        <p>Siğiller, Human Papilloma Virüsü (HPV) kaynaklı, cilt yüzeyinde kabarık ve pütürlü yapılar olarak oluşan bulaşıcı cilt lezyonlarıdır. El, ayak tabanı, yüz ve genital bölgede sıkça görülür. Estetik kaygıya neden olabilir ve bulaşma riski taşır.</p>
+        <h4>Siğil (Ben) Nedir?</h4>
+        <p>Siğiller, Human Papilloma Virüsü (HPV) kaynaklı, cilt yüzeyinde kabarık ve pütürlü yapılar olarak oluşan bulaşıcı cilt lezyonlarıdır. Bu viral enfeksiyonlar, vücudun farklı bölgelerinde ortaya çıkabilir ve hem estetik hem de sağlık açısından önem taşır. Siğiller, bulaşıcı olması nedeniyle erken tedavi edilmesi gereken cilt problemleridir.</p>
         
-        <h4>Lazerle Siğil Tedavisi</h4>
-        <p>Kliniğimizde siğiller için modern ve etkili yöntem olan lazer tedavisi uygulanmaktadır. Lazer, siğilin köküne inerek sağlıklı dokulara zarar vermeden bu oluşumları yok eder. Bu yöntem, cerrahiye göre daha az iz bırakır ve iyileşme süreci oldukça kısadır.</p>
+        <h4>Siğil Türleri ve Özellikleri</h4>
+        <p>Siğiller, bulundukları bölgeye ve görünümlerine göre farklı türlerde sınıflandırılır:</p>
         
-        <h4>Gelişmiş Cihazlarla Güvenli Müdahale</h4>
-        <p>Lokal anestezi altında yapılan işlem genellikle tek seansta sonuç verir. Karbondioksit lazer cihazlarımız ile uygulama ağrısızdır. Aynı gün sosyal yaşama dönüş mümkündür.</p>
+        <h5>Yaygın Siğiller (Verruca Vulgaris)</h5>
+        <ul>
+          <li>En sık görülen siğil türü</li>
+          <li>El, parmak ve tırnak çevresinde oluşur</li>
+          <li>Kaba, pütürlü yüzey yapısı</li>
+          <li>Gri-kahverengi renkte</li>
+        </ul>
         
-        <h4>Steril Ortam, Uzman Ekip</h4>
-        <p>Kliniğimizdeki steril koşullar ve deneyimli dermatoloji ekibimizle, lazerle siğil tedavisi etkili, hızlı ve güvenlidir. Gerekli durumlarda takip seansları planlanarak kalıcı çözüm sağlanır.</p>
+        <h5>Ayak Tabanı Siğilleri (Plantar Warts)</h5>
+        <ul>
+          <li>Ayak tabanında ve parmak altlarında görülür</li>
+          <li>Basınç nedeniyle içe doğru büyür</li>
+          <li>Yürürken ağrıya neden olabilir</li>
+          <li>Kalın, nasır benzeri görünüm</li>
+        </ul>
+        
+        <h5>Düz Siğiller (Flat Warts)</h5>
+        <ul>
+          <li>Yüz, boyun ve el sırtında görülür</li>
+          <li>Küçük, düz ve yumuşak yapıda</li>
+          <li>Ten renginde veya hafif kahverengi</li>
+          <li>Çok sayıda olabilir</li>
+        </ul>
+        
+        <h5>Filiform Siğiller</h5>
+        <ul>
+          <li>Yüz, boyun ve dudak çevresinde görülür</li>
+          <li>Uzun, iplik benzeri çıkıntılar</li>
+          <li>Estetik kaygıya neden olur</li>
+          <li>Kolayca travmatize olabilir</li>
+        </ul>
+        
+        <h5>Genital Siğiller (Condyloma Acuminata)</h5>
+        <ul>
+          <li>Genital bölge ve çevresinde görülür</li>
+          <li>Karnabahar benzeri görünüm</li>
+          <li>Bulaşıcılığı yüksektir</li>
+          <li>Erken tedavi gerektirir</li>
+        </ul>
+        
+        <h4>Siğil Nedenleri ve Bulaşma Yolları</h4>
+        <p>Siğiller, HPV virüsünün neden olduğu enfeksiyonlardır ve çeşitli yollarla bulaşabilir:</p>
+        
+        <h5>Bulaşma Yolları</h5>
+        <ul>
+          <li><strong>Direkt Temas:</strong> Enfekte kişi ile doğrudan temas</li>
+          <li><strong>Ortak Eşya Kullanımı:</strong> Havlu, terlik, ayakkabı paylaşımı</li>
+          <li><strong>Ortak Alanlar:</strong> Havuz, sauna, spor salonu zeminleri</li>
+          <li><strong>Kendine Bulaştırma:</strong> Vücudun farklı bölgelerine yayılma</li>
+          <li><strong>Cinsel Temas:</strong> Genital siğiller için</li>
+        </ul>
+        
+        <h5>Risk Faktörleri</h5>
+        <ul>
+          <li>Bağışıklık sisteminin zayıf olması</li>
+          <li>Ciltte kesik, çizik veya yaralar</li>
+          <li>Nemli ve sıcak ortamlar</li>
+          <li>Ortak eşya kullanımı</li>
+          <li>Stres ve yorgunluk</li>
+        </ul>
+        
+        <h4>Siğil Tanısı</h4>
+        <p>Siğil tanısı genellikle dermatolog muayenesi ile konulur:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Görsel inceleme</li>
+          <li>Dokunma ile değerlendirme</li>
+          <li>Büyüteç ile detaylı inceleme</li>
+        </ul>
+        
+        <h5>Dermatoskopi</h5>
+        <ul>
+          <li>Özel cihaz ile yakın inceleme</li>
+          <li>Siğil yapısının detaylı analizi</li>
+          <li>Malignite şüphesi olan durumlarda</li>
+        </ul>
+        
+        <h5>Biyopsi (Gerekirse)</h5>
+        <ul>
+          <li>Şüpheli durumlarda</li>
+          <li>Kanser şüphesi olan vakalarda</li>
+          <li>Tedaviye dirençli siğillerde</li>
+        </ul>
+        
+        <h4>Modern Siğil Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde siğil tedavisi için en güncel ve etkili yöntemleri kullanıyoruz. Tedavi seçimi, siğilin türüne, büyüklüğüne, yerleşim yerine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>Lazer Tedavisi</h4>
+        <p>Lazer tedavisi, siğil tedavisinde en modern ve etkili yöntemlerden biridir:</p>
+        
+        <h5>Karbondioksit (CO2) Lazer</h5>
+        <ul>
+          <li>Siğilin köküne kadar etkili</li>
+          <li>Sağlıklı dokulara minimal zarar</li>
+          <li>Tek seansta sonuç</li>
+          <li>Hızlı iyileşme süreci</li>
+        </ul>
+        
+        <h5>Erbium YAG Lazer</h5>
+        <ul>
+          <li>Daha hassas kesim</li>
+          <li>Yüzeysel siğiller için ideal</li>
+          <li>Minimal yan etki</li>
+          <li>Hızlı iyileşme</li>
+        </ul>
+        
+        <h4>Kriyoterapi (Dondurma Tedavisi)</h4>
+        <p>Sıvı azot kullanılarak yapılan dondurma tedavisi:</p>
+        <ul>
+          <li>Yüzeysel siğiller için etkili</li>
+          <li>Minimal ağrı</li>
+          <li>Hızlı uygulama</li>
+          <li>Birkaç seans gerekebilir</li>
+        </ul>
+        
+        <h4>Elektrokoter (Yakma Tedavisi)</h4>
+        <p>Elektrik akımı ile siğilin yakılması:</p>
+        <ul>
+          <li>Küçük siğiller için uygun</li>
+          <li>Lokal anestezi ile uygulanır</li>
+          <li>Hızlı sonuç</li>
+          <li>Hafif iz bırakabilir</li>
+        </ul>
+        
+        <h4>Topikal Tedaviler</h4>
+        <p>Hafif siğiller için topikal tedaviler kullanılabilir:</p>
+        
+        <h5>Salicylic Acid</h5>
+        <ul>
+          <li>Siğil yüzeyini yumuşatır</li>
+          <li>Düzenli uygulama gerekir</li>
+          <li>Evde kullanım için uygun</li>
+          <li>Birkaç hafta sürebilir</li>
+        </ul>
+        
+        <h5>Podophyllin</h5>
+        <ul>
+          <li>Genital siğiller için</li>
+          <li>Doktor kontrolünde uygulanır</li>
+          <li>Hızlı etki</li>
+          <li>Yan etki riski</li>
+        </ul>
+        
+        <h5>Imiquimod</h5>
+        <ul>
+          <li>Bağışıklık sistemini uyarır</li>
+          <li>Genital siğiller için</li>
+          <li>Uzun süreli tedavi</li>
+          <li>Yan etki riski düşük</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı yöntemleri birleştiriyoruz:</p>
+        <ul>
+          <li>Lazer + Topikal tedavi</li>
+          <li>Kriyoterapi + Lazer</li>
+          <li>Elektrokoter + Topikal tedavi</li>
+          <li>Medikal tedavi + Lazer</li>
+        </ul>
+        
+        <h4>Siğil Tedavi Süreci</h4>
+        <p>Siğil tedavisi, uzman dermatologlar tarafından steril koşullarda uygulanır:</p>
+        
+        <h5>1. Konsültasyon ve Planlama</h5>
+        <ul>
+          <li>Siğil türünün belirlenmesi</li>
+          <li>Uygun tedavi yönteminin seçimi</li>
+          <li>Hasta bilgilendirmesi</li>
+          <li>Tedavi planının hazırlanması</li>
+        </ul>
+        
+        <h5>2. Tedavi Uygulaması</h5>
+        <ul>
+          <li>Steril ortam hazırlığı</li>
+          <li>Lokal anestezi uygulaması</li>
+          <li>Seçilen yöntemle tedavi</li>
+          <li>Gerekli bakım önerileri</li>
+        </ul>
+        
+        <h5>3. Tedavi Sonrası Takip</h5>
+        <ul>
+          <li>İyileşme sürecinin takibi</li>
+          <li>Gerekirse ek seanslar</li>
+          <li>Nüks önleme önerileri</li>
+          <li>Düzenli kontroller</li>
+        </ul>
+        
+        <h4>Siğil Tedavi Sonrası Bakım</h4>
+        <p>Siğil tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>İlk 24 Saat</h5>
+        <ul>
+          <li>Uygulama bölgesini kuru tutun</li>
+          <li>Su ile temas ettirmeyin</li>
+          <li>Bandaj kullanımı (gerekirse)</li>
+          <li>Ağrı kesici kullanımı (gerekirse)</li>
+        </ul>
+        
+        <h5>İlk Hafta</h5>
+        <ul>
+          <li>Güneş koruyucu kullanın</li>
+          <li>Kabuk oluşumunu bekleyin</li>
+          <li>Kabuğu zorla çıkarmayın</li>
+          <li>Hijyen kurallarına dikkat edin</li>
+        </ul>
+        
+        <h5>Uzun Vadeli Bakım</h5>
+        <ul>
+          <li>Düzenli cilt kontrolü</li>
+          <li>Yeni siğil oluşumunu takip</li>
+          <li>Koruyucu önlemler</li>
+          <li>Düzenli dermatolog kontrolü</li>
+        </ul>
+        
+        <h4>Siğil Nüksünü Önleme</h4>
+        <p>Siğil tedavisi sonrası nüksü önlemek için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Kişisel Hijyen</h5>
+        <ul>
+          <li>Elleri sık sık yıkayın</li>
+          <li>Ortak eşya kullanımından kaçının</li>
+          <li>Havlu ve terlik paylaşmayın</li>
+          <li>Ayakları kuru tutun</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Havuz ve saunada terlik kullanın</li>
+          <li>Spor salonunda hijyene dikkat edin</li>
+          <li>Ortak alanlarda koruyucu önlemler alın</li>
+        </ul>
+        
+        <h5>Bağışıklık Sistemi</h5>
+        <ul>
+          <li>Düzenli beslenme</li>
+          <li>Yeterli uyku</li>
+          <li>Stres yönetimi</li>
+          <li>Düzenli egzersiz</li>
+        </ul>
+        
+        <h4>Siğil Tedavi Sonuçları</h4>
+        <p>Siğil tedavisinde sonuçlar genellikle hızlı görülür:</p>
+        
+        <h5>Lazer Tedavisi</h5>
+        <ul>
+          <li>Tek seansta %90+ başarı oranı</li>
+          <li>1-2 hafta iyileşme süreci</li>
+          <li>Minimal iz riski</li>
+          <li>Hızlı sosyal yaşama dönüş</li>
+        </ul>
+        
+        <h5>Kriyoterapi</h5>
+        <ul>
+          <li>2-4 seans gerekebilir</li>
+          <li>3-4 hafta iyileşme süreci</li>
+          <li>Hafif ağrı olabilir</li>
+          <li>Etkili sonuçlar</li>
+        </ul>
+        
+        <h5>Topikal Tedaviler</h5>
+        <ul>
+          <li>4-12 hafta sürebilir</li>
+          <li>Düzenli uygulama gerekir</li>
+          <li>Yan etki riski düşük</li>
+          <li>Evde uygulanabilir</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde siğil tedavisi için en güncel teknolojileri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Modern Teknolojiler:</strong> En güncel lazer sistemleri</li>
+          <li><strong>Uzman Ekip:</strong> Deneyimli dermatologlar</li>
+          <li><strong>Steril Ortam:</strong> Hijyenik ve güvenli uygulama</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel plan</li>
+          <li><strong>Hızlı Sonuçlar:</strong> Etkili ve güvenli tedavi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Siğiller, modern tedavi yöntemleri ile başarıyla tedavi edilebilen cilt problemleridir. Kliniğimizde lazer teknolojisi, kriyoterapi ve diğer modern yöntemlerle, siğillerinizi güvenli ve etkili şekilde tedavi ediyoruz. Uzman ekibimiz ve gelişmiş cihazlarımızla, size en uygun tedavi planını hazırlayarak, hızlı ve kalıcı sonuçlar elde etmenizi sağlıyoruz.</p>
       </div>
     `
   },
@@ -417,14 +919,252 @@ const services = ref([
     category: 'Genel Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Tırnak Hastalıkları Nelerdir?</h4>
-        <p>Tırnak hastalıkları, mantar enfeksiyonları, tırnak batması, tırnak mantarı gibi çeşitli durumları içerir. Bu hastalıklar, genellikle tırnaklarda renk değişiklikleri, şekil bozuklukları ve ağrı ile kendini gösterir.</p>
+        <h4>Tırnak Hastalıkları Nedir?</h4>
+        <p>Tırnak hastalıkları, tırnakların yapısını, rengini, şeklini ve işlevini etkileyen çeşitli dermatolojik durumlardır. Bu hastalıklar, sadece estetik problemlere değil, aynı zamanda ağrı, enfeksiyon ve fonksiyonel bozukluklara da neden olabilir. Tırnak hastalıkları, her yaş grubunda görülebilir ve erken tanı ile tedavi edilmesi önemlidir.</p>
         
-        <h4>Tırnak Hastalıklarının Tedavisi</h4>
-        <p>Tırnak hastalıklarının tedavisinde, hastalığın türüne göre farklı yaklaşımlar uygulanır. Mantar enfeksiyonları için antifungal ilaçlar, tırnak batması için cerrahi müdahale gerekebilir. Ayrıca, tırnak hijyenine dikkat etmek ve uygun ayakkabı seçimi tedavi sürecini destekler.</p>
+        <h4>Tırnak Hastalıkları Türleri</h4>
+        <p>Tırnak hastalıkları, nedenlerine ve belirtilerine göre farklı kategorilerde sınıflandırılır:</p>
+        
+        <h5>Mantar Enfeksiyonları (Onychomycosis)</h5>
+        <ul>
+          <li><strong>Distal Subungual Onychomycosis:</strong> Tırnak ucundan başlayan en yaygın mantar enfeksiyonu</li>
+          <li><strong>Proximal Subungual Onychomycosis:</strong> Tırnak kökünden başlayan enfeksiyon</li>
+          <li><strong>Superficial White Onychomycosis:</strong> Tırnak yüzeyinde beyaz lekeler</li>
+          <li><strong>Candida Onychomycosis:</strong> Maya mantarı kaynaklı enfeksiyon</li>
+        </ul>
+        
+        <h5>Tırnak Batması (Ingrown Nail)</h5>
+        <ul>
+          <li>Tırnak kenarının yumuşak dokuya gömülmesi</li>
+          <li>Şiddetli ağrı ve enfeksiyon riski</li>
+          <li>Yanlış tırnak kesimi ve dar ayakkabı nedeniyle oluşur</li>
+          <li>Ayak başparmağında sık görülür</li>
+        </ul>
+        
+        <h5>Tırnak Deformiteleri</h5>
+        <ul>
+          <li><strong>Koilonychia:</strong> Kaşık şeklinde tırnak</li>
+          <li><strong>Beau Çizgileri:</strong> Tırnakta yatay çizgiler</li>
+          <li><strong>Onycholysis:</strong> Tırnak yatağından ayrılma</li>
+          <li><strong>Pitting:</strong> Tırnak yüzeyinde küçük çukurlar</li>
+        </ul>
+        
+        <h5>Psoriatik Tırnak Hastalığı</h5>
+        <ul>
+          <li>Sedef hastalığına bağlı tırnak değişiklikleri</li>
+          <li>Tırnak yüzeyinde pitting ve kalınlaşma</li>
+          <li>Renk değişiklikleri ve şekil bozuklukları</li>
+          <li>Sedef hastalığının şiddeti ile ilişkili</li>
+        </ul>
+        
+        <h4>Tırnak Hastalıklarının Nedenleri</h4>
+        <p>Tırnak hastalıkları birçok farklı faktöre bağlı olarak gelişebilir:</p>
+        
+        <h5>Enfeksiyonlar</h5>
+        <ul>
+          <li>Mantar enfeksiyonları (dermatofitler, mayalar)</li>
+          <li>Bakteriyel enfeksiyonlar</li>
+          <li>Viral enfeksiyonlar (siğil)</li>
+        </ul>
+        
+        <h5>Fiziksel Travmalar</h5>
+        <ul>
+          <li>Yanlış tırnak kesimi</li>
+          <li>Dar ayakkabı kullanımı</li>
+          <li>Tekrarlayan travmalar</li>
+          <li>Spor yaralanmaları</li>
+        </ul>
+        
+        <h5>Sistemik Hastalıklar</h5>
+        <ul>
+          <li>Diyabet</li>
+          <li>Tiroid hastalıkları</li>
+          <li>Anemi</li>
+          <li>Bağışıklık sistemi bozuklukları</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Nemli ortamlar</li>
+          <li>Kimyasal maddeler</li>
+          <li>Güneş ışınları</li>
+          <li>Mesleki maruziyetler</li>
+        </ul>
+        
+        <h4>Tırnak Hastalıkları Tanısı</h4>
+        <p>Tırnak hastalıklarının doğru tedavi edilebilmesi için kapsamlı bir tanı süreci gerekir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Tırnak yapısının detaylı incelenmesi</li>
+          <li>Renk, şekil ve kalınlık değişikliklerinin tespiti</li>
+          <li>Çevre dokuların değerlendirilmesi</li>
+          <li>Ağrı ve hassasiyet kontrolü</li>
+        </ul>
+        
+        <h5>Laboratuvar Testleri</h5>
+        <ul>
+          <li><strong>Mantar Kültürü:</strong> Enfeksiyon etkeninin belirlenmesi</li>
+          <li><strong>KOH Testi:</strong> Hızlı mantar tanısı</li>
+          <li><strong>PAS Boyaması:</strong> Mantar hiflerinin görülmesi</li>
+          <li><strong>Biyopsi:</strong> Şüpheli durumlarda</li>
+        </ul>
+        
+        <h5>Görüntüleme Yöntemleri</h5>
+        <ul>
+          <li>Dermatoskopi ile detaylı inceleme</li>
+          <li>Gerekirse radyolojik görüntüleme</li>
+        </ul>
+        
+        <h4>Modern Tırnak Hastalıkları Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde tırnak hastalıkları için en güncel ve etkili tedavi yöntemlerini kullanıyoruz. Tedavi seçimi, hastalığın türüne, şiddetine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>Mantar Enfeksiyonları Tedavisi</h4>
+        <p>Tırnak mantarı tedavisinde farklı yaklaşımlar kullanılır:</p>
+        
+        <h5>Topikal Tedaviler</h5>
+        <ul>
+          <li><strong>Antifungal Kremler:</strong> Amorolfine, ciclopirox</li>
+          <li><strong>Antifungal Tırnak Losyonları:</strong> Günlük uygulama</li>
+          <li><strong>Antifungal Tırnak Vernikleri:</strong> Haftalık uygulama</li>
+        </ul>
+        
+        <h5>Sistemik Tedaviler</h5>
+        <ul>
+          <li><strong>Terbinafine:</strong> En etkili oral antifungal</li>
+          <li><strong>İtraconazole:</strong> Alternatif tedavi seçeneği</li>
+          <li><strong>Fluconazole:</strong> Candida enfeksiyonları için</li>
+        </ul>
+        
+        <h5>Lazer Tedavisi</h5>
+        <ul>
+          <li>Mantar hiflerini hedef alan lazer</li>
+          <li>Topikal tedavi ile kombinasyon</li>
+          <li>Hızlı sonuç ve minimal yan etki</li>
+        </ul>
+        
+        <h4>Tırnak Batması Tedavisi</h4>
+        <p>Tırnak batması tedavisinde farklı yaklaşımlar uygulanır:</p>
+        
+        <h5>Konservatif Tedavi</h5>
+        <ul>
+          <li>Doğru tırnak kesimi teknikleri</li>
+          <li>Uygun ayakkabı seçimi</li>
+          <li>Antiseptik banyolar</li>
+          <li>Bandaj uygulaması</li>
+        </ul>
+        
+        <h5>Cerrahi Tedavi</h5>
+        <ul>
+          <li><strong>Kısmi Tırnak Çekimi:</strong> Sadece batık kısmın alınması</li>
+          <li><strong>Fenol Uygulaması:</strong> Tekrar büyümeyi önleme</li>
+          <li><strong>Lazer ile Tedavi:</strong> Minimal invaziv yaklaşım</li>
+        </ul>
+        
+        <h4>Psoriatik Tırnak Hastalığı Tedavisi</h4>
+        <p>Sedef hastalığına bağlı tırnak değişikliklerinin tedavisinde:</p>
+        <ul>
+          <li>Topikal kortikosteroidler</li>
+          <li>Vitamin D analogları</li>
+          <li>Retinoidler</li>
+          <li>Biyolojik tedaviler (gerekirse)</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>Topikal + Sistemik tedavi</li>
+          <li>Lazer + Medikal tedavi</li>
+          <li>Cerrahi + Medikal tedavi</li>
+          <li>Yaşam tarzı değişiklikleri + Medikal tedavi</li>
+        </ul>
+        
+        <h4>Tırnak Hastalıkları Tedavi Sonrası Bakım</h4>
+        <p>Tırnak hastalıkları tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>Hijyen Kuralları</h5>
+        <ul>
+          <li>Günlük tırnak temizliği</li>
+          <li>Antiseptik solüsyonlar</li>
+          <li>Kuru tutma</li>
+          <li>Düzenli tırnak kesimi</li>
+        </ul>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Uygun ayakkabı seçimi</li>
+          <li>Çorap değişimi</li>
+          <li>Ortak eşya kullanımından kaçınma</li>
+          <li>Düzenli kontroller</li>
+        </ul>
         
         <h4>Tırnak Sağlığını Korumak İçin Öneriler</h4>
-        <p>Tırnak sağlığını korumak için düzenli tırnak bakımı, nemlendirici kullanımı ve tırnakların aşırı ıslak kalmaması önemlidir. Kimyasal içerikli temizlik ürünlerinden kaçınılmalı ve tırnaklar düzenli olarak kontrol edilmelidir.</p>
+        <p>Tırnak sağlığını korumak için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Doğru Tırnak Bakımı</h5>
+        <ul>
+          <li>Düzenli ve doğru tırnak kesimi</li>
+          <li>Nemlendirici kullanımı</li>
+          <li>Kimyasal maddelerden korunma</li>
+          <li>Güneş koruyucu kullanımı</li>
+        </ul>
+        
+        <h5>Beslenme ve Yaşam Tarzı</h5>
+        <ul>
+          <li>Protein açısından zengin beslenme</li>
+          <li>Biotin takviyesi</li>
+          <li>Yeterli su tüketimi</li>
+          <li>Düzenli egzersiz</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Nemli ortamlardan kaçınma</li>
+          <li>Koruyucu eldiven kullanımı</li>
+          <li>Düzenli havalandırma</li>
+          <li>Temizlik ürünlerinde dikkat</li>
+        </ul>
+        
+        <h4>Tırnak Hastalıkları Tedavi Sonuçları</h4>
+        <p>Tırnak hastalıkları tedavisinde sonuçlar genellikle zamanla görülür:</p>
+        
+        <h5>Mantar Enfeksiyonları</h5>
+        <ul>
+          <li>3-6 ay tedavi süresi</li>
+          <li>%70-80 başarı oranı</li>
+          <li>Tekrar enfeksiyon riski</li>
+          <li>Düzenli takip gerekli</li>
+        </ul>
+        
+        <h5>Tırnak Batması</h5>
+        <ul>
+          <li>1-2 hafta iyileşme süreci</li>
+          <li>%90+ başarı oranı</li>
+          <li>Tekrar oluşum riski</li>
+          <li>Koruyucu önlemler önemli</li>
+        </ul>
+        
+        <h5>Psoriatik Tırnak</h5>
+        <ul>
+          <li>3-6 ay tedavi süresi</li>
+          <li>Sedef hastalığı kontrolü ile ilişkili</li>
+          <li>Uzun vadeli tedavi gerekli</li>
+          <li>Düzenli dermatolog kontrolü</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde tırnak hastalıkları tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Tırnak hastalıkları konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel lazer ve tedavi sistemleri</li>
+          <li><strong>Kapsamlı Tanı:</strong> Detaylı laboratuvar ve görüntüleme</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Tırnak hastalıkları, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun tırnak hastalıkları tedavi planını hazırlayarak, ağrı, enfeksiyon ve estetik problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, tırnak sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
     `
   },
@@ -435,13 +1175,308 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Deri Enfeksiyonları Nedir?</h4>
-        <p>Deri enfeksiyonları, bakteri, virüs, mantar veya parazit kaynaklı olarak ciltte meydana gelen enfeksiyonlardır. En sık rastlanan türleri arasında selülit, impetigo ve herpes zoster bulunur. Bu enfeksiyonlar, genellikle kızarıklık, şişlik, ağrı, sıcaklık artışı ve bazen de irinle kendini belli eder.</p>
+        <p>Deri enfeksiyonları, bakteri, virüs, mantar veya parazit kaynaklı olarak ciltte meydana gelen enfeksiyonlardır. Bu enfeksiyonlar, cildin farklı katmanlarını etkileyebilir ve çeşitli belirtilerle kendini gösterir. Deri enfeksiyonları, sadece lokal problemlere değil, aynı zamanda sistemik komplikasyonlara da neden olabilir. Erken tanı ve tedavi, enfeksiyonun yayılmasını önlemek ve komplikasyonları azaltmak için kritik öneme sahiptir.</p>
         
-        <h4>Deri Enfeksiyonlarının Tedavisi</h4>
-        <p>Deri enfeksiyonlarının tedavisinde öncelikle enfeksiyona neden olan mikroorganizma belirlenir. Bakteriyel enfeksiyonlarda antibiyotikler, viral olanlarda antiviral ilaçlar ve mantar enfeksiyonlarında antifungal ajanlar kullanılır. Cilt temizliği ve hijyen, tedavinin başarısı için kritik önemdedir.</p>
+        <h4>Deri Enfeksiyonları Türleri</h4>
+        <p>Deri enfeksiyonları, etken mikroorganizmaya ve etkilenen cilt katmanına göre sınıflandırılır:</p>
         
-        <h4>Korunma Yöntemleri</h4>
-        <p>Deri enfeksiyonlarından korunmak için kişisel hijyene dikkat etmek, ortak eşya kullanımından kaçınmak ve açık yaraların temiz tutulması gerekir. Bağışıklık sisteminin güçlü olması da bu tür enfeksiyonların önlenmesinde etkilidir.</p>
+        <h5>Bakteriyel Deri Enfeksiyonları</h5>
+        <ul>
+          <li><strong>İmpetigo:</strong> Yüzeysel bakteriyel enfeksiyon, sarı kabuklarla karakterize</li>
+          <li><strong>Selülit:</strong> Derin doku enfeksiyonu, kızarıklık ve şişlik ile</li>
+          <li><strong>Fronkül:</strong> Kıl kökü enfeksiyonu, ağrılı nodül</li>
+          <li><strong>Karbunkül:</strong> Birden fazla fronkülün birleşmesi</li>
+          <li><strong>Erizipel:</strong> Yüzeysel lenfatik enfeksiyon, belirgin sınırlar</li>
+        </ul>
+        
+        <h5>Viral Deri Enfeksiyonları</h5>
+        <ul>
+          <li><strong>Herpes Simplex:</strong> Uçuk ve genital herpes</li>
+          <li><strong>Herpes Zoster:</strong> Zona hastalığı, ağrılı döküntü</li>
+          <li><strong>Molluscum Contagiosum:</strong> İnci benzeri papüller</li>
+          <li><strong>Viral Siğiller:</strong> HPV kaynaklı cilt lezyonları</li>
+        </ul>
+        
+        <h5>Mantar Deri Enfeksiyonları</h5>
+        <ul>
+          <li><strong>Dermatofitoz:</strong> Ringworm, tinea enfeksiyonları</li>
+          <li><strong>Candida:</strong> Maya enfeksiyonları, intertrigo</li>
+          <li><strong>Pityriasis Versicolor:</strong> Renk değişikliği yapan mantar</li>
+        </ul>
+        
+        <h5>Paraziter Deri Enfeksiyonları</h5>
+        <ul>
+          <li><strong>Uyuz:</strong> Sarcoptes scabiei akarı</li>
+          <li><strong>Bit:</strong> Saç ve vücut biti</li>
+          <li><strong>Larva Migrans:</strong> Hayvan parazitleri</li>
+        </ul>
+        
+        <h4>Deri Enfeksiyonlarının Nedenleri</h4>
+        <p>Deri enfeksiyonları birçok farklı faktöre bağlı olarak gelişebilir:</p>
+        
+        <h5>Mikrobiyolojik Faktörler</h5>
+        <ul>
+          <li>Bakteri, virüs, mantar ve parazitler</li>
+          <li>Antibiyotik direnci</li>
+          <li>Virülans faktörleri</li>
+          <li>Biyofilm oluşumu</li>
+        </ul>
+        
+        <h5>Konak Faktörleri</h5>
+        <ul>
+          <li>Bağışıklık sistemi zayıflığı</li>
+          <li>Diyabet ve metabolik hastalıklar</li>
+          <li>Kronik hastalıklar</li>
+          <li>İleri yaş ve çocukluk dönemi</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Nemli ve sıcak ortamlar</li>
+          <li>Kötü hijyen koşulları</li>
+          <li>Ortak eşya kullanımı</li>
+          <li>Hayvan teması</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Faktörleri</h5>
+        <ul>
+          <li>Yanlış cilt bakımı</li>
+          <li>Dar ve sentetik kıyafetler</li>
+          <li>Yoğun egzersiz ve terleme</li>
+          <li>Stres ve yorgunluk</li>
+        </ul>
+        
+        <h4>Deri Enfeksiyonları Belirtileri</h4>
+        <p>Deri enfeksiyonlarında görülen belirtiler enfeksiyon türüne göre değişiklik gösterir:</p>
+        
+        <h5>Genel Belirtiler</h5>
+        <ul>
+          <li>Kızarıklık ve inflamasyon</li>
+          <li>Şişlik ve ödem</li>
+          <li>Ağrı ve hassasiyet</li>
+          <li>Sıcaklık artışı</li>
+          <li>Kaşıntı ve yanma hissi</li>
+        </ul>
+        
+        <h5>Özel Belirtiler</h5>
+        <ul>
+          <li><strong>Bakteriyel:</strong> İrin, kabuklanma, ülserasyon</li>
+          <li><strong>Viral:</strong> Su dolu kabarcıklar, ağrı</li>
+          <li><strong>Mantar:</strong> Pullanma, renk değişikliği, halka şeklinde lezyonlar</li>
+          <li><strong>Paraziter:</strong> Tünel izleri, yoğun kaşıntı</li>
+        </ul>
+        
+        <h5>Sistemik Belirtiler</h5>
+        <ul>
+          <li>Ateş ve titreme</li>
+          <li>Halsizlik ve yorgunluk</li>
+          <li>Lenf bezi büyümesi</li>
+          <li>İştahsızlık</li>
+        </ul>
+        
+        <h4>Deri Enfeksiyonları Tanısı</h4>
+        <p>Deri enfeksiyonlarının doğru tedavi edilebilmesi için kapsamlı bir tanı süreci gerekir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Lezyonların detaylı incelenmesi</li>
+          <li>Yayılım paterni ve sınırların belirlenmesi</li>
+          <li>Lenf bezi kontrolü</li>
+          <li>Genel durum değerlendirmesi</li>
+        </ul>
+        
+        <h5>Laboratuvar Testleri</h5>
+        <ul>
+          <li><strong>Mikroskopi:</strong> Direkt inceleme</li>
+          <li><strong>Kültür:</strong> Mikroorganizma üretimi</li>
+          <li><strong>Antibiyogram:</strong> Antibiyotik duyarlılığı</li>
+          <li><strong>Seroloji:</strong> Viral enfeksiyonlar için</li>
+        </ul>
+        
+        <h5>Görüntüleme Yöntemleri</h5>
+        <ul>
+          <li>Dermatoskopi</li>
+          <li>Ultrasonografi (derin enfeksiyonlar için)</li>
+          <li>Manyetik rezonans görüntüleme (MRG)</li>
+        </ul>
+        
+        <h4>Modern Deri Enfeksiyonları Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde deri enfeksiyonları için en güncel ve etkili tedavi yöntemlerini kullanıyoruz. Tedavi seçimi, enfeksiyonun türüne, şiddetine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>Bakteriyel Enfeksiyonlar Tedavisi</h4>
+        <p>Bakteriyel deri enfeksiyonlarının tedavisinde:</p>
+        
+        <h5>Topikal Tedaviler</h5>
+        <ul>
+          <li><strong>Antibiyotik Kremler:</strong> Mupirocin, fusidic acid</li>
+          <li><strong>Antiseptik Solüsyonlar:</strong> Povidone-iodine, chlorhexidine</li>
+          <li><strong>Antibiyotik Merhemler:</strong> Neomycin, bacitracin</li>
+        </ul>
+        
+        <h5>Sistemik Antibiyotikler</h5>
+        <ul>
+          <li><strong>Beta-laktamlar:</strong> Penisilin, sefalosporin</li>
+          <li><strong>Makrolidler:</strong> Eritromisin, klaritromisin</li>
+          <li><strong>Florokinolonlar:</strong> Siprofloksasin, levofloksasin</li>
+          <li><strong>Linkozamidler:</strong> Klindamisin</li>
+        </ul>
+        
+        <h5>Cerrahi Tedavi</h5>
+        <ul>
+          <li>Apse drenajı</li>
+          <li>Nekrotik doku temizliği</li>
+          <li>Debridman</li>
+        </ul>
+        
+        <h4>Viral Enfeksiyonlar Tedavisi</h4>
+        <p>Viral deri enfeksiyonlarının tedavisinde:</p>
+        
+        <h5>Antiviral İlaçlar</h5>
+        <ul>
+          <li><strong>Asiklovir:</strong> Herpes enfeksiyonları için</li>
+          <li><strong>Valasiklovir:</strong> Oral herpes tedavisi</li>
+          <li><strong>Famiklovir:</strong> Zona tedavisi</li>
+        </ul>
+        
+        <h5>Destekleyici Tedaviler</h5>
+        <ul>
+          <li>Ağrı kesiciler</li>
+          <li>Kaşıntı önleyiciler</li>
+          <li>Nemlendiriciler</li>
+          <li>Soğuk kompresler</li>
+        </ul>
+        
+        <h4>Mantar Enfeksiyonları Tedavisi</h4>
+        <p>Mantar deri enfeksiyonlarının tedavisinde:</p>
+        
+        <h5>Topikal Antifungaller</h5>
+        <ul>
+          <li><strong>Azol Türevleri:</strong> Klotrimazol, mikonazol</li>
+          <li><strong>Alilaminler:</strong> Terbinafine</li>
+          <li><strong>Pirimidinler:</strong> Siklopiroks</li>
+        </ul>
+        
+        <h5>Sistemik Antifungaller</h5>
+        <ul>
+          <li><strong>Terbinafine:</strong> Dermatofit enfeksiyonları</li>
+          <li><strong>İtrakonazole:</strong> Candida enfeksiyonları</li>
+          <li><strong>Fluconazole:</strong> Sistemik mantar enfeksiyonları</li>
+        </ul>
+        
+        <h4>Paraziter Enfeksiyonlar Tedavisi</h4>
+        <p>Paraziter deri enfeksiyonlarının tedavisinde:</p>
+        
+        <h5>Uyuz Tedavisi</h5>
+        <ul>
+          <li>Permetrin kremi</li>
+          <li>İvermektin (oral)</li>
+          <li>Lindane losyonu</li>
+          <li>Çevresel temizlik</li>
+        </ul>
+        
+        <h5>Bit Tedavisi</h5>
+        <ul>
+          <li>Permetrin şampuan</li>
+          <li>Malathion losyonu</li>
+          <li>Fiziksel temizlik</li>
+          <li>Çevresel dezenfeksiyon</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>Antimikrobiyal + Destekleyici tedavi</li>
+          <li>Topikal + Sistemik tedavi</li>
+          <li>Medikal + Cerrahi tedavi</li>
+          <li>Hijyen + Medikal tedavi</li>
+        </ul>
+        
+        <h4>Deri Enfeksiyonları Tedavi Sonrası Bakım</h4>
+        <p>Deri enfeksiyonları tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>Hijyen Kuralları</h5>
+        <ul>
+          <li>Günlük cilt temizliği</li>
+          <li>Antiseptik solüsyonlar</li>
+          <li>Kuru tutma</li>
+          <li>Düzenli bandaj değişimi</li>
+        </ul>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Ortak eşya kullanımından kaçınma</li>
+          <li>Kişisel hijyen ürünleri</li>
+          <li>Düzenli el yıkama</li>
+          <li>Çevresel temizlik</li>
+        </ul>
+        
+        <h4>Deri Enfeksiyonlarından Korunma</h4>
+        <p>Deri enfeksiyonlarından korunmak için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Kişisel Hijyen</h5>
+        <ul>
+          <li>Düzenli el yıkama</li>
+          <li>Günlük duş alma</li>
+          <li>Kişisel eşya kullanımı</li>
+          <li>Düzenli cilt bakımı</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Temiz ve kuru ortam</li>
+            <li>Düzenli havalandırma</li>
+            <li>Ortak alanlarda dikkat</li>
+            <li>Hayvan temasında korunma</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı</h5>
+        <ul>
+          <li>Sağlıklı beslenme</li>
+          <li>Düzenli egzersiz</li>
+          <li>Yeterli uyku</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h4>Deri Enfeksiyonları Tedavi Sonuçları</h4>
+        <p>Deri enfeksiyonları tedavisinde sonuçlar genellikle hızlı görülür:</p>
+        
+        <h5>Bakteriyel Enfeksiyonlar</h5>
+        <ul>
+          <li>1-2 hafta tedavi süresi</li>
+          <li>%85-95 başarı oranı</li>
+          <li>Hızlı iyileşme</li>
+          <li>Düzenli takip gerekli</li>
+        </ul>
+        
+        <h5>Viral Enfeksiyonlar</h5>
+        <ul>
+          <li>1-3 hafta tedavi süresi</li>
+          <li>%70-90 başarı oranı</li>
+          <li>Tekrar atak riski</li>
+          <li>Uzun vadeli tedavi gerekebilir</li>
+        </ul>
+        
+        <h5>Mantar Enfeksiyonları</h5>
+        <ul>
+          <li>2-6 hafta tedavi süresi</li>
+          <li>%80-90 başarı oranı</li>
+          <li>Tekrar enfeksiyon riski</li>
+          <li>Koruyucu önlemler önemli</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde deri enfeksiyonları tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Deri enfeksiyonları konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel tanı ve tedavi sistemleri</li>
+          <li><strong>Kapsamlı Tanı:</strong> Detaylı laboratuvar ve görüntüleme</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Deri enfeksiyonları, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun deri enfeksiyonları tedavi planını hazırlayarak, ağrı, enfeksiyon ve komplikasyonlarınızda etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
     `
   },
@@ -452,13 +1487,276 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Mantar Enfeksiyonları Nedir?</h4>
-        <p>Mantar enfeksiyonları, vücudun nemli ve sıcak bölgelerinde, özellikle ayak parmak araları, kasık ve genital bölgede ortaya çıkan, dermatofit ve kandida türü mantarların neden olduğu enfeksiyonlardır. Kaşıntı, döküntü ve ciltte soyulmalarla kendini gösterir.</p>
+        <p>Mantar enfeksiyonları, dermatofit, maya ve küf mantarlarının neden olduğu yaygın cilt hastalıklarıdır. Bu enfeksiyonlar, vücudun nemli ve sıcak bölgelerinde gelişir ve çeşitli belirtilerle kendini gösterir. Mantar enfeksiyonları, sadece estetik problemlere değil, aynı zamanda kaşıntı, ağrı ve ikincil enfeksiyonlara da neden olabilir. Erken tanı ve tedavi, enfeksiyonun yayılmasını önlemek ve komplikasyonları azaltmak için kritik öneme sahiptir.</p>
         
-        <h4>Mantar Enfeksiyonları Nasıl Tedavi Edilir?</h4>
-        <p>Tedavi, genellikle topikal antifungal kremler ve gerektiğinde ağızdan alınan antifungal ilaçlarla gerçekleştirilir. Tedavi süresince pamuklu ve hava alan giysiler tercih edilmeli, enfekte bölge kuru tutulmalıdır.</p>
+        <h4>Mantar Enfeksiyonları Türleri</h4>
+        <p>Mantar enfeksiyonları, etken mantar türüne ve etkilenen vücut bölgesine göre sınıflandırılır:</p>
         
-        <h4>Önleyici Önlemler</h4>
-        <p>Mantar enfeksiyonlarından korunmak için ayakların kuru kalmasına özen gösterilmeli, havlu ve ayakkabı gibi kişisel eşyalar paylaşılmamalıdır. Ayrıca bağışıklık sisteminin güçlendirilmesi de önemlidir.</p>
+        <h5>Dermatofit Enfeksiyonları (Tinea)</h5>
+        <ul>
+          <li><strong>Tinea Pedis (Ayak Mantarı):</strong> Ayak parmak araları ve tabanında görülen enfeksiyon</li>
+          <li><strong>Tinea Unguium (Tırnak Mantarı):</strong> Tırnaklarda kalınlaşma ve renk değişikliği</li>
+          <li><strong>Tinea Cruris (Kasık Mantarı):</strong> Kasık bölgesinde kırmızı, kaşıntılı lezyonlar</li>
+          <li><strong>Tinea Corporis (Vücut Mantarı):</strong> Gövdede halka şeklinde lezyonlar</li>
+          <li><strong>Tinea Capitis (Saç Mantarı):</strong> Saçlı deride pullanma ve saç dökülmesi</li>
+          <li><strong>Tinea Faciei (Yüz Mantarı):</strong> Yüzde kırmızı, pullu lezyonlar</li>
+          <li><strong>Tinea Manuum (El Mantarı):</strong> El avuç içi ve parmaklarda enfeksiyon</li>
+        </ul>
+        
+        <h5>Maya Enfeksiyonları (Candida)</h5>
+        <ul>
+          <li><strong>Kandidiyazis:</strong> Nemli vücut kıvrımlarında gelişen enfeksiyon</li>
+          <li><strong>Intertrigo:</strong> Vücut kıvrımlarında kızarıklık ve pullanma</li>
+          <li><strong>Oral Kandidiyazis:</strong> Ağızda beyaz plaklar</li>
+          <li><strong>Vajinal Kandidiyazis:</strong> Kadınlarda vajinal enfeksiyon</li>
+        </ul>
+        
+        <h5>Küf Mantarı Enfeksiyonları</h5>
+        <ul>
+          <li><strong>Aspergillozis:</strong> Nadir görülen derin mantar enfeksiyonu</li>
+          <li><strong>Mukormikozis:</strong> Şiddetli sistemik mantar enfeksiyonu</li>
+        </ul>
+        
+        <h4>Mantar Enfeksiyonlarının Nedenleri</h4>
+        <p>Mantar enfeksiyonları birçok farklı faktöre bağlı olarak gelişebilir:</p>
+        
+        <h5>Mikrobiyolojik Faktörler</h5>
+        <ul>
+          <li>Dermatofit mantarları (Trichophyton, Microsporum, Epidermophyton)</li>
+          <li>Candida albicans ve diğer maya türleri</li>
+          <li>Küf mantarları (Aspergillus, Mucor)</li>
+          <li>Mantar sporlarının çevrede bulunması</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Nemli ve sıcak ortamlar</li>
+          <li>Havalandırması yetersiz alanlar</li>
+          <li>Ortak kullanım alanları (havuz, sauna, spor salonu)</li>
+          <li>Dar ve sentetik kıyafetler</li>
+        </ul>
+        
+        <h5>Konak Faktörleri</h5>
+        <ul>
+          <li>Bağışıklık sistemi zayıflığı</li>
+          <li>Diyabet ve metabolik hastalıklar</li>
+          <li>Hormonal değişiklikler</li>
+          <li>İleri yaş ve çocukluk dönemi</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Faktörleri</h5>
+        <ul>
+          <li>Yanlış cilt bakımı</li>
+          <li>Uzun süre ıslak kalma</li>
+          <li>Ortak eşya kullanımı</li>
+          <li>Yoğun egzersiz ve terleme</li>
+        </ul>
+        
+        <h4>Mantar Enfeksiyonları Belirtileri</h4>
+        <p>Mantar enfeksiyonlarında görülen belirtiler enfeksiyon türüne ve yerleşim yerine göre değişiklik gösterir:</p>
+        
+        <h5>Genel Belirtiler</h5>
+        <ul>
+          <li>Kızarıklık ve inflamasyon</li>
+          <li>Kaşıntı ve yanma hissi</li>
+          <li>Pullanma ve kabuklanma</li>
+          <li>Ciltte çatlaklar</li>
+          <li>Kötü koku (özellikle ayak mantarında)</li>
+        </ul>
+        
+        <h5>Bölgesel Belirtiler</h5>
+        <ul>
+          <li><strong>Ayak Mantarı:</strong> Parmak aralarında beyazlaşma, çatlaklar, kaşıntı</li>
+          <li><strong>Tırnak Mantarı:</strong> Tırnakta kalınlaşma, renk değişikliği, kırılganlık</li>
+          <li><strong>Kasık Mantarı:</strong> Kırmızı, kaşıntılı, halka şeklinde lezyonlar</li>
+          <li><strong>Vücut Mantarı:</strong> Halka şeklinde, kenarları kırmızı, ortası açık lezyonlar</li>
+          <li><strong>Saç Mantarı:</strong> Saçlı deride pullanma, saç dökülmesi, kırık saçlar</li>
+        </ul>
+        
+        <h5>Komplikasyonlar</h5>
+        <ul>
+          <li>İkincil bakteriyel enfeksiyonlar</li>
+          <li>Lenfanjit ve lenfadenit</li>
+          <li>Selülit</li>
+          <li>Mantar alerjisi</li>
+        </ul>
+        
+        <h4>Mantar Enfeksiyonları Tanısı</h4>
+        <p>Mantar enfeksiyonlarının doğru tedavi edilebilmesi için kapsamlı bir tanı süreci gerekir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Lezyonların detaylı incelenmesi</li>
+          <li>Yayılım paterni ve sınırların belirlenmesi</li>
+          <li>Wood lambası incelemesi</li>
+          <li>Dermatoskopi ile detaylı görünüm</li>
+        </ul>
+        
+        <h5>Laboratuvar Testleri</h5>
+        <ul>
+          <li><strong>KOH Testi:</strong> Hızlı mantar tanısı</li>
+          <li><strong>Mantar Kültürü:</strong> Etken mantar türünün belirlenmesi</li>
+          <li><strong>PAS Boyaması:</strong> Mantar hiflerinin görülmesi</li>
+          <li><strong>Biyopsi:</strong> Şüpheli durumlarda</li>
+        </ul>
+        
+        <h5>Görüntüleme Yöntemleri</h5>
+        <ul>
+          <li>Dermatoskopi</li>
+          <li>Gerekirse radyolojik görüntüleme</li>
+        </ul>
+        
+        <h4>Modern Mantar Enfeksiyonları Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde mantar enfeksiyonları için en güncel ve etkili tedavi yöntemlerini kullanıyoruz. Tedavi seçimi, enfeksiyonun türüne, yerleşim yerine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>Topikal Tedaviler</h4>
+        <p>Hafif ve yüzeysel mantar enfeksiyonlarında topikal tedaviler etkili sonuçlar verir:</p>
+        
+        <h5>Antifungal Kremler</h5>
+        <ul>
+          <li><strong>Azol Türevleri:</strong> Klotrimazol, mikonazol, ketokonazol</li>
+          <li><strong>Alilaminler:</strong> Terbinafine, naftifine</li>
+          <li><strong>Pirimidinler:</strong> Siklopiroks</li>
+          <li><strong>Benzilaminler:</strong> Butenafine</li>
+        </ul>
+        
+        <h5>Antifungal Solüsyonlar</h5>
+        <ul>
+          <li>Günlük uygulama</li>
+          <li>Hızlı emilim</li>
+          <li>Kıyafet lekesi yapmaz</li>
+          <li>Uzun süreli etki</li>
+        </ul>
+        
+        <h5>Antifungal Merhemler</h5>
+        <ul>
+          <li>Nemlendirici etki</li>
+          <li>Çatlak ve kuruluk için uygun</li>
+          <li>Uzun süreli uygulama</li>
+        </ul>
+        
+        <h4>Sistemik Tedaviler</h5>
+        <p>Orta ve şiddetli mantar enfeksiyonlarında sistemik tedaviler gerekebilir:</p>
+        
+        <h5>Oral Antifungaller</h5>
+        <ul>
+          <li><strong>Terbinafine:</strong> Dermatofit enfeksiyonları için en etkili</li>
+          <li><strong>İtrakonazole:</strong> Candida ve dermatofit enfeksiyonları</li>
+          <li><strong>Fluconazole:</strong> Candida enfeksiyonları</li>
+          <li><strong>Griseofulvin:</strong> Saç mantarı için klasik tedavi</li>
+        </ul>
+        
+        <h5>İntravenöz Tedaviler</h5>
+        <ul>
+          <li>Şiddetli sistemik enfeksiyonlar için</li>
+          <li>Hastane ortamında uygulanır</li>
+          <li>Yan etki takibi gerekli</li>
+        </ul>
+        
+        <h4>Lazer Tedavisi</h4>
+        <p>Mantar enfeksiyonlarında lazer tedavisi özellikle tırnak mantarı için etkilidir:</p>
+        <ul>
+          <li>Mantar hiflerini hedef alan lazer</li>
+          <li>Topikal tedavi ile kombinasyon</li>
+          <li>Hızlı sonuç ve minimal yan etki</li>
+          <li>Tekrar enfeksiyon riskini azaltır</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>Topikal + Sistemik tedavi</li>
+          <li>Lazer + Medikal tedavi</li>
+          <li>Antifungal + Destekleyici tedavi</li>
+          <li>Hijyen + Medikal tedavi</li>
+        </ul>
+        
+        <h4>Mantar Enfeksiyonları Tedavi Sonrası Bakım</h4>
+        <p>Mantar enfeksiyonları tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>Hijyen Kuralları</h5>
+        <ul>
+          <li>Günlük cilt temizliği</li>
+          <li>Antifungal solüsyonlar</li>
+          <li>Kuru tutma</li>
+          <li>Düzenli kıyafet değişimi</li>
+        </ul>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Ortak eşya kullanımından kaçınma</li>
+          <li>Kişisel hijyen ürünleri</li>
+          <li>Düzenli çorap değişimi</li>
+          <li>Çevresel temizlik</li>
+        </ul>
+        
+        <h4>Mantar Enfeksiyonlarından Korunma</h4>
+        <p>Mantar enfeksiyonlarından korunmak için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Kişisel Hijyen</h5>
+        <ul>
+          <li>Düzenli el ve ayak yıkama</li>
+          <li>Günlük duş alma</li>
+          <li>Kişisel eşya kullanımı</li>
+          <li>Düzenli cilt bakımı</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Temiz ve kuru ortam</li>
+          <li>Düzenli havalandırma</li>
+          <li>Ortak alanlarda dikkat</li>
+          <li>Havuz ve sauna sonrası duş</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı</h5>
+        <ul>
+          <li>Pamuklu kıyafetler</li>
+          <li>Uygun ayakkabı seçimi</li>
+          <li>Düzenli egzersiz</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h4>Mantar Enfeksiyonları Tedavi Sonuçları</h4>
+        <p>Mantar enfeksiyonları tedavisinde sonuçlar genellikle zamanla görülür:</p>
+        
+        <h5>Yüzeysel Enfeksiyonlar</h5>
+        <ul>
+          <li>2-4 hafta tedavi süresi</li>
+          <li>%80-90 başarı oranı</li>
+          <li>Hızlı iyileşme</li>
+          <li>Düzenli takip gerekli</li>
+        </ul>
+        
+        <h5>Tırnak Mantarı</h5>
+        <ul>
+          <li>3-6 ay tedavi süresi</li>
+          <li>%70-80 başarı oranı</li>
+          <li>Yavaş iyileşme</li>
+          <li>Uzun vadeli tedavi gerekli</li>
+        </ul>
+        
+        <h5>Sistemik Enfeksiyonlar</h5>
+        <ul>
+          <li>6-12 ay tedavi süresi</li>
+          <li>%60-80 başarı oranı</li>
+          <li>Yoğun tedavi gerekli</li>
+          <li>Yan etki takibi önemli</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde mantar enfeksiyonları tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Mantar enfeksiyonları konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel lazer ve tedavi sistemleri</li>
+          <li><strong>Kapsamlı Tanı:</strong> Detaylı laboratuvar ve görüntüleme</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Mantar enfeksiyonları, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun mantar enfeksiyonları tedavi planını hazırlayarak, kaşıntı, ağrı ve estetik problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
     `
   },
@@ -468,14 +1766,310 @@ const services = ref([
     category: 'Genel Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Egzama Nedir?</h4>
-        <p>Egzama, ciltte kuruluk, kaşıntı, kızarıklık ve kabuklanma ile karakterize kronik bir cilt hastalığıdır. Atopik dermatit en yaygın formudur ve genellikle alerjik bünyeye sahip kişilerde görülür. Temas egzaması da kimyasal maddelere maruziyet sonrası oluşabilir.</p>
+        <h4>Alerji ve Egzama Nedir?</h4>
+        <p>Alerji ve egzama, ciltte kuruluk, kaşıntı, kızarıklık ve kabuklanma ile karakterize kronik cilt hastalıklarıdır. Bu durumlar, sadece estetik problemlere değil, aynı zamanda yaşam kalitesini önemli ölçüde etkileyen sağlık sorunlarıdır. Alerji ve egzama, her yaş grubunda görülebilir ve erken tanı ile tedavi edilmesi önemlidir. Kliniğimizde bu hastalıklar için modern ve etkili tedavi yöntemleri kullanılmaktadır.</p>
         
-        <h4>Egzama Tedavi Yöntemleri</h4>
-        <p>Tedavi, semptomların şiddetine göre nemlendiriciler, kortikosteroid kremler ve bağışıklık düzenleyici ilaçlar kullanılarak yapılır. Egzama tetikleyicilerinin (sabun, deterjan, polen vb.) belirlenip uzak durulması da tedavinin bir parçasıdır.</p>
+        <h4>Egzama Türleri ve Özellikleri</h4>
+        <p>Egzama, farklı nedenlere ve belirtilere göre çeşitli türlerde sınıflandırılır:</p>
         
-        <h4>Alerji Kontrolü ve Önlem</h4>
-        <p>Egzamanın kontrol altına alınabilmesi için düzenli cilt bakımı ve alerji testleri önemlidir. Alerjik egzama durumunda alerjenlerden kaçınmak, tedavinin başarısını önemli ölçüde artırır.</p>
+        <h5>Atopik Dermatit (Atopik Egzama)</h5>
+        <ul>
+          <li><strong>En yaygın egzama türü:</strong> Çocukluk döneminde başlar</li>
+          <li><strong>Genetik yatkınlık:</strong> Aile öyküsünde alerjik hastalıklar</li>
+          <li><strong>Belirtiler:</strong> Kızarıklık, kaşıntı, kuruluk, kabuklanma</li>
+          <li><strong>Yerleşim:</strong> Yüz, boyun, dirsek ve diz kıvrımları</li>
+          <li><strong>Ataklar:</strong> Stres, alerjenler ve çevresel faktörlerle tetiklenir</li>
+        </ul>
+        
+        <h5>Kontakt Dermatit (Temas Egzaması)</h5>
+        <ul>
+          <li><strong>İrritan Kontakt Dermatit:</strong> Kimyasal maddelerle temas</li>
+          <li><strong>Alerjik Kontakt Dermatit:</strong> Alerjik reaksiyon</li>
+          <li><strong>Belirtiler:</strong> Kızarıklık, şişlik, kaşıntı, kabarcıklar</li>
+          <li><strong>Tetikleyiciler:</strong> Nikel, krom, kozmetik ürünler, deterjanlar</li>
+          <li><strong>Yerleşim:</strong> Temas eden bölgelerde</li>
+        </ul>
+        
+        <h5>Seboreik Dermatit</h5>
+        <ul>
+          <li><strong>Yağlı cilt bölgelerinde:</strong> Saçlı deri, yüz, göğüs</li>
+          <li><strong>Belirtiler:</strong> Sarımsı kabuklar, pullanma, kızarıklık</li>
+          <li><strong>Nedenler:</strong> Maya mantarı, yağ üretimi, stres</li>
+          <li><strong>Mevsimsel değişim:</strong> Kış aylarında artış</li>
+        </ul>
+        
+        <h5>Nummular Egzama</h5>
+        <ul>
+          <li><strong>Para şeklinde lezyonlar:</strong> Yuvarlak veya oval</li>
+          <li><strong>Belirtiler:</strong> Kaşıntılı, kırmızı, pullu lezyonlar</li>
+          <li><strong>Yerleşim:</strong> Bacaklar, kollar, gövde</li>
+          <li><strong>Kronik seyir:</strong> Uzun süreli tedavi gerekebilir</li>
+        </ul>
+        
+        <h5>Dishidrotik Egzama</h5>
+        <ul>
+          <li><strong>El ve ayaklarda:</strong> Avuç içi ve ayak tabanı</li>
+          <li><strong>Belirtiler:</strong> Su dolu kabarcıklar, kaşıntı, pullanma</li>
+          <li><strong>Tetikleyiciler:</strong> Stres, nem, alerjenler</li>
+          <li><strong>Mevsimsel özellik:</strong> Yaz aylarında artış</li>
+        </ul>
+        
+        <h4>Alerji Türleri ve Nedenleri</h4>
+        <p>Alerjik reaksiyonlar, bağışıklık sisteminin normalde zararsız olan maddelere aşırı tepki vermesi sonucu oluşur:</p>
+        
+        <h5>Gıda Alerjileri</h5>
+        <ul>
+          <li><strong>Süt ve süt ürünleri:</strong> İnek sütü, peynir, yoğurt</li>
+          <li><strong>Yumurta:</strong> Özellikle yumurta beyazı</li>
+          <li><strong>Kuruyemişler:</strong> Fındık, ceviz, badem</li>
+          <li><strong>Deniz ürünleri:</strong> Balık, karides, midye</li>
+          <li><strong>Gluten:</strong> Buğday, arpa, çavdar</li>
+        </ul>
+        
+        <h5>Çevresel Alerjiler</h5>
+        <ul>
+          <li><strong>Polen alerjisi:</strong> Ağaç, çimen, yabani ot polenleri</li>
+          <li><strong>Ev tozu akarları:</strong> Toz, halı, yastık</li>
+          <li><strong>Hayvan alerjileri:</strong> Kedi, köpek, kuş tüyleri</li>
+          <li><strong>Küf alerjisi:</strong> Nemli ortamlarda gelişen mantarlar</li>
+        </ul>
+        
+        <h5>Kimyasal Alerjiler</h5>
+        <ul>
+          <li><strong>Kozmetik ürünler:</strong> Parfüm, koruyucu maddeler</li>
+          <li><strong>Deterjanlar:</strong> Çamaşır deterjanı, bulaşık deterjanı</li>
+          <li><strong>Metaller:</strong> Nikel, krom, kobalt</li>
+          <li><strong>Lateks:</strong> Eldiven, balon, tıbbi malzemeler</li>
+        </ul>
+        
+        <h4>Alerji ve Egzama Belirtileri</h4>
+        <p>Alerji ve egzama belirtileri, hastalığın türüne ve şiddetine göre değişiklik gösterir:</p>
+        
+        <h5>Cilt Belirtileri</h5>
+        <ul>
+          <li><strong>Kızarıklık ve inflamasyon:</strong> Ciltte kırmızı alanlar</li>
+          <li><strong>Kaşıntı:</strong> Hafiften şiddetliye değişen kaşıntı</li>
+          <li><strong>Kuruluk ve pullanma:</strong> Cilt yüzeyinde pullanma</li>
+          <li><strong>Kabuklanma:</strong> İltihaplı alanlarda kabuk oluşumu</li>
+          <li><strong>Çatlaklar:</strong> Özellikle kuru ciltlerde</li>
+        </ul>
+        
+        <h5>Sistemik Belirtiler</h5>
+        <ul>
+          <li><strong>Burun akıntısı ve hapşırık:</strong> Solunum yolu alerjileri</li>
+          <li><strong>Gözlerde kaşıntı ve kızarıklık:</strong> Konjonktivit</li>
+          <li><strong>Nefes darlığı:</strong> Astım belirtileri</li>
+          <li><strong>Mide bulantısı ve kusma:</strong> Gıda alerjileri</li>
+          <li><strong>Baş ağrısı:</strong> Sinüs tıkanıklığı</li>
+        </ul>
+        
+        <h5>Komplikasyonlar</h5>
+        <ul>
+          <li><strong>İkincil enfeksiyonlar:</strong> Bakteriyel ve viral</li>
+          <li><strong>Lichenifikasyon:</strong> Ciltte kalınlaşma</li>
+          <li><strong>Pigmentasyon değişiklikleri:</strong> Leke oluşumu</li>
+          <li><strong>Uyku bozuklukları:</strong> Kaşıntı nedeniyle</li>
+          <li><strong>Psikolojik etkiler:</strong> Depresyon, anksiyete</li>
+        </ul>
+        
+        <h4>Alerji ve Egzama Tanısı</h4>
+        <p>Alerji ve egzama tanısı için kapsamlı bir değerlendirme süreci gerekir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Lezyonların detaylı incelenmesi</li>
+          <li>Yayılım paterni ve sınırların belirlenmesi</li>
+          <li>Kaşıntı şiddetinin değerlendirilmesi</li>
+          <li>Genel cilt durumunun kontrolü</li>
+        </ul>
+        
+        <h5>Alerji Testleri</h5>
+        <ul>
+          <li><strong>Prick Testi:</strong> Cilt üzerinde alerjen testi</li>
+          <li><strong>Patch Testi:</strong> Kontakt alerji tespiti</li>
+          <li><strong>Kan Testleri:</strong> IgE seviyesi ve spesifik alerjenler</li>
+          <li><strong>Eliminasyon Testi:</strong> Gıda alerjileri için</li>
+        </ul>
+        
+        <h5>Laboratuvar Testleri</h5>
+        <ul>
+          <li>Tam kan sayımı</li>
+          <li>Eozinofil sayısı</li>
+          <li>CRP ve sedimantasyon</li>
+          <li>Gerekirse biyopsi</li>
+        </ul>
+        
+        <h4>Modern Alerji ve Egzama Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde alerji ve egzama için en güncel ve etkili tedavi yöntemlerini kullanıyoruz. Tedavi seçimi, hastalığın türüne, şiddetine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>Topikal Tedaviler</h4>
+        <p>Hafif ve orta şiddetli alerji ve egzama vakalarında topikal tedaviler etkili sonuçlar verir:</p>
+        
+        <h5>Nemlendiriciler</h5>
+        <ul>
+          <li><strong>Vazelin bazlı:</strong> Yoğun nemlendirme</li>
+          <li><strong>Üre içeren:</strong> Keratolitik etki</li>
+          <li><strong>Seramid içeren:</strong> Cilt bariyerini güçlendirme</li>
+          <li><strong>Hiyalüronik asit:</strong> Hızlı nemlendirme</li>
+        </ul>
+        
+        <h5>Kortikosteroidler</h5>
+        <ul>
+          <li><strong>Hafif:</strong> Hidrokortizon %1</li>
+          <li><strong>Orta:</strong> Betametazon, mometazon</li>
+          <li><strong>Şiddetli:</strong> Klobetasol, halobetasol</li>
+          <li><strong>Uygulama:</strong> Günde 1-2 kez</li>
+        </ul>
+        
+        <h5>Kalsinörin İnhibitörleri</h5>
+        <ul>
+          <li><strong>Tacrolimus:</strong> %0.03 ve %0.1 konsantrasyonlar</li>
+          <li><strong>Pimekrolimus:</strong> %1 krem</li>
+          <li><strong>Etki:</strong> İnflamasyonu azaltma</li>
+          <li><strong>Avantaj:</strong> Uzun süreli kullanım güvenli</li>
+        </ul>
+        
+        <h4>Sistemik Tedaviler</h4>
+        <p>Orta ve şiddetli alerji ve egzama vakalarında sistemik tedaviler gerekebilir:</p>
+        
+        <h5>Antihistaminikler</h5>
+        <ul>
+          <li><strong>Birinci Nesil:</strong> Difenhidramin, klorfeniramin</li>
+          <li><strong>İkinci Nesil:</strong> Seterizin, loratadin, feksofenadin</li>
+          <li><strong>Etki:</strong> Kaşıntı ve alerjik belirtileri azaltma</li>
+          <li><strong>Uygulama:</strong> Günlük veya gerektiğinde</li>
+        </ul>
+        
+        <h5>İmmünomodülatörler</h5>
+        <ul>
+          <li><strong>Siklosporin:</strong> Şiddetli atopik dermatit</li>
+          <li><strong>Metotreksat:</strong> Kronik egzama</li>
+          <li><strong>Azatioprin:</strong> Alternatif tedavi</li>
+          <li><strong>Takip:</strong> Düzenli laboratuvar kontrolü</li>
+        </ul>
+        
+        <h5>Biyolojik Tedaviler</h5>
+        <ul>
+          <li><strong>Dupilumab:</strong> IL-4 ve IL-13 inhibitörü</li>
+          <li><strong>Tralokinumab:</strong> IL-13 inhibitörü</li>
+          <li><strong>Nemolizumab:</strong> IL-31 inhibitörü</li>
+          <li><strong>Uygulama:</strong> Enjeksiyon ile</li>
+        </ul>
+        
+        <h4>Fototerapi (Işık Tedavisi)</h4>
+        <p>Orta ve şiddetli alerji ve egzama vakalarında fototerapi etkili bir tedavi seçeneğidir:</p>
+        
+        <h5>UVB Tedavisi</h5>
+        <ul>
+          <li><strong>Narrowband UVB:</strong> En etkili UVB tedavisi</li>
+          <li><strong>Broadband UVB:</strong> Geleneksel UVB tedavisi</li>
+          <li><strong>Uygulama:</strong> Haftada 2-3 kez</li>
+          <li><strong>Süre:</strong> 6-12 hafta</li>
+        </ul>
+        
+        <h5>PUVA Tedavisi</h5>
+        <ul>
+          <li><strong>Psoralen + UVA:</strong> Kombine tedavi</li>
+          <li><strong>Etki:</strong> Güçlü immünosupresyon</li>
+          <li><strong>Uygulama:</strong> Haftada 2-3 kez</li>
+          <li><strong>Yan etki:</strong> Mide bulantısı, güneş yanığı</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>Topikal + Sistemik tedavi</li>
+          <li>Fototerapi + Medikal tedavi</li>
+          <li>Biyolojik + Destekleyici tedavi</li>
+          <li>Yaşam tarzı değişiklikleri + Medikal tedavi</li>
+        </ul>
+        
+        <h4>Alerji ve Egzama Tedavi Sonrası Bakım</h4>
+        <p>Alerji ve egzama tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>Cilt Bakımı</h5>
+        <ul>
+          <li>Günlük nemlendirici kullanımı</li>
+          <li>Nazik temizleyiciler</li>
+          <li>Güneş koruyucu (SPF 30+)</li>
+          <li>Düzenli cilt kontrolü</li>
+        </ul>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Alerjenlerden kaçınma</li>
+          <li>Uygun kıyafet seçimi</li>
+          <li>Çevresel faktörlere dikkat</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h4>Alerji ve Egzamadan Korunma</h4>
+        <p>Alerji ve egzamadan korunmak için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Çevresel Kontrol</h5>
+        <ul>
+          <li>Ev tozu akarlarını azaltma</li>
+          <li>Polen maruziyetini minimize etme</li>
+          <li>Hayvan alerjilerinde dikkat</li>
+          <li>Nem kontrolü</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Değişiklikleri</h5>
+        <ul>
+          <li>Sağlıklı beslenme</li>
+          <li>Düzenli egzersiz</li>
+          <li>Yeterli uyku</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h5>Kişisel Hijyen</h5>
+        <ul>
+          <li>Düzenli el yıkama</li>
+          <li>Uygun cilt bakımı</li>
+          <li>Kimyasal maddelerden korunma</li>
+          <li>Düzenli kontroller</li>
+        </ul>
+        
+        <h4>Alerji ve Egzama Tedavi Sonuçları</h4>
+        <p>Alerji ve egzama tedavisinde sonuçlar genellikle zamanla görülür:</p>
+        
+        <h5>Topikal Tedaviler</h5>
+        <ul>
+          <li>1-2 hafta tedavi süresi</li>
+          <li>%70-80 başarı oranı</li>
+          <li>Hızlı iyileşme</li>
+          <li>Düzenli uygulama gerekli</li>
+        </ul>
+        
+        <h5>Sistemik Tedaviler</h5>
+        <ul>
+          <li>2-4 hafta tedavi süresi</li>
+          <li>%80-90 başarı oranı</li>
+          <li>Orta hızda iyileşme</li>
+          <li>Yan etki takibi önemli</li>
+        </ul>
+        
+        <h5>Fototerapi</h5>
+        <ul>
+          <li>6-12 hafta tedavi süresi</li>
+          <li>%75-85 başarı oranı</li>
+          <li>Yavaş ama kalıcı iyileşme</li>
+          <li>Uzun vadeli sonuçlar</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde alerji ve egzama tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Alerji ve egzama konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel tanı ve tedavi sistemleri</li>
+          <li><strong>Kapsamlı Tanı:</strong> Detaylı alerji testleri ve laboratuvar</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Alerji ve egzama, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun alerji ve egzama tedavi planını hazırlayarak, kaşıntı, kızarıklık ve yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
     `
   },
@@ -485,14 +2079,322 @@ const services = ref([
     category: 'Genel Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Ürtiker Nedir?</h4>
-        <p>Ürtiker, ciltte ani başlayan, kaşıntılı, kabarık, kırmızı döküntülerle seyreden bir alerjik reaksiyondur. Akut ürtiker genellikle birkaç saat içinde geçerken, kronik ürtiker haftalarca sürebilir.</p>
+        <h4>Ürtiker (Kurdeşen) Nedir?</h4>
+        <p>Ürtiker, ciltte aniden ortaya çıkan, kaşıntılı, kırmızı ve şişkin lezyonlarla karakterize bir cilt hastalığıdır. Bu lezyonlar genellikle birkaç saat içinde kaybolur ve vücudun farklı bölgelerinde tekrar ortaya çıkabilir. Ürtiker, alerjik reaksiyonlar, enfeksiyonlar, stres veya fiziksel uyaranlar sonucu gelişebilir. Hastaların yaşam kalitesini önemli ölçüde etkileyebilen bu durum, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir.</p>
         
-        <h4>Ürtikerin Nedenleri ve Tedavisi</h4>
-        <p>Tedavi, alerjenin belirlenip uzaklaştırılması ve antihistaminik ilaçların kullanımıyla yapılır. Şiddetli vakalarda kortizon içeren ilaçlar gerekebilir. Soğuk kompresler ve rahatlatıcı losyonlar semptomları hafifletebilir.</p>
+        <h4>Ürtiker Türleri ve Özellikleri</h4>
+        <p>Ürtiker, süresine ve nedenine göre farklı kategorilerde sınıflandırılır:</p>
         
-        <h4>Ürtikerde Yaşam Tarzı Değişiklikleri</h4>
-        <p>Ürtiker ataklarının önlenmesi için tetikleyici yiyeceklerden (deniz ürünleri, yumurta), ilaçlardan ve stresten uzak durulmalıdır. Düzenli egzersiz ve sağlıklı yaşam tarzı semptomları hafifletir.</p>
+        <h5>Akut Ürtiker</h5>
+        <ul>
+          <li><strong>Süre:</strong> 6 haftadan kısa süren</li>
+          <li><strong>Nedenler:</strong> Alerjik reaksiyonlar, enfeksiyonlar, ilaçlar</li>
+          <li><strong>Belirtiler:</strong> Ani başlangıç, şiddetli kaşıntı</li>
+          <li><strong>Prognoz:</strong> Genellikle iyi, kendiliğinden düzelir</li>
+          <li><strong>Tedavi:</strong> Antihistaminikler, tetikleyici faktörlerden kaçınma</li>
+        </ul>
+        
+        <h5>Kronik Ürtiker</h5>
+        <ul>
+          <li><strong>Süre:</strong> 6 haftadan uzun süren</li>
+          <li><strong>Nedenler:</strong> Otoimmün hastalıklar, kronik enfeksiyonlar</li>
+          <li><strong>Belirtiler:</strong> Tekrarlayan ataklar, yaşam kalitesini etkiler</li>
+          <li><strong>Prognoz:</strong> Uzun vadeli tedavi gerekebilir</li>
+          <li><strong>Tedavi:</strong> Kapsamlı yaklaşım, immünomodülatörler</li>
+        </ul>
+        
+        <h5>Fiziksel Ürtiker</h5>
+        <ul>
+          <li><strong>Dermografik Ürtiker:</strong> Cilt çizildiğinde oluşan</li>
+          <li><strong>Soğuk Ürtiker:</strong> Soğuk maruziyeti ile tetiklenen</li>
+          <li><strong>Sıcak Ürtiker:</strong> Sıcak maruziyeti ile tetiklenen</li>
+          <li><strong>Güneş Ürtiker:</strong> Güneş ışınları ile tetiklenen</li>
+          <li><strong>Vibrasyon Ürtiker:</strong> Titreşim ile tetiklenen</li>
+        </ul>
+        
+        <h5>Kolinerjik Ürtiker</h5>
+        <ul>
+          <li><strong>Neden:</strong> Terleme, sıcak banyo, egzersiz</li>
+          <li><strong>Belirtiler:</strong> Küçük, kaşıntılı papüller</li>
+          <li><strong>Yerleşim:</strong> Gövde, boyun, yüz</li>
+          <li><strong>Süre:</strong> 30-60 dakika</li>
+          <li><strong>Tedavi:</strong> Antihistaminikler, tetikleyici faktörlerden kaçınma</li>
+        </ul>
+        
+        <h4>Ürtiker Nedenleri ve Tetikleyicileri</h4>
+        <p>Ürtiker birçok farklı faktöre bağlı olarak gelişebilir:</p>
+        
+        <h5>Alerjik Nedenler</h5>
+        <ul>
+          <li><strong>Gıda Alerjileri:</strong> Fındık, deniz ürünleri, yumurta, süt</li>
+          <li><strong>İlaç Alerjileri:</strong> Antibiyotikler, ağrı kesiciler, aspirin</li>
+          <li><strong>Böcek Isırıkları:</strong> Arı, eşek arısı, sivrisinek</li>
+          <li><strong>Lateks Alerjisi:</strong> Eldiven, balon, tıbbi malzemeler</li>
+        </ul>
+        
+        <h5>Enfeksiyonlar</h5>
+        <ul>
+          <li><strong>Viral Enfeksiyonlar:</strong> Üst solunum yolu enfeksiyonları</li>
+          <li><strong>Bakteriyel Enfeksiyonlar:</strong> Diş apsesi, sinüzit</li>
+          <li><strong>Paraziter Enfeksiyonlar:</strong> Bağırsak parazitleri</li>
+          <li><strong>Mantar Enfeksiyonları:</strong> Candida, dermatofitler</li>
+        </ul>
+        
+        <h5>Fiziksel Faktörler</h5>
+        <ul>
+          <li><strong>Basınç:</strong> Dar kıyafetler, çanta askısı</li>
+          <li><strong>Sıcaklık:</strong> Soğuk, sıcak, güneş ışınları</li>
+          <li><strong>Vibrasyon:</strong> Elektrikli aletler, araç kullanımı</li>
+          <li><strong>Su:</strong> Su ile temas (aquajenik ürtiker)</li>
+        </ul>
+        
+        <h5>Sistemik Hastalıklar</h5>
+        <ul>
+          <li><strong>Otoimmün Hastalıklar:</strong> Lupus, romatoid artrit</li>
+          <li><strong>Tiroid Hastalıkları:</strong> Hashimoto, Graves</li>
+          <li><strong>Kanser:</strong> Lenfoma, lösemi</li>
+          <li><strong>Endokrin Hastalıklar:</strong> Diyabet, adrenal yetmezlik</li>
+        </ul>
+        
+        <h4>Ürtiker Belirtileri ve Klinik Bulgular</h4>
+        <p>Ürtiker belirtileri, hastalığın türüne ve şiddetine göre değişiklik gösterir:</p>
+        
+        <h5>Cilt Belirtileri</h5>
+        <ul>
+          <li><strong>Lezyonlar:</strong> Kırmızı, pembe veya ten renginde</li>
+          <li><strong>Şekil:</strong> Yuvarlak, oval veya düzensiz</li>
+          <li><strong>Boyut:</strong> Birkaç milimetre ile birkaç santimetre</li>
+          <li><strong>Yüzey:</strong> Düz, hafif kabarık</li>
+          <li><strong>Kaşıntı:</strong> Hafiften şiddetliye değişen</li>
+        </ul>
+        
+        <h5>Genel Belirtiler</h5>
+        <ul>
+          <li><strong>Yanma ve batma hissi:</strong> Özellikle fiziksel ürtikerde</li>
+          <li><strong>Şişlik:</strong> Anjiyoödem ile birlikte olabilir</li>
+          <li><strong>Kızarıklık:</strong> Lezyon çevresinde</li>
+          <li><strong>Isı artışı:</strong> Enflamasyon nedeniyle</li>
+        </ul>
+        
+        <h5>Anjiyoödem</h5>
+        <ul>
+          <li><strong>Derin doku şişliği:</strong> Göz kapakları, dudaklar, dil</li>
+          <li><strong>Solunum sıkıntısı:</strong> Larinks tutulumunda</li>
+          <li><strong>Karın ağrısı:</strong> Bağırsak tutulumunda</li>
+          <li><strong>Tehlike:</strong> Acil müdahale gerekebilir</li>
+        </ul>
+        
+        <h4>Ürtiker Tanısı</h4>
+        <p>Ürtiker tanısı için kapsamlı bir değerlendirme süreci gerekir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Lezyonların detaylı incelenmesi</li>
+          <li>Yayılım paterni ve sınırların belirlenmesi</li>
+          <li>Kaşıntı şiddetinin değerlendirilmesi</li>
+          <li>Anjiyoödem varlığının kontrolü</li>
+        </ul>
+        
+        <h5>Alerji Testleri</h5>
+        <ul>
+          <li><strong>Prick Testi:</strong> Gıda ve inhalan alerjenler</li>
+          <li><strong>Patch Testi:</strong> Kontakt alerjenler</li>
+          <li><strong>Kan Testleri:</strong> IgE seviyesi ve spesifik alerjenler</li>
+          <li><strong>Eliminasyon Testi:</strong> Gıda alerjileri için</li>
+        </ul>
+        
+        <h5>Fiziksel Testler</h5>
+        <ul>
+          <li><strong>Dermografik Test:</strong> Cilt çizme ile</li>
+          <li><strong>Soğuk Test:</strong> Buz küpü uygulaması</li>
+          <li><strong>Güneş Testi:</strong> UV ışınları ile</li>
+          <li><strong>Basınç Testi:</strong> Ağırlık uygulaması</li>
+        </ul>
+        
+        <h5>Laboratuvar Testleri</h5>
+        <ul>
+          <li>Tam kan sayımı</li>
+          <li>Eozinofil sayısı</li>
+          <li>CRP ve sedimantasyon</li>
+          <li>Tiroid fonksiyon testleri</li>
+          <li>Otoantikor testleri</li>
+        </ul>
+        
+        <h4>Modern Ürtiker Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde ürtiker için en güncel ve etkili tedavi yöntemlerini kullanıyoruz. Tedavi seçimi, hastalığın türüne, şiddetine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>Birinci Basamak Tedavi</h4>
+        <p>Hafif ve orta şiddetli ürtiker vakalarında birinci basamak tedaviler etkili sonuçlar verir:</p>
+        
+        <h5>Antihistaminikler</h5>
+        <ul>
+          <li><strong>Birinci Nesil:</strong> Difenhidramin, klorfeniramin</li>
+          <li><strong>İkinci Nesil:</strong> Seterizin, loratadin, feksofenadin</li>
+          <li><strong>Üçüncü Nesil:</strong> Desloratadin, levosetirizin</li>
+          <li><strong>Uygulama:</strong> Günlük veya gerektiğinde</li>
+          <li><strong>Etki:</strong> Kaşıntı ve şişliği azaltma</li>
+        </ul>
+        
+        <h5>H2 Blokerleri</h5>
+        <ul>
+          <li><strong>Ranitidin:</strong> H2 reseptör antagonisti</li>
+          <li><strong>Famotidin:</strong> Alternatif H2 bloker</li>
+          <li><strong>Kombinasyon:</strong> H1 ve H2 blokerlerle</li>
+          <li><strong>Etki:</strong> Ek antihistaminik etki</li>
+        </ul>
+        
+        <h4>İkinci Basamak Tedavi</h4>
+        <p>Birinci basamak tedaviye yanıt vermeyen vakalarda ikinci basamak tedaviler kullanılır:</p>
+        
+        <h5>Kortikosteroidler</h5>
+        <ul>
+          <li><strong>Prednizolon:</strong> Kısa süreli kullanım</li>
+          <li><strong>Methylprednizolon:</strong> İntravenöz uygulama</li>
+          <li><strong>Süre:</strong> 3-7 gün</li>
+          <li><strong>Yan etki:</strong> Uzun süreli kullanımda dikkat</li>
+        </ul>
+        
+        <h5>Montelukast</h5>
+        <ul>
+          <li><strong>Etki:</strong> Lökotrien reseptör antagonisti</li>
+          <li><strong>Kullanım:</strong> Kronik ürtikerde</li>
+          <li><strong>Avantaj:</strong> Uzun süreli kullanım güvenli</li>
+          <li><strong>Kombinasyon:</strong> Antihistaminiklerle</li>
+        </ul>
+        
+        <h4>Üçüncü Basamak Tedavi</h4>
+        <p>Şiddetli ve dirençli ürtiker vakalarında üçüncü basamak tedaviler gerekebilir:</p>
+        
+        <h5>İmmünomodülatörler</h5>
+        <ul>
+          <li><strong>Siklosporin:</strong> T hücre inhibitörü</li>
+          <li><strong>Metotreksat:</strong> Folat antagonisti</li>
+          <li><strong>Azatioprin:</strong> Purin antagonisti</li>
+          <li><strong>Takip:</strong> Düzenli laboratuvar kontrolü</li>
+        </ul>
+        
+        <h5>Biyolojik Tedaviler</h5>
+        <ul>
+          <li><strong>Omalizumab:</strong> Anti-IgE antikoru</li>
+          <li><strong>Etki:</strong> IgE seviyesini düşürme</li>
+          <li><strong>Uygulama:</strong> Ayda bir enjeksiyon</li>
+          <li><strong>Avantaj:</strong> Yüksek etkinlik, güvenli</li>
+        </ul>
+        
+        <h4>Fiziksel Ürtiker Tedavisi</h4>
+        <p>Fiziksel ürtiker türlerinde özel tedavi yaklaşımları uygulanır:</p>
+        
+        <h5>Dermografik Ürtiker</h5>
+        <ul>
+          <li>Antihistaminikler</li>
+          <li>Fototerapi (UVB)</li>
+          <li>Basınçtan kaçınma</li>
+          <li>Nazik cilt bakımı</li>
+        </ul>
+        
+        <h5>Soğuk Ürtiker</h5>
+        <ul>
+          <li>Antihistaminikler</li>
+          <li>Soğuktan korunma</li>
+          <li>Kademeli soğuk adaptasyonu</li>
+          <li>Epinefrin (acil durumlar için)</li>
+        </ul>
+        
+        <h5>Kolinerjik Ürtiker</h5>
+        <ul>
+          <li>Antihistaminikler</li>
+          <li>Egzersizden kaçınma</li>
+          <li>Serin ortamda kalma</li>
+          <li>Beta blokerler (gerekirse)</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>Antihistaminik + H2 bloker</li>
+          <li>Medikal + Fiziksel tedavi</li>
+          <li>Biyolojik + Destekleyici tedavi</li>
+          <li>Yaşam tarzı değişiklikleri + Medikal tedavi</li>
+        </ul>
+        
+        <h4>Ürtiker Tedavi Sonrası Bakım</h4>
+        <p>Ürtiker tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Tetikleyici faktörlerden kaçınma</li>
+          <li>Düzenli antihistaminik kullanımı</li>
+          <li>Stres yönetimi</li>
+          <li>Düzenli kontroller</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Değişiklikleri</h5>
+        <ul>
+          <li>Sağlıklı beslenme</li>
+          <li>Düzenli egzersiz</li>
+          <li>Yeterli uyku</li>
+          <li>Alkol ve sigaradan kaçınma</li>
+        </ul>
+        
+        <h4>Ürtikerden Korunma</h4>
+        <p>Ürtikerden korunmak için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Alerjen Kontrolü</h5>
+        <ul>
+          <li>Gıda alerjenlerinden kaçınma</li>
+          <li>İlaç alerjilerinde dikkat</li>
+          <li>Çevresel alerjenlerden korunma</li>
+          <li>Böcek ısırıklarından kaçınma</li>
+        </ul>
+        
+        <h5>Fiziksel Faktörler</h5>
+        <ul>
+          <li>Uygun kıyafet seçimi</li>
+          <li>Çevresel sıcaklık kontrolü</li>
+          <li>Güneş koruyucu kullanımı</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h4>Ürtiker Tedavi Sonuçları</h4>
+        <p>Ürtiker tedavisinde sonuçlar genellikle hızlı görülür:</p>
+        
+        <h5>Akut Ürtiker</h5>
+        <ul>
+          <li>1-7 gün tedavi süresi</li>
+          <li>%90+ başarı oranı</li>
+          <li>Hızlı iyileşme</li>
+          <li>Tekrar riski düşük</li>
+        </ul>
+        
+        <h5>Kronik Ürtiker</h5>
+        <ul>
+          <li>3-12 ay tedavi süresi</li>
+          <li>%70-80 başarı oranı</li>
+          <li>Uzun vadeli tedavi gerekli</li>
+          <li>Tekrar atak riski</li>
+        </ul>
+        
+        <h5>Fiziksel Ürtiker</h5>
+        <ul>
+          <li>6-12 ay tedavi süresi</li>
+          <li>%60-80 başarı oranı</li>
+          <li>Tetikleyici faktörlerden kaçınma önemli</li>
+          <li>Uzun vadeli takip gerekli</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde ürtiker tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Ürtiker konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel tanı ve tedavi sistemleri</li>
+          <li><strong>Kapsamlı Tanı:</strong> Detaylı alerji testleri ve laboratuvar</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Ürtiker, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun ürtiker tedavi planını hazırlayarak, kaşıntı, şişlik ve yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
     `
   },
@@ -503,13 +2405,314 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Dermatit Nedir?</h4>
-        <p>Dermatit, cildin iltihaplanması anlamına gelir ve farklı türleri bulunur: temas dermatiti, seboreik dermatit, atopik dermatit gibi. Ciltte kaşıntı, kızarıklık, kabuklanma ve bazen sızıntıyla kendini gösterir.</p>
+        <p>Dermatit, cildin iltihaplanması anlamına gelir ve farklı türleri bulunur. Bu hastalık, ciltte kaşıntı, kızarıklık, kabuklanma ve bazen sızıntıyla kendini gösterir. Dermatit, sadece estetik problemlere değil, aynı zamanda yaşam kalitesini önemli ölçüde etkileyen sağlık sorunlarıdır. Erken tanı ve tedavi, hastalığın ilerlemesini önlemek ve komplikasyonları azaltmak için kritik öneme sahiptir.</p>
         
-        <h4>Dermatit Tedavisi Nasıl Yapılır?</h4>
-        <p>Tedavi, dermatit türüne göre değişiklik gösterir. Topikal kortikosteroidler, antihistaminikler ve nemlendiriciler en sık kullanılan ürünlerdir. Ayrıca hastanın alerjik olup olmadığını belirlemek için testler yapılması önerilir.</p>
+        <h4>Dermatit Türleri ve Özellikleri</h4>
+        <p>Dermatit, nedenlerine ve belirtilerine göre farklı kategorilerde sınıflandırılır:</p>
         
-        <h4>Alerjik Hastalıklarda Uzun Vadeli Kontrol</h4>
-        <p>Alerjik cilt hastalıklarının kontrolü için çevresel tetikleyicilerin ortadan kaldırılması, beslenmeye dikkat edilmesi ve bağışıklık sisteminin güçlendirilmesi önemlidir. Kronik vakalarda düzenli dermatolog kontrolü şarttır.</p>
+        <h5>Atopik Dermatit (Atopik Egzama)</h5>
+        <ul>
+          <li><strong>En yaygın tür:</strong> Çocukluk döneminde başlar</li>
+          <li><strong>Genetik yatkınlık:</strong> Aile öyküsünde alerjik hastalıklar</li>
+          <li><strong>Belirtiler:</strong> Kızarıklık, kaşıntı, kuruluk, kabuklanma</li>
+          <li><strong>Yerleşim:</strong> Yüz, boyun, dirsek ve diz kıvrımları</li>
+          <li><strong>Ataklar:</strong> Stres, alerjenler ve çevresel faktörlerle tetiklenir</li>
+        </ul>
+        
+        <h5>Kontakt Dermatit</h5>
+        <ul>
+          <li><strong>İrritan Kontakt Dermatit:</strong> Kimyasal maddelerle temas</li>
+          <li><strong>Alerjik Kontakt Dermatit:</strong> Alerjik reaksiyon</li>
+          <li><strong>Belirtiler:</strong> Kızarıklık, şişlik, kaşıntı, kabarcıklar</li>
+          <li><strong>Tetikleyiciler:</strong> Nikel, krom, kozmetik ürünler, deterjanlar</li>
+          <li><strong>Yerleşim:</strong> Temas eden bölgelerde</li>
+        </ul>
+        
+        <h5>Seboreik Dermatit</h5>
+        <ul>
+          <li><strong>Yağlı cilt bölgelerinde:</strong> Saçlı deri, yüz, göğüs</li>
+          <li><strong>Belirtiler:</strong> Sarımsı kabuklar, pullanma, kızarıklık</li>
+          <li><strong>Nedenler:</strong> Maya mantarı, yağ üretimi, stres</li>
+          <li><strong>Mevsimsel değişim:</strong> Kış aylarında artış</li>
+        </ul>
+        
+        <h5>Nummular Dermatit</h5>
+        <ul>
+          <li><strong>Para şeklinde lezyonlar:</strong> Yuvarlak veya oval</li>
+          <li><strong>Belirtiler:</strong> Kaşıntılı, kırmızı, pullu lezyonlar</li>
+          <li><strong>Yerleşim:</strong> Bacaklar, kollar, gövde</li>
+          <li><strong>Kronik seyir:</strong> Uzun süreli tedavi gerekebilir</li>
+        </ul>
+        
+        <h5>Dishidrotik Dermatit</h5>
+        <ul>
+          <li><strong>El ve ayaklarda:</strong> Avuç içi ve ayak tabanı</li>
+          <li><strong>Belirtiler:</strong> Su dolu kabarcıklar, kaşıntı, pullanma</li>
+          <li><strong>Tetikleyiciler:</strong> Stres, nem, alerjenler</li>
+          <li><strong>Mevsimsel özellik:</strong> Yaz aylarında artış</li>
+        </ul>
+        
+        <h4>Dermatit Nedenleri ve Tetikleyicileri</h4>
+        <p>Dermatit birçok farklı faktöre bağlı olarak gelişebilir:</p>
+        
+        <h5>Genetik Faktörler</h5>
+        <ul>
+          <li>Aile öyküsünde alerjik hastalıklar</li>
+          <li>Atopik yapı</li>
+          <li>Bağışıklık sistemi bozuklukları</li>
+          <li>Metabolik hastalıklar</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Hava kirliliği</li>
+          <li>İklim değişiklikleri</li>
+          <li>UV radyasyon</li>
+          <li>Kimyasal maddeler</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Faktörleri</h5>
+        <ul>
+          <li>Stres ve anksiyete</li>
+          <li>Uyku düzensizliği</li>
+          <li>Yanlış beslenme</li>
+          <li>Sigara ve alkol kullanımı</li>
+        </ul>
+        
+        <h5>Mesleki Faktörler</h5>
+        <ul>
+          <li>Kimyasal maddelerle temas</li>
+          <li>Su ve nem maruziyeti</li>
+          <li>Lateks ve plastik ürünler</li>
+          <li>Tekrarlayan travmalar</li>
+        </ul>
+        
+        <h4>Dermatit Belirtileri ve Klinik Bulgular</h4>
+        <p>Dermatit belirtileri, hastalığın türüne ve şiddetine göre değişiklik gösterir:</p>
+        
+        <h5>Cilt Belirtileri</h5>
+        <ul>
+          <li><strong>Kızarıklık:</strong> Hafif pembe ile koyu kırmızı arası</li>
+          <li><strong>Kaşıntı:</strong> Hafiften şiddetliye değişen</li>
+          <li><strong>Kuruluk:</strong> Cilt yüzeyinde pullanma</li>
+          <li><strong>Kabuklanma:</strong> İltihaplı alanlarda</li>
+          <li><strong>Çatlaklar:</strong> Özellikle kuru ciltlerde</li>
+        </ul>
+        
+        <h5>İnflamatuar Belirtiler</h5>
+        <ul>
+          <li><strong>Şişlik:</strong> Ödem ve inflamasyon</li>
+          <li><strong>Sıcaklık artışı:</strong> Enflamasyon nedeniyle</li>
+          <li><strong>Ağrı:</strong> Hafif ağrı ve hassasiyet</li>
+          <li><strong>Sızıntı:</strong> Şiddetli vakalarda</li>
+        </ul>
+        
+        <h5>Komplikasyonlar</h5>
+        <ul>
+          <li><strong>İkincil enfeksiyonlar:</strong> Bakteriyel ve viral</li>
+          <li><strong>Lichenifikasyon:</strong> Ciltte kalınlaşma</li>
+          <li><strong>Pigmentasyon değişiklikleri:</strong> Leke oluşumu</li>
+          <li><strong>Uyku bozuklukları:</strong> Kaşıntı nedeniyle</li>
+        </ul>
+        
+        <h4>Dermatit Tanısı</h4>
+        <p>Dermatit tanısı için kapsamlı bir değerlendirme süreci gerekir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Lezyonların detaylı incelenmesi</li>
+          <li>Yayılım paterni ve sınırların belirlenmesi</li>
+          <li>Kaşıntı şiddetinin değerlendirilmesi</li>
+          <li>Genel cilt durumunun kontrolü</li>
+        </ul>
+        
+        <h5>Alerji Testleri</h5>
+        <ul>
+          <li><strong>Prick Testi:</strong> Gıda ve inhalan alerjenler</li>
+          <li><strong>Patch Testi:</strong> Kontakt alerji tespiti</li>
+          <li><strong>Kan Testleri:</strong> IgE seviyesi ve spesifik alerjenler</li>
+          <li><strong>Eliminasyon Testi:</strong> Gıda alerjileri için</li>
+        </ul>
+        
+        <h5>Laboratuvar Testleri</h5>
+        <ul>
+          <li>Tam kan sayımı</li>
+          <li>Eozinofil sayısı</li>
+          <li>CRP ve sedimantasyon</li>
+          <li>Gerekirse biyopsi</li>
+        </ul>
+        
+        <h4>Modern Dermatit Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde dermatit için en güncel ve etkili tedavi yöntemlerini kullanıyoruz. Tedavi seçimi, hastalığın türüne, şiddetine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>Topikal Tedaviler</h4>
+        <p>Hafif ve orta şiddetli dermatit vakalarında topikal tedaviler etkili sonuçlar verir:</p>
+        
+        <h5>Nemlendiriciler</h5>
+        <ul>
+          <li><strong>Vazelin bazlı:</strong> Yoğun nemlendirme</li>
+          <li><strong>Üre içeren:</strong> Keratolitik etki</li>
+          <li><strong>Seramid içeren:</strong> Cilt bariyerini güçlendirme</li>
+          <li><strong>Hiyalüronik asit:</strong> Hızlı nemlendirme</li>
+        </ul>
+        
+        <h5>Kortikosteroidler</h5>
+        <ul>
+          <li><strong>Hafif:</strong> Hidrokortizon %1</li>
+          <li><strong>Orta:</strong> Betametazon, mometazon</li>
+          <li><strong>Şiddetli:</strong> Klobetasol, halobetasol</li>
+          <li><strong>Uygulama:</strong> Günde 1-2 kez</li>
+        </ul>
+        
+        <h5>Kalsinörin İnhibitörleri</h5>
+        <ul>
+          <li><strong>Tacrolimus:</strong> %0.03 ve %0.1 konsantrasyonlar</li>
+          <li><strong>Pimekrolimus:</strong> %1 krem</li>
+          <li><strong>Etki:</strong> İnflamasyonu azaltma</li>
+          <li><strong>Avantaj:</strong> Uzun süreli kullanım güvenli</li>
+        </ul>
+        
+        <h4>Sistemik Tedaviler</h4>
+        <p>Orta ve şiddetli dermatit vakalarında sistemik tedaviler gerekebilir:</p>
+        
+        <h5>Antihistaminikler</h5>
+        <ul>
+          <li><strong>Birinci Nesil:</strong> Difenhidramin, klorfeniramin</li>
+          <li><strong>İkinci Nesil:</strong> Seterizin, loratadin, feksofenadin</li>
+          <li><strong>Etki:</strong> Kaşıntı ve alerjik belirtileri azaltma</li>
+          <li><strong>Uygulama:</strong> Günlük veya gerektiğinde</li>
+        </ul>
+        
+        <h5>İmmünomodülatörler</h5>
+        <ul>
+          <li><strong>Siklosporin:</strong> Şiddetli atopik dermatit</li>
+          <li><strong>Metotreksat:</strong> Kronik dermatit</li>
+          <li><strong>Azatioprin:</strong> Alternatif tedavi</li>
+          <li><strong>Takip:</strong> Düzenli laboratuvar kontrolü</li>
+        </ul>
+        
+        <h5>Biyolojik Tedaviler</h5>
+        <ul>
+          <li><strong>Dupilumab:</strong> IL-4 ve IL-13 inhibitörü</li>
+          <li><strong>Tralokinumab:</strong> IL-13 inhibitörü</li>
+          <li><strong>Nemolizumab:</strong> IL-31 inhibitörü</li>
+          <li><strong>Uygulama:</strong> Enjeksiyon ile</li>
+        </ul>
+        
+        <h4>Fototerapi (Işık Tedavisi)</h4>
+        <p>Orta ve şiddetli dermatit vakalarında fototerapi etkili bir tedavi seçeneğidir:</p>
+        
+        <h5>UVB Tedavisi</h5>
+        <ul>
+          <li><strong>Narrowband UVB:</strong> En etkili UVB tedavisi</li>
+          <li><strong>Broadband UVB:</strong> Geleneksel UVB tedavisi</li>
+          <li><strong>Uygulama:</strong> Haftada 2-3 kez</li>
+          <li><strong>Süre:</strong> 6-12 hafta</li>
+        </ul>
+        
+        <h5>PUVA Tedavisi</h5>
+        <ul>
+          <li><strong>Psoralen + UVA:</strong> Kombine tedavi</li>
+          <li><strong>Etki:</strong> Güçlü immünosupresyon</li>
+          <li><strong>Uygulama:</strong> Haftada 2-3 kez</li>
+          <li><strong>Yan etki:</strong> Mide bulantısı, güneş yanığı</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>Topikal + Sistemik tedavi</li>
+          <li>Fototerapi + Medikal tedavi</li>
+          <li>Biyolojik + Destekleyici tedavi</li>
+          <li>Yaşam tarzı değişiklikleri + Medikal tedavi</li>
+        </ul>
+        
+        <h4>Dermatit Tedavi Sonrası Bakım</h4>
+        <p>Dermatit tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>Cilt Bakımı</h5>
+        <ul>
+          <li>Günlük nemlendirici kullanımı</li>
+          <li>Nazik temizleyiciler</li>
+          <li>Güneş koruyucu (SPF 30+)</li>
+          <li>Düzenli cilt kontrolü</li>
+        </ul>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Alerjenlerden kaçınma</li>
+          <li>Uygun kıyafet seçimi</li>
+          <li>Çevresel faktörlere dikkat</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h4>Dermatitten Korunma</h4>
+        <p>Dermatitten korunmak için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Çevresel Kontrol</h5>
+        <ul>
+          <li>Ev tozu akarlarını azaltma</li>
+          <li>Polen maruziyetini minimize etme</li>
+          <li>Hayvan alerjilerinde dikkat</li>
+          <li>Nem kontrolü</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Değişiklikleri</h5>
+        <ul>
+          <li>Sağlıklı beslenme</li>
+          <li>Düzenli egzersiz</li>
+          <li>Yeterli uyku</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h5>Kişisel Hijyen</h5>
+        <ul>
+          <li>Düzenli el yıkama</li>
+          <li>Uygun cilt bakımı</li>
+          <li>Kimyasal maddelerden korunma</li>
+          <li>Düzenli kontroller</li>
+        </ul>
+        
+        <h4>Dermatit Tedavi Sonuçları</h4>
+        <p>Dermatit tedavisinde sonuçlar genellikle zamanla görülür:</p>
+        
+        <h5>Topikal Tedaviler</h5>
+        <ul>
+          <li>1-2 hafta tedavi süresi</li>
+          <li>%70-80 başarı oranı</li>
+          <li>Hızlı iyileşme</li>
+          <li>Düzenli uygulama gerekli</li>
+        </ul>
+        
+        <h5>Sistemik Tedaviler</h5>
+        <ul>
+          <li>2-4 hafta tedavi süresi</li>
+          <li>%80-90 başarı oranı</li>
+          <li>Orta hızda iyileşme</li>
+          <li>Yan etki takibi önemli</li>
+        </ul>
+        
+        <h5>Fototerapi</h5>
+        <ul>
+          <li>6-12 hafta tedavi süresi</li>
+          <li>%75-85 başarı oranı</li>
+          <li>Yavaş ama kalıcı iyileşme</li>
+          <li>Uzun vadeli sonuçlar</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde dermatit tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Dermatit konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel tanı ve tedavi sistemleri</li>
+          <li><strong>Kapsamlı Tanı:</strong> Detaylı alerji testleri ve laboratuvar</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Dermatit, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun dermatit tedavi planını hazırlayarak, kaşıntı, kızarıklık ve yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
     `
   },
@@ -520,13 +2723,326 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Alerjik Hastalıklar Nedir?</h4>
-        <p>Alerjik hastalıklar, bağışıklık sisteminin normalde zararsız olan maddelere (alerjenlere) karşı aşırı tepki vermesi sonucu ortaya çıkan kronik sağlık sorunlarıdır. Polen, toz akarları, hayvan tüyleri, bazı yiyecekler ve ilaçlar en yaygın alerjenler arasında yer alır. Bu hastalıklar; burun akıntısı, hapşırık, kaşıntı, nefes darlığı, deri döküntüsü gibi çeşitli belirtilerle kendini gösterebilir.</p>
+        <p>Alerjik hastalıklar, bağışıklık sisteminin normalde zararsız olan maddelere (alerjenlere) karşı aşırı tepki vermesi sonucu ortaya çıkan kronik sağlık sorunlarıdır. Bu hastalıklar, sadece cilt problemlerine değil, aynı zamanda solunum yolu, sindirim sistemi ve genel sağlık üzerinde de önemli etkilere sahiptir. Alerjik hastalıklar, her yaş grubunda görülebilir ve erken tanı ile tedavi edilmesi önemlidir. Kliniğimizde bu hastalıklar için modern ve etkili tedavi yöntemleri kullanılmaktadır.</p>
         
-        <h4>Alerjik Hastalıkların Türleri ve Belirtileri</h4>
-        <p>Alerjik hastalıklar arasında en yaygın olanlar alerjik rinit (saman nezlesi), astım, besin alerjileri, kontakt dermatit ve atopik dermatittir. Bu hastalıkların semptomları kişiden kişiye değişse de, genellikle mevsimsel ya da maruziyet sonrası aniden gelişir. Bazı durumlarda ciddi reaksiyonlar (anafilaksi) yaşanabilir ve acil müdahale gerekebilir.</p>
+        <h4>Alerjik Hastalıklar Türleri ve Özellikleri</h4>
+        <p>Alerjik hastalıklar, etkilenen organ sistemine ve alerjen türüne göre farklı kategorilerde sınıflandırılır:</p>
         
-        <h4>Tanı ve Tedavi Yöntemleri</h4>
-        <p>Alerjik hastalıkların tanısında alerji testleri (cilt prick testi, kan testleri) ve hasta öyküsü çok önemlidir. Tedavide ise antihistaminikler, kortikosteroid spreyler ve immünoterapi (alerji aşısı) gibi yöntemler kullanılabilir. En etkili yöntem, alerjeni tanımak ve mümkün olduğunca maruz kalmaktan kaçınmaktır. Uzman bir dermatolog veya alerji uzmanı eşliğinde kişiye özel bir tedavi planı, alerjik hastalıklarla yaşamı daha konforlu hale getirebilir.</p>
+        <h5>Solunum Yolu Alerjileri</h5>
+        <ul>
+          <li><strong>Alerjik Rinit (Saman Nezlesi):</strong> Burun akıntısı, hapşırık, burun tıkanıklığı</li>
+          <li><strong>Alerjik Konjonktivit:</strong> Gözlerde kaşıntı, kızarıklık, sulanma</li>
+          <li><strong>Alerjik Astım:</strong> Nefes darlığı, hırıltı, öksürük</li>
+          <li><strong>Sinüzit:</strong> Burun tıkanıklığı, baş ağrısı, yüz ağrısı</li>
+        </ul>
+        
+        <h5>Cilt Alerjileri</h5>
+        <ul>
+          <li><strong>Atopik Dermatit:</strong> Kronik cilt iltihabı, kaşıntı, kuruluk</li>
+          <li><strong>Kontakt Dermatit:</strong> Temas sonrası cilt reaksiyonu</li>
+          <li><strong>Ürtiker (Kurdeşen):</strong> Ani cilt döküntüleri, kaşıntı</li>
+          <li><strong>Anjiyoödem:</strong> Derin doku şişliği</li>
+        </ul>
+        
+        <h5>Gıda Alerjileri</h5>
+        <ul>
+          <li><strong>Süt Alerjisi:</strong> İnek sütü proteinlerine karşı reaksiyon</li>
+          <li><strong>Yumurta Alerjisi:</strong> Yumurta beyazı ve sarısı alerjisi</li>
+          <li><strong>Kuruyemiş Alerjisi:</strong> Fındık, ceviz, badem alerjisi</li>
+          <li><strong>Deniz Ürünleri Alerjisi:</strong> Balık, karides, midye alerjisi</li>
+          <li><strong>Gluten Alerjisi:</strong> Buğday, arpa, çavdar alerjisi</li>
+        </ul>
+        
+        <h5>İlaç Alerjileri</h5>
+        <ul>
+          <li><strong>Antibiyotik Alerjisi:</strong> Penisilin, sefalosporin alerjisi</li>
+          <li><strong>Ağrı Kesici Alerjisi:</strong> Aspirin, ibuprofen alerjisi</li>
+          <li><strong>Kemoterapi Alerjisi:</strong> Antikanser ilaçlarına reaksiyon</li>
+          <li><strong>Anestezi Alerjisi:</strong> Lokal ve genel anestezik alerjisi</li>
+        </ul>
+        
+        <h5>Böcek Alerjileri</h5>
+        <ul>
+          <li><strong>Arı Alerjisi:</strong> Bal arısı, eşek arısı alerjisi</li>
+          <li><strong>Sivrisinek Alerjisi:</strong> Böcek ısırığı reaksiyonu</li>
+          <li><strong>Hamam Böceği Alerjisi:</strong> Ev tozu akarları ile ilişkili</li>
+        </ul>
+        
+        <h4>Alerjik Hastalıkların Nedenleri</h4>
+        <p>Alerjik hastalıklar birçok farklı faktöre bağlı olarak gelişebilir:</p>
+        
+        <h5>Genetik Faktörler</h5>
+        <ul>
+          <li>Aile öyküsünde alerjik hastalıklar</li>
+          <li>Atopik yapı</li>
+          <li>Bağışıklık sistemi genleri</li>
+          <li>HLA genotipi</li>
+        </ul>
+        
+        <h5>Çevresel Faktörler</h5>
+        <ul>
+          <li>Hava kirliliği</li>
+          <li>İklim değişiklikleri</li>
+          <li>UV radyasyon</li>
+          <li>Endüstriyel kimyasallar</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Faktörleri</h5>
+        <ul>
+          <li>Hijyen hipotezi</li>
+          <li>Beslenme alışkanlıkları</li>
+          <li>Stres ve anksiyete</li>
+          <li>Sigara ve alkol kullanımı</li>
+        </ul>
+        
+        <h5>Mesleki Faktörler</h5>
+        <ul>
+          <li>Kimyasal maddelerle temas</li>
+          <li>Toz ve partikül maruziyeti</li>
+          <li>Lateks ve plastik ürünler</li>
+          <li>Biyolojik ajanlar</li>
+        </ul>
+        
+        <h4>Alerjik Hastalıklar Belirtileri</h4>
+        <p>Alerjik hastalıklarda görülen belirtiler, etkilenen organ sistemine göre değişiklik gösterir:</p>
+        
+        <h5>Solunum Yolu Belirtileri</h5>
+        <ul>
+          <li><strong>Burun:</strong> Akıntı, tıkanıklık, hapşırık, kaşıntı</li>
+          <li><strong>Gözler:</strong> Kızarıklık, kaşıntı, sulanma, şişlik</li>
+          <li><strong>Boğaz:</strong> Kaşıntı, yanma, ses kısıklığı</li>
+          <li><strong>Akciğerler:</strong> Nefes darlığı, hırıltı, öksürük</li>
+        </ul>
+        
+        <h5>Cilt Belirtileri</h5>
+        <ul>
+          <li><strong>Kızarıklık:</strong> Hafif pembe ile koyu kırmızı arası</li>
+          <li><strong>Kaşıntı:</strong> Hafiften şiddetliye değişen</li>
+          <li><strong>Döküntü:</strong> Ürtiker, egzama, dermatit</li>
+          <li><strong>Şişlik:</strong> Anjiyoödem, yüz şişmesi</li>
+        </ul>
+        
+        <h5>Sindirim Sistemi Belirtileri</h5>
+        <ul>
+          <li><strong>Mide:</strong> Bulantı, kusma, ağrı</li>
+          <li><strong>Bağırsak:</strong> İshal, karın ağrısı, kramp</li>
+          <li><strong>Ağız:</strong> Kaşıntı, şişlik, uyuşma</li>
+        </ul>
+        
+        <h5>Genel Belirtiler</h5>
+        <ul>
+          <li>Halsizlik ve yorgunluk</li>
+          <li>Baş ağrısı</li>
+          <li>Uyku bozuklukları</li>
+          <li>Konsantrasyon güçlüğü</li>
+        </ul>
+        
+        <h5>Anafilaksi (Acil Durum)</h5>
+        <ul>
+          <li>Nefes darlığı ve boğulma hissi</li>
+          <li>Kan basıncında düşme</li>
+          <li>Bilinç kaybı</li>
+          <li>Kalp durması</li>
+        </ul>
+        
+        <h4>Alerjik Hastalıklar Tanısı</h4>
+        <p>Alerjik hastalıkların doğru tanısı için kapsamlı bir değerlendirme süreci gerekir:</p>
+        
+        <h5>Klinik Muayene</h5>
+        <ul>
+          <li>Detaylı hasta öyküsü</li>
+          <li>Fizik muayene</li>
+          <li>Belirtilerin değerlendirilmesi</li>
+          <li>Aile öyküsü</li>
+        </ul>
+        
+        <h5>Alerji Testleri</h5>
+        <ul>
+          <li><strong>Prick Testi:</strong> Cilt üzerinde alerjen testi</li>
+          <li><strong>Patch Testi:</strong> Kontakt alerji tespiti</li>
+          <li><strong>Intradermal Test:</strong> Deri içi alerjen testi</li>
+          <li><strong>Provokasyon Testi:</strong> Alerjen maruziyet testi</li>
+        </ul>
+        
+        <h5>Laboratuvar Testleri</h5>
+        <ul>
+          <li><strong>Kan Testleri:</strong> IgE seviyesi, spesifik alerjenler</li>
+          <li><strong>Tam Kan Sayımı:</strong> Eozinofil sayısı</li>
+          <li><strong>CRP ve Sedimantasyon:</strong> İnflamasyon belirteçleri</li>
+          <li><strong>Tiroid Fonksiyon Testleri:</strong> Endokrin değerlendirme</li>
+        </ul>
+        
+        <h5>Görüntüleme Yöntemleri</h5>
+        <ul>
+          <li>Akciğer grafisi</li>
+          <li>Sinüs tomografisi</li>
+          <li>Endoskopi (gerekirse)</li>
+          <li>Deri biyopsisi (gerekirse)</li>
+        </ul>
+        
+        <h4>Modern Alerjik Hastalıklar Tedavi Yöntemleri</h4>
+        <p>Kliniğimizde alerjik hastalıklar için en güncel ve etkili tedavi yöntemlerini kullanıyoruz. Tedavi seçimi, hastalığın türüne, şiddetine ve hastanın durumuna göre belirlenir.</p>
+        
+        <h4>İlaç Tedavileri</h4>
+        <p>Hafif ve orta şiddetli alerjik hastalıklarda ilaç tedavileri etkili sonuçlar verir:</p>
+        
+        <h5>Antihistaminikler</h5>
+        <ul>
+          <li><strong>Birinci Nesil:</strong> Difenhidramin, klorfeniramin</li>
+          <li><strong>İkinci Nesil:</strong> Seterizin, loratadin, feksofenadin</li>
+          <li><strong>Üçüncü Nesil:</strong> Desloratadin, levosetirizin</li>
+          <li><strong>Uygulama:</strong> Günlük veya gerektiğinde</li>
+          <li><strong>Etki:</strong> Alerjik belirtileri azaltma</li>
+        </ul>
+        
+        <h5>Kortikosteroidler</h5>
+        <ul>
+          <li><strong>Topikal:</strong> Krem, merhem, sprey</li>
+          <li><strong>Oral:</strong> Tablet, şurup</li>
+          <li><strong>İnhalasyon:</strong> Astım tedavisi için</li>
+          <li><strong>Uygulama:</strong> Kısa süreli, düzenli takip ile</li>
+        </ul>
+        
+        <h5>Lökotrien Antagonistleri</h5>
+        <ul>
+          <li><strong>Montelukast:</strong> Astım ve alerjik rinit</li>
+          <li><strong>Zafirlukast:</strong> Alternatif tedavi</li>
+          <li><strong>Etki:</strong> İnflamasyonu azaltma</li>
+          <li><strong>Avantaj:</strong> Uzun süreli kullanım güvenli</li>
+        </ul>
+        
+        <h4>İmmünoterapi (Alerji Aşısı)</h4>
+        <p>Orta ve şiddetli alerjik hastalıklarda immünoterapi etkili bir tedavi seçeneğidir:</p>
+        
+        <h5>Subkutan İmmünoterapi (SCIT)</h5>
+        <ul>
+          <li><strong>Uygulama:</strong> Cilt altına enjeksiyon</li>
+          <li><strong>Süre:</strong> 3-5 yıl</li>
+          <li><strong>Frekans:</strong> Haftalık, aylık</li>
+          <li><strong>Etki:</strong> Alerjik reaksiyonları azaltma</li>
+        </ul>
+        
+        <h5>Sublingual İmmünoterapi (SLIT)</h5>
+        <ul>
+          <li><strong>Uygulama:</strong> Dil altına damla/tablet</li>
+          <li><strong>Süre:</strong> 3-5 yıl</li>
+          <li><strong>Frekans:</strong> Günlük</li>
+          <li><strong>Avantaj:</strong> Evde uygulanabilir</li>
+        </ul>
+        
+        <h4>Biyolojik Tedaviler</h4>
+        <p>Şiddetli ve dirençli alerjik hastalıklarda biyolojik tedaviler kullanılır:</p>
+        
+        <h5>Anti-IgE Tedavisi</h5>
+        <ul>
+          <li><strong>Omalizumab:</strong> IgE seviyesini düşürme</li>
+          <li><strong>Uygulama:</strong> Ayda bir enjeksiyon</li>
+          <li><strong>Endikasyon:</strong> Şiddetli astım, kronik ürtiker</li>
+          <li><strong>Avantaj:</strong> Yüksek etkinlik</li>
+        </ul>
+        
+        <h5>Anti-IL-4/IL-13 Tedavisi</h5>
+        <ul>
+          <li><strong>Dupilumab:</strong> Atopik dermatit, astım</li>
+          <li><strong>Etki:</strong> İnflamasyonu azaltma</li>
+          <li><strong>Uygulama:</strong> 2 haftada bir enjeksiyon</li>
+        </ul>
+        
+        <h4>Kombine Tedavi Yaklaşımı</h4>
+        <p>Kliniğimizde en iyi sonuçları almak için farklı tedavi yöntemlerini birleştiriyoruz:</p>
+        <ul>
+          <li>İlaç + İmmünoterapi</li>
+          <li>Biyolojik + Destekleyici tedavi</li>
+          <li>Yaşam tarzı değişiklikleri + Medikal tedavi</li>
+          <li>Çevresel kontrol + Farmakolojik tedavi</li>
+        </ul>
+        
+        <h4>Alerjik Hastalıklar Tedavi Sonrası Bakım</h4>
+        <p>Alerjik hastalıklar tedavisi sonrası düzenli bakım çok önemlidir:</p>
+        
+        <h5>Koruyucu Önlemler</h5>
+        <ul>
+          <li>Alerjenlerden kaçınma</li>
+          <li>Düzenli ilaç kullanımı</li>
+          <li>Çevresel kontrol</li>
+          <li>Stres yönetimi</li>
+        </ul>
+        
+        <h5>Yaşam Tarzı Değişiklikleri</h5>
+        <ul>
+          <li>Sağlıklı beslenme</li>
+          <li>Düzenli egzersiz</li>
+          <li>Yeterli uyku</li>
+          <li>Sigara ve alkolden kaçınma</li>
+        </ul>
+        
+        <h4>Alerjik Hastalıklardan Korunma</h4>
+        <p>Alerjik hastalıklardan korunmak için dikkat edilmesi gerekenler:</p>
+        
+        <h5>Çevresel Kontrol</h5>
+        <ul>
+          <li>Ev tozu akarlarını azaltma</li>
+          <li>Polen maruziyetini minimize etme</li>
+          <li>Hayvan alerjilerinde dikkat</li>
+          <li>Nem ve küf kontrolü</li>
+        </ul>
+        
+        <h5>Beslenme Önerileri</h5>
+        <ul>
+          <li>Antioksidan açısından zengin beslenme</li>
+          <li>Omega-3 yağ asitleri</li>
+          <li>Probiyotik gıdalar</li>
+          <li>Vitamin D takviyesi</li>
+        </ul>
+        
+        <h5>Kişisel Hijyen</h5>
+        <ul>
+          <li>Düzenli el yıkama</li>
+          <li>Uygun cilt bakımı</li>
+          <li>Düzenli kontroller</li>
+          <li>Acil durum planı</li>
+        </ul>
+        
+        <h4>Alerjik Hastalıklar Tedavi Sonuçları</h4>
+        <p>Alerjik hastalıklar tedavisinde sonuçlar genellikle zamanla görülür:</p>
+        
+        <h5>İlaç Tedavileri</h5>
+        <ul>
+          <li>1-2 hafta tedavi süresi</li>
+          <li>%70-80 başarı oranı</li>
+          <li>Hızlı iyileşme</li>
+          <li>Düzenli kullanım gerekli</li>
+        </ul>
+        
+        <h5>İmmünoterapi</h5>
+        <ul>
+          <li>3-5 yıl tedavi süresi</li>
+          <li>%80-90 başarı oranı</li>
+          <li>Uzun vadeli sonuçlar</li>
+          <li>Kalıcı iyileşme</li>
+        </ul>
+        
+        <h5>Biyolojik Tedaviler</h5>
+        <ul>
+          <li>3-6 ay tedavi süresi</li>
+          <li>%85-95 başarı oranı</li>
+          <li>Hızlı ve etkili sonuçlar</li>
+          <li>Yüksek maliyet</li>
+        </ul>
+        
+        <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
+        <p>Kliniğimizde alerjik hastalıklar tedavisi için en güncel yöntemleri ve uzman dermatolog ekibimizi kullanarak, her hasta için özel tedavi planları hazırlıyoruz:</p>
+        <ul>
+          <li><strong>Uzman Ekip:</strong> Alerjik hastalıklar konusunda deneyimli dermatologlar</li>
+          <li><strong>Modern Teknolojiler:</strong> En güncel tanı ve tedavi sistemleri</li>
+          <li><strong>Kapsamlı Tanı:</strong> Detaylı alerji testleri ve laboratuvar</li>
+          <li><strong>Kişiselleştirilmiş Yaklaşım:</strong> Her hasta için özel tedavi planı</li>
+          <li><strong>Kombine Tedavi:</strong> Farklı yöntemlerin birleştirilmesi</li>
+          <li><strong>Düzenli Takip:</strong> Tedavi sonrası kapsamlı bakım</li>
+        </ul>
+        
+        <h4>Sonuç</h4>
+        <p>Alerjik hastalıklar, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun alerjik hastalıklar tedavi planını hazırlayarak, yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, alerjik hastalıklarla yaşamayı öğrenmenize yardımcı oluyoruz.</p>
       </div>
     `
   },

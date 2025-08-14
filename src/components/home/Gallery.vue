@@ -2,8 +2,8 @@
   <section id="galeri" class="gallery-section">
     <div class="container">
       <div class="section-title text-center mb-5" data-aos="fade-up">
-        <h2>Galeri</h2>
-        <p>Kliniğimizden Kareler</p>
+        <h2>{{ $t('home.gallery.title') }}</h2>
+        <p>{{ $t('home.gallery.subtitle') }}</p>
       </div>
       <div class="gallery-slider">
         <swiper
@@ -35,7 +35,7 @@
             <div class="gallery-item">
               <img :src="images.clinic10" alt="Modern Klinik">
               <div class="gallery-item-title">
-                <h4>Modern Klinik Ortamımız</h4>
+                <h4>{{ $t('home.gallery.items.modernClinic.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -43,7 +43,7 @@
             <div class="gallery-item">
               <img :src="images.clinic1" alt="Lazer Tedavi">
               <div class="gallery-item-title">
-                <h4>Lazer Tedavi Ünitemiz</h4>
+                <h4>{{ $t('home.gallery.items.laserUnit.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -51,7 +51,7 @@
             <div class="gallery-item">
               <img :src="images.clinic6" alt="Lazer Tedavi">
               <div class="gallery-item-title">
-                <h4>Lazer Tedavi Ünitemiz</h4>
+                <h4>{{ $t('home.gallery.items.laserUnit.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -59,7 +59,7 @@
             <div class="gallery-item">
               <img :src="images.clinic7" alt="Bekleme Salonu">
               <div class="gallery-item-title">
-                <h4>Ferah Bekleme Salonumuz</h4>
+                <h4>{{ $t('home.gallery.items.waitingRoom.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -67,7 +67,7 @@
             <div class="gallery-item">
               <img :src="images.clinic8" alt="Bekleme Salonu">
               <div class="gallery-item-title">
-                <h4>Ferah Bekleme Salonumuz</h4>
+                <h4>{{ $t('home.gallery.items.waitingRoom.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -75,7 +75,7 @@
             <div class="gallery-item">
               <img :src="images.clinic9" alt="Bekleme Salonu">
               <div class="gallery-item-title">
-                <h4>Ferah Bekleme Salonumuz</h4>
+                <h4>{{ $t('home.gallery.items.waitingRoom.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -83,7 +83,7 @@
             <div class="gallery-item">
               <img :src="images.clinic3" alt="Tedavi Odası">
               <div class="gallery-item-title">
-                <h4>Muayene Odamız</h4>
+                <h4>{{ $t('home.gallery.items.examinationRoom.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -91,7 +91,7 @@
             <div class="gallery-item">
               <img :src="images.clinic4" alt="Tedavi Odası">
               <div class="gallery-item-title">
-                <h4>Tedavi Odalarımız</h4>
+                <h4>{{ $t('home.gallery.items.treatmentRoom.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -99,7 +99,7 @@
             <div class="gallery-item">
               <img :src="images.clinic5" alt="Tedavi Odası">
               <div class="gallery-item-title">
-                <h4>Tedavi Odalarımız</h4>
+                <h4>{{ $t('home.gallery.items.treatmentRoom.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -107,7 +107,7 @@
             <div class="gallery-item">
               <img :src="images.clinic12" alt="Muayene Odası">
               <div class="gallery-item-title">
-                <h4>Kliniğimizin Genel Görünümü</h4>
+                <h4>{{ $t('home.gallery.items.generalView.title') }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -115,7 +115,7 @@
             <div class="gallery-item">
               <img :src="images.clinic11" alt="Estetik Ünite">
               <div class="gallery-item-title">
-                <h4>Kliniğimizin Genel Görünümü</h4>
+                <h4>{{ $t('home.gallery.items.generalView.title') }}</h4>
               </div>
             </div>
           </swiper-slide>

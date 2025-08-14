@@ -3,10 +3,10 @@
 
 .navbar {
   position: fixed !important;
-  top: $topbar-height;
+  top: 40px; // TopBar height'ına göre ayarladım
   left: 0;
   right: 0;
-  z-index: $z-index-navbar;
+  z-index: 1000; // Daha düşük z-index
   min-height: $navbar-height;
   background-color: $navbar-background;
   border-bottom: 1px solid $navbar-border-color;
@@ -107,6 +107,7 @@
     padding: 0.5rem 0;
     min-width: 230px;
     animation: fadeIn 0.3s ease;
+    z-index: 1001; // Navbar'dan biraz yüksek ama TopBar'dan düşük
 
     &::after {
       content: '';

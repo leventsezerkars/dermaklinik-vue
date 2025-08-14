@@ -2,8 +2,8 @@
   <section class="services-section" id="hizmetler">
     <div class="container">
       <div class="section-title text-center" data-aos="fade-up">
-        <h2>Hizmetlerimiz</h2>
-        <p>Dermatoloji ve estetik alanında uzman kadromuzla yanınızdayız</p>
+        <h2>{{ $t('home.services.title') }}</h2>
+        <p>{{ $t('home.services.subtitle') }}</p>
       </div>
 
       <!-- Cilt Gençleştirme ve Yenileme -->
@@ -11,7 +11,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6" data-aos="fade-right">
             <div class="service-category-content">
-              <h3>Genel Dermatoloji</h3>
+              <h3>{{ $t('header.generalDermatology') }}</h3>
               <div class="service-list">
                 <router-link class="service-link" to="/hizmetler/akne-sivilce-tedavisi">
                   <div class="service-item laser">
@@ -19,8 +19,8 @@
                       <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Akne(Sivilce) Tedavileri</h4>
-                      <p>Yağ dengesini bozan sivilcelere etkili çözümler uyguluyoruz.</p>
+                      <h4>{{ $t('services.general.items.acne') }}</h4>
+                      <p>{{ $t('home.services.general.acne.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -30,8 +30,8 @@
                       <i class="fa-solid fa-droplet"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Rosasea(Gül) Hastalığı</h4>
-                      <p>Yanaklardaki kızarıklı ve hassasiyeti kontrol altına alıyoruz</p>
+                      <h4>{{ $t('services.general.items.rosacea') }}</h4>
+                      <p>{{ $t('home.services.general.rosacea.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -41,8 +41,8 @@
                       <i class="fa-solid fa-syringe"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Siğil ve Ben Tedavileri</h4>
-                      <p>Ciltteki istenmeyen oluşumları güvenle ve iz bırakmadan gideriyoruz.</p>
+                      <h4>{{ $t('services.general.items.wart') }}</h4>
+                      <p>{{ $t('home.services.general.wart.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -52,8 +52,8 @@
                       <i class="fa-solid fa-dna"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Saç Dökülmesi Tedavileri</h4>
-                      <p>Güçsüzleşen saçlar için analiz ve kişiye özel tedavi uyguluyoruz.</p>
+                      <h4>{{ $t('services.general.items.hairLoss') }}</h4>
+                      <p>{{ $t('home.services.general.hairLoss.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -77,7 +77,7 @@
         <div class="row align-items-center flex-row-reverse">
           <div class="col-lg-6" data-aos="fade-left">
             <div class="service-category-content">
-              <h3>Estetik Dermatoloji</h3>
+              <h3>{{ $t('header.aestheticDermatology') }}</h3>
               <div class="service-list">
                 <router-link class="service-link" to="/hizmetler/botoks-uygulamasi">
                   <div class="service-item botox">
@@ -85,8 +85,8 @@
                       <i class="fa-solid fa-wand-magic"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Botoks Uygulamaları</h4>
-                      <p>Kırışıklık, migren, terleme ve diş sıkma gibi problemleri tedavi ediyoruz.</p>
+                      <h4>{{ $t('services.aesthetic.items.botox') }}</h4>
+                      <p>{{ $t('home.services.aesthetic.botox.description') }}</p>
                     </div>
                   </div>                  
                 </router-link>
@@ -96,8 +96,8 @@
                       <i class="fa-solid fa-fill-drip"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Dolgu Uygulamaları</h4>
-                      <p>Dudak, çene, yanak, göz altı ve nazolobial çizgileri hafifleterek yüzünüze hacim ve ifade kazandırıyoruz</p>
+                      <h4>{{ $t('services.aesthetic.items.filler') }}</h4>
+                      <p>{{ $t('home.services.aesthetic.filler.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -107,8 +107,8 @@
                       <i class="fa-solid fa-star"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Leke Tedavileri</h4>
-                      <p>Farklı cihazlarımızla güneş, yaş, kılcal damar ve akne lekelerini hedef alıyor, cilt tonunuzu eşitliyoruz.</p>
+                      <h4>{{ $t('services.aesthetic.items.spotTreatment') }}</h4>
+                      <p>{{ $t('home.services.aesthetic.spotTreatment.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -118,8 +118,8 @@
                       <i class="fa-solid fa-arrows-to-circle"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Lifting & Yüz Germe</h4>
-                      <p>İp askı veya cihazlarla yüz hatlarını toparlıyor cildinize genç ve sıkı bir görünüm kazandırıyoruz.</p>
+                      <h4>{{ $t('services.aesthetic.items.threadLifting') }}</h4>
+                      <p>{{ $t('home.services.aesthetic.threadLifting.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -143,7 +143,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6" data-aos="fade-right">
             <div class="service-category-content">
-              <h3>Lazer Tedavileri</h3>
+              <h3>{{ $t('header.laserTreatments') }}</h3>
               <div class="service-list">
                 <router-link class="service-link" to="/hizmetler/veloce-bb-light">
                   <div class="service-item sac-mezo">
@@ -151,8 +151,8 @@
                       <i class="fa-solid fa-spray-can"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Veloce BB Lazer</h4>
-                      <p>Cilt tonunu eşitleyen, leke ve kızarıklıkları hedef alan son teknoloji lazer sistemidir</p>
+                      <h4>{{ $t('services.laser.items.veloceBB') }}</h4>
+                      <p>{{ $t('home.services.laser.veloceBB.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -163,8 +163,8 @@
                       <i class="fa-solid fa-droplet"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Fraksiyonel Karbondioksit Lazer</h4>
-                      <p>Cilt yenileme, leke, iz, gözenek ve kırışıklık tedavisinde etkili; cildi soyma ve yenileme sağlar.</p>
+                      <h4>{{ $t('services.laser.items.fractionalCO2') }}</h4>
+                      <p>{{ $t('home.services.laser.fractionalCO2.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -175,8 +175,8 @@
                       <i class="fa-solid fa-eye"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Altın İğne (Fraksiyonel Radyofrekans)</h4>
-                      <p>Kollajen üretimini arttırarak gözenek, iz ve sıkılaşma problemlerine çözüm sunar.</p>
+                      <h4>{{ $t('services.laser.items.secretGoldenNeedle') }}</h4>
+                      <p>{{ $t('home.services.laser.secretGoldenNeedle.description') }}</p>
                     </div>
                   </div>
                 </router-link>
@@ -187,8 +187,8 @@
                       <i class="fa-solid fa-eye"></i>
                     </div>
                     <div class="service-content">
-                      <h4>Pikosaniye Lazer</h4>
-                      <p>Hızlı atış gücüyle dövme silmede izsiz ve etkili sonuçlar sunar</p>
+                      <h4>{{ $t('services.laser.items.picoSecond') }}</h4>
+                      <p>{{ $t('home.services.laser.picoSecond.description') }}</p>
                     </div>
                   </div>
                 </router-link>
