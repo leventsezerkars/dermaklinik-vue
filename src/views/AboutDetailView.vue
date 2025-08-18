@@ -77,7 +77,7 @@
                     <div class="timeline-year">2016-2017</div>
                     <div class="timeline-content">
                       <h4>Selçuk Üniversitesi Tıp Fakültesi</h4>
-                      <p>Valilik görevlendirmesi ile uzman doktor olarak görev yaptım</p>
+                      <p>Uzman doktor olarak görev yaptım</p>
                     </div>
                   </div>
                   
@@ -85,7 +85,7 @@
                     <div class="timeline-year">2017-2019</div>
                     <div class="timeline-content">
                       <h4>Selçuk Üniversitesi Tıp Fakültesi</h4>
-                      <p>Dahili Tıp Bilimleri Bölümü, Deri ve Zührevi Hastalıklar Anabilim Dalı'nda doktor öğretim üyesi olarak görev aldım</p>
+                      <p>Dahili Tıp Bilimleri Bölümü, Deri ve Zührevi Hastalıklar Anabilim Dalı'nda öğretim görevlisi olarak görev aldım</p>
                     </div>
                   </div>
                   
@@ -109,7 +109,7 @@
                     <div class="timeline-year">2021-Günümüz</div>
                     <div class="timeline-content">
                       <h4>Dr. MU Klinik Konya</h4>
-                      <p>Kurucu hekimi olarak açtığım kliniğimde halen aktif olarak hekimlik ve yöneticilik görevimi sürdürmekteyim</p>
+                      <p>2021 yılından bu yana Konya'da hizmet veren kliniğimiz, modern teknoloji ve uzman kadrosuyla dermatoloji alanında öncü kuruluşlardan biridir. Halen aktif olarak hekimlik ve yöneticilik görevimi sürdürmekteyim</p>
                     </div>
                   </div>
                 </div>

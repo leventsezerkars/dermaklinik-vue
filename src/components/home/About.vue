@@ -67,10 +67,6 @@
                 loading="lazy"
               >
             </div>
-            <div class="about-experience">
-              <h3>50+</h3>
-              <p v-html="$t('home.about.certificates')"></p>
-            </div>
           </div>
         </div>
       </div>
