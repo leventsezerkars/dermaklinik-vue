@@ -3797,28 +3797,38 @@ const services = ref([
     category: 'Lazer Tedavileri',
     content: `
       <div class="service-content-detail">
-        <h4>Fraksiyonel Karbondioksit Lazer Nedir?</h4>
-        <p>Fraksiyonel Karbondioksit Lazer, cildin en derin katmanlarına ulaşabilen, yenileme ve iyileştirme sürecini hızlandıran güçlü bir lazer tedavisidir. Cilt dokusundaki hasarlı bölgeleri hedef alır ve yeni, sağlıklı hücrelerin oluşumunu teşvik eder. Bu sayede cilt daha genç, pürüzsüz ve sağlıklı bir görünüme kavuşur.</p>
-        
-        <h4>Nasıl Etki Eder?</h4>
-        <p>Lazer ışınları ciltte kontrollü mikrokanallar açarak kolajen ve elastin üretimini tetikler. Bu mekanizma cilt yenilenmesini hızlandırır ve yara izleri, akne izleri gibi problemlerde cilt yüzeyini düzeltir. Ciltte sıkılaşma ve ton eşitliği sağlar.</p>
-        
-        <h4>Hangi Durumlarda Uygulanır?</h4>
-        <p>Derin kırışıklıklar, sarkmalar, akne ve yara izlerinin tedavisinde kullanılır. Ayrıca ciltteki derin lekeler ve geniş gözeneklerin küçültülmesinde de etkili bir yöntemdir.</p>
-        
-        <h4>Hangi Bölgelere Uygulanır?</h4>
-        <p>Başta yüz olmak üzere boyun, dekolte ve eller gibi yaşlanma belirtilerinin görüldüğü bölgelerde uygulanabilir. Bölgesel cilt yenileme için tercih edilir.</p>
-        
-        <h4>Tedavi Sonrası Bakım</h4>
-        <p>Tedavi sonrası ciltte kabuklanma ve kızarıklık olabilir, nemlendirici kullanımı çok önemlidir. Güneşten korunmak gerekir ve ağır makyaj yapılmamalıdır. İyileşme süreci genellikle 7-10 gün sürer.</p>
-        
-        <h4>Endikasyonları:</h4>
+        <h4>Fraksiyonel CO2 Nedir?</h4>
+        <p>Ablatif fraksiyonel lazer, ciltte mikroskobik termal hasar sütunları (MTZ) oluşturarak kontrollü yeniden şekillenme (remodeling) ve kolajen stimulasyonu sağlar.</p>
+
+        <h4>Endikasyonlar</h4>
         <ul>
-          <li>Derin kırışıklıklar</li>
-          <li>Akne ve yara izleri</li>
-          <li>Cilt sarkması</li>
-          <li>Geniş gözenekler</li>
-          <li>Derin cilt lekeleri</li>
+          <li>Akne/cerrahi izler ve atrofik skarlar</li>
+          <li>Derin kırışıklık ve fotoyaşlanma bulguları</li>
+          <li>Geniş gözenek, düzensiz doku ve ton</li>
+        </ul>
+
+        <h4>Teknoloji ve Parametreler</h4>
+        <ul>
+          <li>Yoğunluk, enerji ve tarama deseni iz tipine göre ayarlanır</li>
+          <li>Ağrı kontrolü: Topikal anestezi; işlem süresi 20-40 dk</li>
+        </ul>
+
+        <h4>Uygulama ve İyileşme</h4>
+        <ul>
+          <li>Seans: 3-5 seans, 4-6 hafta aralıklarla</li>
+          <li>Down-time: 5-10 gün eritem/kabuklanma; nazik bariyer bakımı</li>
+        </ul>
+
+        <h4>Sonuçlar</h4>
+        <ul>
+          <li>İz derinliğinde azalma, dokuda pürüzsüzleşme ve sıkılaşma</li>
+          <li>Ton eşitliği ve ince çizgilerde iyileşme</li>
+        </ul>
+
+        <h4>Güvenlik ve Bakım</h4>
+        <ul>
+          <li>SPF 50+, irritanlardan kaçınma ve nem bariyeri takviyesi</li>
+          <li>Aktif enfeksiyonda uygulanmaz; iz profilinde kombinasyonlar (subcision, TCA CROSS) planlanabilir</li>
         </ul>
       </div>
     `
@@ -3829,28 +3839,38 @@ const services = ref([
     category: 'Lazer Tedavileri',
     content: `
       <div class="service-content-detail">
-        <h4>Secret Altın İğne Nedir?</h4>
-        <p>Secret Altın İğne, cilt yenileme ve sıkılaştırmada öncü bir teknolojidir. Mikro iğneler ve radyo frekans enerjisi kombinasyonu ile cildin kendi iyileşme sürecini başlatarak kolajen ve elastin üretimini artırır. Ciltte hem yüzeysel hem de derin etkiler yaratır, böylece daha genç ve sağlıklı bir görünüm sağlar.</p>
-        
-        <h4>Nasıl Etki Eder?</h4>
-        <p>Mikro iğneler cilde kontrollü hasar vererek, radyo frekans enerjisi ile cilt altına ısı verir. Bu ısı, kolajen üretimini tetikler ve cilt sıkılaşır. Hem cilt dokusu yenilenir hem de kırışıklıklar azalır. İz bırakmadan, doğal cilt yenilenmesini sağlar.</p>
-        
-        <h4>Hangi Durumlarda Uygulanır?</h4>
-        <p>İnce ve derin kırışıklıklar, cilt sarkmaları, akne izleri, geniş gözenekler ve cilt tonu düzensizliklerinde kullanılır. Ayrıca ciltteki elastikiyet kaybını giderir.</p>
-        
-        <h4>Hangi Bölgelere Uygulanır?</h4>
-        <p>Yüz, boyun, dekolte ve eller gibi sıkılaşma ve yenileme gereken tüm bölgelere uygulanabilir. Özellikle göz çevresi ve alın bölgesinde sıkça tercih edilir.</p>
-        
-        <h4>Tedavi Sonrası Bakım</h4>
-        <p>Hafif kızarıklık ve hassasiyet olabilir. Nemlendirici kullanımı şarttır, güneş koruyucu ile cilt korunmalıdır. Ağır makyaj ve cilt peelingi uygulamalarından tedavi sonrası bir süre kaçınılmalıdır.</p>
-        
-        <h4>Endikasyonları:</h4>
+        <h4>Secret Altın İğne (Mikro İğneli RF) Nedir?</h4>
+        <p>İzole mikro iğneler aracılığıyla dermise iletilen fraksiyonel RF enerjisi ile kolajen/elasetin üretimini artıran, doku sıkılaştırma ve iz tedavisine yönelik bir teknolojidir.</p>
+
+        <h4>Endikasyonlar</h4>
         <ul>
-          <li>İnce ve derin kırışıklıklar</li>
-          <li>Cilt sarkması</li>
-          <li>Akne izleri</li>
-          <li>Geniş gözenekler</li>
-          <li>Cilt tonu düzensizlikleri</li>
+          <li>Akne izleri ve geniş gözenek</li>
+          <li>İnce-orta kırışıklıklar, cilt elastikiyet kaybı</li>
+          <li>T-bölgesi yağlanma ve dokusal düzensizlik</li>
+        </ul>
+
+        <h4>Teknoloji ve Parametreler</h4>
+        <ul>
+          <li>İğne derinliği, enerji seviyesi ve atım süresi endikasyona göre ayarlanır</li>
+          <li>İzole kaplama ile epidermal hasar minimalize edilir</li>
+        </ul>
+
+        <h4>Uygulama ve Protokol</h4>
+        <ul>
+          <li>Topikal anestezi sonrası 20-30 dk uygulama</li>
+          <li>Seans: 3-4 seans, 4 hafta aralıklarla</li>
+          <li>Kombinasyon: PRP/mezoterapi ile sinerjik</li>
+        </ul>
+
+        <h4>İyileşme ve Sonuçlar</h4>
+        <ul>
+          <li>24-72 saat eritem/ödem; makyajsız 24 saat</li>
+          <li>4-8 haftada gözle görülür sıkılaşma ve izlerde azalma</li>
+        </ul>
+
+        <h4>Bakım</h4>
+        <ul>
+          <li>SPF, nazik temizleme ve bariyer onarımı</li>
         </ul>
       </div>
     `
@@ -3862,25 +3882,25 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Aqua-Peel Nedir?</h4>
-        <p>Aqua-Peel, cildi derinlemesine temizleyen, ölü deri hücrelerini nazikçe soyan ve cilt yüzeyini yenileyen modern bir medikal cilt bakımıdır. Ciltteki tıkanmış gözenekleri açarak, daha parlak, sağlıklı ve pürüzsüz bir görünüm sağlar. Aynı zamanda ciltteki yağ dengesini düzenleyerek akne oluşumunu önlemeye yardımcı olur.</p>
-        
-        <h4>Nasıl Etki Eder?</h4>
-        <p>Cilt yüzeyindeki kir, sebum ve ölü hücreleri özel bir vakum sistemi ile temizler. Aynı zamanda peeling etkisiyle cildin yenilenmesini destekler. İçerdiği aktif maddelerle cilt tonunu eşitler ve nemlendirme sağlar. Ağrısız ve acısızdır, hemen günlük yaşama dönülebilir.</p>
-        
-        <h4>Hangi Durumlarda Uygulanır?</h4>
-        <p>Akneye yatkın, yağlı ve karma ciltlerde, siyah nokta problemi yaşayanlarda, donuk ve mat cilt görünümünde, cilt tonunun eşitlenmesinde tercih edilir. Ciltteki hafif lekelerin görünümünü azaltır ve gözenekleri sıkılaştırır.</p>
-        
-        <h4>Hangi Bölgelere Uygulanır?</h4>
-        <p>Yüz bölgesi başta olmak üzere boyun ve dekolte bölgesinde de uygulanabilir. Hassas bölgelerde nazik bir bakım sağlar.</p>
-        
-        <h4>Tedavi Sonrası Bakım</h4>
-        <p>Tedavi sonrası ciltte hafif kızarıklık olabilir, fakat kısa sürede geçer. Nemlendirici kullanımı ve güneş koruyucu sürmek önemlidir. Cilt bariyerini korumak için aşırı peeling ve agresif ürünlerden uzak durulmalıdır.</p>
-        
-        <h4>Endikasyonları:</h4>
+        <p>Vakum destekli hidro-dermabrazyon ile eş zamanlı temizleme, peeling, ekstraksiyon ve serum infüzyonu sağlayan profesyonel bakım protokolüdür.</p>
+
+        <h4>Endikasyonlar</h4>
         <ul>
-          <li>Akne ve siyah noktalar</li>
-          <li>Yağlı ve karma cilt</li>
-          <li>Donuk, mat cilt görünümü</li>
+          <li>Siyah nokta/komedon, geniş gözenek ve yağ dengesi</li>
+          <li>Mat, nemsiz ve ton eşitsizliği olan ciltler</li>
+        </ul>
+
+        <h4>Protokol</h4>
+        <ul>
+          <li>Yumuşatma + ekstraksiyon + düşük yoğunluklu kimyasal peeling</li>
+          <li>Antioksidan/nem serumu infüzyonu</li>
+          <li>Seans: Aylık idame önerilir</li>
+        </ul>
+
+        <h4>Sonuçlar ve Bakım</h4>
+        <ul>
+          <li>İlk seansta parlaklık ve pürüzsüzlük; gözenek görünümünde azalma</li>
+          <li>24 saat makyajdan kaçınma, SPF ve nazik nemlendirme</li>
         </ul>
       </div>
     `
@@ -3892,29 +3912,31 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Piko Saniye Lazer Nedir?</h4>
-        <p>Piko Saniye Lazer, ciltteki lekeler, dövmeler ve renk düzensizliklerini hızlı ve etkili bir şekilde tedavi eden gelişmiş bir lazer teknolojisidir. Çok kısa atım süresi sayesinde ciltteki hedef bölgeyi minimum zarar ile yok ederken, çevre dokular korunur. Bu sayede daha hızlı iyileşme ve daha başarılı sonuçlar elde edilir.</p>
-        
-        <h4>Nasıl Etki Eder?</h4>
-        <p>Lazer enerjisi, ciltteki renk pigmentlerini çok kısa patlamalarla parçalar. Bu parçalanan pigmentler vücut tarafından doğal yollarla atılır. Bu süreç, ciltteki lekelerin ve istenmeyen dövme renklerinin kaybolmasını sağlar. Ayrıca cilt tonunu eşitleyerek daha homojen bir görünüm sunar.</p>
-        
-        <h4>Hangi Durumlarda Uygulanır?</h4>
-        <p>Ciltteki güneş lekeleri, yaşlılık lekeleri, çil, doğum lekeleri ve istenmeyen dövme renklerinin silinmesinde kullanılır. Ayrıca ciltteki pigmentasyon bozuklukları ve melazma tedavisinde de etkili bir yöntemdir.</p>
-        
-        <h4>Hangi Bölgelere Uygulanır?</h4>
-        <p>Yüz, boyun, eller ve vücudun diğer lekeli bölgelerinde uygulanabilir. Dövme tedavisinde ise dövmenin bulunduğu tüm vücut bölgelerine uygulanır.</p>
-        
-        <h4>Tedavi Sonrası Bakım</h4>
-        <p>Uygulama sonrası hafif kabuklanma ve kızarıklık olabilir. Güneşten korunmak şarttır, yara bakım kremleri önerilir. Ağır makyaj ve sürtünme yaratacak hareketlerden kaçınılmalıdır. Genellikle 2-4 seans arasında tedavi önerilir.</p>
-        
-        <h4>Endikasyonları:</h4>
+        <p>Pikosaniye ölçekli atım süreleriyle fotomekanik etki oluşturarak pigment partiküllerini mikro-fragmente eden, çevre dokuda ısı hasarını minimalize eden ileri lazer teknolojisidir.</p>
+
+        <h4>Endikasyonlar</h4>
         <ul>
-          <li>Güneş ve yaşlılık lekeleri</li>
-          <li>Çil ve doğum lekeleri</li>
-          <li>Melazma</li>
-          <li>İstenmeyen dövme renkleri</li>
-          <li>Pigmentasyon bozuklukları</li>
-          <li>Tüy sarartma</li>
-          <li>Kılcal damar görünümü</li>
+          <li>Pigmente lezyonlar: Güneş/yaşlılık lekeleri, çiller</li>
+          <li>Melazma ve PIH (seçili protokollerle)</li>
+          <li>Dövme silme (çok renkli/katmanlı dövmelerde dalga boyu seçimi)</li>
+        </ul>
+
+        <h4>Teknoloji ve Parametreler</h4>
+        <ul>
+          <li>Dalga boyu ve fluens, hedef pigment rengine ve derinliğine göre ayarlanır</li>
+          <li>Spot boyutu ve geçiş sayısı ile etkinlik/güvenlik dengesi</li>
+        </ul>
+
+        <h4>Uygulama ve Protokol</h4>
+        <ul>
+          <li>Seans: 2-6 seans; leke/dövme tipine göre değişir</li>
+          <li>Aralık: 3-8 hafta; dövme tedavilerinde daha uzun</li>
+        </ul>
+
+        <h4>İyileşme ve Bakım</h4>
+        <ul>
+          <li>Kısa süreli eritem/ödem; dövmede kabuklanma olabilir</li>
+          <li>SPF, yara bakım protokolü ve irritanlardan kaçınma</li>
         </ul>
       </div>
     `
