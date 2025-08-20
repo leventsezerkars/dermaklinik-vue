@@ -3947,27 +3947,32 @@ const services = ref([
     category: 'Lazer Tedavileri',
     content: `
       <div class="service-content-detail">
-        <h4>HI-FU Nedir?</h4>
-        <p>HI-FU, ciltte derinlemesine ısı enerjisi oluşturarak kollajen ve elastin üretimini uyaran, ameliyatsız yüz germe ve cilt sıkılaştırma yöntemidir. Cerrahi işlemlere alternatif olarak tercih edilir ve doğal cilt yenilenmesini destekler.</p>
+        <h4>HIFU Nedir?</h4>
+        <p>Yüksek yoğunluklu odaklı ultrason (HIFU), dermis ve SMAS katmanında termal koagülasyon noktaları oluşturarak kolajen remodeling sağlayan, ameliyatsız sıkılaştırma yöntemidir.</p>
         
-        <h4>Nasıl Etki Eder?</h4>
-        <p>Ultrason enerjisi, cildin derin katmanlarında mikro hasarlar oluşturarak vücudun doğal iyileşme mekanizmasını harekete geçirir. Bu süreçte yeni kollajen lifleri üretilir, cilt sıkılaşır ve yüz hatları belirginleşir.</p>
-        
-        <h4>Hangi Durumlarda Uygulanır?</h4>
-        <p>Yüz, boyun ve çene bölgesindeki sarkmalar, cilt gevşekliği ve hafif kırışıklıklarda kullanılır. Yüz konturunu toparlamak isteyenler için idealdir.</p>
-        
-        <h4>Hangi Bölgelere Uygulanır?</h4>
-        <p>Yüz, boyun, çene hattı ve dekolte bölgesinde uygulanabilir. Özellikle çene altı bölgesinde sıkılaştırma için sık tercih edilir.</p>
-        
-        <h4>Tedavi Sonrası Bakım</h4>
-        <p>Tedavi sonrası hafif kızarıklık veya şişlik görülebilir ancak genellikle kısa sürede geçer. Yoğun güneş maruziyetinden kaçınılmalı, nemlendirici ve güneş koruyucu kullanılmalıdır.</p>
-        
-        <h4>Kullanım Alanları:</h4>
+        <h4>Endikasyonlar</h4>
         <ul>
-          <li>Yüz ve boyun sarkmaları</li>
-          <li>Cilt sıkılaştırma</li>
-          <li>Yüz konturu belirginleştirme</li>
-          <li>Hafif kırışıklıklar</li>
+          <li>Yüz/çene hattı ve boyunda gevşeme, sarkma</li>
+          <li>Kaş kaldırma, orta yüz toparlama</li>
+          <li>Cilt sıkılaştırma ve kontur belirginleştirme</li>
+        </ul>
+        
+        <h4>Teknoloji ve Parametreler</h4>
+        <ul>
+          <li>1.5/3.0/4.5 mm kartuşlarla katman hedefleme</li>
+          <li>Enerji çizgileri ve atım sayısı bölgeye göre planlanır</li>
+        </ul>
+        
+        <h4>Uygulama ve Sonuçlar</h4>
+        <ul>
+          <li>Tek seans; 2-3 ayda belirginleşen ve 6 aya kadar artan etki</li>
+          <li>Kalıcılık: 12-18 ay; yaş/cilt kalitesine bağlı değişir</li>
+        </ul>
+        
+        <h4>İyileşme ve Bakım</h4>
+        <ul>
+          <li>Minimum down-time; geçici hassasiyet/ödem olabilir</li>
+          <li>SPF ve nazik bakım önerilir</li>
         </ul>
       </div>
     `
