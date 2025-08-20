@@ -3053,16 +3053,60 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Botoks Nedir?</h4>
-        <p>Botoks, mimik kaslarının hareketini geçici olarak durdurarak kırışıklıkların azalmasını sağlayan güvenli ve etkili bir estetik uygulamadır. Özellikle alın, kaş arası ve göz çevresinde yaşlanma belirtilerini hafifletmek için kullanılır.</p>
-        
-        <h4>Uygulama Bölgeleri ve Süreci</h4>
-        <p>Kaş arası çizgileri, alın kırışıklıkları, kaz ayakları ve boyun bantları botoksla düzeltilebilen başlıca alanlardır. İşlem 10-15 dakika sürer ve sosyal hayatı kesintiye uğratmaz.</p>
-        
-        <h4>Doğal ve Kontrollü Gençleşme</h4>
-        <p>Kliniğimizde kişiye özel dozlarla yapılan botoks uygulamaları, yüz ifadesini bozmadan, doğal bir gençleşme sağlar. Donukluk yaratmadan mimiklerin korunması önceliğimizdir.</p>
-        
-        <h4>Uzman Hekimlerle Güvenli Sonuçlar</h4>
-        <p>Uygulama, dermatoloji uzmanlarımız tarafından steril koşullarda gerçekleştirilir. Orijinal ve FDA onaylı botulinum toksin ürünleri kullanılır. Etkisi ortalama 4-6 ay devam eder.</p>
+        <p>Botoks, botulinum toksininin düşük ve güvenli dozlarda kas içine uygulanmasıyla mimik kaslarının aktivitesini geçici olarak azaltan bir tedavidir. Bu sayede dinamik kırışıklıkların görünümü yumuşar, yüz daha dinlenmiş ve genç bir ifade kazanır.</p>
+
+        <h4>Endikasyonlar</h4>
+        <ul>
+          <li>Alın çizgileri, kaş arası (glabella) ve kaz ayakları</li>
+          <li>Bunny lines (burun üzeri çizgiler) ve dudak üstü ince çizgiler</li>
+          <li>Boyun bantları (platysmal bantlar) ve masseter hipertrofisi (çene sıkma)</li>
+          <li>Hiperhidroz (koltuk altı, avuç içi ve ayak tabanında aşırı terleme)</li>
+          <li>Migren ve gnatizm gibi fonksiyonel endikasyonlarda doktor değerlendirmesi ile</li>
+        </ul>
+
+        <h4>Uygulama Süreci</h4>
+        <ul>
+          <li>Değerlendirme: Yüz dinamiği, kas gücü ve asimetri analizi yapılır.</li>
+          <li>Planlama: Kişiye özel doz ve enjeksiyon noktaları belirlenir.</li>
+          <li>Uygulama: İnce iğnelerle, 10-15 dakikada konforlu enjeksiyon.</li>
+          <li>Günlük yaşama dönüş: İşlem sonrası hemen sosyal hayata dönüş mümkündür.</li>
+        </ul>
+
+        <h4>Avantajlar</h4>
+        <ul>
+          <li>Doğal görünüm: Mimikleri dondurmadan yumuşatma etkisi</li>
+          <li>Hızlı işlem, hızlı dönüş: Öğle arası uygulama imkanı</li>
+          <li>Öngörülebilir ve tekrarlanabilir sonuçlar</li>
+          <li>Kişiye özel doz ve bölgesel yaklaşım</li>
+        </ul>
+
+        <h4>Sonuçlar ve Etkinlik Süresi</h4>
+        <ul>
+          <li>Etki başlangıcı: 3-5 gün; maksimum etki: 10-14 gün</li>
+          <li>Kalıcılık: Ortalama 4-6 ay (kişisel farklılık gösterebilir)</li>
+          <li>Düzenli uygulamalarda etkinin süresi uzayabilir</li>
+        </ul>
+
+        <h4>Kontrendikasyonlar ve Uyarılar</h4>
+        <ul>
+          <li>Gebelik ve emzirme döneminde önerilmez</li>
+          <li>Nöromusküler hastalıklar (myasthenia gravis vb.)</li>
+          <li>Enjeksiyon alanında aktif enfeksiyon</li>
+        </ul>
+
+        <h4>İşlem Sonrası Bakım</h4>
+        <ul>
+          <li>İlk 4-6 saat: Yatmama, bölgeyi ovuşturmama</li>
+          <li>İlk 24 saat: Sauna, hamam, ağır egzersiz ve sıcak banyodan kaçınma</li>
+          <li>Gerekirse soğuk kompres ile hafif kızarıklık/ödem yönetimi</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Uzman dermatologlar eşliğinde yüz anatomisine uygun planlama</li>
+          <li>FDA onaylı ürünler ve steril saha prensipleri</li>
+          <li>Doğal, dengeli ve güvenli sonuç odaklı yaklaşım</li>
+        </ul>
       </div>
     `
   },
@@ -3073,34 +3117,58 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Dolgu Nedir?</h4>
-        <p>Dolgu, yaşla birlikte hacim kaybına uğrayan yüz bölgelerinde volüm kazandırmak, çizgileri doldurmak ve yüz hatlarını belirginleştirmek amacıyla uygulanan estetik bir enjeksiyon işlemidir.</p>
-        
-        <h4>Dolgu Hangi Bölgelere Uygulanır?</h4>
-        <p>Dolgu uygulamaları, dudaklar, yanaklar, elmacık kemikleri, çene ucu, burun, göz altı ve nazolabial çizgiler gibi yüzün birçok alanında kullanılabilir. Doğal ve dengeli sonuçlar elde edilir.</p>
-        
-        <h4>Kliniğimizde Hangi Dolgu Ürünleri Kullanılıyor?</h4>
-        <p>Kliniğimizde yalnızca FDA onaylı, yüksek saflıkta ve uzun ömürlü hyalüronik asit dolguları kullanılmaktadır. Cilde uyumlu bu maddeler ile maksimum güvenlik sağlanır.</p>
-        
-        <h4>Dolgu Uygulaması Nasıl Yapılır?</h4>
-        <p>Dolgu işlemi, lokal anestezik krem sonrası çok ince iğnelerle cilt altına enjekte edilerek gerçekleştirilir. Uygulama yaklaşık 15-30 dakika sürer ve hemen etkisini gösterir.</p>
-        
-        <h4>Dolgu Sonrası Nelere Dikkat Edilmeli?</h4>
-        <p>Dolgu uygulaması sonrası bölgede hafif kızarıklık ya da ödem olabilir, bu durum genellikle birkaç saat içinde geçer. İşlem sonrası aynı gün sosyal yaşama dönülebilir.</p>
-        
-        <h4>Dolgu Ne Kadar Kalıcıdır?</h4>
-        <p>Uygulanan bölgeye ve kullanılan dolgu tipine göre etkisi 9 ila 18 ay arasında sürer. Düzenli aralıklarla tekrar edildiğinde dolgu etkisi daha uzun kalıcılık sağlar.</p>
-        
-        <h4>Dolgu ile Yüz Gençleştirme Mümkün mü?</h4>
-        <p>Evet, dolgu tedavisi ile yüz kontürleri şekillendirilir, hacim kayıpları yerine konur ve yaşa bağlı çökmeler giderilir. Sonuç; daha genç, dinamik ve dinlenmiş bir yüz görünümüdür.</p>
-        
-        <h4>Dolgu ile Ameliyatsız Estetik Mümkün mü?</h4>
-        <p>Dolgu uygulamaları, cerrahi işlem gerektirmeden yüz hatlarını düzeltmek isteyenler için hızlı ve etkili bir çözümdür. Kliniğimizde en çok tercih edilen medikal estetik işlemler arasındadır.</p>
-        
-        <h4>Dolgu Kimlere Uygulanabilir?</h4>
-        <p>18 yaş üzeri, genel sağlık durumu uygun olan herkese dolgu tedavisi yapılabilir. Hamilelik ve emzirme döneminde önerilmez. Uygulama öncesi detaylı analiz yapılır.</p>
-        
-        <h4>Dolgu Uygulaması Neden Kliniğimizde Tercih Edilmeli?</h4>
-        <p>Alanında uzman hekimlerimiz, yüz oranlarını dikkatle analiz ederek kişiye özel dolgu planlaması yapar. Steril, güvenli ve teknolojik altyapımızla estetik sonuçlar sunarız.</p>
+        <p>Hyalüronik asit ve benzeri biyouyumlu maddelerin dokuya enjekte edilerek hacim kaybını yerine koyduğu, yüz hatlarını belirginleştirdiği ve kırışıklıkları yumuşattığı minimal invaziv bir işlemdir.</p>
+
+        <h4>Endikasyonlar</h4>
+        <ul>
+          <li>Dudak hacmi ve şekillendirme, perioral ince çizgiler</li>
+          <li>Orta yüz volüm kaybı, elmacık kemiği belirginleştirme</li>
+          <li>Göz altı olukları (tear trough) ve nazolabial/ marionette çizgileri</li>
+          <li>Çene ucu ve çene hattı kontürleme, burun sırtı düzeltme (non-surgical rhinoplasty)</li>
+          <li>Eller ve diğer seçili bölgelerde hacim restorasyonu</li>
+        </ul>
+
+        <h4>Kullanılan Ürünler</h4>
+        <ul>
+          <li>FDA onaylı hyalüronik asit dolguları (farklı viskozite ve kohesivite seçenekleri)</li>
+          <li>Endikasyona uygun çapraz bağ yoğunluğu ve reolojik profile göre ürün seçimi</li>
+        </ul>
+
+        <h4>Uygulama Süreci</h4>
+        <ul>
+          <li>Planlama: Yüz altın oran ve doku desteğine göre kişiye özel plan</li>
+          <li>Anestezi: Topikal krem veya gerekli durumlarda lokal anestezi</li>
+          <li>Teknik: İğne veya kanül ile katman ve düzlem odaklı enjeksiyon</li>
+          <li>Süre: 15-30 dakika; sonuç anında görünür</li>
+        </ul>
+
+        <h4>Sonuçlar ve Kalıcılık</h4>
+        <ul>
+          <li>Kalıcılık: Bölge ve ürün tipine göre 9-18 ay</li>
+          <li>Dokuyla uyum: Doğal mimiklere eşlik eden yumuşak doku entegrasyonu</li>
+          <li>Revizyon: Gerekirse hyalüronidaz ile geri döndürülebilir</li>
+        </ul>
+
+        <h4>Güvenlik ve Uyarılar</h4>
+        <ul>
+          <li>Vasküler komplikasyon riskine karşı anatomik güvenlik planı</li>
+          <li>Aktif enfeksiyon ve otoimmün alevlenmede ertelenir</li>
+          <li>Gebelik ve emzirme döneminde önerilmez</li>
+        </ul>
+
+        <h4>İşlem Sonrası Bakım</h4>
+        <ul>
+          <li>İlk 24-48 saat: Ödem/hematom için soğuk kompres, masajdan kaçınma</li>
+          <li>Sauna, hamam ve ağır egzersizden kısa süreli kaçınma</li>
+          <li>Güneşten korunma ve uygun nemlendirme</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Yüz anatomisine hakim uzman hekimlerle güvenli uygulama</li>
+          <li>Kişiye özel ürün ve teknik seçimi</li>
+          <li>Doğal, dengeli ve uzun ömürlü sonuçlar</li>
+        </ul>
       </div>
     `
   },
@@ -3111,34 +3179,54 @@ const services = ref([
     content: `
       <div class="service-content-detail">
         <h4>Regenera Activa Nedir?</h4>
-        <p>Regenera Activa, saç dökülmesini durdurmak ve saç kalitesini artırmak için kişinin kendi dokusundan alınan kök hücrelerin mikrogreft yöntemiyle saçlı deriye uygulanmasıyla yapılan özel bir tedavidir.</p>
-        
-        <h4>Kök Hücre ile Saç Dökülmesi Tedavisi Nasıl Çalışır?</h4>
-        <p>Regenera Activa, saç köklerinin uyarılmasını sağlayan özel hücreleri içeren mikrogreftleri doğrudan saç derisine enjekte ederek dökülmeyi durdurur ve yeni saç oluşumunu teşvik eder.</p>
-        
-        <h4>Kimler Regenera Activa İçin Uygundur?</h4>
-        <p>Erkek tipi saç dökülmesi (androgenetik alopesi) yaşayan erkekler ve saç yoğunluğu azalmış kadınlar için Regenera Activa tedavisi ideal ve doğal bir çözümdür.</p>
-        
-        <h4>Kliniğimizde Regenera Activa Nasıl Uygulanıyor?</h4>
-        <p>Kliniğimizde bu özel kök hücre tedavisi, lokal anestezi altında, steril koşullarda, tek seansta uygulanır. İşlem yaklaşık 30 dakika sürer, aynı gün sosyal yaşama dönüş mümkündür.</p>
-        
-        <h4>Regenera Activa Ne Zaman Etki Gösterir?</h4>
-        <p>İlk etkiler 4-6 hafta içinde görülmeye başlar. Saç dökülmesi azalır, saç kalınlığı ve yoğunluğu artar. Sonuçlar 6 ay-1 yıl arasında devam eder.</p>
-        
-        <h4>Regenera Activa Kalıcı Bir Tedavi Midir?</h4>
-        <p>Regenera Activa, saç dökülmesini geçici olarak yavaşlatır ve kökleri güçlendirir. Etkinin devamı için yılda bir tekrar önerilir.</p>
-        
-        <h4>Neden Kök Hücre ile Saç Tedavisi?</h4>
-        <p>Çünkü kök hücre tedavisi, kimyasal madde içermez ve vücutla tamamen uyumludur. Doğal ve yan etkisiz bir tedavi süreci sunar.</p>
-        
-        <h4>Regenera Activa ile Diğer Tedaviler Birlikte Uygulanabilir mi?</h4>
-        <p>Evet, Regenera Activa uygulaması PRP ve mezoterapi ile kombine edildiğinde sonuçlar daha da güçlenir.</p>
-        
-        <h4>Lazer Destekli Saç Tedavileriyle Etki Artar mı?</h4>
-        <p>Kliniğimizde kullanılan lazer cihazları, saç derisini uyararak kök hücre tedavisi sonrası etkilerin kalıcılığını artırır.</p>
-        
-        <h4>Regenera Activa Neden Kliniğimizde Tercih Edilmeli?</h4>
-        <p>Çünkü Regenera Activa uygulaması, uzman dermatologlar tarafından, son teknoloji cihazlar ve steril ortamda güvenle gerçekleştirilir. Kalıcı ve doğal çözümler arayanlar için doğru adrestir.</p>
+        <p>Regenera Activa, otojen mikrogreft temelli, doku rejenerasyonunu hedefleyen, saç dökülmesinde kök güçlendirmeye odaklı bir tedavi yaklaşımıdır. Kişinin kendi dokusundan elde edilen hücresel içerikler, saçlı deriye kontrollü olarak uygulanır.</p>
+
+        <h4>Endikasyonlar</h4>
+        <ul>
+          <li>Androgenetik alopesi (erkek/kadın tipi saç dökülmesi)</li>
+          <li>Saç kalitesi ve çapında azalma, diffüz incelme</li>
+          <li>Transplant öncesi/sonrası destekleyici protokoller</li>
+        </ul>
+
+        <h4>Mekanizma ve Protokol</h4>
+        <ul>
+          <li>Otojen mikrogreftlerin hazırlığı ve filtrasyonu</li>
+          <li>Hedef bölgelere dermal düzlemde mikroenjeksiyon</li>
+          <li>Seans: Tek seans sıklıkla yeterli olmakla birlikte, ihtiyaca göre tekrar</li>
+        </ul>
+
+        <h4>Sonuçlar ve Zamanlama</h4>
+        <ul>
+          <li>İlk gözlemler: 4-6 hafta; belirginleşme: 3. ay</li>
+          <li>Saç çapında artış, dökülmede azalma, yoğunlukta iyileşme</li>
+          <li>Etki süresi bireysel farklılık göstermekle birlikte 6-12 ay</li>
+        </ul>
+
+        <h4>Güvenlik ve Uyarılar</h4>
+        <ul>
+          <li>Otojen içerik nedeniyle alerjik reaksiyon riski düşüktür</li>
+          <li>Aktif skalp enfeksiyonu ve inflamatuvar durumlarda ertelenir</li>
+          <li>Gebelik ve emzirme döneminde önerilmez</li>
+        </ul>
+
+        <h4>İşlem Sonrası Bakım</h4>
+        <ul>
+          <li>İlk 24-48 saat: Yıkama ve yoğun fiziksel aktiviteden kaçınma</li>
+          <li>Güneşten korunma, nazik temizleme ve uygun dermokozmetik</li>
+        </ul>
+
+        <h4>Kombinasyon Tedavileri</h4>
+        <ul>
+          <li>PRP, mezoterapi ve düşük seviyeli lazer protokolleri ile sinerji</li>
+          <li>Beslenme ve medikal desteklerle bütüncül yaklaşım</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Standartize protokoller ve steril saha yönetimi</li>
+          <li>Deneyimli ekip ve kişiye özel planlama</li>
+          <li>Doğal ve güvenli sonuç odaklı yaklaşım</li>
+        </ul>
       </div>
     `
   },
@@ -3148,20 +3236,44 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>PRP tedavisi nedir?</h4>
-        <p>PRP, kişinin kendi kanından elde edilen plazmanın cilt ya da saçlı deriye enjekte edilmesiyle yapılan doğal bir yenilenme tedavisidir.</p>
-        
-        <h4>PRP nasıl uygulanır?</h4>
-        <p>Kişiden alınan kan özel tüplerde ayrıştırılır, trombositten zengin plazma mikro iğnelerle hedef bölgeye enjekte edilir.</p>
-        
-        <h4>PRP hangi alanlarda kullanılır?</h4>
-        <p>Cilt gençleştirme, ince kırışıklıklar, akne izleri, saç dökülmesi ve göz altı morluklarında PRP tedavisi yaygın kullanılır.</p>
-        
-        <h4>PRP kaç seans yapılır?</h4>
-        <p>Genellikle 3-4 seans önerilir. Ciltte parlaklık, sıkılık ve saçta canlanma 2. seanstan itibaren fark edilir.</p>
-        
-        <h4>Kliniğinizde PRP uygulaması nasıldır?</h4>
-        <p>Steril ortamda, CE belgeli tüplerle ve uzman ekip tarafından yapılan PRP uygulaması, yüksek güvenlik ve etki sunar.</p>
+        <h4>PRP Nedir?</h4>
+        <p>Platelet Rich Plasma (PRP), hastadan alınan kanın özel bir işlemle ayrıştırılarak trombositten zengin plazmanın hedef dokuya enjekte edilmesi temeline dayanır. Trombosit büyüme faktörleri doku onarımı ve yenilenmesini destekler.</p>
+
+        <h4>Endikasyonlar</h4>
+        <ul>
+          <li>Cilt kalitesi artışı: İnce kırışıklıklar, ton eşitliği, parlaklık</li>
+          <li>Akne izi ve skar iyileştirme protokolleri</li>
+          <li>Saç dökülmesi (telogen effluvium, androgenetik alopesi destek)</li>
+          <li>Göz altı morluk ve ince kırışıklık protokolleri</li>
+        </ul>
+
+        <h4>Uygulama Süreci</h4>
+        <ul>
+          <li>Kanin alınması ve santrifüj ile PRP elde edilmesi</li>
+          <li>Topikal anestezi sonrası mikroenjeksiyon veya nappage teknikleri</li>
+          <li>Seans: 3-4 seans, 3-4 hafta aralıklarla önerilir</li>
+        </ul>
+
+        <h4>Sonuçlar</h4>
+        <ul>
+          <li>2. seans itibarıyla parlaklık ve taze görünüm</li>
+          <li>Saçta dökülmede azalma ve çap/kök kalitesinde artış</li>
+          <li>Kümülatif etki; idame için 6-12 ayda bir tekrar</li>
+        </ul>
+
+        <h4>Güvenlik</h4>
+        <ul>
+          <li>Otojen içerik nedeniyle alerji riski çok düşüktür</li>
+          <li>Antikoagülan kullananlarda hekim değerlendirmesi gerektirir</li>
+          <li>Gebelik ve emzirme döneminde önerilmez</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>CE belgeli tüp ve kapalı sistemlerle güvenli hazırlık</li>
+          <li>Anatomik olarak doğru düzlem ve protokoller</li>
+          <li>Kombine tedavi seçenekleri ile optimize sonuçlar</li>
+        </ul>
       </div>
     `
   },
@@ -3171,20 +3283,42 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Mezoterapi nedir?</h4>
-        <p>Mezoterapi, vitamin, mineral, aminoasit ve enzim karışımlarının cilt altına mikro iğnelerle enjekte edilmesidir.</p>
-        
-        <h4>Mezoterapi nerelerde kullanılır?</h4>
-        <p>Yüz gençleştirme, leke tedavisi, saç dökülmesi ve selülit gibi birçok estetik problemde mezoterapi tedavisi uygulanabilir.</p>
-        
-        <h4>Mezoterapi nasıl etki eder?</h4>
-        <p>Mezoterapi, uygulandığı bölgedeki hücreleri yeniler, kan dolaşımını artırır ve cildin nem dengesini sağlar.</p>
-        
-        <h4>Seanslar nasıl planlanır?</h4>
-        <p>İhtiyaca göre 4-6 seans uygulanır. Uygulama süresi kısa, iyileşme süreci yok denecek kadar azdır.</p>
-        
-        <h4>Kliniğinizde mezoterapi farkı nedir?</h4>
-        <p>Kişiye özel içeriklerle yapılan mezoterapi uygulamaları, uzman hekimlerimizce steril ortamda gerçekleştirilir.</p>
+        <h4>Mezoterapi Nedir?</h4>
+        <p>Mezoterapi, cilt ve saç derisine mikroenjeksiyonlarla vitamin, mineral, peptid, hyalüronik asit ve büyüme faktörleri gibi aktiflerin verilmesini sağlayan, hedefe yönelik bir tedavi yöntemidir.</p>
+
+        <h4>Endikasyonlar</h4>
+        <ul>
+          <li>Ciltte kuruluk, matlık, ton eşitsizliği ve ince kırışıklıklar</li>
+          <li>Leke görünümünün destekleyici yönetimi</li>
+          <li>Saç dökülmesi ve saç kalitesi artışı</li>
+          <li>Selülit ve lokal incelme protokolleri (seçilmiş vakalarda)</li>
+        </ul>
+
+        <h4>Uygulama Protokolü</h4>
+        <ul>
+          <li>İçerik seçimi: Endikasyona uygun meso-kokteyl ve HA</li>
+          <li>Teknik: Nappage, noktasal veya kanül ile homojen dağıtım</li>
+          <li>Seans: 4-6 seans, 2-4 hafta aralıklarla</li>
+        </ul>
+
+        <h4>Sonuçlar</h4>
+        <ul>
+          <li>İlk seanslardan itibaren nem, parlaklık ve elastikiyette artış</li>
+          <li>Leke ve iz protokollerinde kombine tedavilerle sinerji</li>
+          <li>Saçta dökülmede azalma, tel çapında artış</li>
+        </ul>
+
+        <h4>Güvenlik ve Bakım</h4>
+        <ul>
+          <li>İşlem sonrası hafif eritem/ödem normaldir, 24-48 saatte geriler</li>
+          <li>Güneşten korunma, irritan ürünlerden kısa süreli kaçınma</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Kişiye özel içerik ve çok katmanlı uygulama yaklaşımı</li>
+          <li>Hijyen, güvenlik ve anatomik hassasiyet odaklı protokoller</li>
+        </ul>
       </div>
     `
   },
@@ -3194,20 +3328,44 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Cilt lekeleri neden oluşur?</h4>
-        <p>Güneş, hormonlar, yaşlanma ve akne sonrası izler, ciltte kalıcı renk değişikliklerine neden olabilir.</p>
-        
-        <h4>Leke tedavisi ile cildiniz nasıl değişir?</h4>
-        <p>Leke tedavisi, cilt tonunu dengeler, donuk görünümü giderir ve ışıl ışıl, sağlıklı bir cilde kavuşmanızı sağlar.</p>
-        
-        <h4>Neden kliniğimizde çok sayıda leke hastamız var?</h4>
-        <p>Çünkü hastalarımıza kişiye özel tedavi planı sunuyor, en yeni ve etkili cihazlarla üstün sonuçlar elde ediyoruz.</p>
-        
-        <h4>Hangi cihazlarla tedavi yapılır?</h4>
-        <p>Gelişmiş teknolojik cihazlarımız sayesinde, her leke tipine uygun farklı yöntemlerle, maksimum etkinlik sağlanır.</p>
-        
-        <h4>Tedavi süreci ve sonuçlar nasıldır?</h4>
-        <p>İlk seanslardan itibaren lekelerde belirgin açılma görülür. 4-6 seansta cilt yenilenir, aydınlık ve eşit tonda bir görünüm oluşur.</p>
+        <h4>Cilt Lekeleri Nedir?</h4>
+        <p>Güneş hasarı, melazma, postinflamatuvar hiperpigmentasyon ve yaşla ilişkili lentijinler en sık görülen leke tipleridir. Her bir alt tipin tedavi dinamikleri farklıdır.</p>
+
+        <h4>Değerlendirme ve Planlama</h4>
+        <ul>
+          <li>Fototip, leke derinliği (epidermal/dermal) ve yaygınlık analizi</li>
+          <li>Hormonal ve ilaç öyküsü, güneş maruziyeti ve bakım alışkanlıkları</li>
+          <li>Kombine protokollere uygunluk değerlendirmesi</li>
+        </ul>
+
+        <h4>Tedavi Yaklaşımları</h4>
+        <ul>
+          <li>Lazer/ışık sistemleri: Leke tipine uygun dalga boyu seçimi</li>
+          <li>Kimyasal peeling: AHA/BHA, TCA ve kombine ajanlar</li>
+          <li>Topikal ajanlar: Arbutin, azelaik asit, C vitamini, retinoidler</li>
+          <li>Mezoterapi ve PRP ile destek protokolleri</li>
+        </ul>
+
+        <h4>Seans ve Sonuçlar</h4>
+        <ul>
+          <li>Genellikle 3-6 seans; 3-4 hafta aralıklarla</li>
+          <li>İlk seanslardan itibaren ton eşitliği ve parlaklıkta artış</li>
+          <li>Melazmada idame ve fotokoruma kritik önemdedir</li>
+        </ul>
+
+        <h4>Bakım ve Korunma</h4>
+        <ul>
+          <li>SPF 50+ geniş spektrum koruma; UV maruziyetini sınırlama</li>
+          <li>Antioksidan ve bariyer onarıcı dermokozmetik rutin</li>
+          <li>Atak dönemlerinde nazik yaklaşım ve irritanlardan kaçınma</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Leke alt tipine özel cihaz ve protokol çeşitliliği</li>
+          <li>Kişiye özel, katmanlı ve güvenli tedavi planları</li>
+          <li>Uzun dönem idame ve takip programları</li>
+        </ul>
       </div>
     `
   },
@@ -3217,20 +3375,42 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Akne izleri neden oluşur?</h4>
-        <p>Sivilceler ciltte iltihaplanmaya ve doku hasarına neden olabilir. Bu hasar sonrası cilt yüzeyinde çukurlar, kabarıklıklar ve renk farklılıkları oluşur; bunlar akne izleri olarak adlandırılır.</p>
-        
-        <h4>Akne izleri nasıl tedavi edilir?</h4>
-        <p>Akne iz tedavisi, cildin yenilenmesini hızlandırarak, kollajen üretimini artıran yöntemlerle izlerin görünümünü azaltır ve cilt dokusunu pürüzsüzleştirir.</p>
-        
-        <h4>Kliniğimizde hangi yöntemler tercih edilir?</h4>
-        <p>Son teknoloji lazer cihazları ve mikroiğneleme (dermaroller) ile yapılan uygulamalarla, her cilt tipine uygun, kişiye özel akne iz tedavisi uygulanır.</p>
-        
-        <h4>Tedavi süreci nasıldır?</h4>
-        <p>Genellikle 4-6 seans arası yapılan uygulamalar sonrası, cilt dokusunda belirgin iyileşme ve izlerin hafiflemesi sağlanır.</p>
-        
-        <h4>Neden kliniğimizi tercih etmelisiniz?</h4>
-        <p>Uzman dermatologlarımız, ileri teknolojili cihazlarımız ve steril ortamımızla, doğal görünümlü, uzun süre kalıcı akne iz tedavisi sonuçları sunuyoruz.</p>
+        <h4>Akne İzi Nedir?</h4>
+        <p>İnflamatuvar akne sonrası iyileşme fazında dermal matriksin düzensiz onarımı ile oluşan atrofil/hipertrrofik izler ve eşlik eden renk değişikliklerini kapsar. İz tipi ve derinliği tedavi planını belirler.</p>
+
+        <h4>İz Tipleri</h4>
+        <ul>
+          <li>Atrofik: Ice-pick, boxcar, rolling</li>
+          <li>Hipertrrofik ve keloid</li>
+          <li>Postinflamatuvar eritem/hiperpigmentasyon</li>
+        </ul>
+
+        <h4>Tedavi Yaklaşımları</h4>
+        <ul>
+          <li>Fraksiyonel lazerler (CO2/Er:YAG): Kolajen remodelingi</li>
+          <li>Mikroiğneleme/RF: Doku yenilenmesi ve iz yumuşatma</li>
+          <li>Subcision, TCA CROSS, dolgu ile seviyelendirme</li>
+          <li>Renk eşitsizliği için vasküler/pigmente lazer ve topikaller</li>
+        </ul>
+
+        <h4>Seans ve Sonuçlar</h4>
+        <ul>
+          <li>4-6 seans; 4-6 hafta aralıklarla, iz tipine göre kombinasyon</li>
+          <li>Dokuda pürüzsüzleşme, iz derinliğinde belirgin azalma</li>
+          <li>Kümülatif ve kalıcı iyileşme odaklı protokoller</li>
+        </ul>
+
+        <h4>Bakım ve Güvenlik</h4>
+        <ul>
+          <li>Güneşten korunma, nazik bariyer onarımı</li>
+          <li>Aktif akne kontrolü ile eş zamanlı yönetim</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>İz tipine özel, çok modaliteli ve kişiye özel planlama</li>
+          <li>Deneyimli ekip, güvenli ve kanıta dayalı protokoller</li>
+        </ul>
       </div>
     `
   },
@@ -3240,20 +3420,42 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Yara izleri neden oluşur?</h4>
-        <p>Travma, cerrahi müdahale veya yanık sonrası ciltte oluşan kalıcı dokusal değişiklikler, yara izlerini meydana getirir. Bu izler hem estetik hem de fonksiyonel sorun yaratabilir.</p>
-        
-        <h4>Yara izleri nasıl tedavi edilir?</h4>
-        <p>Yara iz tedavisi, ciltteki sertlikleri azaltır, izlerin rengini açar ve dokuyu yumuşatarak daha az görünür hale getirir.</p>
-        
-        <h4>Kliniğimizde hangi yöntemler kullanılır?</h4>
-        <p>Mezoterapiler ve lazer tedavileri gibi ileri teknolojik cihazlarla, kişiye özel kombine yara izi tedavisi planları uygulanır.</p>
-        
-        <h4>Tedavi süreci nasıldır?</h4>
-        <p>Çoğunlukla 4-8 seans gerektiren uygulamalarda, her seansta ciltte esneklik artar ve yara izlerinin görünümü azalır.</p>
-        
-        <h4>Kliniğimizin avantajları nelerdir?</h4>
-        <p>Uzman hekimlerimiz ve yüksek teknolojili cihazlarımızla, güvenli, etkili ve doğal sonuçlar veren yara izi tedavisi sunmaktayız.</p>
+        <h4>Yara İzi Nedir?</h4>
+        <p>Travma, cerrahi, yanık veya inflamasyon sonrası oluşan skarlar; düz, hipertrofik veya keloid formda görülebilir. Doku elastikiyeti, renk ve yüzey bütünlüğünü etkiler.</p>
+
+        <h4>İz Sınıflaması</h4>
+        <ul>
+          <li>Düz skar, hipertrofik skar, keloid</li>
+          <li>Atrofik skar (doku kaybı), kontraktür skar</li>
+          <li>Renk değişiklikleri: Eritem, hiperpigmentasyon/hipopigmentasyon</li>
+        </ul>
+
+        <h4>Tedavi Yaklaşımları</h4>
+        <ul>
+          <li>Fraksiyonel lazerler ve mikroiğneleme/RF ile remodelleme</li>
+          <li>İntralezyonel enjeksiyonlar (kortikosteroid, 5-FU vb.)</li>
+          <li>Silikon jel/levha, bası terapisi ve bantlama</li>
+          <li>Kontraktürlerde kombine fizik tedavi ve cerrahi danışma</li>
+        </ul>
+
+        <h4>Seans ve Sonuçlar</h4>
+        <ul>
+          <li>4-8 seans; skar tipine göre aralık ve protokol değişir</li>
+          <li>Doku yumuşaması, kabarıklıkta ve kızarıklıkta azalma</li>
+          <li>Fonksiyonel kısıtlılıklarda hareket açıklığında artış</li>
+        </ul>
+
+        <h4>Bakım ve Güvenlik</h4>
+        <ul>
+          <li>Güneşten korunma, masaj ve topikal desteklerle idame</li>
+          <li>Keloid yatkınlığında koruyucu stratejiler</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>İz tipine göre kişiselleştirilmiş, kanıta dayalı protokoller</li>
+          <li>Gelişmiş cihaz parkuru ve deneyimli ekip</li>
+        </ul>
       </div>
     `
   },
@@ -3263,20 +3465,39 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Aquapeel nedir?</h4>
-        <p>Medikal cilt bakımı Aquapeel, cildi derinlemesine temizleyen, peeling ve nemlendirme işlemini bir arada sunan gelişmiş bir tedavi yöntemidir.</p>
-        
-        <h4>Aquapeel nasıl çalışır?</h4>
-        <p>Özel uçlar ve vakum sistemiyle cilt yüzeyindeki ölü hücreler nazikçe uzaklaştırılır, cilt besleyici serumlarla derinlemesine nemlendirilir ve yenilenir.</p>
-        
-        <h4>Aquapeel hangi cilt tipleri için uygundur?</h4>
-        <p>Tüm cilt tipleri için güvenlidir. Akne, yağlı cilt, donuk ve yorgun ciltlerde belirgin iyileşme sağlar.</p>
-        
-        <h4>Aquapeel'in etkileri nelerdir?</h4>
-        <p>Ciltte pürüzsüzlük, parlaklık ve canlılık artar; gözenekler küçülür, ince kırışıklıklar azalır.</p>
-        
-        <h4>Kliniğimizde Aquapeel farkı nedir?</h4>
-        <p>Son teknoloji cihazlarımız ve uzman ekibimizle, kişiye özel programlar sunarak, uzun süre kalıcı ve etkili medikal cilt bakımı sağlamaktayız.</p>
+        <h4>Aquapeel Nedir?</h4>
+        <p>Vakum destekli hidro-dermabrazyon sistemi ile eş zamanlı temizleme, peeling, ekstraksiyon ve dermal infüzyon sağlayan, cilt bariyerine nazik bir medikal bakım yöntemidir.</p>
+
+        <h4>Endikasyonlar</h4>
+        <ul>
+          <li>Siyah nokta, komedon ve geniş gözenek</li>
+          <li>Mat, nemsiz ve düzensiz cilt dokusu</li>
+          <li>Akneye yatkın ciltlerde destek bakım</li>
+        </ul>
+
+        <h4>Protokol</h4>
+        <ul>
+          <li>Temizleme ve yumuşatma, kontrollü ekstraksiyon</li>
+          <li>Kimyasal peeling solüsyonlarının düşük yoğunluklu uygulanması</li>
+          <li>Antioksidan ve nem verici serum infüzyonu</li>
+        </ul>
+
+        <h4>Sonuçlar ve Sıklık</h4>
+        <ul>
+          <li>İlk seansta dahi parlaklık ve pürüzsüzlük hissi</li>
+          <li>Aylık idame ile gözenek ve sebum dengesinde belirgin iyileşme</li>
+        </ul>
+
+        <h4>Bakım</h4>
+        <ul>
+          <li>24 saat makyajdan kaçınma, nazik nemlendirme ve SPF kullanımı</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Cilt tipine göre kişiselleştirilmiş akış ve çözelti seçimi</li>
+          <li>Hijyen ve cihaz kalibrasyonuna özenli yaklaşım</li>
+        </ul>
       </div>
     `
   },
@@ -3286,20 +3507,40 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>İple yüz askılama nedir?</h4>
-        <p>İple yüz askılama, ciltte sarkmaları ve gevşemeleri azaltmak için uygulanan, cildi gençleştiren minimal invaziv bir estetik yöntemdir.</p>
-        
-        <h4>Nasıl uygulanır?</h4>
-        <p>Cilde yerleştirilen özel ipler sayesinde cilt dokusu yukarı doğru kaldırılır, aynı zamanda kolajen üretimi tetiklenir.</p>
-        
-        <h4>Kimler için uygundur?</h4>
-        <p>Yüz, boyun ve çene hattında hafif-orta dereceli sarkması olan, cerrahi müdahaleden kaçınmak isteyen kişiler için ideal bir çözümdür.</p>
-        
-        <h4>İple yüz askılama ne kadar sürer?</h4>
-        <p>İşlem genellikle 30-45 dakika sürer ve iyileşme süreci oldukça kısadır.</p>
-        
-        <h4>Kliniğimizde uygulamanın avantajları nelerdir?</h4>
-        <p>Uzman doktorumuz tarafından steril koşullarda yapılan iple yüz askılama, doğal ve kalıcı sonuçlar sunar, aynı zamanda cihaz ve teknik çeşitliliğimizle hastalarımıza en uygun tedaviyi sağlar.</p>
+        <h4>İple Yüz Askılama Nedir?</h4>
+        <p>PDO/PLLA/PLGA gibi biyo-uyumlu iplerin dermal/subdermal planlara yerleştirilerek mekanik lifting ve biyostimülasyon yoluyla dokuda toparlanma sağlayan minimal invaziv bir yöntemdir.</p>
+
+        <h4>Endikasyonlar</h4>
+        <ul>
+          <li>Yanak sarkması, nazolabial ve marionette oluklarının belirginliği</li>
+          <li>Çene hattı belirginliğinin azalması, boyun gevşemesi</li>
+          <li>Kaş düşüklüğü ve orta yüz sarkmaları</li>
+        </ul>
+
+        <h4>Uygulama ve İyileşme</h4>
+        <ul>
+          <li>Planlama: Vektörlere göre giriş-çıkış noktalarının belirlenmesi</li>
+          <li>Anestezi: Lokal anestezi ile konforlu uygulama (30-45 dk)</li>
+          <li>İyileşme: 3-7 gün hafif ödem/hematom, bantlama önerileri</li>
+        </ul>
+
+        <h4>Sonuçlar ve Kalıcılık</h4>
+        <ul>
+          <li>Hemen hissedilen mekanik lifting, 6-8 haftada kolajen ile güçlenme</li>
+          <li>Kalıcılık: İp tipine ve yaşa bağlı 12-18 ay</li>
+        </ul>
+
+        <h4>Uyarılar</h4>
+        <ul>
+          <li>İlk 2 hafta aşırı mimik, masaj, yüzüstü yatma ve yoğun egzersizden kaçınma</li>
+          <li>Aktif enfeksiyon, kanama diyatezi ve keloid yatkınlığında dikkat</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Yüz vektör anatomisine uygun, kişiye özel ip ve teknik seçimi</li>
+          <li>Hijyen, güvenlik ve doğal sonuç odaklı yaklaşım</li>
+        </ul>
       </div>
     `
   },
@@ -3309,20 +3550,34 @@ const services = ref([
     category: 'Estetik Dermatoloji',
     content: `
       <div class="service-content-detail">
-        <h4>Kılcal damarlar nedir?</h4>
-        <p>Yüzde cilt yüzeyine yakın, ince ve kırmızı-mor renkte görülen damarlara kılcal damarlar denir. Estetik açıdan rahatsızlık verebilir.</p>
-        
-        <h4>Kılcal damarlar neden oluşur?</h4>
-        <p>Genetik yatkınlık, güneşe fazla maruz kalma, hormonal değişiklikler ve yaşlanma, yüz bölgesinde kılcal damarların ortaya çıkmasına neden olur.</p>
-        
-        <h4>Kılcal damar tedavisi nasıl yapılır?</h4>
-        <p>Kliniğimizde son teknoloji lazer ve ışık cihazları kullanılarak, ciltteki görünür kılcal damarlar etkili şekilde hedef alınır ve yok edilir.</p>
-        
-        <h4>Tedavi süreci nasıldır?</h4>
-        <p>Genellikle 1-4 seans arası yapılan uygulamalarla, ciltte belirgin iyileşme sağlanır, damarlardaki kızarıklık ve görünürlük azalır.</p>
-        
-        <h4>Kliniğimizde kılcal damar tedavisinin avantajları nelerdir?</h4>
-        <p>Uzman hekimlerimiz, ileri cihazlarımız ve steril ortamımız sayesinde, konforlu, kalıcı ve doğal sonuçlar sunan etkili kılcal damar tedavisi gerçekleştiriyoruz.</p>
+        <h4>Kılcal Damar (Telanjiektazi) Nedir?</h4>
+        <p>Yüz ve burun çevresinde belirginleşen ince damar genişlemeleri; rozasea, fotoyaşlanma ve genetik yatkınlıkla ilişkili olabilir.</p>
+
+        <h4>Değerlendirme</h4>
+        <ul>
+          <li>Damar çapı, derinliği ve rengine göre enerji sistemi seçimi</li>
+          <li>Eşlik eden rozasea ve inflamasyon varlığının yönetimi</li>
+        </ul>
+
+        <h4>Tedavi Yaklaşımı</h4>
+        <ul>
+          <li>Lazer/ışık sistemleri ile selektif fototermoliz</li>
+          <li>Hedef: Hemoglobin absorpsiyon piki ve uygun nabız süreleri</li>
+          <li>Seans: 1-4 seans arası, 3-4 hafta aralıklarla</li>
+        </ul>
+
+        <h4>Sonuçlar ve Bakım</h4>
+        <ul>
+          <li>Kızarıklık ve görünürlükte belirgin azalma</li>
+          <li>Soğutma, nazik bakım ve SPF ile post-prosedür koruma</li>
+          <li>Rozasea yatkınlığında tetikleyicilerden kaçınma</li>
+        </ul>
+
+        <h4>Neden Kliniğimiz?</h4>
+        <ul>
+          <li>Damar tipine göre dalga boyu ve atım parametresi optimizasyonu</li>
+          <li>Güvenli, etkili ve kanıta dayalı protokoller</li>
+        </ul>
       </div>
     `
   },

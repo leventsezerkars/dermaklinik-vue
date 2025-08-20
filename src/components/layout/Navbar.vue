@@ -45,7 +45,7 @@
               <li><router-link class="dropdown-item" to="/hizmetler/akne-iz-tedavisi">{{ $t('services.aesthetic.items.acneScar') }}</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/yara-iz-tedavisi">{{ $t('services.aesthetic.items.scarTreatment') }}</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/sivi-yuz-germe">{{ $t('services.aesthetic.items.liquidFaceLift') }}</router-link></li>
-              <li><router-link class="dropdown-item" to="/hizmetler/medikal-cilt-bakimi">{{ $t('services.aesthetic.items.medicalSkinCare') }}</router-link></li>
+              <li><router-link class="dropdown-item" to="/hizmetler/medikal-cilt-bakimi-aquapeel">{{ $t('services.aesthetic.items.medicalSkinCare') }}</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/iple-yuz-askilama">{{ $t('services.aesthetic.items.threadLifting') }}</router-link></li>
               <li><router-link class="dropdown-item" to="/hizmetler/kilcal-damar-tedavisi">{{ $t('services.aesthetic.items.capillaryTreatment') }}</router-link></li>
             </ul>
