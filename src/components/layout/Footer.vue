@@ -58,7 +58,7 @@
             <div class="footer-bottom-links">
               <a href="#">{{ $t('footer.privacyPolicy') }}</a>
               <a href="#">{{ $t('footer.termsOfUse') }}</a>
-              <a href="#">{{ $t('footer.kvkk') }}</a>
+              <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#kvkkModal">{{ $t('footer.kvkk') }}</a>
               <LanguageSelector />
             </div>
           </div>
@@ -66,6 +66,19 @@
       </div>
     </div>
   </footer>
+  <div class="modal fade" id="kvkkModal" tabindex="-1" aria-labelledby="kvkkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content bg-dark">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white" id="kvkkModalLabel">{{ $t('footer.kvkk') }}</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0">
+          <iframe src="/KVKK.pdf" style="width: 100%; height: 80vh; border: 0;" title="KVKK"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
