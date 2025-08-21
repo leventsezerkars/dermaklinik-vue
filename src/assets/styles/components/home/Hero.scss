@@ -85,34 +85,41 @@
     align-items: center;
 
     a.btn {
-      padding: 12px 24px;
+      padding: 10px 20px;
       font-weight: $font-weight-medium;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       position: relative;
       overflow: hidden;
       z-index: 1;
-      min-width: 180px;
+      min-width: 160px;
       text-align: center;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 48px;
+      height: 44px;
       line-height: 1;
       margin: 0;
       
       @media (max-width: $breakpoint-lg) {
-        min-width: 160px;
-        padding: 10px 20px;
+        min-width: 150px;
+        padding: 8px 18px;
         font-size: 0.9rem;
-        height: 44px;
+        height: 42px;
       }
       
       @media (max-width: $breakpoint-md) {
-        min-width: 140px;
-        padding: 8px 16px;
+        min-width: 130px;
+        padding: 8px 14px;
         font-size: 0.85rem;
-        height: 40px;
+        height: 38px;
+      }
+
+      @media (max-width: 400px) {
+        min-width: 120px;
+        padding: 7px 12px;
+        font-size: 0.8rem;
+        height: 36px;
       }
 
       &::before {
@@ -165,6 +172,7 @@
       a.btn {
         width: 100%;
         min-width: unset;
+        max-width: 320px;
       }
     }
   }
@@ -203,6 +211,13 @@
       transform: scale(1.2);
     }
   }
+
+  // Mobilde içerikleri biraz aşağı indirerek CTA görünürlüğünü iyileştir
+  @media (max-width: $breakpoint-md) {
+    .swiper-slide .container .row { align-items: flex-end; }
+    .hero-content { padding-bottom: $spacing-xxl; }
+    .hero-buttons { margin-top: $spacing-md; }
+  }
 }
 
 // Override Bootstrap buton stilleri için ek kural
@@ -213,7 +228,7 @@ section#anasayfa .hero-buttons {
 section#anasayfa .hero-buttons a.btn {
   text-decoration: none;
   margin: 0;
-  height: 48px;
+  height: inherit;
   box-sizing: border-box;
   vertical-align: middle;
 }

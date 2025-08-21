@@ -3,7 +3,7 @@
 
 .navbar {
   position: fixed !important;
-  top: 40px; // TopBar height'ına göre ayarladım
+  top: $topbar-height; // TopBar height'ına göre ayarladım
   left: 0;
   right: 0;
   z-index: 1000; // Daha düşük z-index
@@ -19,6 +19,7 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    gap: 0.5rem;
   }
 
   .navbar-brand {
@@ -60,6 +61,7 @@
     border: 1px solid rgba($gold, 0.15);
     padding: 0.25rem 0.5rem;
     margin-right: 0.5rem;
+    z-index: 1002; // Mobilde TopBar üzerindeki içerik taşmasından etkilenmesin
 
     &:focus {
       box-shadow: none;
@@ -145,6 +147,8 @@
       padding: 1rem;
       margin-top: 0.5rem;
       border: 1px solid rgba($gold, 0.1);
+      max-height: calc(100vh - (#{$topbar-height} + 10px));
+      overflow-y: auto; // Mobilde taşmayı önle
     }
 
     .navbar-nav {
@@ -181,7 +185,23 @@
   }
 
   @media (max-width: 768px) {
-    top: 11px;
+    top: $topbar-height; // Topbar görünür kalır
+    .navbar-brand {
+      flex: 1 1 auto; // kalan alanı kullan
+      min-width: 0;   // ellipsis için gerekli
+    }
+    .navbar-brand .brand-text {
+      font-size: $font-size-md; // mobilde daha küçük
+      letter-spacing: 0.2px;
+      margin-left: $spacing-sm;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .navbar-brand img {
+      height: 56px; // logoyu biraz daha küçült
+    }
   }
 }
 

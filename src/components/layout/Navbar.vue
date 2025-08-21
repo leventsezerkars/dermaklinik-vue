@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-lg" >
     <div class="container">
-      <router-link class="navbar-brand d-flex align-items-center" to="/">
+      <button class="navbar-toggler order-0 me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <router-link class="navbar-brand d-flex align-items-center order-1" to="/">
         <img src="/images/logo_beyaz.png" alt="Doç. Dr. Mehmet Ünal Logo" height="70">
         <span class="ms-3 brand-text">{{ $t('header.brand') }}</span>
       </router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse order-2" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <router-link class="nav-link" to="/">{{ $t('common.home') }}</router-link>
@@ -79,6 +79,44 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const closeNavbar = () => {
+  const navbar = document.getElementById('navbarNav')
+  if (!navbar) return
+  const bsCollapse = (window as any).bootstrap?.Collapse
+  if (bsCollapse) {
+    const instance = bsCollapse.getInstance?.(navbar) || new bsCollapse(navbar, { toggle: false })
+    instance.hide()
+  } else {
+    navbar.classList.remove('show')
+  }
+}
+
+onMounted(() => {
+  // Route değişince menüyü kapat
+  router.afterEach(() => {
+    closeNavbar()
+  })
+
+  // Dropdown item'ına tıklanınca kısa gecikme ile menüyü kapat
+  const navbar = document.getElementById('navbarNav')
+  if (navbar) {
+    navbar.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement
+      if (!target) return
+      const isToggle = target.closest('a.dropdown-toggle')
+      if (isToggle) return
+      const isItem = target.closest('a.dropdown-item, a.nav-link:not(.dropdown-toggle)')
+      if (isItem) {
+        setTimeout(() => closeNavbar(), 100)
+      }
+    })
+  }
+})
 </script>
 
 <script setup lang="ts">

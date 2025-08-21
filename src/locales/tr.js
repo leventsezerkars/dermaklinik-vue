@@ -49,7 +49,7 @@ export default {
     contactInfo: 'İletişim Bilgileri',
     address: 'Ateşbaz Veli Mahallesi, Yeni Meram Cd. No:83 D:4, 42090 Meram / Konya',
     phone: '+90 546 529 76 77',
-    email: 'dr.munal1101@gmail.com',
+    email: 'dr.munal1101{\'@\'}gmail.com',
     workingHours: 'Pazartesi - Cumartesi: 09:00 - 21:00',
     copyright: '© 2024 Doç. Dr. Mehmet Ünal. Tüm hakları saklıdır.',
     privacyPolicy: 'Gizlilik Politikası',
