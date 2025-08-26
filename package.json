@@ -19,6 +19,7 @@
     "bootstrap": "^5.3.2",
     "swiper": "^11.2.6",
     "vue": "^3.5.13",
+    "vue-easy-lightbox": "^1.19.0",
     "vue-i18n": "^9.14.5",
     "vue-meta": "^3.0.0-alpha.10",
     "vue-router": "^4.2.5",

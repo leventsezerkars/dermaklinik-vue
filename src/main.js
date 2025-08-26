@@ -6,11 +6,13 @@ import i18n from './i18n'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 const app = createApp(App)
 app.use(router)
 app.use(store)
 app.use(i18n)
+app.use(VueEasyLightbox)
 
 // i18n instance'ını global olarak erişilebilir hale getir
 window.i18n = i18n
