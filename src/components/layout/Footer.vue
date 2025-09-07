@@ -87,24 +87,5 @@ import '@/assets/styles/components/layout/_Footer.scss';
 </script>
 
 <style lang="scss">
-@use "sass:color";
-
-.footer {
-  .social-links {
-    a {
-      &:hover {
-        background-color: color.adjust(#D4AF37, $lightness: -10%);
-        border-color: color.adjust(#D4AF37, $lightness: -10%);
-      }
-    }
-  }
-
-  .footer-links {
-    a {
-      &:hover {
-        color: color.adjust(#D4AF37, $lightness: -10%);
-      }
-    }
-  }
-}
+@use '@/assets/styles/components/layout/_Footer.scss';
 </style> 

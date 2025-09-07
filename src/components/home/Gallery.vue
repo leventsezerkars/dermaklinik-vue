@@ -200,42 +200,4 @@ const closeLightbox = () => {
 
 <style lang="scss">
 @use '@/assets/styles/components/home/Gallery.scss';
-
-// Lightbox için ek stiller
-.gallery-item {
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.02);
-  }
-}
-
-// Lightbox overlay stilleri
-:deep(.vel-modal) {
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-:deep(.vel-img) {
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-:deep(.vel-close) {
-  color: white;
-  font-size: 2rem;
-  
-  &:hover {
-    color: #007bff;
-  }
-}
-
-:deep(.vel-btn) {
-  color: white;
-  font-size: 1.5rem;
-  
-  &:hover {
-    color: #007bff;
-  }
-}
 </style> 

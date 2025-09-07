@@ -50,6 +50,15 @@
     }
   }
 
+  .social-links {
+    a {
+      &:hover {
+        background-color: color.adjust(#D4AF37, $lightness: -10%);
+        border-color: color.adjust(#D4AF37, $lightness: -10%);
+      }
+    }
+  }
+
   .footer-social {
     display: flex;
     gap: 1rem;
@@ -102,6 +111,12 @@
   }
 
   .footer-links {
+    a {
+      &:hover {
+        color: color.adjust(#D4AF37, $lightness: -10%);
+      }
+    }
+
     ul {
       list-style: none;
       padding: 0;
