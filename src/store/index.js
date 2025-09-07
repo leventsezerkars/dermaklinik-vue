@@ -1,11 +1,17 @@
 import { createStore } from 'vuex'
 import services from './modules/services'
 import blog from './modules/blog'
+import companyInfo from './modules/companyInfo'
+import menu from './modules/menu'
+import gallery from './modules/gallery'
 
 export default createStore({
   modules: {
     services,
-    blog
+    blog,
+    companyInfo,
+    menu,
+    gallery
   },
   state: {
     siteInfo: {
@@ -136,7 +142,27 @@ export default createStore({
     getSocialMedia: state => state.siteInfo.socialMedia,
     getServices: state => state.services.services,
     getServicesLoading: state => state.services.loading,
-    getServicesError: state => state.services.error
+    getServicesError: state => state.services.error,
+    
+    // CompanyInfo getters
+    getCompanyInfo: (state, getters) => getters['companyInfo/activeCompanyInfo'],
+    getCompanyName: (state, getters) => getters['companyInfo/companyName'],
+    getCompanyAddress: (state, getters) => getters['companyInfo/companyAddress'],
+    getCompanyPhone: (state, getters) => getters['companyInfo/companyPhone'],
+    getCompanyEmail: (state, getters) => getters['companyInfo/companyEmail'],
+    getCompanyLogo: (state, getters) => getters['companyInfo/companyLogo'],
+    getCompanyWorkingHours: (state, getters) => getters['companyInfo/workingHours'],
+    getCompanySocialMedia: (state, getters) => getters['companyInfo/socialMedia'],
+    getCompanySeoInfo: (state, getters) => getters['companyInfo/seoInfo'],
+    
+    // Menu getters
+    getMainMenuItems: (state, getters) => getters['menu/mainMenuItems'],
+    getHierarchicalMenu: (state, getters) => getters['menu/hierarchicalMenu'],
+    
+    // Gallery getters
+    getGalleryGroups: (state, getters) => getters['gallery/activeGroups'],
+    getGalleryImages: (state, getters) => getters['gallery/activeImages'],
+    getSortedGalleryGroups: (state, getters) => getters['gallery/sortedGroups']
   },
   mutations: {
     updateSiteInfo(state, payload) {
@@ -156,11 +182,13 @@ export default createStore({
     }
   },
   actions: {
-    async fetchSiteInfo({ commit }) {
+    async fetchSiteInfo({ commit, dispatch }) {
       try {
-        // API çağrısı yapılacak
-        // const response = await axios.get('/api/site-info')
-        // commit('updateSiteInfo', response.data)
+        // Şirket bilgilerini ve menü öğelerini çek
+        await Promise.all([
+          dispatch('companyInfo/fetchActiveCompanyInfo'),
+          dispatch('menu/fetchMenuItems')
+        ])
       } catch (error) {
         console.error('Site bilgileri yüklenirken hata:', error)
       }

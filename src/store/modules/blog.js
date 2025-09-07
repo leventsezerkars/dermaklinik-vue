@@ -1,7 +1,8 @@
-import axios from 'axios';
+import { BlogAPI, BlogCategoryAPI } from '../../services/api/blog';
 
 const state = {
   posts: [],
+  categories: [],
   currentPost: null,
   relatedPosts: [],
   pagination: {
@@ -11,12 +12,17 @@ const state = {
     itemsPerPage: 10
   },
   isLoading: false,
-  error: null
+  error: null,
+  lastFetch: null
 };
 
 const mutations = {
   setPosts(state, posts) {
     state.posts = posts;
+    state.lastFetch = new Date();
+  },
+  setCategories(state, categories) {
+    state.categories = categories;
   },
   setCurrentPost(state, post) {
     state.currentPost = post;
@@ -32,40 +38,53 @@ const mutations = {
   },
   setError(state, error) {
     state.error = error;
+  },
+  clearError(state) {
+    state.error = null;
   }
 };
 
 const actions = {
-  async fetchPosts({ commit }, { page = 1, limit = 10 } = {}) {
+  async fetchPosts({ commit, state }, { page = 1, limit = 10, search = '' } = {}) {
+    // Cache kontrolü - 5 dakikadan eski değilse tekrar çekme
+    if (state.posts.length > 0 && state.lastFetch) {
+      const now = new Date();
+      const diffInMinutes = (now - state.lastFetch) / (1000 * 60);
+      if (diffInMinutes < 5) {
+        return state.posts;
+      }
+    }
+
     try {
       commit('setLoading', true);
-      commit('setError', null);
+      commit('clearError');
       
-      // API endpoint'i projenize göre güncelleyin
-      const response = await axios.get(`/api/blog/posts?page=${page}&limit=${limit}`);
+      const response = await BlogAPI.getAll(page, limit, search);
       
-      commit('setPosts', response.data.posts);
+      commit('setPosts', response.data);
       commit('setPagination', {
         currentPage: page,
         totalPages: Math.ceil(response.data.total / limit),
         totalItems: response.data.total,
         itemsPerPage: limit
       });
+      
+      return response.data;
     } catch (error) {
       commit('setError', error.message);
       console.error('Blog posts yüklenirken hata oluştu:', error);
+      throw error;
     } finally {
       commit('setLoading', false);
     }
   },
 
-  async fetchPostBySlug({ commit }, slug) {
+  async fetchPostById({ commit }, id) {
     try {
       commit('setLoading', true);
-      commit('setError', null);
+      commit('clearError');
       
-      // API endpoint'i projenize göre güncelleyin
-      const response = await axios.get(`/api/blog/posts/${slug}`);
+      const response = await BlogAPI.getById(id);
       
       commit('setCurrentPost', response.data);
       return response.data;
@@ -78,18 +97,36 @@ const actions = {
     }
   },
 
-  async fetchRelatedPosts({ commit }, { postId, limit = 3 }) {
+  async incrementPostView({ commit }, id) {
+    try {
+      await BlogAPI.incrementView(id);
+    } catch (error) {
+      console.error('Görüntülenme sayısı artırılırken hata oluştu:', error);
+    }
+  },
+
+  async fetchCategories({ commit, state }) {
+    // Cache kontrolü - 10 dakikadan eski değilse tekrar çekme
+    if (state.categories.length > 0 && state.lastFetch) {
+      const now = new Date();
+      const diffInMinutes = (now - state.lastFetch) / (1000 * 60);
+      if (diffInMinutes < 10) {
+        return state.categories;
+      }
+    }
+
     try {
       commit('setLoading', true);
-      commit('setError', null);
+      commit('clearError');
       
-      // API endpoint'i projenize göre güncelleyin
-      const response = await axios.get(`/api/blog/posts/${postId}/related?limit=${limit}`);
+      const response = await BlogCategoryAPI.getAll();
       
-      commit('setRelatedPosts', response.data);
+      commit('setCategories', response.data);
+      return response.data;
     } catch (error) {
       commit('setError', error.message);
-      console.error('İlgili blog postları yüklenirken hata oluştu:', error);
+      console.error('Blog kategorileri yüklenirken hata oluştu:', error);
+      throw error;
     } finally {
       commit('setLoading', false);
     }
@@ -98,12 +135,42 @@ const actions = {
 
 const getters = {
   allPosts: state => state.posts,
+  categories: state => state.categories,
   currentPost: state => state.currentPost,
   relatedPosts: state => state.relatedPosts,
   pagination: state => state.pagination,
   isLoading: state => state.isLoading,
   hasError: state => state.error !== null,
-  error: state => state.error
+  error: state => state.error,
+  
+  // Aktif blog yazılarını getirir
+  activePosts: state => {
+    return state.posts.filter(post => post.isActive && !post.isDeleted);
+  },
+  
+  // Aktif kategorileri getirir
+  activeCategories: state => {
+    return state.categories.filter(category => category.isActive && !category.isDeleted);
+  },
+  
+  // Kategoriye göre blog yazılarını getirir
+  getPostsByCategory: state => categoryId => {
+    return state.posts.filter(post => post.categoryId === categoryId && post.isActive && !post.isDeleted);
+  },
+  
+  // En çok görüntülenen blog yazılarını getirir
+  mostViewedPosts: state => {
+    return [...state.posts]
+      .filter(post => post.isActive && !post.isDeleted)
+      .sort((a, b) => b.viewCount - a.viewCount);
+  },
+  
+  // En yeni blog yazılarını getirir
+  latestPosts: state => {
+    return [...state.posts]
+      .filter(post => post.isActive && !post.isDeleted)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }
 };
 
 export default {
