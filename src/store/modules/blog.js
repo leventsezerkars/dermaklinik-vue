@@ -97,6 +97,42 @@ const actions = {
     }
   },
 
+  async fetchPostBySlug({ commit }, slug) {
+    try {
+      commit('setLoading', true);
+      commit('clearError');
+      
+      const response = await BlogAPI.getBySlug(slug);
+      
+      commit('setCurrentPost', response.data);
+      return response.data;
+    } catch (error) {
+      commit('setError', error.message);
+      console.error('Blog post detayı yüklenirken hata oluştu:', error);
+      throw error;
+    } finally {
+      commit('setLoading', false);
+    }
+  },
+
+  async fetchRecentPosts({ commit }, limit = 5) {
+    try {
+      commit('setLoading', true);
+      commit('clearError');
+      
+      const response = await BlogAPI.getAll(1, limit);
+      
+      commit('setRelatedPosts', response.data);
+      return response.data;
+    } catch (error) {
+      commit('setError', error.message);
+      console.error('Son blog yazıları yüklenirken hata oluştu:', error);
+      throw error;
+    } finally {
+      commit('setLoading', false);
+    }
+  },
+
   async incrementPostView({ commit }, id) {
     try {
       await BlogAPI.incrementView(id);

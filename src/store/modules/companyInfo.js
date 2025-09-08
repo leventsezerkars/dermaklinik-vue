@@ -8,17 +8,28 @@ export default {
     activeCompanyInfo: null,
     loading: false,
     error: null,
-    lastFetch: null
+    lastFetch: null,
+    isFetching: false // Tekrarlayan istekleri engellemek için
   },
 
   mutations: {
     setCompanyInfo(state, companyInfo) {
       state.companyInfo = companyInfo
       state.lastFetch = new Date()
+      // localStorage'a kaydet
+      localStorage.setItem('companyInfo_cache', JSON.stringify({
+        data: companyInfo,
+        timestamp: new Date().toISOString()
+      }))
     },
     setActiveCompanyInfo(state, companyInfo) {
       state.activeCompanyInfo = companyInfo
       state.lastFetch = new Date()
+      // localStorage'a kaydet
+      localStorage.setItem('activeCompanyInfo_cache', JSON.stringify({
+        data: companyInfo,
+        timestamp: new Date().toISOString()
+      }))
     },
     setLoading(state, loading) {
       state.loading = loading
@@ -28,32 +39,84 @@ export default {
     },
     clearError(state) {
       state.error = null
+    },
+    setFetching(state, status) {
+      state.isFetching = status
+    },
+    // localStorage'dan veri yükle
+    loadFromCache(state) {
+      try {
+        const activeCache = localStorage.getItem('activeCompanyInfo_cache')
+        if (activeCache) {
+          const { data, timestamp } = JSON.parse(activeCache)
+          const cacheTime = new Date(timestamp)
+          const now = new Date()
+          const diffInHours = (now - cacheTime) / (1000 * 60 * 60)
+          
+          // 1 saatten eski değilse cache'den yükle
+          if (diffInHours < 1) {
+            state.activeCompanyInfo = data
+            state.lastFetch = cacheTime
+            console.log('CompanyInfo: localStorage cache\'den yüklendi')
+          } else {
+            // Eski cache'i temizle
+            localStorage.removeItem('activeCompanyInfo_cache')
+            console.log('CompanyInfo: Eski cache temizlendi')
+          }
+        }
+      } catch (error) {
+        console.error('CompanyInfo: Cache yüklenirken hata:', error)
+        localStorage.removeItem('activeCompanyInfo_cache')
+      }
     }
   },
 
   actions: {
     async fetchActiveCompanyInfo({ commit, state }) {
-      // Cache kontrolü - 5 dakikadan eski değilse tekrar çekme
+      // İlk önce localStorage'dan cache'i yükle
+      if (!state.activeCompanyInfo) {
+        commit('loadFromCache')
+      }
+
+      // Eğer zaten istek atılıyorsa, mevcut isteği bekle
+      if (state.isFetching) {
+        return new Promise((resolve) => {
+          const checkInterval = setInterval(() => {
+            if (!state.isFetching) {
+              clearInterval(checkInterval)
+              resolve(state.activeCompanyInfo)
+            }
+          }, 100)
+        })
+      }
+
+      // Cache kontrolü - 1 saatten eski değilse tekrar çekme
       if (state.activeCompanyInfo && state.lastFetch) {
         const now = new Date()
-        const diffInMinutes = (now - state.lastFetch) / (1000 * 60)
-        if (diffInMinutes < 5) {
+        const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
+        if (diffInHours < 1) {
+          console.log('CompanyInfo: Cache\'den döndürülüyor (1 saat geçmedi)')
           return state.activeCompanyInfo
         }
       }
 
+      commit('setFetching', true)
       commit('setLoading', true)
       commit('clearError')
       
       try {
+        console.log('CompanyInfo: API\'den yeni veri çekiliyor...')
         const response = await CompanyInfoAPI.getActiveSingle()
         commit('setActiveCompanyInfo', response.data)
+        console.log('CompanyInfo: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
         return response.data
       } catch (error) {
         commit('setError', error.message)
+        console.error('CompanyInfo: Hata oluştu:', error)
         throw error
       } finally {
         commit('setLoading', false)
+        commit('setFetching', false)
       }
     },
 
@@ -128,6 +191,7 @@ export default {
     activeCompanyInfo: state => state.activeCompanyInfo,
     companyInfo: state => state.companyInfo,
     isLoading: state => state.loading,
+    isFetching: state => state.isFetching,
     hasError: state => state.error !== null,
     error: state => state.error,
     
@@ -138,6 +202,7 @@ export default {
     companyEmail: state => state.activeCompanyInfo?.email || '',
     companyLogo: state => state.activeCompanyInfo?.logoUrl || '',
     workingHours: state => state.activeCompanyInfo?.workingHours || '',
+    companyDescription: state => state.activeCompanyInfo?.metaDescription || '',
     
     // Sosyal medya bilgileri
     socialMedia: state => ({

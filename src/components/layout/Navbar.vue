@@ -5,8 +5,12 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <router-link class="navbar-brand d-flex align-items-center order-1" to="/">
-        <img src="/images/logo_beyaz.png" alt="Doç. Dr. Mehmet Ünal Logo" height="70">
-        <span class="ms-3 brand-text">{{ $t('header.brand') }}</span>
+        <img 
+          :src="companyLogo || '/images/logo_beyaz.png'" 
+          :alt="companyName || 'Doç. Dr. Mehmet Ünal Logo'" 
+          height="70"
+        >
+        <span class="ms-3 brand-text">{{ companyName || $t('header.brand') }}</span>
       </router-link>
       <div class="collapse navbar-collapse order-2" id="navbarNav">
         <ul class="navbar-nav ms-auto">
@@ -79,10 +83,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 const router = useRouter()
+const store = useStore()
+
+// Store'dan şirket bilgilerini al
+const companyName = computed(() => store.getters['companyInfo/companyName'])
+const companyLogo = computed(() => store.getters['companyInfo/companyLogo'])
 
 const closeNavbar = () => {
   const navbar = document.getElementById('navbarNav')
@@ -96,7 +106,14 @@ const closeNavbar = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // Şirket bilgilerini çek
+  try {
+    await store.dispatch('companyInfo/fetchActiveCompanyInfo')
+  } catch (error) {
+    console.error('Şirket bilgileri yüklenirken hata:', error)
+  }
+
   // Route değişince menüyü kapat
   router.afterEach(() => {
     closeNavbar()

@@ -8,8 +8,17 @@ import WhatsAppButton from './components/common/WhatsAppButton.vue'
 
 const store = useStore()
 
-onMounted(() => {
-  store.dispatch('fetchServices')
+onMounted(async () => {
+  // Uygulama başlangıcında temel verileri çek
+  try {
+    await Promise.all([
+      store.dispatch('fetchServices'),
+      store.dispatch('companyInfo/fetchActiveCompanyInfo'),
+      store.dispatch('menu/fetchMenuItems')
+    ])
+  } catch (error) {
+    console.error('Uygulama verileri yüklenirken hata:', error)
+  }
 })
 </script>
 

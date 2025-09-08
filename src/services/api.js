@@ -1,12 +1,39 @@
 import axios from 'axios'
 
+// Environment değişkenlerini al
+const getApiUrl = () => {
+  // Önce import.meta.env'den dene
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL
+  }
+  // Sonra global değişkenden dene
+  if (typeof __VITE_API_URL__ !== 'undefined') {
+    return __VITE_API_URL__
+  }
+  // Son olarak varsayılan değer
+  return 'http://localhost:5000/api'
+}
+
+const getApiKey = () => {
+  // Önce import.meta.env'den dene
+  if (import.meta.env.VITE_API_KEY) {
+    return import.meta.env.VITE_API_KEY
+  }
+  // Sonra global değişkenden dene
+  if (typeof __VITE_API_KEY__ !== 'undefined') {
+    return __VITE_API_KEY__
+  }
+  // Son olarak varsayılan değer
+  return 'your-api-key-here'
+}
+
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: getApiUrl(),
   withCredentials: false,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'X-API-Key': import.meta.env.VITE_API_KEY || 'your-api-key-here'
+    'X-API-Key': getApiKey()
   },
   timeout: 10000
 })

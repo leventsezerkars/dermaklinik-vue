@@ -6,10 +6,14 @@
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="footer-info">
               <div class="footer-logo">
-                <img src="/images/logo_beyaz.png" alt="Logo" height="70">
-                <span class="brand-text">{{ $t('header.brand') }}</span>
+                <img 
+                  :src="companyLogo || '/images/logo_beyaz.png'" 
+                  :alt="companyName || 'Logo'" 
+                  height="70"
+                >
+                <span class="brand-text">{{ companyName || $t('header.brand') }}</span>
               </div>
-              <p class="mt-3">{{ $t('footer.description') }}</p>
+              <p class="mt-3">{{ companyDescription || $t('footer.description') }}</p>
             </div>
           </div>
           <div class="col-lg-2 col-md-6 mb-4">
@@ -38,10 +42,17 @@
             <div class="footer-contact">
               <h4>{{ $t('footer.contactInfo') }}</h4>
               <div class="contact-info">
-                <p><i class="fas fa-map-marker-alt"></i> {{ $t('footer.address') }}</p>
-                <p><i class="fas fa-phone"></i> {{ $t('footer.phone') }}</p>
-                <p><i class="fas fa-envelope"></i> {{ $t('footer.email') }}</p>
-                <p><i class="fas fa-clock"></i> {{ $t('footer.workingHours') }}</p>
+                <p v-if="companyAddress"><i class="fas fa-map-marker-alt"></i> {{ companyAddress }}</p>
+                <p v-else><i class="fas fa-map-marker-alt"></i> {{ $t('footer.address') }}</p>
+                
+                <p v-if="companyPhone"><i class="fas fa-phone"></i> {{ companyPhone }}</p>
+                <p v-else><i class="fas fa-phone"></i> {{ $t('footer.phone') }}</p>
+                
+                <p v-if="companyEmail"><i class="fas fa-envelope"></i> {{ companyEmail }}</p>
+                <p v-else><i class="fas fa-envelope"></i> {{ $t('footer.email') }}</p>
+                
+                <p v-if="companyWorkingHours"><i class="fas fa-clock"></i> {{ companyWorkingHours }}</p>
+                <p v-else><i class="fas fa-clock"></i> {{ $t('footer.workingHours') }}</p>
               </div>
             </div>
           </div>
@@ -82,8 +93,30 @@
 </template>
 
 <script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import LanguageSelector from '@/components/common/LanguageSelector.vue'
 import '@/assets/styles/components/layout/_Footer.scss';
+
+const store = useStore()
+
+// Store'dan şirket bilgilerini al
+const companyName = computed(() => store.getters['companyInfo/companyName'])
+const companyLogo = computed(() => store.getters['companyInfo/companyLogo'])
+const companyAddress = computed(() => store.getters['companyInfo/companyAddress'])
+const companyPhone = computed(() => store.getters['companyInfo/companyPhone'])
+const companyEmail = computed(() => store.getters['companyInfo/companyEmail'])
+const companyWorkingHours = computed(() => store.getters['companyInfo/workingHours'])
+const companyDescription = computed(() => store.getters['companyInfo/companyDescription'])
+
+onMounted(async () => {
+  // Şirket bilgilerini çek
+  try {
+    await store.dispatch('companyInfo/fetchActiveCompanyInfo')
+  } catch (error) {
+    console.error('Şirket bilgileri yüklenirken hata:', error)
+  }
+})
 </script>
 
 <style lang="scss">

@@ -7,13 +7,19 @@ export default {
     menuItems: [],
     loading: false,
     error: null,
-    lastFetch: null
+    lastFetch: null,
+    isFetching: false // Tekrarlayan istekleri engellemek için
   },
 
   mutations: {
     setMenuItems(state, menuItems) {
       state.menuItems = menuItems
       state.lastFetch = new Date()
+      // localStorage'a kaydet
+      localStorage.setItem('menuItems_cache', JSON.stringify({
+        data: menuItems,
+        timestamp: new Date().toISOString()
+      }))
     },
     setLoading(state, loading) {
       state.loading = loading
@@ -23,32 +29,84 @@ export default {
     },
     clearError(state) {
       state.error = null
+    },
+    setFetching(state, status) {
+      state.isFetching = status
+    },
+    // localStorage'dan veri yükle
+    loadFromCache(state) {
+      try {
+        const menuCache = localStorage.getItem('menuItems_cache')
+        if (menuCache) {
+          const { data, timestamp } = JSON.parse(menuCache)
+          const cacheTime = new Date(timestamp)
+          const now = new Date()
+          const diffInHours = (now - cacheTime) / (1000 * 60 * 60)
+          
+          // 1 saatten eski değilse cache'den yükle
+          if (diffInHours < 1) {
+            state.menuItems = data
+            state.lastFetch = cacheTime
+            console.log('Menu: localStorage cache\'den yüklendi')
+          } else {
+            // Eski cache'i temizle
+            localStorage.removeItem('menuItems_cache')
+            console.log('Menu: Eski cache temizlendi')
+          }
+        }
+      } catch (error) {
+        console.error('Menu: Cache yüklenirken hata:', error)
+        localStorage.removeItem('menuItems_cache')
+      }
     }
   },
 
   actions: {
     async fetchMenuItems({ commit, state }) {
-      // Cache kontrolü - 10 dakikadan eski değilse tekrar çekme
+      // İlk önce localStorage'dan cache'i yükle
+      if (state.menuItems.length === 0) {
+        commit('loadFromCache')
+      }
+
+      // Eğer zaten istek atılıyorsa, mevcut isteği bekle
+      if (state.isFetching) {
+        return new Promise((resolve) => {
+          const checkInterval = setInterval(() => {
+            if (!state.isFetching) {
+              clearInterval(checkInterval)
+              resolve(state.menuItems)
+            }
+          }, 100)
+        })
+      }
+
+      // Cache kontrolü - 1 saatten eski değilse tekrar çekme
       if (state.menuItems.length > 0 && state.lastFetch) {
         const now = new Date()
-        const diffInMinutes = (now - state.lastFetch) / (1000 * 60)
-        if (diffInMinutes < 10) {
+        const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
+        if (diffInHours < 1) {
+          console.log('Menu: Cache\'den döndürülüyor (1 saat geçmedi)')
           return state.menuItems
         }
       }
 
+      commit('setFetching', true)
       commit('setLoading', true)
       commit('clearError')
       
       try {
+        console.log('Menu: API\'den yeni veri çekiliyor...')
         const response = await MenuAPI.getAll()
         commit('setMenuItems', response.data)
+        console.log('Menu: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
         return response.data
       } catch (error) {
         commit('setError', error.message)
+        console.error('Menu: Hata oluştu:', error)
         throw error
       } finally {
         commit('setLoading', false)
+        commit('setFetching', false)
       }
     },
 
@@ -71,6 +129,7 @@ export default {
   getters: {
     menuItems: state => state.menuItems,
     isLoading: state => state.loading,
+    isFetching: state => state.isFetching,
     hasError: state => state.error !== null,
     error: state => state.error,
     
