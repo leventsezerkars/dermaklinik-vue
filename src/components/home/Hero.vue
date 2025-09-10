@@ -3,7 +3,7 @@
     <div class="swiper hero-slider">
       <div class="swiper-wrapper">
         <!-- Slide 1: Cilt Sağlığı ve Dermatoloji -->
-        <div class="swiper-slide" style="background-image: url('images/dr_mu2.jpg');">
+        <div class="swiper-slide" style="background-image: url('images/dr_mu2.jpg?v=3');">
           <div class="container">
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">

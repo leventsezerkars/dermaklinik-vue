@@ -171,6 +171,7 @@ export default {
       professionalTreatment: 'Profesyonel Tedavi'
     },
     introText: 'Bu sayfada {title} hakkında detaylı bilgi bulabilir, tedavi süreçlerini öğrenebilir ve uzman ekibimizle iletişime geçebilirsiniz.',
+    loading: 'Hizmet bilgileri yükleniyor...',
     notFound: {
       title: 'Hizmet Bulunamadı',
       description: 'Aradığınız hizmet bulunamadı. Lütfen ana sayfaya dönün veya farklı bir hizmet seçin.',

@@ -171,6 +171,7 @@ export default {
       professionalTreatment: 'Professional Treatment'
     },
     introText: 'On this page, you can find detailed information about {title}, learn about treatment processes, and contact our expert team.',
+    loading: 'Loading service information...',
     notFound: {
       title: 'Service Not Found',
       description: 'The service you are looking for was not found. Please return to the home page or select a different service.',
