@@ -8,16 +8,19 @@ export default {
     loading: false,
     error: null,
     lastFetch: null,
-    isFetching: false // Tekrarlayan istekleri engellemek için
+    isFetching: false, // Tekrarlayan istekleri engellemek için
+    currentLanguage: 'tr' // Mevcut dil
   },
 
   mutations: {
-    setMenuItems(state, menuItems) {
+    setMenuItems(state, { menuItems, language }) {
       state.menuItems = menuItems
+      state.currentLanguage = language
       state.lastFetch = new Date()
       // localStorage'a kaydet
       localStorage.setItem('menuItems_cache', JSON.stringify({
         data: menuItems,
+        language: language,
         timestamp: new Date().toISOString()
       }))
     },
@@ -34,20 +37,21 @@ export default {
       state.isFetching = status
     },
     // localStorage'dan veri yükle
-    loadFromCache(state) {
+    loadFromCache(state, language = 'tr') {
       try {
         const menuCache = localStorage.getItem('menuItems_cache')
         if (menuCache) {
-          const { data, timestamp } = JSON.parse(menuCache)
+          const { data, language: cachedLanguage, timestamp } = JSON.parse(menuCache)
           const cacheTime = new Date(timestamp)
           const now = new Date()
           const diffInHours = (now - cacheTime) / (1000 * 60 * 60)
           
-          // 1 saatten eski değilse cache'den yükle
-          if (diffInHours < 1) {
+          // 1 saatten eski değilse ve aynı dil ise cache'den yükle
+          if (diffInHours < 1 && cachedLanguage === language) {
             state.menuItems = data
+            state.currentLanguage = cachedLanguage
             state.lastFetch = cacheTime
-            console.log('Menu: localStorage cache\'den yüklendi')
+            console.log(`Menu: localStorage cache'den yüklendi (${cachedLanguage})`)
           } else {
             // Eski cache'i temizle
             localStorage.removeItem('menuItems_cache')
@@ -58,14 +62,21 @@ export default {
         console.error('Menu: Cache yüklenirken hata:', error)
         localStorage.removeItem('menuItems_cache')
       }
+    },
+    
+    // Dil değiştir
+    setLanguage(state, language) {
+      state.currentLanguage = language
     }
   },
 
   actions: {
-    async fetchMenuItems({ commit, state }) {
+    async fetchMenuItems({ commit, state }, languageCode = null) {
+      const currentLanguage = languageCode || state.currentLanguage || 'tr'
+      
       // İlk önce localStorage'dan cache'i yükle
       if (state.menuItems.length === 0) {
-        commit('loadFromCache')
+        commit('loadFromCache', currentLanguage)
       }
 
       // Eğer zaten istek atılıyorsa, mevcut isteği bekle
@@ -80,12 +91,12 @@ export default {
         })
       }
 
-      // Cache kontrolü - 1 saatten eski değilse tekrar çekme
-      if (state.menuItems.length > 0 && state.lastFetch) {
+      // Cache kontrolü - 1 saatten eski değilse ve aynı dil ise tekrar çekme
+      if (state.menuItems.length > 0 && state.lastFetch && state.currentLanguage === currentLanguage) {
         const now = new Date()
         const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
         if (diffInHours < 1) {
-          console.log('Menu: Cache\'den döndürülüyor (1 saat geçmedi)')
+          console.log(`Menu: Cache'den döndürülüyor (1 saat geçmedi, ${currentLanguage})`)
           return state.menuItems
         }
       }
@@ -95,10 +106,10 @@ export default {
       commit('clearError')
       
       try {
-        console.log('Menu: API\'den yeni veri çekiliyor...')
-        const response = await MenuAPI.getAll()
-        commit('setMenuItems', response.data)
-        console.log('Menu: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
+        console.log(`Menu: API'den yeni veri çekiliyor... (${currentLanguage})`)
+        const response = await MenuAPI.getAll(currentLanguage)
+        commit('setMenuItems', { menuItems: response.data, language: currentLanguage })
+        console.log(`Menu: Veri başarıyla yüklendi ve localStorage'a kaydedildi (${currentLanguage})`)
         return response.data
       } catch (error) {
         commit('setError', error.message)
@@ -110,12 +121,13 @@ export default {
       }
     },
 
-    async fetchMenuItemById({ commit }, id) {
+    async fetchMenuItemById({ commit, state }, { id, languageCode = null }) {
+      const currentLanguage = languageCode || state.currentLanguage || 'tr'
       commit('setLoading', true)
       commit('clearError')
       
       try {
-        const response = await MenuAPI.getById(id)
+        const response = await MenuAPI.getById(id, currentLanguage)
         return response.data
       } catch (error) {
         commit('setError', error.message)
@@ -123,6 +135,12 @@ export default {
       } finally {
         commit('setLoading', false)
       }
+    },
+
+    // Dil değiştir ve menüyü yenile
+    async changeLanguage({ commit, dispatch }, languageCode) {
+      commit('setLanguage', languageCode)
+      await dispatch('fetchMenuItems', languageCode)
     }
   },
 
@@ -132,12 +150,20 @@ export default {
     isFetching: state => state.isFetching,
     hasError: state => state.error !== null,
     error: state => state.error,
+    currentLanguage: state => state.currentLanguage,
     
     // Ana menü öğelerini getirir (parentId null olanlar)
     mainMenuItems: state => {
       return state.menuItems
         .filter(item => !item.parentId && item.isActive && !item.isDeleted)
         .sort((a, b) => a.sortOrder - b.sortOrder)
+        .map(item => ({
+          ...item,
+          // Mevcut dildeki çeviriyi bul
+          title: item.translations?.find(t => t.language?.code === state.currentLanguage)?.title || item.title,
+          content: item.translations?.find(t => t.language?.code === state.currentLanguage)?.content || item.content,
+          slug: item.translations?.find(t => t.language?.code === state.currentLanguage)?.slug || item.slug
+        }))
     },
     
     // Alt menü öğelerini getirir
@@ -145,6 +171,13 @@ export default {
       return state.menuItems
         .filter(item => item.parentId === parentId && item.isActive && !item.isDeleted)
         .sort((a, b) => a.sortOrder - b.sortOrder)
+        .map(item => ({
+          ...item,
+          // Mevcut dildeki çeviriyi bul
+          title: item.translations?.find(t => t.language?.code === state.currentLanguage)?.title || item.title,
+          content: item.translations?.find(t => t.language?.code === state.currentLanguage)?.content || item.content,
+          slug: item.translations?.find(t => t.language?.code === state.currentLanguage)?.slug || item.slug
+        }))
     },
     
     // Menü öğesini slug'a göre bulur
@@ -167,9 +200,20 @@ export default {
         const children = state.menuItems
           .filter(child => child.parentId === item.id && child.isActive && !child.isDeleted)
           .sort((a, b) => a.sortOrder - b.sortOrder)
+          .map(child => ({
+            ...child,
+            // Mevcut dildeki çeviriyi bul
+            title: child.translations?.find(t => t.language?.code === state.currentLanguage)?.title || child.title,
+            content: child.translations?.find(t => t.language?.code === state.currentLanguage)?.content || child.content,
+            slug: child.translations?.find(t => t.language?.code === state.currentLanguage)?.slug || child.slug
+          }))
         
         return {
           ...item,
+          // Mevcut dildeki çeviriyi bul
+          title: item.translations?.find(t => t.language?.code === state.currentLanguage)?.title || item.title,
+          content: item.translations?.find(t => t.language?.code === state.currentLanguage)?.content || item.content,
+          slug: item.translations?.find(t => t.language?.code === state.currentLanguage)?.slug || item.slug,
           children: children.length > 0 ? children : null
         }
       })

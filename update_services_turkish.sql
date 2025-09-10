@@ -1,206 +1,17 @@
-<template>
-  <div class="service-detail-page">
-    <!-- Blog Style Header -->
-    <header class="blog-header">
-      <div class="container">
-        <div class="header-content">
-          <div class="breadcrumb">
-            <router-link to="/" class="breadcrumb-link">
-              <i class="fas fa-home"></i>
-              <span>{{ $t('serviceDetail.breadcrumb.home') }}</span>
-            </router-link>
-            <i class="fas fa-chevron-right separator"></i>
-            <span class="current-page">{{ currentService?.category || $t('serviceDetail.breadcrumb.service') }}</span>
-          </div>
-          
-          <div class="service-meta" v-if="currentService">
-            <div class="category-badge">
-              <i class="fas fa-tag"></i>
-              {{ currentService.category }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+-- =============================================
+-- ServiceDetailView.vue Hizmet İçerikleri Güncelleme Scripti
+-- TR İçerikler için SQL Script
+-- =============================================
 
-    <!-- Main Content Area -->
-    <main class="blog-main">
-      <div class="container">
-        <div class="blog-layout">
-          <!-- Main Content -->
-          <article class="blog-content">
-            <header class="content-header" v-if="currentService">
-              <h1 class="blog-title">{{ currentService.title }}</h1>
-              <div class="content-meta">
-                <div class="meta-item">
-                  <i class="fas fa-user-md"></i>
-                  <span>{{ $t('serviceDetail.meta.expertDermatologist') }}</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-calendar-alt"></i>
-                  <span>{{ $t('serviceDetail.meta.updated') }}</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-eye"></i>
-                  <span>{{ $t('serviceDetail.meta.professionalTreatment') }}</span>
-                </div>
-              </div>
-            </header>
+-- TR dil ID'sini al
+DECLARE @TrLanguageId UNIQUEIDENTIFIER = (SELECT Id FROM Language WHERE Code = 'tr');
 
-            <div class="content-body" v-if="currentService">
-              <div class="service-intro">
-                <div class="intro-icon">
-                  <i class="fas fa-stethoscope"></i>
-                </div>
-                <p class="intro-text">
-                  {{ $t('serviceDetail.introText', { title: currentService.title.toLowerCase() }) }}
-                </p>
-              </div>
+-- Hizmet içeriklerini güncelle
 
-              <div class="service-content" v-html="currentService.content"></div>
-            </div>
-            
-            <div v-else class="service-not-found">
-              <div class="not-found-content">
-                <div class="not-found-icon">
-                  <i class="fas fa-search"></i>
-                </div>
-                <h2>{{ $t('serviceDetail.notFound.title') }}</h2>
-                <p>{{ $t('serviceDetail.notFound.description') }}</p>
-                <div class="not-found-actions">
-                  <router-link to="/" class="btn btn-primary">
-                    <i class="fas fa-home me-2"></i>
-                    {{ $t('serviceDetail.notFound.homeLink') }}
-                  </router-link>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Sidebar -->
-          <aside class="blog-sidebar">
-            <!-- Quick Contact Card -->
-            <div class="sidebar-card contact-card">
-              <div class="card-header">
-                <i class="fas fa-calendar-check"></i>
-                <h3>{{ $t('serviceDetail.sidebar.quickAppointment.title') }}</h3>
-              </div>
-              <div class="card-content">
-                <p>{{ $t('serviceDetail.sidebar.quickAppointment.description') }}</p>
-                <div class="contact-stats">
-                  <div class="stat-item">
-                    <i class="fas fa-clock"></i>
-                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.quickResponse') }}</span>
-                  </div>
-                  <div class="stat-item">
-                    <i class="fas fa-user-md"></i>
-                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.expertStaff') }}</span>
-                  </div>
-                  <div class="stat-item">
-                    <i class="fas fa-star"></i>
-                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.reliableService') }}</span>
-                  </div>
-                </div>
-                <div class="contact-actions">
-                  <a href="https://wa.me/905465297677" class="btn btn-primary btn-full">
-                    <i class="fas fa-calendar-alt me-2"></i>
-                    {{ $t('serviceDetail.sidebar.quickAppointment.actions.bookAppointment') }}
-                  </a>
-                  <a href="tel:+905465297677" class="btn btn-outline btn-full">
-                    <i class="fas fa-phone me-2"></i>
-                    {{ $t('serviceDetail.sidebar.quickAppointment.actions.callNow') }}
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Related Services -->
-            <div class="sidebar-card related-services" v-if="currentService">
-              <div class="card-header">
-                <i class="fas fa-link"></i>
-                <h3>{{ $t('serviceDetail.sidebar.relatedServices.title') }}</h3>
-              </div>
-              <div class="card-content">
-                <div class="related-list">
-                  <router-link 
-                    v-for="service in relatedServices" 
-                    :key="service.slug"
-                    :to="`/hizmetler/${service.slug}`"
-                    class="related-item"
-                  >
-                    <div class="related-icon">
-                      <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <div class="related-content">
-                      <h4>{{ service.title }}</h4>
-                      <span class="related-category">{{ service.category }}</span>
-                    </div>
-                  </router-link>
-                </div>
-              </div>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="sidebar-card contact-info">
-              <div class="card-header">
-                <i class="fas fa-info-circle"></i>
-                <h3>{{ $t('serviceDetail.sidebar.contactInfo.title') }}</h3>
-              </div>
-              <div class="card-content">
-                <div class="info-item">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.address') }}</strong>
-                    <span> Ateşbaz Veli Mahallesi, Yeni Meram Cd. No:83 D:4, 42090 Meram / Konya</span>
-                  </div>
-                </div>
-                <div class="info-item">
-                  <i class="fas fa-phone"></i>
-                  <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.phone') }}</strong>
-                    <span>+90 546 529 76 77</span>
-                  </div>
-                </div>
-                <div class="info-item">
-                  <i class="fas fa-envelope"></i>
-                  <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.email') }}</strong>
-                    <span>dr.munal1101@gmail.com</span>
-                  </div>
-                </div>
-                <div class="info-item">
-                  <i class="fas fa-clock"></i>
-                  <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.workingHours') }}</strong>
-                    <span>{{ $t('serviceDetail.sidebar.contactInfo.workingHoursValue') }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </main>
-  </div>
-</template>
-
-<script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { useHead } from '@vueuse/head'
-
-const route = useRoute()
-const loading = ref(false)
-const error = ref(null)
-
-// Hizmetler verisi - local array
-const services = ref([
-  {
-    slug: 'akne-sivilce-tedavisi',
-    title: 'Akne (Sivilce) Tedavisi',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+-- 1. Akne (Sivilce) Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Akne Nedir?</h4>
         <p>Akne, cildin yağ bezlerinin fazla sebum üretmesi ve gözeneklerin tıkanması sonucu ortaya çıkan iltihaplı bir cilt hastalığıdır. Özellikle yüz, sırt, omuz ve göğüs bölgelerinde sık görülür. Gençlik döneminde yaygın olsa da yetişkinlikte de görülebilir ve kişinin yaşam kalitesini olumsuz etkileyebilir. Akne, sadece estetik bir sorun değil, aynı zamanda cilt sağlığını da etkileyen önemli bir dermatolojik durumdur.</p>
         
@@ -257,14 +68,19 @@ const services = ref([
         <h4>Neden Kliniğimizi Tercih Etmelisiniz?</h4>
         <p>Kliniğimizde akne tedavisi için en güncel teknolojileri ve uzman dermatolog ekibimizi kullanarak, her hastaya özel tedavi planları hazırlıyoruz. Fraksiyonel lazer, Altın İğne ve Kolajen aşısı gibi modern yöntemlerle, akne ve akne sonrası oluşan problemleri etkili şekilde çözüyoruz. Deneyimli ekibimiz ve gelişmiş cihazlarımızla, güvenli ve sonuç odaklı tedavi hizmeti sunuyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'rosacea-gul-hastaligi-tedavisi',
-    title: 'Rosacea (Gül Hastalığı) Tedavisi',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'akne-sivilce-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 2. Rosacea (Gül Hastalığı) Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Rosacea (Gül Hastalığı) Nedir?</h4>
         <p>Rosacea, yüzün merkezinde kızarıklık, damar genişlemeleri ve iltihaplı lezyonlarla kendini gösteren kronik bir cilt hastalığıdır. Bu hastalık, genellikle 30-50 yaş arası yetişkinlerde görülür ve kadınlarda daha sık rastlanır. Rosacea, sadece estetik bir problem değil, aynı zamanda cilt sağlığını da etkileyen önemli bir dermatolojik durumdur.</p>
         
@@ -300,7 +116,7 @@ const services = ref([
         </ul>
         
         <h4>Rosacea Nedenleri ve Tetikleyicileri</h4>
-        <p>Rosacea'nın kesin nedeni bilinmemekle birlikte, birçok faktör hastalığın gelişiminde rol oynar:</p>
+        <p>Rosacea''nın kesin nedeni bilinmemekle birlikte, birçok faktör hastalığın gelişiminde rol oynar:</p>
         
         <h5>Genetik Faktörler</h5>
         <ul>
@@ -355,10 +171,10 @@ const services = ref([
         <p>Kliniğimizde rosacea tedavisi için en güncel ve etkili yöntemleri kullanıyoruz. Tedavi planı, hastalığın evresine, şiddetine ve hastanın ihtiyaçlarına göre kişiselleştirilir.</p>
         
         <h4>Topikal Tedaviler</h4>
-        <p>Rosacea'nın erken evrelerinde topikal tedaviler etkili sonuçlar verir:</p>
+        <p>Rosacea''nın erken evrelerinde topikal tedaviler etkili sonuçlar verir:</p>
         
         <h5>Metronidazol</h5>
-        <p>Antibiyotik özelliği olan bu ilaç, rosacea'daki inflamasyonu azaltır ve kızarıklığı hafifletir. %0.75 ve %1 konsantrasyonlarda kullanılır.</p>
+        <p>Antibiyotik özelliği olan bu ilaç, rosacea''daki inflamasyonu azaltır ve kızarıklığı hafifletir. %0.75 ve %1 konsantrasyonlarda kullanılır.</p>
         
         <h5>İvermektin</h5>
         <p>Demodex akarlarına karşı etkili olan bu ilaç, rosacea semptomlarını azaltır ve cildi yatıştırır.</p>
@@ -403,7 +219,7 @@ const services = ref([
           <li>Medikal tedavi + Yaşam tarzı değişiklikleri</li>
         </ul>
         
-        <h4>Rosacea'da Yaşam Tarzı Değişiklikleri</h4>
+        <h4>Rosacea''da Yaşam Tarzı Değişiklikleri</h4>
         <p>Rosacea tedavisinde başarılı sonuçlar almak için yaşam tarzı değişiklikleri çok önemlidir:</p>
         
         <h5>Cilt Bakımı</h5>
@@ -411,7 +227,7 @@ const services = ref([
           <li>Nazik temizleyiciler kullanın</li>
           <li>Alkolsüz ve parfümsüz ürünler tercih edin</li>
           <li>Güneş koruyucu kullanımı şarttır (SPF 30+)</li>
-          <li>Fiziksel peeling'den kaçının</li>
+          <li>Fiziksel peeling''den kaçının</li>
         </ul>
         
         <h5>Beslenme Önerileri</h5>
@@ -500,14 +316,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Rosacea, doğru tedavi ve yaşam tarzı değişiklikleri ile kontrol altına alınabilen bir hastalıktır. Kliniğimizde uzman ekibimizle birlikte, size en uygun rosacea tedavi planını hazırlayarak, kızarıklık, damar genişlemeleri ve inflamasyon gibi şikayetlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, rosacea ile yaşamayı öğrenmenize yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'sac-dokulmesi-ve-sac-tedavileri',
-    title: 'Saç Dökülmesi ve Saç Tedavileri',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'rosacea-gul-hastaligi-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 3. Saç Dökülmesi ve Saç Tedavileri
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Saç Dökülmesi Nedir?</h4>
         <p>Saç dökülmesi, günlük yaşamda herkesin karşılaştığı normal bir durumdur. Günde 50-100 saç telinin dökülmesi normal kabul edilir. Ancak bu sayının artması, saç yoğunluğunda azalma, saç tellerinde incelme veya belirli bölgelerde açılma gibi durumlar patolojik saç dökülmesi olarak değerlendirilir. Saç dökülmesi, sadece estetik bir sorun değil, aynı zamanda altta yatan sağlık problemlerinin de göstergesi olabilir.</p>
         
@@ -615,14 +436,19 @@ const services = ref([
         
         <p>Kök hücre tedavisi, mezoterapi ve PRP gibi modern yöntemlerle, saçlarınızın yeniden canlanmasını ve güçlenmesini sağlıyoruz. Her hasta için özel olarak tasarlanan tedavi programları ile, saç dökülmesi şikayetlerinizde etkili ve uzun süreli sonuçlar elde ediyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'sigil-ben-tedavisi',
-    title: 'Siğil (Ben) Tedavisi',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'sac-dokulmesi-ve-sac-tedavileri' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 4. Siğil (Ben) Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Siğil (Ben) Nedir?</h4>
         <p>Siğiller, Human Papilloma Virüsü (HPV) kaynaklı, cilt yüzeyinde kabarık ve pütürlü yapılar olarak oluşan bulaşıcı cilt lezyonlarıdır. Bu viral enfeksiyonlar, vücudun farklı bölgelerinde ortaya çıkabilir ve hem estetik hem de sağlık açısından önem taşır. Siğiller, bulaşıcı olması nedeniyle erken tedavi edilmesi gereken cilt problemleridir.</p>
         
@@ -911,14 +737,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Siğiller, modern tedavi yöntemleri ile başarıyla tedavi edilebilen cilt problemleridir. Kliniğimizde lazer teknolojisi, kriyoterapi ve diğer modern yöntemlerle, siğillerinizi güvenli ve etkili şekilde tedavi ediyoruz. Uzman ekibimiz ve gelişmiş cihazlarımızla, size en uygun tedavi planını hazırlayarak, hızlı ve kalıcı sonuçlar elde etmenizi sağlıyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'tirnak-hastaliklari-ve-tedavisi',
-    title: 'Tırnak Hastalıkları ve Tedavisi',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'sigil-ben-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 5. Tırnak Hastalıkları ve Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Tırnak Hastalıkları Nedir?</h4>
         <p>Tırnak hastalıkları, tırnakların yapısını, rengini, şeklini ve işlevini etkileyen çeşitli dermatolojik durumlardır. Bu hastalıklar, sadece estetik problemlere değil, aynı zamanda ağrı, enfeksiyon ve fonksiyonel bozukluklara da neden olabilir. Tırnak hastalıkları, her yaş grubunda görülebilir ve erken tanı ile tedavi edilmesi önemlidir.</p>
         
@@ -1166,14 +997,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Tırnak hastalıkları, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun tırnak hastalıkları tedavi planını hazırlayarak, ağrı, enfeksiyon ve estetik problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, tırnak sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'deri-enfeksiyonlari',
-    title: 'Deri Enfeksiyonları',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'tirnak-hastaliklari-ve-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 6. Deri Enfeksiyonları
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Deri Enfeksiyonları Nedir?</h4>
         <p>Deri enfeksiyonları, bakteri, virüs, mantar veya parazit kaynaklı olarak ciltte meydana gelen enfeksiyonlardır. Bu enfeksiyonlar, cildin farklı katmanlarını etkileyebilir ve çeşitli belirtilerle kendini gösterir. Deri enfeksiyonları, sadece lokal problemlere değil, aynı zamanda sistemik komplikasyonlara da neden olabilir. Erken tanı ve tedavi, enfeksiyonun yayılmasını önlemek ve komplikasyonları azaltmak için kritik öneme sahiptir.</p>
         
@@ -1478,14 +1314,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Deri enfeksiyonları, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun deri enfeksiyonları tedavi planını hazırlayarak, ağrı, enfeksiyon ve komplikasyonlarınızda etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'mantar-enfeksiyonlari',
-    title: 'Mantar Enfeksiyonları',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'deri-enfeksiyonlari' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 7. Mantar Enfeksiyonları
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Mantar Enfeksiyonları Nedir?</h4>
         <p>Mantar enfeksiyonları, dermatofit, maya ve küf mantarlarının neden olduğu yaygın cilt hastalıklarıdır. Bu enfeksiyonlar, vücudun nemli ve sıcak bölgelerinde gelişir ve çeşitli belirtilerle kendini gösterir. Mantar enfeksiyonları, sadece estetik problemlere değil, aynı zamanda kaşıntı, ağrı ve ikincil enfeksiyonlara da neden olabilir. Erken tanı ve tedavi, enfeksiyonun yayılmasını önlemek ve komplikasyonları azaltmak için kritik öneme sahiptir.</p>
         
@@ -1758,14 +1599,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Mantar enfeksiyonları, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun mantar enfeksiyonları tedavi planını hazırlayarak, kaşıntı, ağrı ve estetik problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'alerji-ve-egzama-turleri',
-    title: 'Alerji ve Egzama Türleri',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'mantar-enfeksiyonlari' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 8. Alerji ve Egzama Türleri
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Alerji ve Egzama Nedir?</h4>
         <p>Alerji ve egzama, ciltte kuruluk, kaşıntı, kızarıklık ve kabuklanma ile karakterize kronik cilt hastalıklarıdır. Bu durumlar, sadece estetik problemlere değil, aynı zamanda yaşam kalitesini önemli ölçüde etkileyen sağlık sorunlarıdır. Alerji ve egzama, her yaş grubunda görülebilir ve erken tanı ile tedavi edilmesi önemlidir. Kliniğimizde bu hastalıklar için modern ve etkili tedavi yöntemleri kullanılmaktadır.</p>
         
@@ -2071,14 +1917,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Alerji ve egzama, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun alerji ve egzama tedavi planını hazırlayarak, kaşıntı, kızarıklık ve yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'urtiker-kurdesen',
-    title: 'Ürtiker (Kurdeşen)',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'alerji-ve-egzama-turleri' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 9. Ürtiker (Kurdeşen)
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Ürtiker (Kurdeşen) Nedir?</h4>
         <p>Ürtiker, ciltte aniden ortaya çıkan, kaşıntılı, kırmızı ve şişkin lezyonlarla karakterize bir cilt hastalığıdır. Bu lezyonlar genellikle birkaç saat içinde kaybolur ve vücudun farklı bölgelerinde tekrar ortaya çıkabilir. Ürtiker, alerjik reaksiyonlar, enfeksiyonlar, stres veya fiziksel uyaranlar sonucu gelişebilir. Hastaların yaşam kalitesini önemli ölçüde etkileyebilen bu durum, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir.</p>
         
@@ -2396,14 +2247,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Ürtiker, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun ürtiker tedavi planını hazırlayarak, kaşıntı, şişlik ve yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'dermatit',
-    title: 'Dermatit',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'urtiker-kurdesen' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 10. Dermatit
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Dermatit Nedir?</h4>
         <p>Dermatit, cildin iltihaplanması anlamına gelir ve farklı türleri bulunur. Bu hastalık, ciltte kaşıntı, kızarıklık, kabuklanma ve bazen sızıntıyla kendini gösterir. Dermatit, sadece estetik problemlere değil, aynı zamanda yaşam kalitesini önemli ölçüde etkileyen sağlık sorunlarıdır. Erken tanı ve tedavi, hastalığın ilerlemesini önlemek ve komplikasyonları azaltmak için kritik öneme sahiptir.</p>
         
@@ -2714,14 +2570,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Dermatit, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun dermatit tedavi planını hazırlayarak, kaşıntı, kızarıklık ve yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, cilt sağlığınızı korumaya ve iyileştirmeye yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'alerjik-hastaliklar',
-    title: 'Alerjik Hastalıklar',
-    category: 'Genel Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'dermatit' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 11. Alerjik Hastalıklar
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Alerjik Hastalıklar Nedir?</h4>
         <p>Alerjik hastalıklar, bağışıklık sisteminin normalde zararsız olan maddelere (alerjenlere) karşı aşırı tepki vermesi sonucu ortaya çıkan kronik sağlık sorunlarıdır. Bu hastalıklar, sadece cilt problemlerine değil, aynı zamanda solunum yolu, sindirim sistemi ve genel sağlık üzerinde de önemli etkilere sahiptir. Alerjik hastalıklar, her yaş grubunda görülebilir ve erken tanı ile tedavi edilmesi önemlidir. Kliniğimizde bu hastalıklar için modern ve etkili tedavi yöntemleri kullanılmaktadır.</p>
         
@@ -3044,14 +2905,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Alerjik hastalıklar, doğru tanı ve tedavi ile başarıyla kontrol altına alınabilir. Kliniğimizde uzman ekibimizle birlikte, size en uygun alerjik hastalıklar tedavi planını hazırlayarak, yaşam kalitesi problemlerinizde etkili ve kalıcı sonuçlar elde etmenizi sağlıyoruz. Modern tedavi yöntemleri ve kişiselleştirilmiş yaklaşımımızla, alerjik hastalıklarla yaşamayı öğrenmenize yardımcı oluyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'botoks-uygulamasi',
-    title: 'Botoks Uygulaması',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'alerjik-hastaliklar' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 12. Botoks Uygulaması
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Botoks Nedir?</h4>
         <p>Botoks, botulinum toksininin düşük ve güvenli dozlarda kas içine uygulanmasıyla mimik kaslarının aktivitesini geçici olarak azaltan bir tedavidir. Bu sayede dinamik kırışıklıkların görünümü yumuşar, yüz daha dinlenmiş ve genç bir ifade kazanır.</p>
 
@@ -3108,14 +2974,19 @@ const services = ref([
           <li>Doğal, dengeli ve güvenli sonuç odaklı yaklaşım</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'dolgu-uygulamasi',
-    title: 'Dolgu Uygulaması',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'botoks-uygulamasi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 13. Dolgu Uygulaması
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Dolgu Nedir?</h4>
         <p>Hyalüronik asit ve benzeri biyouyumlu maddelerin dokuya enjekte edilerek hacim kaybını yerine koyduğu, yüz hatlarını belirginleştirdiği ve kırışıklıkları yumuşattığı minimal invaziv bir işlemdir.</p>
 
@@ -3170,14 +3041,19 @@ const services = ref([
           <li>Doğal, dengeli ve uzun ömürlü sonuçlar</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'regenera-activa-kok-hucre-tedavisi',
-    title: 'Regenera Activa (Kök Hücre Tedavisi)',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'dolgu-uygulamasi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 14. Regenera Activa (Kök Hücre Tedavisi)
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Regenera Activa Nedir?</h4>
         <p>Regenera Activa, otojen mikrogreft temelli, doku rejenerasyonunu hedefleyen, saç dökülmesinde kök güçlendirmeye odaklı bir tedavi yaklaşımıdır. Kişinin kendi dokusundan elde edilen hücresel içerikler, saçlı deriye kontrollü olarak uygulanır.</p>
 
@@ -3228,14 +3104,19 @@ const services = ref([
           <li>Doğal ve güvenli sonuç odaklı yaklaşım</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'prp-platelet-rich-plasma-tedavisi',
-    title: 'PRP (Platelet Rich Plasma) Tedavisi',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'regenera-activa-kok-hucre-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 15. PRP (Platelet Rich Plasma) Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>PRP Nedir?</h4>
         <p>Platelet Rich Plasma (PRP), hastadan alınan kanın özel bir işlemle ayrıştırılarak trombositten zengin plazmanın hedef dokuya enjekte edilmesi temeline dayanır. Trombosit büyüme faktörleri doku onarımı ve yenilenmesini destekler.</p>
 
@@ -3275,14 +3156,19 @@ const services = ref([
           <li>Kombine tedavi seçenekleri ile optimize sonuçlar</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'mezoterapi-uygulamasi',
-    title: 'Mezoterapi Uygulaması',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'prp-platelet-rich-plasma-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 16. Mezoterapi Uygulaması
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Mezoterapi Nedir?</h4>
         <p>Mezoterapi, cilt ve saç derisine mikroenjeksiyonlarla vitamin, mineral, peptid, hyalüronik asit ve büyüme faktörleri gibi aktiflerin verilmesini sağlayan, hedefe yönelik bir tedavi yöntemidir.</p>
 
@@ -3320,14 +3206,19 @@ const services = ref([
           <li>Hijyen, güvenlik ve anatomik hassasiyet odaklı protokoller</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'leke-tedavisi',
-    title: 'Leke Tedavisi',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'mezoterapi-uygulamasi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 17. Leke Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Cilt Lekeleri Nedir?</h4>
         <p>Güneş hasarı, melazma, postinflamatuvar hiperpigmentasyon ve yaşla ilişkili lentijinler en sık görülen leke tipleridir. Her bir alt tipin tedavi dinamikleri farklıdır.</p>
 
@@ -3367,14 +3258,19 @@ const services = ref([
           <li>Uzun dönem idame ve takip programları</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'akne-iz-tedavisi',
-    title: 'Akne İz Tedavisi',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'leke-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 18. Akne İz Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Akne İzi Nedir?</h4>
         <p>İnflamatuvar akne sonrası iyileşme fazında dermal matriksin düzensiz onarımı ile oluşan atrofil/hipertrrofik izler ve eşlik eden renk değişikliklerini kapsar. İz tipi ve derinliği tedavi planını belirler.</p>
 
@@ -3412,14 +3308,19 @@ const services = ref([
           <li>Deneyimli ekip, güvenli ve kanıta dayalı protokoller</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'yara-iz-tedavisi',
-    title: 'Yara İz Tedavisi',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'akne-iz-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 19. Yara İz Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Yara İzi Nedir?</h4>
         <p>Travma, cerrahi, yanık veya inflamasyon sonrası oluşan skarlar; düz, hipertrofik veya keloid formda görülebilir. Doku elastikiyeti, renk ve yüzey bütünlüğünü etkiler.</p>
 
@@ -3457,14 +3358,19 @@ const services = ref([
           <li>Gelişmiş cihaz parkuru ve deneyimli ekip</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'medikal-cilt-bakimi-aquapeel',
-    title: 'Medikal Cilt Bakımı (Aquapeel)',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'yara-iz-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 20. Medikal Cilt Bakımı (Aquapeel)
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Aquapeel Nedir?</h4>
         <p>Vakum destekli hidro-dermabrazyon sistemi ile eş zamanlı temizleme, peeling, ekstraksiyon ve dermal infüzyon sağlayan, cilt bariyerine nazik bir medikal bakım yöntemidir.</p>
 
@@ -3499,14 +3405,19 @@ const services = ref([
           <li>Hijyen ve cihaz kalibrasyonuna özenli yaklaşım</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'iple-yuz-askilama',
-    title: 'İple Yüz Askılama',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'medikal-cilt-bakimi-aquapeel' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 21. İple Yüz Askılama
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>İple Yüz Askılama Nedir?</h4>
         <p>PDO/PLLA/PLGA gibi biyo-uyumlu iplerin dermal/subdermal planlara yerleştirilerek mekanik lifting ve biyostimülasyon yoluyla dokuda toparlanma sağlayan minimal invaziv bir yöntemdir.</p>
 
@@ -3542,14 +3453,19 @@ const services = ref([
           <li>Hijyen, güvenlik ve doğal sonuç odaklı yaklaşım</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'kilcal-damar-tedavisi',
-    title: 'Kılcal Damar Tedavisi',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'iple-yuz-askilama' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 22. Kılcal Damar Tedavisi
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Kılcal Damar (Telanjiektazi) Nedir?</h4>
         <p>Yüz ve burun çevresinde belirginleşen ince damar genişlemeleri; rozasea, fotoyaşlanma ve genetik yatkınlıkla ilişkili olabilir.</p>
 
@@ -3579,14 +3495,19 @@ const services = ref([
           <li>Güvenli, etkili ve kanıta dayalı protokoller</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'sivi-yuz-germe',
-    title: 'Sıvı Yüz Germe',
-    category: 'Estetik Dermatoloji',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'kilcal-damar-tedavisi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 23. Sıvı Yüz Germe
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Sıvı Yüz Germe Nedir?</h4>
         <p>Sıvı yüz germe, cerrahi müdahale gerektirmeden yüz hatlarını toparlayan, sarkmaları azaltan ve cildi gençleştiren modern bir estetik yöntemdir. Bu tedavi, özel formülasyonlu dolgu maddeleri ve cilt sıkılaştırıcı ajanlar kullanılarak gerçekleştirilir. Sıvı yüz germe, ameliyatsız yüz gençleştirme arayanlar için güvenli ve etkili bir alternatif sunar.</p>
         
@@ -3712,14 +3633,19 @@ const services = ref([
         <h4>Sonuç</h4>
         <p>Sıvı yüz germe, ameliyatsız yüz gençleştirme arayanlar için modern, güvenli ve etkili bir çözümdür. Bu yöntem ile yüz hatlarınızı toparlayabilir, sarkmaları azaltabilir ve daha genç bir görünüm elde edebilirsiniz. Kliniğimizde uzman ekibimizle birlikte, size en uygun sıvı yüz germe tedavi planını hazırlayarak, doğal ve kalıcı sonuçlar elde etmenizi sağlıyoruz.</p>
       </div>
-    `
-  },
-  {
-    slug: 'veloce-bb-light',
-    title: 'Veloce BB LİGHT',
-    category: 'Lazer Tedavileri',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'sivi-yuz-germe' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 24. Veloce BB LİGHT
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Veloce BB Lazer Nedir?</h4>
         <p>Veloce BB Lazer, cilt yenileme ve gençleştirme alanında devrim niteliğinde bir teknolojidir. Bu gelişmiş lazer sistemi, cildin derin katmanlarına kontrollü şekilde nüfuz ederek, kolajen ve elastin üretimini artırır. Özellikle rozasea (gül hastalığı) ve cilt lekelerinin tedavisinde son derece etkili sonuçlar verir. Veloce BB Lazer, cildin doğal iyileşme mekanizmasını harekete geçirerek, daha parlak, sıkı ve sağlıklı bir görünüm sağlar.</p>
         
@@ -3729,7 +3655,7 @@ const services = ref([
         <h4>Rozasea (Gül Hastalığı) Tedavisinde Veloce BB Lazer</h4>
         <p>Rozasea tedavisinde Veloce BB Lazer özellikle etkili bir yöntemdir. Bu lazer sistemi, rozaseanın temel belirtileri olan kızarıklık, damar genişlemeleri ve inflamasyonu hedef alır. Lazer ışınları, genişlemiş kılcal damarları seçici olarak kapatarak kızarıklığı azaltır ve cilt tonunu dengeler.</p>
         
-        <p>Rozasea tedavisinde Veloce BB Lazer'in avantajları:</p>
+        <p>Rozasea tedavisinde Veloce BB Lazer''in avantajları:</p>
         <ul>
           <li>Genişlemiş kılcal damarları etkili şekilde kapatır</li>
           <li>Yüz kızarıklığını azaltır</li>
@@ -3742,7 +3668,7 @@ const services = ref([
         <h4>Leke Tedavisinde Veloce BB Lazer</h4>
         <p>Veloce BB Lazer, cilt lekelerinin tedavisinde de son derece etkili bir yöntemdir. Bu lazer sistemi, güneş lekeleri, yaşlılık lekeleri, melazma ve akne sonrası oluşan lekeleri başarıyla tedavi eder. Lazer ışınları, ciltteki melanin pigmentlerini hedef alarak lekeleri parçalar ve vücudun doğal yollarla bu parçaları atmasını sağlar.</p>
         
-        <p>Leke tedavisinde Veloce BB Lazer'in özellikleri:</p>
+        <p>Leke tedavisinde Veloce BB Lazer''in özellikleri:</p>
         <ul>
           <li>Güneş ve yaşlılık lekelerini etkili şekilde açar</li>
           <li>Melazma tedavisinde güvenli sonuçlar verir</li>
@@ -3752,7 +3678,7 @@ const services = ref([
           <li>Farklı cilt tiplerinde güvenle kullanılabilir</li>
         </ul>
         
-        <h4>Veloce BB Lazer'in Diğer Kullanım Alanları</h4>
+        <h4>Veloce BB Lazer''in Diğer Kullanım Alanları</h4>
         <p>Veloce BB Lazer, sadece rozasea ve leke tedavisinde değil, genel cilt yenileme ve gençleştirme alanlarında da kullanılır:</p>
         <ul>
           <li>İnce çizgiler ve kırışıklıkların azaltılması</li>
@@ -3772,7 +3698,7 @@ const services = ref([
         <h4>Tedavi Sonrası Bakım</h4>
         <p>Veloce BB Lazer tedavisi sonrası cildin korunması çok önemlidir. Güneş koruyucu kullanımı (en az SPF 50) şarttır. Tedavi sonrası ilk 24-48 saat boyunca ağır makyaj yapılmamalı, cildi tahriş edecek ürünlerden kaçınılmalıdır. Nemlendirici kullanımı ve bol su içimi tedavi sonuçlarının kalıcılığını artırır.</p>
         
-        <h4>Veloce BB Lazer'in Güvenliği</h4>
+        <h4>Veloce BB Lazer''in Güvenliği</h4>
         <p>Veloce BB Lazer, FDA onaylı ve klinik olarak test edilmiş güvenli bir teknolojidir. Uzman dermatologlar tarafından uygulandığında yan etki riski minimaldir. Tedavi sonrası hafif kızarıklık ve şişlik görülebilir, ancak bunlar genellikle birkaç saat içinde geçer. Cilt tipine göre özel parametreler kullanılarak güvenlik maksimum seviyede tutulur.</p>
         
         <h4>Neden Veloce BB Lazer Tercih Edilmeli?</h4>
@@ -3789,14 +3715,19 @@ const services = ref([
         <h4>Kliniğimizde Veloce BB Lazer Uygulaması</h4>
         <p>Kliniğimizde Veloce BB Lazer tedavisi, deneyimli dermatolog ekibimiz tarafından, en güncel teknoloji ile uygulanır. Her hasta için kişiselleştirilmiş tedavi planı hazırlanır ve tedavi sonuçları düzenli olarak takip edilir. Rozasea ve leke tedavisinde özellikle uzmanlaşmış ekibimiz, en iyi sonuçları almak için gerekli tüm önlemleri alır.</p>
       </div>
-    `
-  },
-  {
-    slug: 'fraksiyonel-karbondioksit-co2-lazer',
-    title: 'Fraksiyonel Karbondioksit (CO2) Lazer',
-    category: 'Lazer Tedavileri',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'veloce-bb-light' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 25. Fraksiyonel Karbondioksit (CO2) Lazer
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Fraksiyonel CO2 Nedir?</h4>
         <p>Ablatif fraksiyonel lazer, ciltte mikroskobik termal hasar sütunları (MTZ) oluşturarak kontrollü yeniden şekillenme (remodeling) ve kolajen stimulasyonu sağlar.</p>
 
@@ -3831,14 +3762,19 @@ const services = ref([
           <li>Aktif enfeksiyonda uygulanmaz; iz profilinde kombinasyonlar (subcision, TCA CROSS) planlanabilir</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'secret-altin-igne-fraksiyonel-radyofrekans',
-    title: 'Secret Altın İğne (Fraksiyonel Radyo Frekans)',
-    category: 'Lazer Tedavileri',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'fraksiyonel-karbondioksit-co2-lazer' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 26. Secret Altın İğne (Fraksiyonel Radyo Frekans)
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Secret Altın İğne (Mikro İğneli RF) Nedir?</h4>
         <p>İzole mikro iğneler aracılığıyla dermise iletilen fraksiyonel RF enerjisi ile kolajen/elasetin üretimini artıran, doku sıkılaştırma ve iz tedavisine yönelik bir teknolojidir.</p>
 
@@ -3873,14 +3809,19 @@ const services = ref([
           <li>SPF, nazik temizleme ve bariyer onarımı</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'aqua-peel-medikal-cilt-bakimi',
-    title: 'Aqua-Peel Medikal Cilt Bakımı',
-    category: 'Lazer Tedavileri',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'secret-altin-igne-fraksiyonel-radyofrekans' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 27. Aqua-Peel Medikal Cilt Bakımı
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Aqua-Peel Nedir?</h4>
         <p>Vakum destekli hidro-dermabrazyon ile eş zamanlı temizleme, peeling, ekstraksiyon ve serum infüzyonu sağlayan profesyonel bakım protokolüdür.</p>
 
@@ -3903,14 +3844,19 @@ const services = ref([
           <li>24 saat makyajdan kaçınma, SPF ve nazik nemlendirme</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'piko-saniye-lazer',
-    title: 'Piko Saniye Lazer',
-    category: 'Lazer Tedavileri',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'aqua-peel-medikal-cilt-bakimi' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 28. Piko Saniye Lazer
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>Piko Saniye Lazer Nedir?</h4>
         <p>Pikosaniye ölçekli atım süreleriyle fotomekanik etki oluşturarak pigment partiküllerini mikro-fragmente eden, çevre dokuda ısı hasarını minimalize eden ileri lazer teknolojisidir.</p>
 
@@ -3939,14 +3885,19 @@ const services = ref([
           <li>SPF, yara bakım protokolü ve irritanlardan kaçınma</li>
         </ul>
       </div>
-    `
-  },
-  {
-    slug: 'hifu-ameliyatsiz-yuz-germe',
-    title: 'HI-FU (Ameliyatsız Yüz Germe)',
-    category: 'Lazer Tedavileri',
-    content: `
-      <div class="service-content-detail">
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'piko-saniye-lazer' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
+
+
+-- 29. HI-FU (Ameliyatsız Yüz Germe)
+UPDATE MenuTranslation 
+SET Content = '<div class="service-content-detail">
+<div class="service-content-detail">
         <h4>HIFU Nedir?</h4>
         <p>Yüksek yoğunluklu odaklı ultrason (HIFU), dermis ve SMAS katmanında termal koagülasyon noktaları oluşturarak kolajen remodeling sağlayan, ameliyatsız sıkılaştırma yöntemidir.</p>
         
@@ -3975,50 +3926,14 @@ const services = ref([
           <li>SPF ve nazik bakım önerilir</li>
         </ul>
       </div>
-    `
-  }
-])
+      </div>',
+    UpdatedAt = GETUTCDATE()
+WHERE MenuId IN (
+    SELECT m.Id FROM Menu m 
+    INNER JOIN MenuTranslation mt ON m.Id = mt.MenuId 
+    WHERE mt.Slug = 'hifu-ameliyatsiz-yuz-germe' AND mt.LanguageId = @TrLanguageId
+) AND LanguageId = @TrLanguageId;
 
-// Mevcut hizmeti bul
-const currentService = computed(() => {
-  return services.value.find(service => service.slug === route.params.slug)
-})
 
-// İlgili hizmetleri bul
-const relatedServices = computed(() => {
-  if (!currentService.value) return []
-  
-  return services.value
-    .filter(service => 
-      service.slug !== currentService.value.slug && 
-      service.category === currentService.value.category
-    )
-    .slice(0, 3)
-})
-
-// SEO için head bilgilerini ayarla
-useHead({
-  title: computed(() => currentService.value ? `${currentService.value.title} - Dermaklinik` : 'Hizmet Bulunamadı - Dermaklinik'),
-  meta: [
-    {
-      name: 'description',
-      content: computed(() => currentService.value ? `${currentService.value.title} hakkında detaylı bilgi. Uzman dermatolog ekibimizle modern tedavi yöntemleri.` : 'Aradığınız hizmet bulunamadı.')
-    },
-    {
-      name: 'keywords',
-      content: computed(() => currentService.value ? `${currentService.value.title}, dermatoloji, cilt hastalıkları, tedavi` : 'dermatoloji, cilt hastalıkları')
-    }
-  ]
-})
-
-onMounted(() => {
-  // Sayfa yüklendiğinde gerekli işlemler
-  if (!currentService.value) {
-    error.value = 'Hizmet bulunamadı'
-  }
-})
-</script>
-
-<style lang="scss">
-@use '@/assets/styles/views/ServiceDetailView.scss';
-</style>
+PRINT 'Hizmet içerikleri güncellendi!';
+PRINT 'Güncellenen kayıt sayısı: ' + CAST(@@ROWCOUNT AS NVARCHAR(10));

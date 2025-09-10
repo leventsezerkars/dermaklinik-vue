@@ -3,10 +3,16 @@ import apiClient from '../api'
 export const MenuAPI = {
   /**
    * Tüm menü öğelerini getirir
+   * @param {string} languageCode - Dil kodu (tr, en)
    */
-  async getAll() {
+  async getAll(languageCode = 'tr') {
     try {
-      const response = await apiClient.get('/Menu')
+      const response = await apiClient.get('/Menu', {
+        params: {
+          LanguageCode: languageCode,
+          take : 10000
+        }
+      })
       return response.data
     } catch (error) {
       throw new Error('Menü öğeleri yüklenirken bir hata oluştu')
@@ -15,10 +21,16 @@ export const MenuAPI = {
 
   /**
    * ID'ye göre menü öğesini getirir
+   * @param {string} id - Menü öğesi ID'si
+   * @param {string} languageCode - Dil kodu (tr, en)
    */
-  async getById(id) {
+  async getById(id, languageCode = 'tr') {
     try {
-      const response = await apiClient.get(`/Menu/${id}`)
+      const response = await apiClient.get(`/Menu/${id}`, {
+        params: {
+          LanguageCode: languageCode
+        }
+      })
       return response.data
     } catch (error) {
       throw new Error('Menü öğesi yüklenirken bir hata oluştu')
