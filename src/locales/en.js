@@ -28,6 +28,55 @@ export default {
     allServices: 'All Services'
   },
 
+  // Service Detail
+  serviceDetail: {
+    breadcrumb: {
+      home: 'Home',
+      service: 'Service'
+    },
+    meta: {
+      expertDermatologist: 'Expert Dermatologist',
+      updated: 'Updated',
+      professionalTreatment: 'Professional Treatment'
+    },
+    introText: 'Detailed information about {title} and modern treatment methods.',
+    loading: 'Loading service information...',
+    error: {
+      title: 'An Error Occurred',
+      retry: 'Try Again',
+      homeLink: 'Back to Home'
+    },
+    notFound: {
+      title: 'Service Not Found',
+      description: 'The service you are looking for was not found or may have been removed.',
+      homeLink: 'Back to Home'
+    },
+    sidebar: {
+      quickAppointment: {
+        title: 'Quick Appointment',
+        description: 'Contact our expert team immediately and book your appointment.',
+        stats: {
+          quickResponse: 'Quick Response',
+          expertStaff: 'Expert Staff',
+          highSatisfaction: 'High Satisfaction'
+        },
+        whatsapp: 'WhatsApp',
+        call: 'Call'
+      },
+      relatedServices: {
+        title: 'Related Services'
+      },
+      contactInfo: {
+        title: 'Contact Information',
+        address: 'Address',
+        phone: 'Phone',
+        email: 'Email',
+        workingHours: 'Working Hours',
+        workingHoursValue: 'Monday - Saturday: 09:00 - 18:00'
+      }
+    }
+  },
+
   // Header
   header: {
     brand: 'ASSOC. PROF. DR. MEHMET ÜNAL',

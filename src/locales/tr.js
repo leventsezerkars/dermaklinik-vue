@@ -28,6 +28,55 @@ export default {
     allServices: 'Tüm Hizmetler'
   },
 
+  // Service Detail
+  serviceDetail: {
+    breadcrumb: {
+      home: 'Ana Sayfa',
+      service: 'Hizmet'
+    },
+    meta: {
+      expertDermatologist: 'Uzman Dermatolog',
+      updated: 'Güncellendi',
+      professionalTreatment: 'Profesyonel Tedavi'
+    },
+    introText: '{title} hakkında detaylı bilgi ve modern tedavi yöntemleri.',
+    loading: 'Hizmet bilgileri yükleniyor...',
+    error: {
+      title: 'Bir Hata Oluştu',
+      retry: 'Tekrar Dene',
+      homeLink: 'Ana Sayfaya Dön'
+    },
+    notFound: {
+      title: 'Hizmet Bulunamadı',
+      description: 'Aradığınız hizmet bulunamadı veya kaldırılmış olabilir.',
+      homeLink: 'Ana Sayfaya Dön'
+    },
+    sidebar: {
+      quickAppointment: {
+        title: 'Hızlı Randevu',
+        description: 'Uzman ekibimizle hemen iletişime geçin ve randevunuzu alın.',
+        stats: {
+          quickResponse: 'Hızlı Yanıt',
+          expertStaff: 'Uzman Kadro',
+          highSatisfaction: 'Yüksek Memnuniyet'
+        },
+        whatsapp: 'WhatsApp',
+        call: 'Ara'
+      },
+      relatedServices: {
+        title: 'İlgili Hizmetler'
+      },
+      contactInfo: {
+        title: 'İletişim Bilgileri',
+        address: 'Adres',
+        phone: 'Telefon',
+        email: 'E-posta',
+        workingHours: 'Çalışma Saatleri',
+        workingHoursValue: 'Pazartesi - Cumartesi: 09:00 - 18:00'
+      }
+    }
+  },
+
   // Header
   header: {
     brand: 'DOÇ. DR. MEHMET ÜNAL',
