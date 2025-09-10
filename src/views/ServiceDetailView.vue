@@ -114,32 +114,32 @@
             <div class="sidebar-card contact-card">
               <div class="card-header">
                 <i class="fas fa-calendar-check"></i>
-                <h3>{{ $t('serviceDetail.sidebar.quickAppointment.title') }}</h3>
+                <h3>{{ t('serviceDetail.sidebar.quickAppointment.title') }}</h3>
               </div>
               <div class="card-content">
-                <p>{{ $t('serviceDetail.sidebar.quickAppointment.description') }}</p>
+                <p>{{ t('serviceDetail.sidebar.quickAppointment.description') }}</p>
                 <div class="contact-stats">
                   <div class="stat-item">
                     <i class="fas fa-clock"></i>
-                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.quickResponse') }}</span>
+                    <span>{{ t('serviceDetail.sidebar.quickAppointment.stats.quickResponse') }}</span>
                   </div>
                   <div class="stat-item">
                     <i class="fas fa-user-md"></i>
-                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.expertStaff') }}</span>
+                    <span>{{ t('serviceDetail.sidebar.quickAppointment.stats.expertStaff') }}</span>
                   </div>
                   <div class="stat-item">
                     <i class="fas fa-star"></i>
-                    <span>{{ $t('serviceDetail.sidebar.quickAppointment.stats.highSatisfaction') }}</span>
+                    <span>{{ t('serviceDetail.sidebar.quickAppointment.stats.highSatisfaction') }}</span>
                   </div>
                 </div>
                 <div class="contact-actions">
                   <a :href="`https://wa.me/${contactInfo.phone.replace(/[^0-9]/g, '')}`" class="btn btn-whatsapp" target="_blank">
                     <i class="fab fa-whatsapp"></i>
-                    {{ $t('serviceDetail.sidebar.quickAppointment.whatsapp') }}
+                    {{ t('serviceDetail.sidebar.quickAppointment.whatsapp') }}
                   </a>
                   <a :href="`tel:${contactInfo.phone}`" class="btn btn-phone">
                     <i class="fas fa-phone"></i>
-                    {{ $t('serviceDetail.sidebar.quickAppointment.call') }}
+                    {{ t('serviceDetail.sidebar.quickAppointment.call') }}
                   </a>
                 </div>
               </div>
@@ -218,7 +218,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useHead } from '@vueuse/head'
 import { useStore } from 'vuex'
@@ -228,7 +228,7 @@ import { MenuAPI } from '@/services/api/menu'
 const route = useRoute()
 const router = useRouter()
 const store = useStore()
-const { locale } = useI18n()
+const { locale, t } = useI18n({ useScope: 'global' })
 const loading = ref(false)
 const error = ref(null)
 
@@ -244,8 +244,9 @@ const updateSlugForNewLanguage = async (newLocale) => {
     loading.value = true
     
     // Mevcut hizmetin ID'sini kullanarak yeni dildeki slug'ını bul
-    const menuItems = await MenuAPI.getAll(newLocale)
-    const service = menuItems.data.find(item => item.id === currentService.value.id)
+    const response = await MenuAPI.getAll(newLocale)
+    const menuItems = response.data || response
+    const service = menuItems.find(item => item.id === currentService.value.id)
     
     if (service && service.translations) {
       const translation = service.translations.find(t => t.language?.code === newLocale)
@@ -282,9 +283,11 @@ const fetchServiceData = async () => {
     const currentLanguage = locale.value || 'tr'
     
     // Tüm menü öğelerini çek
-    const menuItems = await MenuAPI.getAll(currentLanguage)
+    const response = await MenuAPI.getAll(currentLanguage)
+    const menuItems = response.data || response
+    
     // Slug'a göre hizmeti bul
-    const service = menuItems.data.find(item => 
+    const service = menuItems.find(item => 
       item.translations && 
       item.translations.some(translation => translation.slug === route.params.slug)
     )
@@ -380,6 +383,8 @@ watch(
   () => locale.value,
   async (newLocale, oldLocale) => {
     if (newLocale && newLocale !== oldLocale && currentService.value) {
+      // DOM güncellemesini bekle
+      await nextTick()
       // Dil değiştiğinde önce mevcut hizmetin yeni dildeki slug'ını bul
       await updateSlugForNewLanguage(newLocale)
     }

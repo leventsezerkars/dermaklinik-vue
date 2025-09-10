@@ -183,12 +183,10 @@ export default {
         stats: {
           quickResponse: 'Hızlı Yanıt',
           expertStaff: 'Uzman Kadro',
-          reliableService: 'Güvenilir Hizmet'
+          highSatisfaction: 'Yüksek Memnuniyet'
         },
-        actions: {
-          bookAppointment: 'Randevu Alın',
-          callNow: 'Hemen Ara'
-        }
+        whatsapp: 'WhatsApp',
+        call: 'Ara'
       },
       relatedServices: {
         title: 'İlgili Hizmetler'

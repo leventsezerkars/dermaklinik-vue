@@ -183,12 +183,10 @@ export default {
         stats: {
           quickResponse: 'Quick Response',
           expertStaff: 'Expert Staff',
-          reliableService: 'Reliable Service'
+          highSatisfaction: 'High Satisfaction'
         },
-        actions: {
-          bookAppointment: 'Book Appointment',
-          callNow: 'Call Now'
-        }
+        whatsapp: 'WhatsApp',
+        call: 'Call'
       },
       relatedServices: {
         title: 'Related Services'
