@@ -172,6 +172,11 @@ export default {
     },
     introText: 'On this page, you can find detailed information about {title}, learn about treatment processes, and contact our expert team.',
     loading: 'Loading service information...',
+    contentWarning: {
+      title: 'Content Loading',
+      message: 'The detailed content of this service will be loaded shortly. Please wait a moment.',
+      icon: 'fas fa-clock'
+    },
     notFound: {
       title: 'Service Not Found',
       description: 'The service you are looking for was not found. Please return to the home page or select a different service.',

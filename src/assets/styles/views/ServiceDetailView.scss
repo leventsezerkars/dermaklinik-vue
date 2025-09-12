@@ -1,4 +1,5 @@
 @use '../variables' as *;
+@use 'sass:color';
 
 .service-detail-page {
   background: $service-background;
@@ -988,6 +989,50 @@
     }
   }
 
+  // Content Warning
+  .content-warning {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    padding: 2rem 0;
+    margin: 2rem 0;
+
+    .warning-content {
+      text-align: center;
+      max-width: 500px;
+      background: rgba($yellow, 0.1);
+      border: 1px solid rgba($yellow, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+
+      .warning-icon {
+        margin-bottom: 1.5rem;
+        
+        i {
+          font-size: 3rem;
+          color: $yellow;
+          animation: pulse 2s infinite;
+        }
+      }
+
+      h3 {
+        color: $white;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      p {
+        color: rgba($white, 0.8);
+        margin: 0;
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+    }
+  }
+
   // Loading States
   .service-loading {
     display: flex;
@@ -1080,7 +1125,7 @@
             border: none;
 
             &:hover {
-              background: lighten($gold, 10%);
+              background: color.adjust($gold, $lightness: 10%);
               transform: translateY(-2px);
             }
           }
@@ -1153,7 +1198,7 @@
           border: none;
 
           &:hover {
-            background: lighten($gold, 10%);
+            background: color.adjust($gold, $lightness: 10%);
             transform: translateY(-2px);
           }
         }
@@ -1166,4 +1211,19 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
 }

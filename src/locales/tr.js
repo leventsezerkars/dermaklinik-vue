@@ -172,6 +172,11 @@ export default {
     },
     introText: 'Bu sayfada {title} hakkında detaylı bilgi bulabilir, tedavi süreçlerini öğrenebilir ve uzman ekibimizle iletişime geçebilirsiniz.',
     loading: 'Hizmet bilgileri yükleniyor...',
+    contentWarning: {
+      title: 'İçerik Yükleniyor',
+      message: 'Bu hizmetin detaylı içeriği en kısa sürede yüklenecektir. Lütfen kısa bir süre bekleyiniz.',
+      icon: 'fas fa-clock'
+    },
     notFound: {
       title: 'Hizmet Bulunamadı',
       description: 'Aradığınız hizmet bulunamadı. Lütfen ana sayfaya dönün veya farklı bir hizmet seçin.',

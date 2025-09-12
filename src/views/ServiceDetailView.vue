@@ -57,7 +57,19 @@
                 </p>
               </div>
 
-              <div class="service-content">
+              <!-- İçerik uyarısı - eğer içerik yoksa -->
+              <div v-if="!currentService.content || currentService.content.trim() === ''" class="content-warning">
+                <div class="warning-content">
+                  <div class="warning-icon">
+                    <i :class="$t('serviceDetail.contentWarning.icon')"></i>
+                  </div>
+                  <h3>{{ $t('serviceDetail.contentWarning.title') }}</h3>
+                  <p>{{ $t('serviceDetail.contentWarning.message') }}</p>
+                </div>
+              </div>
+
+              <!-- Normal içerik - eğer içerik varsa -->
+              <div v-else class="service-content">
                 <div class="service-content-detail" v-html="currentService.content"></div>
               </div>
             </div>
