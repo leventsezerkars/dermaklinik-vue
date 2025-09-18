@@ -161,6 +161,13 @@ const loadHeroData = async () => {
   try {
     // Sabit grup ID ile hero resimlerini yükle
     const result = await store.dispatch('gallery/fetchHeroImages')
+    
+    // Veri yüklendikten sonra Swiper'ı sadece bir kez başlat
+    if (!swiperInstance) {
+      setTimeout(() => {
+        initSwiper()
+      }, 200)
+    }
   } catch (error) {
     console.error('Hero verileri yüklenirken hata:', error)
   }
@@ -198,14 +205,9 @@ const initSwiper = () => {
   })
 }
 
-// Component mount edildiğinde verileri yükle ve swiper'ı başlat
+// Component mount edildiğinde verileri yükle
 onMounted(() => {
   loadHeroData()
-  
-  // Swiper'ı biraz gecikmeyle başlat (DOM güncellemeleri için)
-  setTimeout(() => {
-    initSwiper()
-  }, 100)
 })
 </script>
 
