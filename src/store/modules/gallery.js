@@ -1,5 +1,10 @@
 import { GalleryGroupAPI, GalleryImageAPI, GalleryImageGroupMapAPI } from '../../services/api/gallery'
 
+// Sabit galeri grubu ID'si
+const GALLERY_GROUP_ID = '9ed81090-088e-44c1-e6a2-08ddf1fc97e5'
+// Hero grubu ID'si
+const HERO_GROUP_ID = '2E04E209-BA5F-427F-A2B5-08DDF5EB9022'
+
 export default {
   namespaced: true,
   
@@ -9,7 +14,10 @@ export default {
     groupImages: {},
     loading: false,
     error: null,
-    lastFetch: null
+    lastFetch: null,
+    galleryGroupId: GALLERY_GROUP_ID,
+    heroGroupId: HERO_GROUP_ID,
+    isFetching: false // Tekrarlayan istekleri engellemek için
   },
 
   mutations: {
@@ -24,6 +32,24 @@ export default {
     setGroupImages(state, { groupId, images }) {
       state.groupImages[groupId] = images
     },
+    setGalleryImages(state, images) {
+      state.groupImages[state.galleryGroupId] = images
+      state.lastFetch = new Date()
+      // localStorage'a kaydet
+      localStorage.setItem('galleryImages_cache', JSON.stringify({
+        data: images,
+        timestamp: new Date().toISOString()
+      }))
+    },
+    setHeroImages(state, images) {
+      state.groupImages[state.heroGroupId] = images
+      state.lastFetch = new Date()
+      // localStorage'a kaydet
+      localStorage.setItem('heroImages_cache', JSON.stringify({
+        data: images,
+        timestamp: new Date().toISOString()
+      }))
+    },
     setLoading(state, loading) {
       state.loading = loading
     },
@@ -32,6 +58,61 @@ export default {
     },
     clearError(state) {
       state.error = null
+    },
+    setFetching(state, status) {
+      state.isFetching = status
+    },
+    // localStorage'dan veri yükle
+    loadFromCache(state) {
+      try {
+        const galleryCache = localStorage.getItem('galleryImages_cache')
+        if (galleryCache) {
+          const { data, timestamp } = JSON.parse(galleryCache)
+          const cacheTime = new Date(timestamp)
+          const now = new Date()
+          const diffInHours = (now - cacheTime) / (1000 * 60 * 60)
+          
+          // 1 saatten eski değilse cache'den yükle
+          if (diffInHours < 1) {
+            state.groupImages[state.galleryGroupId] = data
+            state.lastFetch = cacheTime
+            console.log('Gallery: localStorage cache\'den yüklendi')
+          } else {
+            // Eski cache'i temizle
+            localStorage.removeItem('galleryImages_cache')
+            console.log('Gallery: Eski cache temizlendi')
+          }
+        }
+      } catch (error) {
+        console.error('Gallery: Cache yüklenirken hata:', error)
+        localStorage.removeItem('galleryImages_cache')
+      }
+    },
+    // Hero resimlerini localStorage'dan yükle
+    loadHeroFromCache(state) {
+      try {
+        const heroCache = localStorage.getItem('heroImages_cache')
+        if (heroCache) {
+          const { data, timestamp } = JSON.parse(heroCache)
+          const cacheTime = new Date(timestamp)
+          const now = new Date()
+          const diffInHours = (now - cacheTime) / (1000 * 60 * 60)
+          
+          // 1 saatten eski değilse cache'den yükle
+          if (diffInHours < 1) {
+            state.groupImages[state.heroGroupId] = data
+            state.lastFetch = cacheTime
+            console.log('Hero: localStorage cache\'den yüklendi')
+          } else {
+            // Eski cache'i temizle
+            localStorage.removeItem('heroImages_cache')
+            console.log('Hero: Eski cache temizlendi')
+          }
+        }
+      } catch (error) {
+        console.error('Hero: Cache yüklenirken hata:', error)
+        localStorage.removeItem('heroImages_cache')
+      }
     }
   },
 
@@ -102,6 +183,104 @@ export default {
       }
     },
 
+    // Galeri resimlerini sabit grup ID ile çek
+    async fetchGalleryImages({ commit, state }) {
+      // İlk önce localStorage'dan cache'i yükle
+      if (!state.groupImages[state.galleryGroupId]) {
+        commit('loadFromCache')
+      }
+
+      // Eğer zaten istek atılıyorsa, mevcut isteği bekle
+      if (state.isFetching) {
+        return new Promise((resolve) => {
+          const checkInterval = setInterval(() => {
+            if (!state.isFetching) {
+              clearInterval(checkInterval)
+              resolve(state.groupImages[state.galleryGroupId] || [])
+            }
+          }, 100)
+        })
+      }
+
+      // Cache kontrolü - 1 saatten eski değilse tekrar çekme
+      if (state.groupImages[state.galleryGroupId] && state.lastFetch) {
+        const now = new Date()
+        const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
+        if (diffInHours < 1) {
+          console.log('Gallery: Cache\'den döndürülüyor (1 saat geçmedi)')
+          return state.groupImages[state.galleryGroupId]
+        }
+      }
+
+      commit('setFetching', true)
+      commit('setLoading', true)
+      commit('clearError')
+      
+      try {
+        console.log('Gallery: API\'den yeni veri çekiliyor...')
+        const response = await GalleryGroupAPI.getImages(state.galleryGroupId)
+        commit('setGalleryImages', response.data)
+        console.log('Gallery: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
+        return response.data
+      } catch (error) {
+        commit('setError', error.message)
+        console.error('Gallery: Hata oluştu:', error)
+        throw error
+      } finally {
+        commit('setLoading', false)
+        commit('setFetching', false)
+      }
+    },
+
+    // Hero resimlerini sabit grup ID ile çek
+    async fetchHeroImages({ commit, state }) {
+      // İlk önce localStorage'dan cache'i yükle
+      if (!state.groupImages[state.heroGroupId]) {
+        commit('loadHeroFromCache')
+      }
+
+      // Eğer zaten istek atılıyorsa, mevcut isteği bekle
+      if (state.isFetching) {
+        return new Promise((resolve) => {
+          const checkInterval = setInterval(() => {
+            if (!state.isFetching) {
+              clearInterval(checkInterval)
+              resolve(state.groupImages[state.heroGroupId] || [])
+            }
+          }, 100)
+        })
+      }
+
+      // Cache kontrolü - 1 saatten eski değilse tekrar çekme
+      if (state.groupImages[state.heroGroupId] && state.lastFetch) {
+        const now = new Date()
+        const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
+        if (diffInHours < 1) {
+          console.log('Hero: Cache\'den döndürülüyor (1 saat geçmedi)')
+          return state.groupImages[state.heroGroupId]
+        }
+      }
+
+      commit('setFetching', true)
+      commit('setLoading', true)
+      commit('clearError')
+      
+      try {
+        console.log('Hero: API\'den yeni veri çekiliyor...')
+        const response = await GalleryGroupAPI.getImages(state.heroGroupId)
+        commit('setHeroImages', response.data)
+        console.log('Hero: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
+        return response.data
+      } catch (error) {
+        commit('setError', error.message)
+        console.error('Hero: Hata oluştu:', error)
+        throw error
+      } finally {
+        commit('setLoading', false)
+        commit('setFetching', false)
+      }
+    },
+
     async fetchGroupById({ commit }, id) {
       commit('setLoading', true)
       commit('clearError')
@@ -138,6 +317,7 @@ export default {
     images: state => state.images,
     groupImages: state => state.groupImages,
     isLoading: state => state.loading,
+    isFetching: state => state.isFetching,
     hasError: state => state.error !== null,
     error: state => state.error,
     
@@ -154,6 +334,22 @@ export default {
     // Belirli bir grubun resimlerini getirir
     getGroupImages: state => groupId => {
       return state.groupImages[groupId] || []
+    },
+    
+    // Galeri resimlerini getirir (sabit grup ID ile)
+    galleryImages: state => {
+      const images = state.groupImages[state.galleryGroupId] || []
+      return images
+        .filter(img => img.isActive && !img.isDeleted)
+        .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+    },
+    
+    // Hero resimlerini getirir (sabit grup ID ile)
+    heroImages: state => {
+      const images = state.groupImages[state.heroGroupId] || []
+      return images
+        .filter(img => img.isActive && !img.isDeleted)
+        .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
     },
     
     // Grup ID'sine göre grubu bulur

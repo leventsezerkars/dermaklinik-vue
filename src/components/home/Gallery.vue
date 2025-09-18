@@ -5,7 +5,28 @@
         <h2>{{ $t('home.gallery.title') }}</h2>
         <p>{{ $t('home.gallery.subtitle') }}</p>
       </div>
-      <div class="gallery-slider">
+      
+      <!-- Loading State -->
+      <div v-if="isLoading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Yükleniyor...</span>
+        </div>
+        <p class="mt-3">{{ $t('common.loading') }}</p>
+      </div>
+
+      <!-- Error State -->
+      <div v-else-if="hasError" class="text-center py-5">
+        <div class="alert alert-warning" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          {{ error || $t('common.error') }}
+        </div>
+        <button @click="loadGalleryData" class="btn btn-primary">
+          {{ $t('common.retry') }}
+        </button>
+      </div>
+
+      <!-- Gallery Content -->
+      <div v-else-if="galleryImages.length > 0" class="gallery-slider">
         <swiper
           :modules="[SwiperAutoplay, SwiperPagination, SwiperNavigation]"
           :slides-per-view="1"
@@ -31,95 +52,27 @@
             }
           }"
         >
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(0)">
-              <img :src="images.clinic10" alt="Modern Klinik">
+          <swiper-slide v-for="(image, index) in galleryImages" :key="image.id">
+            <div class="gallery-item" @click="openLightbox(index)">
+              <img 
+                :src="getImageUrl(image.imageUrl)" 
+                :alt="image.title || image.altText || 'Galeri Resmi'"
+                @error="handleImageError"
+              >
               <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.modernClinic.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(1)">
-              <img :src="images.clinic1" alt="Lazer Tedavi">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.laserUnit.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(2)">
-              <img :src="images.clinic6" alt="Lazer Tedavi">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.laserUnit.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(3)">
-              <img :src="images.clinic7" alt="Bekleme Salonu">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.waitingRoom.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(4)">
-              <img :src="images.clinic8" alt="Bekleme Salonu">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.waitingRoom.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(5)">
-              <img :src="images.clinic6" alt="Bekleme Salonu">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.waitingRoom.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(6)">
-              <img :src="images.clinic3" alt="Tedavi Odası">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.examinationRoom.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(7)">
-              <img :src="images.clinic4" alt="Tedavi Odası">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.treatmentRoom.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(8)">
-              <img :src="images.clinic5" alt="Tedavi Odası">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.treatmentRoom.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(9)">
-              <img :src="images.clinic12" alt="Muayene Odası">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.generalView.title') }}</h4>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="gallery-item" @click="openLightbox(10)">
-              <img :src="images.clinic11" alt="Estetik Ünite">
-              <div class="gallery-item-title">
-                <h4>{{ $t('home.gallery.items.generalView.title') }}</h4>
+                <h4>{{ image.title || $t('home.gallery.defaultTitle') }}</h4>
               </div>
             </div>
           </swiper-slide>
         </swiper>
+      </div>
+
+      <!-- Empty State -->
+      <div v-else class="text-center py-5">
+        <div class="alert alert-info" role="alert">
+          <i class="fas fa-info-circle me-2"></i>
+          {{ $t('home.gallery.noImages') }}
+        </div>
       </div>
     </div>
 
@@ -140,7 +93,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css'
@@ -151,12 +106,16 @@ const SwiperAutoplay = Autoplay
 const SwiperPagination = Pagination
 const SwiperNavigation = Navigation
 
+// Store ve i18n
+const store = useStore()
+const { t } = useI18n()
+
 // Lightbox state
 const lightboxVisible = ref(false)
 const lightboxIndex = ref(0)
 
-// Resimleri import et
-const images = {
+// Fallback resimleri (API'den veri gelmezse kullanılacak)
+const fallbackImages = {
   clinic1: new URL('/images/clinic_images/DSCF4172.JPG', import.meta.url).href,
   clinic2: new URL('/images/clinic_images/DSCF4217.JPG', import.meta.url).href,
   clinic3: new URL('/images/clinic_images/DSCF4218.JPG', import.meta.url).href,
@@ -171,20 +130,53 @@ const images = {
   clinic12: new URL('/images/clinic_images/DSCF4303.JPG', import.meta.url).href
 }
 
+// Store getters
+const isLoading = computed(() => store.getters['gallery/isLoading'])
+const hasError = computed(() => store.getters['gallery/hasError'])
+const error = computed(() => store.getters['gallery/error'])
+
+// Galeri resimlerini getir (sabit grup ID ile)
+const galleryImages = computed(() => store.getters['gallery/galleryImages'])
+
 // Lightbox için resim listesi
-const lightboxImages = computed(() => [
-  images.clinic10,
-  images.clinic1,
-  images.clinic6,
-  images.clinic7,
-  images.clinic8,
-  images.clinic6,
-  images.clinic3,
-  images.clinic4,
-  images.clinic5,
-  images.clinic12,
-  images.clinic11
-])
+const lightboxImages = computed(() => {
+  if (galleryImages.value.length > 0) {
+    return galleryImages.value.map(img => getImageUrl(img.imageUrl))
+  }
+  
+  // Fallback resimler
+  return Object.values(fallbackImages)
+})
+
+// Resim URL'sini oluştur
+const getImageUrl = (imageUrl) => {
+  if (!imageUrl) return fallbackImages.clinic1
+  
+  // Eğer URL zaten tam URL ise direkt döndür
+  if (imageUrl.startsWith('http')) {
+    return imageUrl
+  }
+  
+  // API base URL'ini ekle
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://localhost:7078'
+  return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+}
+
+// Resim yükleme hatası durumunda fallback kullan
+const handleImageError = (event) => {
+  console.warn('Resim yüklenemedi:', event.target.src)
+  event.target.src = fallbackImages.clinic1
+}
+
+// Galeri verilerini yükle
+const loadGalleryData = async () => {
+  try {
+    // Sabit grup ID ile galeri resimlerini yükle
+    await store.dispatch('gallery/fetchGalleryImages')
+  } catch (error) {
+    console.error('Galeri verileri yüklenirken hata:', error)
+  }
+}
 
 // Lightbox açma fonksiyonu
 const openLightbox = (index) => {
@@ -196,6 +188,11 @@ const openLightbox = (index) => {
 const closeLightbox = () => {
   lightboxVisible.value = false
 }
+
+// Component mount edildiğinde verileri yükle
+onMounted(() => {
+  loadGalleryData()
+})
 </script>
 
 <style lang="scss">

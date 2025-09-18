@@ -25,7 +25,10 @@ export default {
     contactInfo: 'İletişim Bilgileri',
     notFound: 'Bulunamadı',
     backToHome: 'Ana Sayfaya Dön',
-    allServices: 'Tüm Hizmetler'
+    allServices: 'Tüm Hizmetler',
+    loading: 'Yükleniyor...',
+    error: 'Bir hata oluştu',
+    retry: 'Tekrar Dene'
   },
 
   // Service Detail
@@ -214,6 +217,8 @@ export default {
       title: 'Cildinizin Sağlığı İçin Uzman Eller',
       subtitle: 'Modern teknoloji ve uzman kadromuzla cilt sağlığınızı koruyoruz',
       cta: 'Randevu Alın',
+      defaultTitle: 'DermaKlinik',
+      defaultSubtitle: 'Cilt sağlığınız için uzman çözümler',
       slide1: {
         title: 'Cildiniz İçin Bilim ve Estetiği Buluşturuyoruz',
         subtitle: 'Uzman kadromuzla sizlere en iyi dermatolojik hizmeti sunuyoruz'
@@ -323,6 +328,8 @@ export default {
     gallery: {
       title: 'Galeri',
       subtitle: 'Kliniğimizden Kareler',
+      defaultTitle: 'Galeri Resmi',
+      noImages: 'Galeri resmi bulunamadı',
       items: {
         modernClinic: {
           title: 'Modern Klinik Ortamımız'

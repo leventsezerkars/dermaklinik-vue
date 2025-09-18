@@ -2,8 +2,55 @@
   <section id="anasayfa" class="hero-section">
     <div class="swiper hero-slider">
       <div class="swiper-wrapper">
-        <!-- Slide 1: Cilt Sağlığı ve Dermatoloji -->
-        <div class="swiper-slide" style="background-image: url('images/dr_mu2.jpg?v=3');">
+        <!-- Loading State -->
+        <div v-if="isLoading" class="swiper-slide d-flex align-items-center justify-content-center">
+          <div class="text-center text-white">
+            <div class="spinner-border text-light" role="status">
+              <span class="visually-hidden">Yükleniyor...</span>
+            </div>
+            <p class="mt-3">{{ $t('common.loading') }}</p>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div v-else-if="hasError" class="swiper-slide d-flex align-items-center justify-content-center">
+          <div class="text-center text-white">
+            <div class="alert alert-warning" role="alert">
+              <i class="fas fa-exclamation-triangle me-2"></i>
+              {{ error || $t('common.error') }}
+            </div>
+            <button @click="loadHeroData" class="btn btn-primary">
+              {{ $t('common.retry') }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Slides -->
+        <div 
+          v-else-if="heroImages.length > 0"
+          v-for="(image, index) in heroImages" 
+          :key="image.id"
+          class="swiper-slide" 
+          :style="{ backgroundImage: `url('${getImageUrl(image.imageUrl)}')` }"
+        >
+          <div class="container">
+            <div class="row h-100 align-items-center">
+              <div class="col-lg-6" data-aos="fade-right">
+                <div class="hero-content">
+                  <h1>{{ image.title || $t('home.hero.defaultTitle') }}</h1>
+                  <p class="lead">{{ image.caption || $t('home.hero.defaultSubtitle') }}</p>
+                  <div class="hero-buttons">
+                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
+                    <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fallback Slides (API'den veri gelmezse) -->
+        <div  v-else class="swiper-slide" style="background-image: url('images/dr_mu2.jpg?v=3');">
           <div class="container">
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
@@ -20,8 +67,7 @@
           </div>
         </div>
         
-        <!-- Slide 2: Cilt Bakımı ve Tedavi -->
-        <div class="swiper-slide" style="background-image: url('images/woman2.jpg');">
+        <div  v-else class="swiper-slide" style="background-image: url('images/woman2.jpg');">
           <div class="container">
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
@@ -38,8 +84,7 @@
           </div>
         </div>
 
-        <!-- Slide 3: Estetik Dermatoloji -->
-        <div class="swiper-slide" style="background-image: url('images/woman3.jpg');">
+        <div  v-else class="swiper-slide" style="background-image: url('images/woman3.jpg');">
           <div class="container">
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
@@ -63,8 +108,10 @@
   </section>
 </template>
 
-<script>
-import { onMounted } from 'vue'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 import Swiper from 'swiper'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -72,34 +119,90 @@ import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-export default {
-  name: 'Hero',
-  setup() {
-    onMounted(() => {
-      new Swiper('.hero-slider', {
-        modules: [Autoplay, EffectFade, Navigation, Pagination],
-        loop: true,
-        speed: 1000,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      })
-    })
+// Store ve i18n
+const store = useStore()
+const { t } = useI18n()
+
+// Store getters
+const isLoading = computed(() => store.getters['gallery/isLoading'])
+const hasError = computed(() => store.getters['gallery/hasError'])
+const error = computed(() => store.getters['gallery/error'])
+
+// Hero resimlerini getir
+const heroImages = computed(() => store.getters['gallery/heroImages'])
+
+// Fallback resimleri (API'den veri gelmezse kullanılacak)
+const fallbackImages = {
+  dr_mu2: 'images/dr_mu2.jpg?v=3',
+  woman2: 'images/woman2.jpg',
+  woman3: 'images/woman3.jpg'
+}
+
+// Resim URL'sini oluştur
+const getImageUrl = (imageUrl) => {
+  if (!imageUrl) return fallbackImages.dr_mu2
+  
+  // Eğer URL zaten tam URL ise direkt döndür
+  if (imageUrl.startsWith('http')) {
+    return imageUrl
+  }
+  
+  // API base URL'ini ekle
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://localhost:7078'
+  return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+}
+
+// Hero verilerini yükle
+const loadHeroData = async () => {
+  try {
+    // Sabit grup ID ile hero resimlerini yükle
+    await store.dispatch('gallery/fetchHeroImages')
+  } catch (error) {
+    console.error('Hero verileri yüklenirken hata:', error)
   }
 }
+
+// Swiper instance
+let swiperInstance = null
+
+// Swiper'ı başlat
+const initSwiper = () => {
+  if (swiperInstance) {
+    swiperInstance.destroy(true, true)
+  }
+  
+  swiperInstance = new Swiper('.hero-slider', {
+    modules: [Autoplay, EffectFade, Navigation, Pagination],
+    loop: true,
+    speed: 1000,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  })
+}
+
+// Component mount edildiğinde verileri yükle ve swiper'ı başlat
+onMounted(() => {
+  loadHeroData()
+  
+  // Swiper'ı biraz gecikmeyle başlat (DOM güncellemeleri için)
+  setTimeout(() => {
+    initSwiper()
+  }, 100)
+})
 </script>
 
 <style lang="scss" scoped>

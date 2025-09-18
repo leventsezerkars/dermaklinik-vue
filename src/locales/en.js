@@ -25,7 +25,10 @@ export default {
     contactInfo: 'Contact Information',
     notFound: 'Not Found',
     backToHome: 'Back to Home',
-    allServices: 'All Services'
+    allServices: 'All Services',
+    loading: 'Loading...',
+    error: 'An error occurred',
+    retry: 'Try Again'
   },
 
   // Service Detail
@@ -214,6 +217,8 @@ export default {
       title: 'Expert Hands for Your Skin Health',
       subtitle: 'We protect your skin health with modern technology and expert staff',
       cta: 'Book Appointment',
+      defaultTitle: 'DermaKlinik',
+      defaultSubtitle: 'Expert solutions for your skin health',
       slide1: {
         title: 'We Bring Science and Aesthetics Together for Your Skin',
         subtitle: 'We provide you with the best dermatological service with our expert staff'
@@ -323,6 +328,8 @@ export default {
     gallery: {
       title: 'Gallery',
       subtitle: 'Snapshots from Our Clinic',
+      defaultTitle: 'Gallery Image',
+      noImages: 'No gallery images found',
       items: {
         modernClinic: {
           title: 'Our Modern Clinic Environment'
