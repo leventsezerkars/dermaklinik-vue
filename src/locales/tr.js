@@ -30,6 +30,19 @@ export default {
     error: 'Bir hata oluştu',
     retry: 'Tekrar Dene'
   },
+  cookie: {
+    title: 'Çerez Kullanımı',
+    description: 'Web sitemizde size en iyi deneyimi sunabilmek için çerezler kullanıyoruz. Bu çerezler web sitesinin işlevselliğini sağlamak ve performansını artırmak için gereklidir.',
+    features: {
+      analytics: 'Site kullanımını analiz etme',
+      preferences: 'Kullanıcı tercihlerini hatırlama',
+      security: 'Güvenlik ve kimlik doğrulama'
+    },
+    accept: 'Kabul Et',
+    decline: 'Reddet',
+    privacyPolicy: 'Gizlilik Politikası',
+    cookiePolicy: 'Çerez Politikası'
+  },
 
   // Service Detail
   serviceDetail: {

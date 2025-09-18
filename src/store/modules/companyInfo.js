@@ -57,7 +57,6 @@ export default {
           if (diffInHours < 1) {
             state.activeCompanyInfo = data
             state.lastFetch = cacheTime
-            console.log('CompanyInfo: localStorage cache\'den yüklendi')
           } else {
             // Eski cache'i temizle
             localStorage.removeItem('activeCompanyInfo_cache')
@@ -95,7 +94,6 @@ export default {
         const now = new Date()
         const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
         if (diffInHours < 1) {
-          console.log('CompanyInfo: Cache\'den döndürülüyor (1 saat geçmedi)')
           return state.activeCompanyInfo
         }
       }
@@ -105,10 +103,8 @@ export default {
       commit('clearError')
       
       try {
-        console.log('CompanyInfo: API\'den yeni veri çekiliyor...')
         const response = await CompanyInfoAPI.getActiveSingle()
         commit('setActiveCompanyInfo', response.data)
-        console.log('CompanyInfo: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
         return response.data
       } catch (error) {
         commit('setError', error.message)

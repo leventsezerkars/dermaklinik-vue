@@ -5,6 +5,7 @@ import TopBar from './components/layout/TopBar.vue'
 import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
 import WhatsAppButton from './components/common/WhatsAppButton.vue'
+import CookieConsent from './components/common/CookieConsent.vue'
 
 const store = useStore()
 
@@ -30,6 +31,7 @@ onMounted(async () => {
   </main>
   <Footer />
   <WhatsAppButton />
+  <CookieConsent />
 </template>
 
 <style lang="scss">

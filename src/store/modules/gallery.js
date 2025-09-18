@@ -17,7 +17,8 @@ export default {
     lastFetch: null,
     galleryGroupId: GALLERY_GROUP_ID,
     heroGroupId: HERO_GROUP_ID,
-    isFetching: false // Tekrarlayan istekleri engellemek için
+    isFetchingGallery: false, // Galeri için tekrarlayan istekleri engellemek için
+    isFetchingHero: false // Hero için tekrarlayan istekleri engellemek için
   },
 
   mutations: {
@@ -59,8 +60,11 @@ export default {
     clearError(state) {
       state.error = null
     },
-    setFetching(state, status) {
-      state.isFetching = status
+    setFetchingGallery(state, status) {
+      state.isFetchingGallery = status
+    },
+    setFetchingHero(state, status) {
+      state.isFetchingHero = status
     },
     // localStorage'dan veri yükle
     loadFromCache(state) {
@@ -76,11 +80,9 @@ export default {
           if (diffInHours < 1) {
             state.groupImages[state.galleryGroupId] = data
             state.lastFetch = cacheTime
-            console.log('Gallery: localStorage cache\'den yüklendi')
           } else {
             // Eski cache'i temizle
             localStorage.removeItem('galleryImages_cache')
-            console.log('Gallery: Eski cache temizlendi')
           }
         }
       } catch (error) {
@@ -102,7 +104,6 @@ export default {
           if (diffInHours < 1) {
             state.groupImages[state.heroGroupId] = data
             state.lastFetch = cacheTime
-            console.log('Hero: localStorage cache\'den yüklendi')
           } else {
             // Eski cache'i temizle
             localStorage.removeItem('heroImages_cache')
@@ -118,7 +119,6 @@ export default {
 
   actions: {
     async fetchGroups({ commit, state }) {
-      // Cache kontrolü - 10 dakikadan eski değilse tekrar çekme
       if (state.groups.length > 0 && state.lastFetch) {
         const now = new Date()
         const diffInMinutes = (now - state.lastFetch) / (1000 * 60)
@@ -188,13 +188,14 @@ export default {
       // İlk önce localStorage'dan cache'i yükle
       if (!state.groupImages[state.galleryGroupId]) {
         commit('loadFromCache')
-      }
+      } 
 
       // Eğer zaten istek atılıyorsa, mevcut isteği bekle
-      if (state.isFetching) {
+      if (state.isFetchingGallery) {
+        console.log('Gallery: Zaten istek atılıyor, bekleniyor...')
         return new Promise((resolve) => {
           const checkInterval = setInterval(() => {
-            if (!state.isFetching) {
+            if (!state.isFetchingGallery) {
               clearInterval(checkInterval)
               resolve(state.groupImages[state.galleryGroupId] || [])
             }
@@ -207,28 +208,25 @@ export default {
         const now = new Date()
         const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
         if (diffInHours < 1) {
-          console.log('Gallery: Cache\'den döndürülüyor (1 saat geçmedi)')
           return state.groupImages[state.galleryGroupId]
         }
       }
 
-      commit('setFetching', true)
+      commit('setFetchingGallery', true)
       commit('setLoading', true)
       commit('clearError')
       
       try {
-        console.log('Gallery: API\'den yeni veri çekiliyor...')
         const response = await GalleryGroupAPI.getImages(state.galleryGroupId)
+        
         commit('setGalleryImages', response.data)
-        console.log('Gallery: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
         return response.data
       } catch (error) {
         commit('setError', error.message)
-        console.error('Gallery: Hata oluştu:', error)
         throw error
       } finally {
         commit('setLoading', false)
-        commit('setFetching', false)
+        commit('setFetchingGallery', false)
       }
     },
 
@@ -240,10 +238,10 @@ export default {
       }
 
       // Eğer zaten istek atılıyorsa, mevcut isteği bekle
-      if (state.isFetching) {
+      if (state.isFetchingHero) {
         return new Promise((resolve) => {
           const checkInterval = setInterval(() => {
-            if (!state.isFetching) {
+            if (!state.isFetchingHero) {
               clearInterval(checkInterval)
               resolve(state.groupImages[state.heroGroupId] || [])
             }
@@ -256,20 +254,17 @@ export default {
         const now = new Date()
         const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
         if (diffInHours < 1) {
-          console.log('Hero: Cache\'den döndürülüyor (1 saat geçmedi)')
           return state.groupImages[state.heroGroupId]
         }
       }
 
-      commit('setFetching', true)
+      commit('setFetchingHero', true)
       commit('setLoading', true)
       commit('clearError')
       
       try {
-        console.log('Hero: API\'den yeni veri çekiliyor...')
         const response = await GalleryGroupAPI.getImages(state.heroGroupId)
         commit('setHeroImages', response.data)
-        console.log('Hero: Veri başarıyla yüklendi ve localStorage\'a kaydedildi')
         return response.data
       } catch (error) {
         commit('setError', error.message)
@@ -277,7 +272,7 @@ export default {
         throw error
       } finally {
         commit('setLoading', false)
-        commit('setFetching', false)
+        commit('setFetchingHero', false)
       }
     },
 
@@ -317,7 +312,8 @@ export default {
     images: state => state.images,
     groupImages: state => state.groupImages,
     isLoading: state => state.loading,
-    isFetching: state => state.isFetching,
+    isFetchingGallery: state => state.isFetchingGallery,
+    isFetchingHero: state => state.isFetchingHero,
     hasError: state => state.error !== null,
     error: state => state.error,
     

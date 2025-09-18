@@ -38,6 +38,7 @@
                     <router-link 
                       class="dropdown-item" 
                       :to="getMenuLink(child)"
+                      @click="closeNavbar"
                     >
                       {{ child.title }}
                     </router-link>
@@ -49,6 +50,7 @@
                 <router-link 
                   class="nav-link" 
                   :to="getMenuLink(menuItem)"
+                  @click="closeNavbar"
                 >
                   {{ menuItem.title }}
                 </router-link>
@@ -199,11 +201,25 @@ onMounted(async () => {
     console.error('Şirket bilgileri yüklenirken hata:', error)
   }
 
-  // Menü verilerini çek (mevcut dil ile)
-  try {
-    await store.dispatch('menu/fetchMenuItems', locale.value)
-  } catch (error) {
-    console.error('Menü verileri yüklenirken hata:', error)
+  // Mevcut dili kontrol et ve menu store'u güncelle
+  const currentLocale = locale.value
+  const storeLocale = store.getters['menu/currentLanguage']
+  
+  
+  // Eğer store'daki dil ile i18n'deki dil farklıysa store'u güncelle
+  if (currentLocale !== storeLocale) {
+    await store.dispatch('menu/changeLanguage', currentLocale)
+  } else {
+    // Aynı dil ise sadece menü verilerini çek (eğer yoksa)
+    if (store.getters['menu/menuItems'].length === 0) {
+      try {
+        await store.dispatch('menu/fetchMenuItems', currentLocale)
+      } catch (error) {
+        console.error('Menü verileri yüklenirken hata:', error)
+      }
+    } else {
+      await store.dispatch('menu/changeLanguage', currentLocale)
+    }
   }
 
   // Route değişince menüyü kapat
@@ -222,9 +238,12 @@ onMounted(async () => {
       const isToggle = target.closest('a.dropdown-toggle, button.dropdown-toggle')
       if (isToggle) return
       
-      // Herhangi bir link'e (dropdown-item, nav-link) tıklanmışsa menüyü kapat
-      const isItem = target.closest('a.dropdown-item, a.nav-link:not(.dropdown-toggle), router-link')
-      if (isItem) {
+      // Router-link veya normal link'e tıklanmışsa menüyü kapat
+      const isRouterLink = target.closest('a[href]') || target.tagName === 'A'
+      const isNavLink = target.closest('a.nav-link:not(.dropdown-toggle)')
+      const isDropdownItem = target.closest('a.dropdown-item')
+      
+      if (isRouterLink || isNavLink || isDropdownItem) {
         // Kısa bir gecikme ile menüyü kapat (router navigation'ın tamamlanması için)
         setTimeout(() => {
           closeNavbar()

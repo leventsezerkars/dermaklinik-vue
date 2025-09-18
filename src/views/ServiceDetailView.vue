@@ -12,13 +12,6 @@
             <i class="fas fa-chevron-right separator"></i>
             <span class="current-page">{{ currentService?.category || $t('serviceDetail.breadcrumb.service') }}</span>
           </div>
-          
-          <div class="service-meta" v-if="currentService">
-            <div class="category-badge">
-              <i class="fas fa-tag"></i>
-              {{ currentService.category }}
-            </div>
-          </div>
         </div>
       </div>
     </header>
@@ -307,8 +300,17 @@ const fetchServiceData = async () => {
     if (service) {
       // Mevcut dildeki çeviriyi bul
       const translation = service.translations.find(t => t.language?.code === currentLanguage)
-      
       if (translation) {
+        // Kategori title'ını bul (parentId varsa parent'ın title'ını al)
+        let categoryTitle = service.title
+        if (service.parentId) {
+          const parentService = menuItems.find(item => item.id === service.parentId)
+          if (parentService) {
+            const parentTranslation = parentService.translations.find(t => t.language?.code === currentLanguage)
+            categoryTitle = parentTranslation ? parentTranslation.title : parentService.title
+          }
+        }
+        
         currentService.value = {
           id: service.id,
           slug: translation.slug,
@@ -317,11 +319,11 @@ const fetchServiceData = async () => {
           seoTitle: translation.seoTitle,
           seoDescription: translation.seoDescription,
           seoKeywords: translation.seoKeywords,
-          category: service.type === 1 ? 'Genel Dermatoloji' : 'Lazer Tedavileri' // Type'a göre kategori belirle
+          category: categoryTitle
         }
         
         // İlgili hizmetleri bul (aynı kategorideki diğer hizmetler)
-        relatedServices.value = menuItems.data
+        relatedServices.value = menuItems
           .filter(item => 
             item.id !== service.id && 
             item.type === service.type &&
@@ -330,11 +332,22 @@ const fetchServiceData = async () => {
           )
           .map(item => {
             const itemTranslation = item.translations.find(t => t.language?.code === currentLanguage)
+            
+            // Her related service için kendi kategorisini bul
+            let itemCategoryTitle = item.title
+            if (item.parentId) {
+              const parentService = menuItems.find(parentItem => parentItem.id === item.parentId)
+              if (parentService) {
+                const parentTranslation = parentService.translations.find(t => t.language?.code === currentLanguage)
+                itemCategoryTitle = parentTranslation ? parentTranslation.title : parentService.title
+              }
+            }
+            
             return {
               id: item.id,
               slug: itemTranslation.slug,
               title: itemTranslation.title,
-              category: item.type === 1 ? 'Genel Dermatoloji' : 'Lazer Tedavileri'
+              category: itemCategoryTitle
             }
           })
           .slice(0, 3)

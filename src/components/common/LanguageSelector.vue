@@ -46,11 +46,16 @@ const currentLang = computed(() => {
   return current ? current.name : 'Türkçe'
 })
 
-const changeLanguage = (newLocale) => {
+const changeLanguage = async (newLocale) => {
   if (newLocale !== currentLocale.value) {
     setLocale(newLocale)
     // i18n locale'ini güncelle
     locale.value = newLocale
+    
+    // Menu store'unda dil değişimini tetikle
+    const { useStore } = await import('vuex')
+    const store = useStore()
+    await store.dispatch('menu/changeLanguage', newLocale)
   }
 }
 

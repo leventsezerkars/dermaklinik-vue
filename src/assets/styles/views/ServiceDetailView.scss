@@ -852,35 +852,19 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-            background: rgba($gold, 0.05);
-            border: 1px solid rgba($gold, 0.1);
+            background: rgba($white, 0.03);
+            border: 1px solid rgba($white, 0.08);
             border-radius: 12px;
             margin-bottom: 0.8rem;
             text-decoration: none;
-            transition: $transition-base;
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-
-            &::before {
-              content: '';
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 3px;
-              height: 100%;
-              background: $gold;
-              transform: scaleY(0);
-              transition: transform 0.3s ease;
-            }
 
             &:hover {
-              transform: translateX(4px);
-              background: rgba($gold, 0.1);
-              border-color: rgba($gold, 0.2);
-
-              &::before {
-                transform: scaleY(1);
-              }
+              background: rgba($white, 0.08);
+              border-color: rgba($gold, 0.3);
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba($gold, 0.15);
             }
 
             .related-icon {
@@ -893,10 +877,23 @@
               align-items: center;
               justify-content: center;
               flex-shrink: 0;
+              transition: all 0.3s ease;
 
               i {
                 color: $gold;
                 font-size: 1rem;
+                transition: all 0.3s ease;
+              }
+            }
+
+            &:hover .related-icon {
+              background: rgba($gold, 0.2);
+              border-color: rgba($gold, 0.4);
+              transform: scale(1.05);
+
+              i {
+                color: $gold;
+                transform: scale(1.1);
               }
             }
 
@@ -914,12 +911,24 @@
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
+                transition: color 0.3s ease;
               }
 
               .related-category {
                 color: rgba($white, 0.6);
                 font-size: 0.8rem;
                 font-weight: 400;
+                transition: color 0.3s ease;
+              }
+            }
+
+            &:hover .related-content {
+              .related-title {
+                color: $gold;
+              }
+
+              .related-category {
+                color: rgba($gold, 0.8);
               }
             }
           }

@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   
   state: {
-    menuItems: [],
+    menuItems: [], // Ham menu verisi (tüm diller dahil)
     loading: false,
     error: null,
     lastFetch: null,
@@ -17,7 +17,8 @@ export default {
       state.menuItems = menuItems
       state.currentLanguage = language
       state.lastFetch = new Date()
-      // localStorage'a kaydet
+      
+      // localStorage'a tek cache olarak kaydet
       localStorage.setItem('menuItems_cache', JSON.stringify({
         data: menuItems,
         language: language,
@@ -46,20 +47,17 @@ export default {
           const now = new Date()
           const diffInHours = (now - cacheTime) / (1000 * 60 * 60)
           
-          // 1 saatten eski değilse ve aynı dil ise cache'den yükle
-          if (diffInHours < 1 && cachedLanguage === language) {
+          // 1 saatten eski değilse ve veri geçerliyse cache'i yükle
+          if (diffInHours < 1 && data && Array.isArray(data)) {
             state.menuItems = data
-            state.currentLanguage = cachedLanguage
+            state.currentLanguage = language
             state.lastFetch = cacheTime
-            console.log(`Menu: localStorage cache'den yüklendi (${cachedLanguage})`)
           } else {
             // Eski cache'i temizle
             localStorage.removeItem('menuItems_cache')
-            console.log('Menu: Eski cache temizlendi')
           }
         }
       } catch (error) {
-        console.error('Menu: Cache yüklenirken hata:', error)
         localStorage.removeItem('menuItems_cache')
       }
     },
@@ -91,12 +89,11 @@ export default {
         })
       }
 
-      // Cache kontrolü - 1 saatten eski değilse ve aynı dil ise tekrar çekme
-      if (state.menuItems.length > 0 && state.lastFetch && state.currentLanguage === currentLanguage) {
+      // Cache kontrolü - 1 saatten eski değilse tekrar çekme
+      if (state.menuItems.length > 0 && state.lastFetch) {
         const now = new Date()
         const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60)
         if (diffInHours < 1) {
-          console.log(`Menu: Cache'den döndürülüyor (1 saat geçmedi, ${currentLanguage})`)
           return state.menuItems
         }
       }
@@ -106,10 +103,8 @@ export default {
       commit('clearError')
       
       try {
-        console.log(`Menu: API'den yeni veri çekiliyor... (${currentLanguage})`)
         const response = await MenuAPI.getAll(currentLanguage)
         commit('setMenuItems', { menuItems: response.data, language: currentLanguage })
-        console.log(`Menu: Veri başarıyla yüklendi ve localStorage'a kaydedildi (${currentLanguage})`)
         return response.data
       } catch (error) {
         commit('setError', error.message)
@@ -138,8 +133,24 @@ export default {
     },
 
     // Dil değiştir ve menüyü yenile
-    async changeLanguage({ commit, dispatch }, languageCode) {
+    async changeLanguage({ commit, state, dispatch }, languageCode) {
+      
       commit('setLanguage', languageCode)
+      
+      // i18n locale'ini güncelle
+      if (window.i18n && window.i18n.global) {
+        window.i18n.global.locale.value = languageCode
+      }
+      
+      // localStorage'a kaydet
+      localStorage.setItem('locale', languageCode)
+      
+      // Eğer menu verisi varsa, sadece dil değiştir (API'ye istek atma)
+      if (state.menuItems.length > 0) {
+        return state.menuItems
+      }
+      
+      // Menu verisi yoksa API'den çek
       await dispatch('fetchMenuItems', languageCode)
     }
   },

@@ -129,7 +129,10 @@ const hasError = computed(() => store.getters['gallery/hasError'])
 const error = computed(() => store.getters['gallery/error'])
 
 // Hero resimlerini getir
-const heroImages = computed(() => store.getters['gallery/heroImages'])
+const heroImages = computed(() => {
+  const images = store.getters['gallery/heroImages']
+  return images
+})
 
 // Fallback resimleri (API'den veri gelmezse kullanılacak)
 const fallbackImages = {
@@ -147,16 +150,17 @@ const getImageUrl = (imageUrl) => {
     return imageUrl
   }
   
-  // API base URL'ini ekle
+  // Resimler için base URL (API olmadan)
   const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://localhost:7078'
-  return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+  const fullUrl = `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+  return fullUrl
 }
 
 // Hero verilerini yükle
 const loadHeroData = async () => {
   try {
     // Sabit grup ID ile hero resimlerini yükle
-    await store.dispatch('gallery/fetchHeroImages')
+    const result = await store.dispatch('gallery/fetchHeroImages')
   } catch (error) {
     console.error('Hero verileri yüklenirken hata:', error)
   }

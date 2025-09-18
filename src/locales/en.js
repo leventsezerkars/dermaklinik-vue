@@ -30,6 +30,19 @@ export default {
     error: 'An error occurred',
     retry: 'Try Again'
   },
+  cookie: {
+    title: 'Cookie Usage',
+    description: 'We use cookies on our website to provide you with the best experience. These cookies are necessary to ensure website functionality and improve performance.',
+    features: {
+      analytics: 'Analyze site usage',
+      preferences: 'Remember user preferences',
+      security: 'Security and authentication'
+    },
+    accept: 'Accept',
+    decline: 'Decline',
+    privacyPolicy: 'Privacy Policy',
+    cookiePolicy: 'Cookie Policy'
+  },
 
   // Service Detail
   serviceDetail: {

@@ -150,16 +150,19 @@ const lightboxImages = computed(() => {
 
 // Resim URL'sini oluştur
 const getImageUrl = (imageUrl) => {
-  if (!imageUrl) return fallbackImages.clinic1
+  if (!imageUrl) {
+    return fallbackImages.clinic1
+  }
   
   // Eğer URL zaten tam URL ise direkt döndür
   if (imageUrl.startsWith('http')) {
     return imageUrl
   }
   
-  // API base URL'ini ekle
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://localhost:7078'
-  return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+  // Resimler için base URL (API olmadan)
+  const baseUrl = import.meta.env.VITE_API_BASE_URL ||'https://localhost:7078'
+  const fullUrl = `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+  return fullUrl
 }
 
 // Resim yükleme hatası durumunda fallback kullan
@@ -172,7 +175,7 @@ const handleImageError = (event) => {
 const loadGalleryData = async () => {
   try {
     // Sabit grup ID ile galeri resimlerini yükle
-    await store.dispatch('gallery/fetchGalleryImages')
+    const result = await store.dispatch('gallery/fetchGalleryImages')
   } catch (error) {
     console.error('Galeri verileri yüklenirken hata:', error)
   }
