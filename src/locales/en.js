@@ -43,6 +43,24 @@ export default {
     privacyPolicy: 'Privacy Policy',
     cookiePolicy: 'Cookie Policy'
   },
+  blog: {
+    title: 'Blog',
+    readMore: 'Read More',
+    recentPosts: 'Recent Posts',
+    categories: 'Categories',
+    tags: 'Tags',
+    author: 'Author',
+    publishedOn: 'Published On',
+    category: 'Category',
+    views: 'views',
+    noPosts: 'No blog posts available yet',
+    noCategories: 'No categories available yet',
+    loading: 'Loading blog posts...',
+    error: 'Error loading blog posts',
+    retry: 'Retry',
+    searchPlaceholder: 'Search blog posts...',
+    allCategories: 'All Categories'
+  },
 
   // Service Detail
   serviceDetail: {
@@ -363,6 +381,11 @@ export default {
           title: 'General View of Our Clinic'
         }
       }
+    },
+    blog: {
+      title: 'Blog & Articles',
+      subtitle: 'Expert opinions and current information on skin health and dermatology topics',
+      viewAll: 'View All'
     },
     faq: {
       title: 'Frequently Asked Questions',

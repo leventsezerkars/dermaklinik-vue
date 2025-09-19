@@ -161,7 +161,7 @@
                   <router-link 
                     v-for="service in relatedServices" 
                     :key="service.id"
-                    :to="`/hizmetler/${service.slug}`"
+                    :to="`${service.slug}`"
                     class="related-item"
                   >
                     <div class="related-icon">
@@ -258,7 +258,7 @@ const updateSlugForNewLanguage = async (newLocale) => {
       
       if (translation && translation.slug) {
         // URL'yi yeni slug ile güncelle
-        const newPath = `/hizmetler/${translation.slug}`
+        const newPath = `${translation.slug}`
         await router.replace(newPath)
         
         // Veriyi yeniden yükle

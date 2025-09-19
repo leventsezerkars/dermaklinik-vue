@@ -47,8 +47,8 @@ const routes = [
     }
   },
   {
-    path: '/blog/:id',
-    name: 'blogDetail',
+    path: '/blog/:slug',
+    name: 'blog-detail',
     component: BlogDetailView,
     meta: {
       title: 'Blog Detay - Doç. Dr. Mehmet Ünal'

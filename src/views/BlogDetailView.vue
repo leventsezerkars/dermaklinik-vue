@@ -1,301 +1,313 @@
 <template>
-  <div class="blog-detail">
-    <div class="blog-header" :style="{ backgroundImage: `url(${post.image})` }">
-      <div class="container">
-        <div class="blog-title">
-          <h1>{{ post.title }}</h1>
-          <div class="blog-meta">
-            <span><i class="far fa-calendar"></i> {{ formatDate(post.date) }}</span>
-            <span><i class="far fa-user"></i> {{ post.author }}</span>
-            <span><i class="far fa-folder"></i> {{ post.category }}</span>
+  <div class="blog-detail-page">
+    <!-- Loading State -->
+    <div v-if="isLoading" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">{{ $t('blog.loading') }}</span>
           </div>
+      <p class="mt-3">{{ $t('blog.loading') }}</p>
         </div>
+
+    <!-- Error State -->
+    <div v-else-if="hasError" class="text-center py-5">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">{{ $t('blog.error') }}</h4>
+        <p>{{ error }}</p>
+        <button @click="loadBlogData" class="btn btn-outline-danger">
+          {{ $t('blog.retry') }}
+        </button>
       </div>
     </div>
 
-    <div class="container py-5">
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="blog-detail-content">
-            <div class="blog-excerpt">
-              <p>{{ post.excerpt }}</p>
-            </div>
-
-            <div v-html="post.content"></div>
-
-            <div class="blog-tags mt-5">
-              <h3>Etiketler</h3>
-              <router-link 
-                v-for="tag in post.tags" 
-                :key="tag"
-                :to="`/blog/etiket/${tag}`"
-                class="blog-tag"
-              >
-                {{ tag }}
+    <!-- Blog Detail Content -->
+    <div v-else-if="post">
+      <!-- Blog Style Header -->
+      <header class="blog-header">
+        <div class="container">
+          <div class="header-content">
+            <div class="breadcrumb">
+              <router-link to="/" class="breadcrumb-link">
+                <i class="fas fa-home"></i>
+                <span>{{ $t('serviceDetail.breadcrumb.home') }}</span>
               </router-link>
+              <i class="fas fa-chevron-right separator"></i>
+              <router-link to="/blog" class="breadcrumb-link">
+                <span>{{ $t('blog.title') }}</span>
+              </router-link>
+              <i class="fas fa-chevron-right separator"></i>
+              <span class="current-page">{{ getPostTitle(post) }}</span>
             </div>
           </div>
         </div>
+      </header>
 
-        <div class="col-lg-4">
+      <!-- Main Content Area -->
+      <main class="blog-main">
+        <div class="container">
+          <div class="blog-layout">
+            <!-- Main Content -->
+            <article class="blog-content">
+              <header class="content-header">
+                <h1 class="blog-title">{{ getPostTitle(post) }}</h1>
+                <div class="content-meta">
+                  <div class="meta-item">
+                    <i class="fas fa-folder"></i>
+                    <span>{{ getPostCategory(post) }}</span>
+                  </div>
+                  <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>{{ formatDate(getPostDate(post)) }}</span>
+                  </div>
+                  <div class="meta-item">
+                    <i class="fas fa-eye"></i>
+                    <span>{{ post.viewCount || 0 }} {{ $t('blog.views') }}</span>
+                  </div>
+                  <div class="meta-item">
+                    <i class="fas fa-user-md"></i>
+                    <span>{{ $t('blog.author') }}</span>
+                  </div>
+                </div>
+              </header>
+
+              <div class="content-body">
+                <div class="blog-featured-image">
+                  <img :src="getPostImage(post)" :alt="getPostTitle(post)" class="img-fluid">
+                </div>
+
+                <div class="blog-content-text" v-html="getPostContent(post)"></div>
+              </div>
+            </article>
+
+            <!-- Sidebar -->
           <aside class="blog-sidebar">
             <div class="sidebar-widget">
-              <h3>Son Yazılar</h3>
-              <ul class="recent-posts">
-                <li v-for="recentPost in recentPosts" :key="recentPost.id">
-                  <router-link :to="`/blog/${recentPost.slug}`">
-                    {{ recentPost.title }}
-                  </router-link>
-                  <span>{{ formatDate(recentPost.date) }}</span>
+                <h3>{{ $t('blog.categories') }}</h3>
+              <ul class="blog-categories">
+                  <li v-for="category in categories" :key="category.id">
+                    <a @click="goToCategory(category)" href="#" class="category-link">
+                      {{ getCategoryName(category) }} <span>({{ getCategoryCount(category) }})</span>
+                    </a>
                 </li>
               </ul>
             </div>
-
             <div class="sidebar-widget">
-              <h3>Kategoriler</h3>
-              <ul class="blog-categories">
-                <li v-for="category in categories" :key="category.name">
-                  <router-link :to="`/blog/kategori/${category.slug}`">
-                    {{ category.name }} <span>({{ category.count }})</span>
+                <h3>{{ $t('blog.recentPosts') }}</h3>
+              <ul class="recent-posts">
+                <li v-for="recentPost in recentPosts" :key="recentPost.id">
+                    <router-link :to="{ name: 'blog-detail', params: { slug: getPostSlug(recentPost) }}">
+                      {{ getPostTitle(recentPost) }}
                   </router-link>
+                    <span>{{ formatDate(recentPost.createdAt) }}</span>
                 </li>
               </ul>
             </div>
           </aside>
         </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- No Post Found -->
+    <div v-else class="text-center py-5">
+      <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">{{ $t('blog.noPosts') }}</h4>
+        <p>{{ $t('blog.noPosts') }}</p>
+        <router-link to="/blog" class="btn btn-outline-primary">
+          {{ $t('blog.title') }}'a Dön
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useHead } from '@vueuse/head'
 
 const store = useStore()
 const route = useRoute()
+const router = useRouter()
+const { locale } = useI18n()
 
-onMounted(async () => {
-  const slug = route.params.slug
-  await store.dispatch('blog/fetchPostBySlug', slug)
-  await store.dispatch('blog/fetchRecentPosts')
-})
-
+// Computed properties
 const post = computed(() => store.getters['blog/currentPost'])
-const recentPosts = computed(() => store.getters['blog/recentPosts'])
+const recentPosts = computed(() => store.getters['blog/relatedPosts'])
 const categories = computed(() => store.getters['blog/categories'])
+const isLoading = computed(() => store.getters['blog/isLoading'])
+const hasError = computed(() => store.getters['blog/hasError'])
+const error = computed(() => store.getters['blog/error'])
 
-const formatDate = (date) => {
-  return new Date(date).toLocaleDateString('tr-TR', {
+// Helper functions
+const getPostTranslation = (post) => {
+  if (!post?.translations || !Array.isArray(post.translations)) return null
+  return post.translations.find(t => t.language?.code === locale.value) || post.translations[0] || null
+}
+
+const getPostTitle = (post) => {
+  const translation = getPostTranslation(post)
+  if (!translation) return 'Başlık Yok'
+  return translation.title || 'Başlık Yok'
+}
+
+const getPostContent = (post) => {
+  const translation = getPostTranslation(post)
+  if (!translation) return 'İçerik bulunamadı'
+  return translation.content || 'İçerik bulunamadı'
+}
+
+const getPostSlug = (post) => {
+  const translation = getPostTranslation(post)
+  if (!translation) return post?.id
+  return translation.slug || post?.id
+}
+
+const getPostImage = (post) => {
+  const translation = getPostTranslation(post)
+  if (!translation) return 'https://images.pexels.com/photos/4167544/pexels-photo-4167544.jpeg?auto=compress&cs=tinysrgb&w=1000&h=600&fit=crop'
+  return translation.featuredImage || 'https://images.pexels.com/photos/4167544/pexels-photo-4167544.jpeg?auto=compress&cs=tinysrgb&w=1000&h=600&fit=crop'
+}
+
+const getPostCategory = (post) => {
+  if (post.category?.translations && post.category.translations.length > 0) {
+    const translation = post.category.translations.find(t => t.language?.code === locale.value)
+    return translation?.name || post.category.translations[0]?.name || 'Kategori'
+  }
+  return 'Kategori'
+}
+
+
+
+const getPostDate = (post) => {
+  return post?.createdAt || new Date().toISOString()
+}
+
+const getCategoryName = (category) => {
+  if (!category?.translations || !Array.isArray(category.translations)) return category?.name || 'Kategori'
+  const translation = category.translations.find(t => t.language?.code === locale.value)
+  return translation?.name || category.name || 'Kategori'
+}
+
+const getCategoryCount = (category) => {
+  return category?.blogs?.length || 0
+}
+
+const goToCategory = (category) => {
+  // Blog sayfasına git ve kategoriyi seç
+  router.push({
+    name: 'blog',
+    query: { category: category.id }
+  })
+}
+
+const formatDate = (dateString) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  return date.toLocaleDateString(locale.value === 'tr' ? 'tr-TR' : 'en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   })
 }
 
+// Load blog data
+const loadBlogData = async () => {
+  try {
+    const slug = route.params.slug
+    await store.dispatch('blog/fetchPostBySlug', { slug, languageCode: locale.value })
+    await store.dispatch('blog/fetchRecentPosts', { languageCode: locale.value })
+    await store.dispatch('blog/fetchCategories', locale.value)
+  } catch (error) {
+    console.error('Blog detay verileri yüklenirken hata:', error)
+  }
+}
+
+// Watch for language changes
+watch(locale, async (newLocale) => {
+  await loadBlogData()
+})
+
+// Load data on mount
+onMounted(async () => {
+  await loadBlogData()
+  // Blog detayı yüklendikten sonra görüntülenme sayısını artır
+  if (post.value?.id) {
+    await store.dispatch('blog/incrementPostView', post.value.id)
+  }
+})
+
+// SEO
 useHead({
-  title: computed(() => `${post.value?.title} - Doç. Dr. Mehmet Ünal`),
+  title: computed(() => `${getPostTitle(post.value)} - Doç. Dr. Mehmet Ünal`),
   meta: [
     {
       name: 'description',
-      content: computed(() => post.value?.excerpt || '')
+      content: computed(() => {
+        const translation = getPostTranslation(post.value)
+        if (!translation) return 'Blog yazısı'
+        const content = translation.content || ''
+        const cleanContent = content.replace(/<[^>]*>/g, '').trim()
+        return cleanContent.length > 160 ? cleanContent.substring(0, 160) + '...' : cleanContent
+      })
+    },
+    {
+      name: 'keywords',
+      content: computed(() => {
+        const translation = getPostTranslation(post.value)
+        if (!translation) return 'dermatoloji, cilt sağlığı'
+        return translation.tags?.join(', ') || 'dermatoloji, cilt sağlığı'
+      })
+    },
+    {
+      property: 'og:title',
+      content: computed(() => getPostTitle(post.value))
+    },
+    {
+      property: 'og:description',
+      content: computed(() => {
+        const translation = getPostTranslation(post.value)
+        if (!translation) return 'Blog yazısı'
+        const content = translation.content || ''
+        const cleanContent = content.replace(/<[^>]*>/g, '').trim()
+        return cleanContent.length > 160 ? cleanContent.substring(0, 160) + '...' : cleanContent
+      })
+    },
+    {
+      property: 'og:image',
+      content: computed(() => getPostImage(post.value))
+    },
+    {
+      property: 'og:type',
+      content: 'article'
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    },
+    {
+      name: 'twitter:title',
+      content: computed(() => getPostTitle(post.value))
+    },
+    {
+      name: 'twitter:description',
+      content: computed(() => {
+        const translation = getPostTranslation(post.value)
+        if (!translation) return 'Blog yazısı'
+        const content = translation.content || ''
+        const cleanContent = content.replace(/<[^>]*>/g, '').trim()
+        return cleanContent.length > 160 ? cleanContent.substring(0, 160) + '...' : cleanContent
+      })
+    },
+    {
+      name: 'twitter:image',
+      content: computed(() => getPostImage(post.value))
     }
   ]
 })
 </script>
 
-<style scoped>
-.blog-header {
-  position: relative;
-  height: 400px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding: 50px 0;
-}
-
-.blog-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
-}
-
-.blog-title {
-  position: relative;
-  z-index: 1;
-}
-
-.blog-title h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.blog-meta {
-  display: flex;
-  gap: 20px;
-}
-
-.blog-meta span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 1rem;
-}
-
-.blog-meta i {
-  color: var(--secondary-color);
-}
-
-.blog-detail-content {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-.blog-excerpt {
-  font-size: 1.2rem;
-  color: var(--text-color);
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.blog-tags {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.blog-tag {
-  display: inline-block;
-  padding: 5px 15px;
-  margin: 5px;
-  background-color: var(--light-bg);
-  color: var(--primary-color);
-  border-radius: 20px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.blog-tag:hover {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.sidebar-widget {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  margin-bottom: 30px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-widget h3 {
-  color: var(--primary-color);
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--border-color);
-}
-
-.recent-posts {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.recent-posts li {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.recent-posts li:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.recent-posts a {
-  color: var(--text-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.recent-posts a:hover {
-  color: var(--primary-color);
-}
-
-.recent-posts span {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.blog-categories {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.blog-categories li {
-  margin-bottom: 10px;
-}
-
-.blog-categories a {
-  color: var(--text-color);
-  text-decoration: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.blog-categories a:hover {
-  background-color: var(--light-bg);
-  color: var(--primary-color);
-}
-
-.blog-categories span {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-@media (max-width: 991px) {
-  .blog-sidebar {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .blog-header {
-    height: 300px;
-  }
-
-  .blog-title h1 {
-    font-size: 2rem;
-  }
-
-  .blog-meta {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .blog-detail-content {
-    padding: 20px;
-  }
-}
+<style lang="scss">
+@use '@/assets/styles/views/BlogDetailView.scss';
 </style> 

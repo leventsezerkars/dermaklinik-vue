@@ -15,6 +15,9 @@
     <!-- FAQ Section -->
     <FAQ />
 
+    <!-- Blog Section -->
+    <Blog />
+
     <!-- Contact Section -->
     <Contact />
   </div>
@@ -27,6 +30,7 @@ import About from '@/components/home/About.vue'
 import Services from '@/components/home/Services.vue'
 import Gallery from '@/components/home/Gallery.vue'
 import FAQ from '@/components/home/FAQ.vue'
+import Blog from '@/components/home/Blog.vue'
 import Contact from '@/components/home/Contact.vue'
 import { useSEO } from '@/composables/useSEO'
 

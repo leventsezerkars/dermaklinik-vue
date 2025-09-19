@@ -147,18 +147,17 @@ const menuError = computed(() => store.getters['menu/error'])
 // Menü linkini oluştur
 const getMenuLink = (menuItem: any) => {
   if (!menuItem) return '#'
-  
   // MenuType'a göre link oluştur
   switch (menuItem.type) {
     case 0: // Page
-      return menuItem.slug ? `/hizmetler/${menuItem.slug}` : '#'
+      return menuItem.slug ? `/${menuItem.target}/${menuItem.slug}` : '#'
     case 1: // Link
       return menuItem.target || '#'
     case 2: // Anchor
       // Anchor linkler için ana sayfaya yönlendir
       return menuItem.target && menuItem.target !== '' ? `/#${menuItem.target}` : '/'
     default:
-      return menuItem.slug ? `/hizmetler/${menuItem.slug}` : '#'
+      return menuItem.slug ? `${menuItem.slug}` : '#'
   }
 }
 

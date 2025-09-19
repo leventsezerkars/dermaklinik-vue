@@ -30,9 +30,11 @@
 <script setup>
 import { computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useStore } from 'vuex'
 import { supportedLocales, setLocale } from '@/i18n'
 
 const { locale } = useI18n()
+const store = useStore()
 
 const currentLocale = computed(() => locale.value)
 
@@ -53,9 +55,13 @@ const changeLanguage = async (newLocale) => {
     locale.value = newLocale
     
     // Menu store'unda dil değişimini tetikle
-    const { useStore } = await import('vuex')
-    const store = useStore()
-    await store.dispatch('menu/changeLanguage', newLocale)
+    try {
+      if (store && store.dispatch) {
+        await store.dispatch('menu/changeLanguage', newLocale)
+      }
+    } catch (error) {
+      console.warn('Menu store dil değişimi başarısız:', error)
+    }
   }
 }
 

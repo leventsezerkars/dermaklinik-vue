@@ -391,6 +391,53 @@
         }
       }
     },
+    "/api/Blog/slug/{slug}": {
+      "get": {
+        "tags": [
+          "Blog"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "languageId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlogDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlogDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlogDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Blog/{id}/increment-view": {
       "post": {
         "tags": [
@@ -2932,6 +2979,9 @@
           },
           "currentTranslation": {
             "$ref": "#/components/schemas/BlogTranslationDto"
+          },
+          "category": {
+            "$ref": "#/components/schemas/BlogCategoryDto"
           }
         },
         "additionalProperties": false

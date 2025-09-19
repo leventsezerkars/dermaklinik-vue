@@ -5,6 +5,7 @@ $gold: #D4AF37;
 $gold-dark: color.adjust($gold, $lightness: -15%);
 $gold-light: color.adjust($gold, $lightness: 15%);
 
+$primary: $gold;
 $primary-color: $gold;
 $background-color: transparent;
 $transition-duration: 0.3s;
@@ -14,6 +15,17 @@ $black: #000;
 $white: #fff;
 $dark: #1a1a1a;
 $background-color: #000;
+
+// Gray Scale
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
 
 // Status Colors
 $red: #dc3545;
@@ -26,6 +38,12 @@ $pink: #e83e8c;
 $teal: #20c997;
 $cyan: #17a2b8;
 $indigo: #6610f2;
+
+// Bootstrap-like status colors
+$danger: $red;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
 
 // Layout Dimensions
 $topbar-height: 40px;

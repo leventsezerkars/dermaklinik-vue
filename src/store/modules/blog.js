@@ -13,7 +13,9 @@ const state = {
   },
   isLoading: false,
   error: null,
-  lastFetch: null
+  lastFetch: null,
+  currentLanguage: 'tr',
+  isFetching: false
 };
 
 const mutations = {
@@ -41,41 +43,65 @@ const mutations = {
   },
   clearError(state) {
     state.error = null;
+  },
+  setLanguage(state, language) {
+    state.currentLanguage = language;
+  },
+  setFetching(state, status) {
+    state.isFetching = status;
   }
 };
 
 const actions = {
-  async fetchPosts({ commit, state }, { page = 1, limit = 10, search = '' } = {}) {
-    // Cache kontrolü - 5 dakikadan eski değilse tekrar çekme
+  async fetchPosts({ commit, state }, { page = 1, limit = 10, search = '', languageCode = null } = {}) {
+    const currentLanguage = languageCode || state.currentLanguage || 'tr';
+
+    // Cache kontrolü - 1 saatten eski değilse tekrar çekme
     if (state.posts.length > 0 && state.lastFetch) {
       const now = new Date();
-      const diffInMinutes = (now - state.lastFetch) / (1000 * 60);
-      if (diffInMinutes < 5) {
+      const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60);
+      if (diffInHours < 1) {
         return state.posts;
       }
     }
 
+    if (state.isFetching) {
+      return new Promise((resolve) => {
+        const checkInterval = setInterval(() => {
+          if (!state.isFetching) {
+            clearInterval(checkInterval);
+            resolve(state.posts);
+          }
+        }, 100);
+      });
+    }
+
     try {
+      commit('setFetching', true);
       commit('setLoading', true);
       commit('clearError');
       
-      const response = await BlogAPI.getAll(page, limit, search);
+      const response = await BlogAPI.getAll(page, limit, search, currentLanguage);
       
-      commit('setPosts', response.data);
+      // API response'undan data array'ini al
+      const posts = response.data.data || response.data;
+      
+      commit('setPosts', posts);
       commit('setPagination', {
         currentPage: page,
-        totalPages: Math.ceil(response.data.total / limit),
-        totalItems: response.data.total,
+        totalPages: Math.ceil(posts.length / limit),
+        totalItems: posts.length,
         itemsPerPage: limit
       });
       
-      return response.data;
+      return posts;
     } catch (error) {
       commit('setError', error.message);
       console.error('Blog posts yüklenirken hata oluştu:', error);
       throw error;
     } finally {
       commit('setLoading', false);
+      commit('setFetching', false);
     }
   },
 
@@ -97,15 +123,17 @@ const actions = {
     }
   },
 
-  async fetchPostBySlug({ commit }, slug) {
+  async fetchPostBySlug({ commit }, { slug, languageCode = 'tr' }) {
     try {
       commit('setLoading', true);
       commit('clearError');
       
-      const response = await BlogAPI.getBySlug(slug);
+      const response = await BlogAPI.getBySlug(slug, languageCode);
       
-      commit('setCurrentPost', response.data);
-      return response.data;
+      // API response'undan data'yı al
+      const post = response.data.data || response.data;
+      commit('setCurrentPost', post);
+      return post;
     } catch (error) {
       commit('setError', error.message);
       console.error('Blog post detayı yüklenirken hata oluştu:', error);
@@ -115,14 +143,13 @@ const actions = {
     }
   },
 
-  async fetchRecentPosts({ commit }, limit = 5) {
+  async fetchRecentPosts({ commit }, { limit = 5, languageCode = 'tr' } = {}) {
     try {
       commit('setLoading', true);
       commit('clearError');
       
-      const response = await BlogAPI.getAll(1, limit);
-      
-      commit('setRelatedPosts', response.data);
+      const response = await BlogAPI.getAll(1, limit, '', languageCode);
+      commit('setRelatedPosts', response.data.data);
       return response.data;
     } catch (error) {
       commit('setError', error.message);
@@ -141,12 +168,14 @@ const actions = {
     }
   },
 
-  async fetchCategories({ commit, state }) {
-    // Cache kontrolü - 10 dakikadan eski değilse tekrar çekme
+  async fetchCategories({ commit, state }, languageCode = null) {
+    const currentLanguage = languageCode || state.currentLanguage || 'tr';
+
+    // Cache kontrolü - 1 saatten eski değilse tekrar çekme
     if (state.categories.length > 0 && state.lastFetch) {
       const now = new Date();
-      const diffInMinutes = (now - state.lastFetch) / (1000 * 60);
-      if (diffInMinutes < 10) {
+      const diffInHours = (now - state.lastFetch) / (1000 * 60 * 60);
+      if (diffInHours < 1) {
         return state.categories;
       }
     }
@@ -155,10 +184,12 @@ const actions = {
       commit('setLoading', true);
       commit('clearError');
       
-      const response = await BlogCategoryAPI.getAll();
+      const response = await BlogCategoryAPI.getAll(currentLanguage);
       
-      commit('setCategories', response.data);
-      return response.data;
+      // API response'undan data array'ini al
+      const categories = response.data.data || response.data;
+      commit('setCategories', categories);
+      return categories;
     } catch (error) {
       commit('setError', error.message);
       console.error('Blog kategorileri yüklenirken hata oluştu:', error);
@@ -166,11 +197,24 @@ const actions = {
     } finally {
       commit('setLoading', false);
     }
+  },
+
+  async changeLanguage({ commit, state, dispatch }, languageCode) {
+    commit('setLanguage', languageCode);
+    
+    // Mevcut veri varsa dil değiştir, yoksa API'den çek
+    if (state.posts.length > 0) {
+      return state.posts;
+    }
+    
+    await dispatch('fetchPosts', { languageCode });
+    await dispatch('fetchCategories', languageCode);
   }
 };
 
 const getters = {
   allPosts: state => state.posts,
+  blogPosts: state => state.posts, // BlogView ve Home için
   categories: state => state.categories,
   currentPost: state => state.currentPost,
   relatedPosts: state => state.relatedPosts,

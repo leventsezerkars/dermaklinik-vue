@@ -43,6 +43,25 @@ export default {
     privacyPolicy: 'Gizlilik Politikası',
     cookiePolicy: 'Çerez Politikası'
   },
+  blog: {
+    title: 'Blog',
+    readMore: 'Devamını Oku',
+    recentPosts: 'Son Yazılar',
+    categories: 'Kategoriler',
+    tags: 'Etiketler',
+    author: 'Yazar',
+    publishedOn: 'Yayınlanma Tarihi',
+    category: 'Kategori',
+    views: 'görüntülenme',
+    noPosts: 'Henüz blog yazısı bulunmuyor',
+    noCategories: 'Henüz kategori bulunmuyor',
+    loading: 'Blog yazıları yükleniyor...',
+    error: 'Blog yazıları yüklenirken hata oluştu',
+    retry: 'Tekrar Dene',
+    searchPlaceholder: 'Blog yazılarında ara...',
+    allCategories: 'Tüm Kategoriler',
+    noCategory: 'Kategori Yok'
+  },
 
   // Service Detail
   serviceDetail: {
@@ -363,6 +382,11 @@ export default {
           title: 'Kliniğimizin Genel Görünümü'
         }
       }
+    },
+    blog: {
+      title: 'Blog & Makaleler',
+      subtitle: 'Cilt sağlığı ve dermatoloji konularında uzman görüşleri ve güncel bilgiler',
+      viewAll: 'Tümünü Gör'
     },
     faq: {
       title: 'Sıkça Sorulan Sorular',
