@@ -67,17 +67,17 @@
                 {{ $t('header.generalDermatology') }}
               </router-link>
               <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" to="/hizmetler/akne-sivilce-tedavisi">{{ $t('services.general.items.acne') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/rosacea-gul-hastaligi-tedavisi">{{ $t('services.general.items.rosacea') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/sac-dokulmesi-ve-sac-tedavileri">{{ $t('services.general.items.hairLoss') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/sigil-ben-tedavisi">{{ $t('services.general.items.wart') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/tirnak-hastaliklari-ve-tedavisi">{{ $t('services.general.items.nailDiseases') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/deri-enfeksiyonlari">{{ $t('services.general.items.skinInfections') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/mantar-enfeksiyonlari">{{ $t('services.general.items.fungalInfections') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/alerji-ve-egzama-turleri">{{ $t('services.general.items.allergyEczema') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/urtiker-kurdesen">{{ $t('services.general.items.urticaria') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/dermatit">{{ $t('services.general.items.dermatitis') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/alerjik-hastaliklar">{{ $t('services.general.items.allergicDiseases') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/akne-sivilce-tedavisi" @click="closeNavbar">{{ $t('services.general.items.acne') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/rosacea-gul-hastaligi-tedavisi" @click="closeNavbar">{{ $t('services.general.items.rosacea') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/sac-dokulmesi-ve-sac-tedavileri" @click="closeNavbar">{{ $t('services.general.items.hairLoss') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/sigil-ben-tedavisi" @click="closeNavbar">{{ $t('services.general.items.wart') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/tirnak-hastaliklari-ve-tedavisi" @click="closeNavbar">{{ $t('services.general.items.nailDiseases') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/deri-enfeksiyonlari" @click="closeNavbar">{{ $t('services.general.items.skinInfections') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/mantar-enfeksiyonlari" @click="closeNavbar">{{ $t('services.general.items.fungalInfections') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/alerji-ve-egzama-turleri" @click="closeNavbar">{{ $t('services.general.items.allergyEczema') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/urtiker-kurdesen" @click="closeNavbar">{{ $t('services.general.items.urticaria') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/dermatit" @click="closeNavbar">{{ $t('services.general.items.dermatitis') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/alerjik-hastaliklar" @click="closeNavbar">{{ $t('services.general.items.allergicDiseases') }}</router-link></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -85,18 +85,18 @@
                 {{ $t('header.aestheticDermatology') }}
               </router-link>
               <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" to="/hizmetler/botoks-uygulamasi">{{ $t('services.aesthetic.items.botox') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/dolgu-uygulamasi">{{ $t('services.aesthetic.items.filler') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/regenera-activa-kok-hucre-tedavisi">{{ $t('services.aesthetic.items.regeneraActiva') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/prp-platelet-rich-plasma-tedavisi">{{ $t('services.aesthetic.items.prp') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/mezoterapi-uygulamasi">{{ $t('services.aesthetic.items.mesotherapy') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/leke-tedavisi">{{ $t('services.aesthetic.items.spotTreatment') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/akne-iz-tedavisi">{{ $t('services.aesthetic.items.acneScar') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/yara-iz-tedavisi">{{ $t('services.aesthetic.items.scarTreatment') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/sivi-yuz-germe">{{ $t('services.aesthetic.items.liquidFaceLift') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/medikal-cilt-bakimi-aquapeel">{{ $t('services.aesthetic.items.medicalSkinCare') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/iple-yuz-askilama">{{ $t('services.aesthetic.items.threadLifting') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/kilcal-damar-tedavisi">{{ $t('services.aesthetic.items.capillaryTreatment') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/botoks-uygulamasi" @click="closeNavbar">{{ $t('services.aesthetic.items.botox') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/dolgu-uygulamasi" @click="closeNavbar">{{ $t('services.aesthetic.items.filler') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/regenera-activa-kok-hucre-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.regeneraActiva') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/prp-platelet-rich-plasma-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.prp') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/mezoterapi-uygulamasi" @click="closeNavbar">{{ $t('services.aesthetic.items.mesotherapy') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/leke-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.spotTreatment') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/akne-iz-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.acneScar') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/yara-iz-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.scarTreatment') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/sivi-yuz-germe" @click="closeNavbar">{{ $t('services.aesthetic.items.liquidFaceLift') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/medikal-cilt-bakimi-aquapeel" @click="closeNavbar">{{ $t('services.aesthetic.items.medicalSkinCare') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/iple-yuz-askilama" @click="closeNavbar">{{ $t('services.aesthetic.items.threadLifting') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/kilcal-damar-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.capillaryTreatment') }}</router-link></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -104,19 +104,19 @@
                 {{ $t('header.laserTreatments') }}
               </router-link>
               <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" to="/hizmetler/veloce-bb-light">{{ $t('services.laser.items.veloceBB') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/fraksiyonel-karbondioksit-co2-lazer">{{ $t('services.laser.items.fractionalCO2') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/secret-altin-igne-fraksiyonel-radyofrekans">{{ $t('services.laser.items.secretGoldenNeedle') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/aqua-peel-medikal-cilt-bakimi">{{ $t('services.laser.items.aquaPeel') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/piko-saniye-lazer">{{ $t('services.laser.items.picoSecond') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/hifu-ameliyatsiz-yuz-germe">{{ $t('services.laser.items.hifu') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/veloce-bb-light" @click="closeNavbar">{{ $t('services.laser.items.veloceBB') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/fraksiyonel-karbondioksit-co2-lazer" @click="closeNavbar">{{ $t('services.laser.items.fractionalCO2') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/secret-altin-igne-fraksiyonel-radyofrekans" @click="closeNavbar">{{ $t('services.laser.items.secretGoldenNeedle') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/aqua-peel-medikal-cilt-bakimi" @click="closeNavbar">{{ $t('services.laser.items.aquaPeel') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/piko-saniye-lazer" @click="closeNavbar">{{ $t('services.laser.items.picoSecond') }}</router-link></li>
+                <li><router-link class="dropdown-item" to="/hizmetler/hifu-ameliyatsiz-yuz-germe" @click="closeNavbar">{{ $t('services.laser.items.hifu') }}</router-link></li>
               </ul>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="#hakkimizda">{{ $t('common.about') }}</router-link>
+              <router-link class="nav-link" to="#hakkimizda" @click="closeNavbar">{{ $t('common.about') }}</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="#contact">{{ $t('common.contact') }}</router-link>
+              <router-link class="nav-link" to="#contact" @click="closeNavbar">{{ $t('common.contact') }}</router-link>
             </li>
           </template>
         </ul>
@@ -165,6 +165,8 @@ const closeNavbar = () => {
   const navbar = document.getElementById('navbarNav')
   if (!navbar) return
   
+  console.log('Closing navbar...')
+  
   // Bootstrap 5 Collapse API'sini kullan
   const bsCollapse = (window as any).bootstrap?.Collapse
   if (bsCollapse) {
@@ -181,6 +183,24 @@ const closeNavbar = () => {
     navbar.classList.remove('show')
     navbar.classList.add('collapse')
   }
+  
+  // Sadece navbar dropdown menülerini kapat (LanguageSelector'ı koru)
+  const navbarDropdowns = document.querySelectorAll('.navbar .dropdown-menu.show')
+  navbarDropdowns.forEach(dropdown => {
+    dropdown.classList.remove('show')
+  })
+  
+  // Toggle butonunun aria-expanded özelliğini güncelle
+  const toggleButton = document.querySelector('[data-bs-target="#navbarNav"]')
+  if (toggleButton) {
+    toggleButton.setAttribute('aria-expanded', 'false')
+  }
+  
+  // Sadece navbar dropdown toggle butonlarının aria-expanded özelliğini güncelle
+  const navbarDropdownToggles = document.querySelectorAll('.navbar .dropdown-toggle')
+  navbarDropdownToggles.forEach(toggle => {
+    toggle.setAttribute('aria-expanded', 'false')
+  })
 }
 
 // Dil değişikliğini izle
@@ -226,6 +246,49 @@ onMounted(async () => {
     closeNavbar()
   })
 
+  // Ana sayfada özel event listener'lar
+  const isHomePage = router.currentRoute.value.path === '/'
+  if (isHomePage) {
+    // Document click listener for closing dropdowns
+    const handleDocumentClick = (e: Event) => {
+      const target = e.target as HTMLElement
+      if (!target) return
+
+      // LanguageSelector'ı koru
+      const isLanguageSelector = target.closest('.language-selector')
+      if (isLanguageSelector) return
+
+      const isNavbarClick = target.closest('.navbar')
+      if (!isNavbarClick) {
+        closeNavbar()
+      }
+    }
+
+    // Click ve touch event listener'ları
+    document.addEventListener('click', handleDocumentClick)
+    document.addEventListener('touchstart', handleDocumentClick)
+
+    // Scroll event listener (throttled - performans için)
+    let scrollTimeout: number | null = null
+    document.addEventListener('scroll', () => {
+      if (scrollTimeout) return
+      scrollTimeout = window.setTimeout(() => {
+        closeNavbar()
+        scrollTimeout = null
+      }, 100)
+    })
+
+    // Resize event listener (throttled - performans için)
+    let resizeTimeout: number | null = null
+    window.addEventListener('resize', () => {
+      if (resizeTimeout) return
+      resizeTimeout = window.setTimeout(() => {
+        closeNavbar()
+        resizeTimeout = null
+      }, 100)
+    })
+  }
+
   // Dropdown item'ına tıklanınca kısa gecikme ile menüyü kapat
   const navbar = document.getElementById('navbarNav')
   if (navbar) {
@@ -233,9 +296,14 @@ onMounted(async () => {
       const target = e.target as HTMLElement
       if (!target) return
       
+      console.log('Navbar click detected:', target)
+      
       // Dropdown toggle butonuna tıklanmışsa menüyü kapatma
       const isToggle = target.closest('a.dropdown-toggle, button.dropdown-toggle')
-      if (isToggle) return
+      if (isToggle) {
+        console.log('Dropdown toggle clicked, not closing')
+        return
+      }
       
       // Router-link veya normal link'e tıklanmışsa menüyü kapat
       const isRouterLink = target.closest('a[href]') || target.tagName === 'A'
@@ -243,6 +311,7 @@ onMounted(async () => {
       const isDropdownItem = target.closest('a.dropdown-item')
       
       if (isRouterLink || isNavLink || isDropdownItem) {
+        console.log('Link clicked, closing navbar')
         // Kısa bir gecikme ile menüyü kapat (router navigation'ın tamamlanması için)
         setTimeout(() => {
           closeNavbar()
