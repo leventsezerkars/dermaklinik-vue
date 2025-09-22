@@ -11,7 +11,7 @@ const getApiUrl = () => {
     return __VITE_API_URL__
   }
   // Son olarak varsayılan değer
-  return 'http://localhost:5000/api'
+  return 'http://localhost:7078/api'
 }
 
 const getApiKey = () => {

@@ -16,12 +16,22 @@ export default defineConfig(({ command, mode }) => {
     },
     define: {
       // Environment değişkenlerini global olarak erişilebilir yap
-      __VITE_API_URL__: JSON.stringify(env.VITE_API_URL || 'http://localhost:5000/api'),
+      __VITE_API_URL__: JSON.stringify(env.VITE_API_URL || 'http://localhost:7078/api'),
       __VITE_API_KEY__: JSON.stringify(env.VITE_API_KEY || 'your-api-key-here'),
     },
     server: {
       port: 3000,
-      open: true
+      open: true,
+      historyApiFallback: true
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: undefined
+        }
+      },
+      // Public klasöründeki dosyaları dist'e kopyala
+      copyPublicDir: true
     },
     // Environment değişkenlerini client-side'da erişilebilir yap
     envPrefix: 'VITE_'
