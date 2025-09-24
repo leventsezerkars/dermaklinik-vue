@@ -1,5 +1,6 @@
 <template>
-  <section class="blog-section">
+  <!-- Blog yoksa component hiç render edilmez -->
+  <section v-if="shouldShowBlog" class="blog-section">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -93,10 +94,7 @@
         </div>
       </div>
 
-      <!-- No Posts -->
-      <div v-else class="text-center py-5">
-        <p class="text-muted">{{ $t('blog.noPosts') }}</p>
-      </div>
+      <!-- View All Button -->
       <div v-if="blogPosts.length > 0" class="text-center mt-4" style="position: relative; z-index: 10;">
         <router-link to="/blog" class="btn btn-knowledge-home">
           {{ $t('home.blog.viewAll')}}
@@ -131,6 +129,18 @@ const blogPosts = computed(() => {
 })
 const isLoading = computed(() => store.getters['blog/isLoading'])
 const maxSlides = computed(() => Math.ceil(blogPosts.value.length / 3)) // 3 posts per slide
+
+// Blog gösterilip gösterilmeyeceğini belirle
+const shouldShowBlog = computed(() => {
+  // Loading durumunda göster
+  if (isLoading.value) return true
+  
+  // Blog postları varsa göster
+  if (blogPosts.value.length > 0) return true
+  
+  // Hiç blog yoksa gösterme
+  return false
+})
 
 // Helper functions
 const getPostTranslation = (post) => {

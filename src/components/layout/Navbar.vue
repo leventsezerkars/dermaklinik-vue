@@ -57,68 +57,6 @@
               </template>
             </li>
           </template>
-          <!-- API'den veri gelmezse varsayılan menü -->
-          <template v-else>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/">{{ $t('common.home') }}</router-link>
-            </li>
-            <li class="nav-item dropdown">
-              <router-link class="nav-link dropdown-toggle" to="#genel" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ $t('header.generalDermatology') }}
-              </router-link>
-              <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" to="/hizmetler/akne-sivilce-tedavisi" @click="closeNavbar">{{ $t('services.general.items.acne') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/rosacea-gul-hastaligi-tedavisi" @click="closeNavbar">{{ $t('services.general.items.rosacea') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/sac-dokulmesi-ve-sac-tedavileri" @click="closeNavbar">{{ $t('services.general.items.hairLoss') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/sigil-ben-tedavisi" @click="closeNavbar">{{ $t('services.general.items.wart') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/tirnak-hastaliklari-ve-tedavisi" @click="closeNavbar">{{ $t('services.general.items.nailDiseases') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/deri-enfeksiyonlari" @click="closeNavbar">{{ $t('services.general.items.skinInfections') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/mantar-enfeksiyonlari" @click="closeNavbar">{{ $t('services.general.items.fungalInfections') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/alerji-ve-egzama-turleri" @click="closeNavbar">{{ $t('services.general.items.allergyEczema') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/urtiker-kurdesen" @click="closeNavbar">{{ $t('services.general.items.urticaria') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/dermatit" @click="closeNavbar">{{ $t('services.general.items.dermatitis') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/alerjik-hastaliklar" @click="closeNavbar">{{ $t('services.general.items.allergicDiseases') }}</router-link></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <router-link class="nav-link dropdown-toggle" to="#estetik" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ $t('header.aestheticDermatology') }}
-              </router-link>
-              <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" to="/hizmetler/botoks-uygulamasi" @click="closeNavbar">{{ $t('services.aesthetic.items.botox') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/dolgu-uygulamasi" @click="closeNavbar">{{ $t('services.aesthetic.items.filler') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/regenera-activa-kok-hucre-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.regeneraActiva') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/prp-platelet-rich-plasma-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.prp') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/mezoterapi-uygulamasi" @click="closeNavbar">{{ $t('services.aesthetic.items.mesotherapy') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/leke-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.spotTreatment') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/akne-iz-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.acneScar') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/yara-iz-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.scarTreatment') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/sivi-yuz-germe" @click="closeNavbar">{{ $t('services.aesthetic.items.liquidFaceLift') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/medikal-cilt-bakimi-aquapeel" @click="closeNavbar">{{ $t('services.aesthetic.items.medicalSkinCare') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/iple-yuz-askilama" @click="closeNavbar">{{ $t('services.aesthetic.items.threadLifting') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/kilcal-damar-tedavisi" @click="closeNavbar">{{ $t('services.aesthetic.items.capillaryTreatment') }}</router-link></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <router-link class="nav-link dropdown-toggle" to="#lazer" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ $t('header.laserTreatments') }}
-              </router-link>
-              <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" to="/hizmetler/veloce-bb-light" @click="closeNavbar">{{ $t('services.laser.items.veloceBB') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/fraksiyonel-karbondioksit-co2-lazer" @click="closeNavbar">{{ $t('services.laser.items.fractionalCO2') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/secret-altin-igne-fraksiyonel-radyofrekans" @click="closeNavbar">{{ $t('services.laser.items.secretGoldenNeedle') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/aqua-peel-medikal-cilt-bakimi" @click="closeNavbar">{{ $t('services.laser.items.aquaPeel') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/piko-saniye-lazer" @click="closeNavbar">{{ $t('services.laser.items.picoSecond') }}</router-link></li>
-                <li><router-link class="dropdown-item" to="/hizmetler/hifu-ameliyatsiz-yuz-germe" @click="closeNavbar">{{ $t('services.laser.items.hifu') }}</router-link></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="#hakkimizda" @click="closeNavbar">{{ $t('common.about') }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="#contact" @click="closeNavbar">{{ $t('common.contact') }}</router-link>
-            </li>
-          </template>
         </ul>
       </div>
     </div>
@@ -130,17 +68,50 @@ import { onMounted, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
+import fallbackData from '@/data/fallback-data' // TypeScript'ın modül çözümlemesini doğru yapabilmesi için .js uzantısı kaldırıldı.
 
 const router = useRouter()
 const store = useStore()
 const { locale } = useI18n()
 
 // Store'dan şirket bilgilerini al
-const companyName = computed(() => store.getters['companyInfo/companyName'])
-const companyLogo = computed(() => store.getters['companyInfo/companyLogo'])
+const companyName = computed(() => {
+  const apiName = store.getters['companyInfo/companyName']
+  if (apiName) {
+    console.log('[Navbar] Company Name: API verisi kullanılıyor')
+    return apiName
+  }
+  console.log('[Navbar] Company Name: Fallback verisi kullanılıyor')
+  return fallbackData.companyInfo.name
+})
+const companyLogo = computed(() => {
+  const apiLogo = store.getters['companyInfo/companyLogo']
+  if (apiLogo) {
+    console.log('[Navbar] Company Logo: API verisi kullanılıyor')
+    return apiLogo
+  }
+  console.log('[Navbar] Company Logo: Fallback verisi kullanılıyor')
+  return fallbackData.companyInfo.logo
+})
 
 // Store'dan menü verilerini al
-const hierarchicalMenu = computed(() => store.getters['menu/hierarchicalMenu'])
+const hierarchicalMenu = computed(() => {
+  const apiMenu = store.getters['menu/hierarchicalMenu']
+  
+  if (apiMenu && apiMenu.length > 0) {
+    console.log('[Navbar] Menu: API verisi kullanılıyor (' + apiMenu.length + ' menü öğesi)')
+    return apiMenu
+  }
+  
+  // Loading durumunda fallback kullanılıyor mesajını farklı göster
+  if (menuLoading.value) {
+    console.log('[Navbar] Menu: Loading durumunda fallback verisi kullanılıyor')
+  } else {
+    console.log('[Navbar] Menu: Fallback verisi kullanılıyor (API\'den menü verisi gelmedi)')
+  }
+  
+  return fallbackData.menu.items
+})
 const menuLoading = computed(() => store.getters['menu/isLoading'])
 const menuError = computed(() => store.getters['menu/error'])
 

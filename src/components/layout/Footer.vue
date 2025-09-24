@@ -21,10 +21,10 @@
               <h4>{{ $t('footer.quickLinks') }}</h4>
               <ul>
                 <li><router-link to="/">{{ $t('common.home') }}</router-link></li>
-                <li><router-link to="#hakkimizda">{{ $t('common.about') }}</router-link></li>
-                <li><router-link to="#hizmetler">{{ $t('common.services') }}</router-link></li>
-                <li><router-link to="#galeri">{{ $t('footer.gallery') }}</router-link></li>
-                <li><router-link to="#contact">{{ $t('common.contact') }}</router-link></li>
+                <li><router-link to="/#hakkimizda">{{ $t('common.about') }}</router-link></li>
+                <li><router-link to="/#hizmetler">{{ $t('common.services') }}</router-link></li>
+                <li><router-link to="/#galeri">{{ $t('footer.gallery') }}</router-link></li>
+                <li><router-link to="/#contact">{{ $t('common.contact') }}</router-link></li>
               </ul>
             </div>
           </div>
@@ -32,9 +32,9 @@
             <div class="footer-links">
               <h4>{{ $t('footer.ourServices') }}</h4>
               <ul>
-                <li><router-link to="#genel">{{ $t('header.generalDermatology') }}</router-link></li>
-                <li><router-link to="#estetik">{{ $t('header.aestheticDermatology') }}</router-link></li>
-                <li><router-link to="#lazer">{{ $t('header.laserTreatments') }}</router-link></li>
+                <li><router-link to="/#genel">{{ $t('header.generalDermatology') }}</router-link></li>
+                <li><router-link to="/#estetik">{{ $t('header.aestheticDermatology') }}</router-link></li>
+                <li><router-link to="/#lazer">{{ $t('header.laserTreatments') }}</router-link></li>
               </ul>
             </div>
           </div>
@@ -67,8 +67,6 @@
           </div>
           <div class="col-md-6 text-end">
             <div class="footer-bottom-links">
-              <a href="#">{{ $t('footer.privacyPolicy') }}</a>
-              <a href="#">{{ $t('footer.termsOfUse') }}</a>
               <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#kvkkModal">{{ $t('footer.kvkk') }}</a>
               <LanguageSelector />
             </div>

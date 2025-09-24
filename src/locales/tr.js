@@ -28,7 +28,8 @@ export default {
     allServices: 'Tüm Hizmetler',
     loading: 'Yükleniyor...',
     error: 'Bir hata oluştu',
-    retry: 'Tekrar Dene'
+    retry: 'Tekrar Dene',
+    close: 'Kapat'
   },
   cookie: {
     title: 'Çerez Kullanımı',
@@ -40,7 +41,8 @@ export default {
     },
     accept: 'Kabul Et',
     decline: 'Reddet',
-    privacyPolicy: 'Gizlilik Politikası',
+    kvkk: 'KVKK Aydınlatma Metni',
+    kvkkTitle: 'Kişisel Verilerin Korunması Kanunu Aydınlatma Metni',
     cookiePolicy: 'Çerez Politikası'
   },
   blog: {
@@ -135,7 +137,7 @@ export default {
     phone: '+90 546 529 76 77',
     email: 'dr.munal1101{\'@\'}gmail.com',
     workingHours: 'Pazartesi - Cumartesi: 09:00 - 21:00',
-    copyright: '© 2024 Doç. Dr. Mehmet Ünal. Tüm hakları saklıdır.',
+    copyright: `© ${new Date().getFullYear()} Doç. Dr. Mehmet Ünal. Tüm hakları saklıdır.`,
     privacyPolicy: 'Gizlilik Politikası',
     termsOfUse: 'Kullanım Koşulları',
     kvkk: 'KVKK',
@@ -251,18 +253,6 @@ export default {
       cta: 'Randevu Alın',
       defaultTitle: 'DermaKlinik',
       defaultSubtitle: 'Cilt sağlığınız için uzman çözümler',
-      slide1: {
-        title: 'Cildiniz İçin Bilim ve Estetiği Buluşturuyoruz',
-        subtitle: 'Uzman kadromuzla sizlere en iyi dermatolojik hizmeti sunuyoruz'
-      },
-      slide2: {
-        title: 'Cilt Sağlığınız Bizim Uzmanlık Alanımız',
-        subtitle: 'En son teknoloji cihazlarla etkili sonuçlar'
-      },
-      slide3: {
-        title: 'Doğal Güzelliğinizi Ortaya Çıkarın',
-        subtitle: 'Güvenli ve etkili estetik dermatoloji uygulamaları'
-      }
     },
     about: {
       title: '{years} Yıllık Tecrübe ile Dermatoloji Uzmanınız',

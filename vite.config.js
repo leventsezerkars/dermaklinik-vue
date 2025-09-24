@@ -13,6 +13,7 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
+      extensions: ['.js', '.ts', '.vue', '.json']
     },
     define: {
       // Environment değişkenlerini global olarak erişilebilir yap

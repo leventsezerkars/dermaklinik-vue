@@ -5,6 +5,21 @@ const GALLERY_GROUP_ID = '9ed81090-088e-44c1-e6a2-08ddf1fc97e5'
 // Hero grubu ID'si
 const HERO_GROUP_ID = '2E04E209-BA5F-427F-A2B5-08DDF5EB9022'
 
+// Resim URL'sini işle
+const getProcessedImageUrl = (imageUrl) => {
+  if (!imageUrl) return ''
+  
+  // Eğer URL zaten tam URL ise direkt döndür
+  if (imageUrl.startsWith('http')) {
+    return imageUrl
+  }
+  
+  // Resimler için base URL
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://localhost:7078'
+  const fullUrl = `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+  return fullUrl
+}
+
 export default {
   namespaced: true,
   
@@ -338,6 +353,10 @@ export default {
       return images
         .filter(img => img.isActive && !img.isDeleted)
         .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+        .map(img => ({
+          ...img,
+          imageUrl: getProcessedImageUrl(img.imageUrl)
+        }))
     },
     
     // Hero resimlerini getirir (sabit grup ID ile)
@@ -346,6 +365,10 @@ export default {
       return images
         .filter(img => img.isActive && !img.isDeleted)
         .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+        .map(img => ({
+          ...img,
+          imageUrl: getProcessedImageUrl(img.imageUrl)
+        }))
     },
     
     // Grup ID'sine göre grubu bulur

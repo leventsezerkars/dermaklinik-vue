@@ -30,7 +30,7 @@ export const GalleryGroupAPI = {
    */
   async getImages(id) {
     try {
-      const response = await apiClient.get(`/GalleryGroup/${id}/images`)
+      const response = await apiClient.get(`/GalleryGroup/${id}/images?take=999`)
       return response.data
     } catch (error) {
       throw new Error('Galeri grubu resimleri yüklenirken bir hata oluştu')

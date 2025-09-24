@@ -28,7 +28,8 @@ export default {
     allServices: 'All Services',
     loading: 'Loading...',
     error: 'An error occurred',
-    retry: 'Try Again'
+    retry: 'Try Again',
+    close: 'Close'
   },
   cookie: {
     title: 'Cookie Usage',
@@ -40,7 +41,8 @@ export default {
     },
     accept: 'Accept',
     decline: 'Decline',
-    privacyPolicy: 'Privacy Policy',
+    kvkk: 'GDPR Privacy Notice',
+    kvkkTitle: 'General Data Protection Regulation Privacy Notice',
     cookiePolicy: 'Cookie Policy'
   },
   blog: {
@@ -134,7 +136,7 @@ export default {
     phone: '+90 546 529 76 77',
     email: 'dr.munal1101{\'@\'}gmail.com',
     workingHours: 'Monday - Saturday: 09:00 - 21:00',
-    copyright: '© 2024 Assoc. Prof. Dr. Mehmet Ünal. All rights reserved.',
+    copyright: `© ${new Date().getFullYear()}  Assoc. Prof. Dr. Mehmet Ünal. All rights reserved.`,
     privacyPolicy: 'Privacy Policy',
     termsOfUse: 'Terms of Use',
     kvkk: 'KVKK',

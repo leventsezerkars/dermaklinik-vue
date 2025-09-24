@@ -37,14 +37,36 @@
     </div>
     
     <div class="cookie-links">
-      <a href="/privacy-policy" class="privacy-link">
-        <i class="fas fa-shield-alt"></i>
-        {{ $t('cookie.privacyPolicy') }}
-      </a>
-      <a href="/cookie-policy" class="cookie-policy-link">
-        <i class="fas fa-cookie"></i>
-        {{ $t('cookie.cookiePolicy') }}
-      </a>
+      <button @click="openKVKKModal" class="kvkk-link">
+        <i class="fas fa-file-pdf"></i>
+        {{ $t('cookie.kvkk') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- KVKK PDF Modal -->
+  <div v-if="showKVKKModal" class="kvkk-modal-overlay" @click="closeKVKKModal">
+    <div class="kvkk-modal" @click.stop>
+      <div class="kvkk-modal-header">
+        <h3>{{ $t('cookie.kvkkTitle') }}</h3>
+        <button @click="closeKVKKModal" class="kvkk-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="kvkk-modal-content">
+        <iframe 
+          :src="kvkkPdfUrl" 
+          width="100%" 
+          height="600px"
+          frameborder="0"
+          title="KVKK Aydınlatma Metni"
+        ></iframe>
+      </div>
+      <div class="kvkk-modal-footer">
+        <button @click="closeKVKKModal" class="btn btn-primary">
+          {{ $t('common.close') }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +77,8 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const showCookieBanner = ref(false)
+const showKVKKModal = ref(false)
+const kvkkPdfUrl = '/KVKK.pdf'
 
 // Cookie consent kontrolü
 const checkCookieConsent = () => {
@@ -82,6 +106,18 @@ const declineCookies = () => {
   
   // Sadece gerekli cookie'leri kullanın
   console.log('Cookie consent declined')
+}
+
+// KVKK modal'ını aç
+const openKVKKModal = () => {
+  showKVKKModal.value = true
+  document.body.style.overflow = 'hidden' // Sayfa kaydırmayı engelle
+}
+
+// KVKK modal'ını kapat
+const closeKVKKModal = () => {
+  showKVKKModal.value = false
+  document.body.style.overflow = 'auto' // Sayfa kaydırmayı geri aç
 }
 
 onMounted(() => {
@@ -280,7 +316,7 @@ onMounted(() => {
     gap: 0.5rem;
   }
 
-  a {
+  a, button {
     color: rgba($white, 0.7);
     text-decoration: none;
     font-size: 0.8rem;
@@ -291,6 +327,8 @@ onMounted(() => {
     border-radius: 6px;
     transition: all 0.3s ease;
     border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
 
     &:hover {
       color: $gold;
@@ -300,6 +338,128 @@ onMounted(() => {
 
     i {
       font-size: 0.7rem;
+    }
+  }
+}
+
+// KVKK Modal Styles
+.kvkk-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.kvkk-modal {
+  background: $dark;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba($gold, 0.2);
+  animation: slideUp 0.3s ease-out;
+
+  @media (max-width: $breakpoint-md) {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 8px;
+  }
+}
+
+.kvkk-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba($gold, 0.2);
+  background: linear-gradient(135deg, rgba($gold, 0.1) 0%, rgba($gold, 0.05) 100%);
+
+  h3 {
+    color: $gold;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    background: linear-gradient(135deg, $gold, $gold-light);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.kvkk-modal-close {
+  background: none;
+  border: none;
+  color: rgba($white, 0.7);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  &:hover {
+    background: rgba($gold, 0.2);
+    color: $gold;
+  }
+}
+
+.kvkk-modal-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow: hidden;
+
+  iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: $breakpoint-md) {
+      height: 500px;
+    }
+  }
+}
+
+.kvkk-modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba($gold, 0.2);
+  display: flex;
+  justify-content: center;
+  background: rgba($dark, 0.5);
+
+  .btn {
+    background: linear-gradient(135deg, $gold, $gold-light);
+    color: $dark;
+    border: none;
+    padding: 0.7rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba($gold, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg, $gold-light, $gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba($gold, 0.4);
     }
   }
 }

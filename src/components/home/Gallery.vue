@@ -55,7 +55,7 @@
           <swiper-slide v-for="(image, index) in galleryImages" :key="image.id">
             <div class="gallery-item" @click="openLightbox(index)">
               <img 
-                :src="getImageUrl(image.imageUrl)" 
+                :src="image.imageUrl" 
                 :alt="image.title || image.altText || 'Galeri Resmi'"
                 @error="handleImageError"
               >
@@ -101,6 +101,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+import fallbackData from '@/data/fallback-data'
 
 const SwiperAutoplay = Autoplay
 const SwiperPagination = Pagination
@@ -114,71 +115,39 @@ const { t } = useI18n()
 const lightboxVisible = ref(false)
 const lightboxIndex = ref(0)
 
-// Fallback resimleri (API'den veri gelmezse kullanılacak)
-const fallbackImages = {
-  clinic1: new URL('/images/clinic_images/DSCF4172.JPG', import.meta.url).href,
-  clinic2: new URL('/images/clinic_images/DSCF4217.JPG', import.meta.url).href,
-  clinic3: new URL('/images/clinic_images/DSCF4218.JPG', import.meta.url).href,
-  clinic4: new URL('/images/clinic_images/DSCF4231.JPG', import.meta.url).href,
-  clinic5: new URL('/images/clinic_images/DSCF4235.JPG', import.meta.url).href,
-  clinic6: new URL('/images/clinic_images/DSCF4254.JPG', import.meta.url).href,
-  clinic7: new URL('/images/clinic_images/DSCF4267.JPG', import.meta.url).href,
-  clinic8: new URL('/images/clinic_images/DSCF4268.JPG', import.meta.url).href,
-  clinic9: new URL('/images/clinic_images/DSCF4285.JPG', import.meta.url).href,
-  clinic10: new URL('/images/clinic_images/DSCF4295.JPG', import.meta.url).href,
-  clinic11: new URL('/images/clinic_images/DSCF4301.JPG', import.meta.url).href,
-  clinic12: new URL('/images/clinic_images/DSCF4303.JPG', import.meta.url).href
-}
-
 // Store getters
 const isLoading = computed(() => store.getters['gallery/isLoading'])
 const hasError = computed(() => store.getters['gallery/hasError'])
 const error = computed(() => store.getters['gallery/error'])
 
-// Galeri resimlerini getir (sabit grup ID ile)
-const galleryImages = computed(() => store.getters['gallery/galleryImages'])
+// Galeri resimlerini getir - API'den veri gelirse onu, gelmezse fallback'i kullan
+const galleryImages = computed(() => {
+  const apiImages = store.getters['gallery/galleryImages']
+  
+  if (apiImages && apiImages.length > 0) {
+    console.log('[Gallery] Images: API verisi kullanılıyor (' + apiImages.length + ' resim)')
+    return apiImages
+  }
+  
+  // Loading durumunda fallback kullanılıyor mesajını farklı göster
+  if (isLoading.value) {
+    console.log('[Gallery] Images: Loading durumunda fallback verisi kullanılıyor')
+  } else {
+    console.log('[Gallery] Images: Fallback verisi kullanılıyor (API\'den veri gelmedi)')
+  }
+  
+  return fallbackData.gallery.images
+})
 
 // Lightbox için resim listesi
 const lightboxImages = computed(() => {
-  if (galleryImages.value.length > 0) {
-    return galleryImages.value.map(img => getImageUrl(img.imageUrl))
-  }
-  
-  // Fallback resimler
-  return Object.values(fallbackImages)
+  return galleryImages.value.map(img => img.imageUrl)
 })
-
-// Resim URL'sini oluştur
-const getImageUrl = (imageUrl) => {
-  if (!imageUrl) {
-    return fallbackImages.clinic1
-  }
-  
-  // Eğer URL zaten tam URL ise direkt döndür
-  if (imageUrl.startsWith('http')) {
-    return imageUrl
-  }
-  
-  // Resimler için base URL (API olmadan)
-  const baseUrl = import.meta.env.VITE_API_BASE_URL ||'https://localhost:7078'
-  const fullUrl = `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
-  return fullUrl
-}
 
 // Resim yükleme hatası durumunda fallback kullan
 const handleImageError = (event) => {
   console.warn('Resim yüklenemedi:', event.target.src)
-  event.target.src = fallbackImages.clinic1
-}
-
-// Galeri verilerini yükle
-const loadGalleryData = async () => {
-  try {
-    // Sabit grup ID ile galeri resimlerini yükle
-    const result = await store.dispatch('gallery/fetchGalleryImages')
-  } catch (error) {
-    console.error('Galeri verileri yüklenirken hata:', error)
-  }
+  event.target.src = fallbackData.gallery.images[0].imageUrl
 }
 
 // Lightbox açma fonksiyonu
@@ -192,9 +161,13 @@ const closeLightbox = () => {
   lightboxVisible.value = false
 }
 
-// Component mount edildiğinde verileri yükle
+// Component mount edildiğinde API'den veri çekmeye çalış
 onMounted(() => {
-  loadGalleryData()
+  // API'den veri çekmeye çalış (opsiyonel)
+  store.dispatch('gallery/fetchGalleryImages').catch(() => {
+    // Hata olursa fallback veriler kullanılacak
+    console.log('API\'den galeri verileri alınamadı, fallback veriler kullanılıyor')
+  })
 })
 </script>
 

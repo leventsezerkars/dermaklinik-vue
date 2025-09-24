@@ -19,80 +19,25 @@
               <i class="fas fa-exclamation-triangle me-2"></i>
               {{ error || $t('common.error') }}
             </div>
-            <button @click="loadHeroData" class="btn btn-primary">
-              {{ $t('common.retry') }}
-            </button>
+            <p class="mt-3">{{ $t('common.fallbackMessage') }}</p>
           </div>
         </div>
 
         <!-- Hero Slides -->
         <div 
-          v-else-if="heroImages.length > 0"
-          v-for="(image, index) in heroImages" 
-          :key="image.id"
+          v-for="(slide, index) in displaySlides" 
+          :key="slide.id"
           class="swiper-slide" 
-          :style="{ backgroundImage: `url('${getImageUrl(image.imageUrl)}')` }"
+          :style="{ backgroundImage: `url('${slide.imageUrl}')` }"
         >
           <div class="container">
             <div class="row h-100 align-items-center">
               <div class="col-lg-6" data-aos="fade-right">
                 <div class="hero-content">
-                  <h1>{{ image.title || $t('home.hero.defaultTitle') }}</h1>
-                  <p class="lead">{{ image.caption || $t('home.hero.defaultSubtitle') }}</p>
+                  <h1>{{ slide.title || $t('home.hero.defaultTitle') }}</h1>
+                  <p class="lead">{{ slide.subtitle || slide.caption || $t('home.hero.defaultSubtitle') }}</p>
                   <div class="hero-buttons">
-                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
-                    <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fallback Slides (API'den veri gelmezse) -->
-        <div  v-else class="swiper-slide" style="background-image: url('images/dr_mu2.jpg?v=3');">
-          <div class="container">
-            <div class="row h-100 align-items-center">
-              <div class="col-lg-6" data-aos="fade-right">
-                <div class="hero-content">
-                  <h1>{{ $t('home.hero.slide1.title') }}</h1>
-                  <p class="lead">{{ $t('home.hero.slide1.subtitle') }}</p>
-                  <div class="hero-buttons">
-                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
-                    <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div  v-else class="swiper-slide" style="background-image: url('images/woman2.jpg');">
-          <div class="container">
-            <div class="row h-100 align-items-center">
-              <div class="col-lg-6" data-aos="fade-right">
-                <div class="hero-content">
-                  <h1>{{ $t('home.hero.slide2.title') }}</h1>
-                  <p class="lead">{{ $t('home.hero.slide2.subtitle') }}</p>
-                  <div class="hero-buttons">
-                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
-                    <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div  v-else class="swiper-slide" style="background-image: url('images/woman3.jpg');">
-          <div class="container">
-            <div class="row h-100 align-items-center">
-              <div class="col-lg-6" data-aos="fade-right">
-                <div class="hero-content">
-                  <h1>{{ $t('home.hero.slide3.title') }}</h1>
-                  <p class="lead">{{ $t('home.hero.slide3.subtitle') }}</p>
-                  <div class="hero-buttons">
-                    <a href="#randevu" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
+                    <a :href="`tel:${companyPhone}`" class="btn btn-primary me-3">{{ $t('common.bookAppointment') }}</a>
                     <a href="#hizmetler" class="btn btn-outline-light">{{ $t('common.services') }}</a>
                   </div>
                 </div>
@@ -118,6 +63,7 @@ import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import fallbackData from '@/data/fallback-data'
 
 // Store ve i18n
 const store = useStore()
@@ -128,86 +74,109 @@ const isLoading = computed(() => store.getters['gallery/isLoading'])
 const hasError = computed(() => store.getters['gallery/hasError'])
 const error = computed(() => store.getters['gallery/error'])
 
-// Hero resimlerini getir
-const heroImages = computed(() => {
-  const images = store.getters['gallery/heroImages']
-  return images
+// Company info getters
+const companyPhone = computed(() => {
+  const apiPhone = store.getters['companyInfo/companyPhone']
+  if (apiPhone) {
+    console.log('[Hero] Company Phone: API verisi kullanılıyor')
+    return apiPhone
+  }
+  console.log('[Hero] Company Phone: Fallback verisi kullanılıyor')
+  return fallbackData.companyInfo.phone
 })
 
-// Fallback resimleri (API'den veri gelmezse kullanılacak)
-const fallbackImages = {
-  dr_mu2: 'images/dr_mu2.jpg?v=3',
-  woman2: 'images/woman2.jpg',
-  woman3: 'images/woman3.jpg'
-}
-
-// Resim URL'sini oluştur
-const getImageUrl = (imageUrl) => {
-  if (!imageUrl) return fallbackImages.dr_mu2
+// Display slides - API'den veri gelirse onu, gelmezse fallback'i kullan
+const displaySlides = computed(() => {
+  const apiImages = store.getters['gallery/heroImages']
   
-  // Eğer URL zaten tam URL ise direkt döndür
-  if (imageUrl.startsWith('http')) {
-    return imageUrl
+  if (apiImages && apiImages.length > 0) {
+    console.log('[Hero] Slides: API verisi kullanılıyor (' + apiImages.length + ' slide)')
+    return apiImages
   }
   
-  // Resimler için base URL (API olmadan)
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://localhost:7078'
-  const fullUrl = `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
-  return fullUrl
-}
-
-// Hero verilerini yükle
-const loadHeroData = async () => {
-  try {
-    // Sabit grup ID ile hero resimlerini yükle
-    const result = await store.dispatch('gallery/fetchHeroImages')
-    
-    // Veri yüklendikten sonra Swiper'ı sadece bir kez başlat
-    if (!swiperInstance) {
-      setTimeout(() => {
-        initSwiper()
-      }, 200)
-    }
-  } catch (error) {
-    console.error('Hero verileri yüklenirken hata:', error)
+  // Loading durumunda fallback kullanılıyor mesajını farklı göster
+  if (isLoading.value) {
+    console.log('[Hero] Slides: Loading durumunda fallback verisi kullanılıyor')
+  } else {
+    console.log('[Hero] Slides: Fallback verisi kullanılıyor (API\'den veri gelmedi)')
   }
-}
+  
+  return fallbackData.hero.slides
+})
 
 // Swiper instance
 let swiperInstance = null
 
 // Swiper'ı başlat
 const initSwiper = () => {
-  if (swiperInstance) {
-    swiperInstance.destroy(true, true)
+  // DOM elementlerinin varlığını kontrol et
+  const swiperElement = document.querySelector('.hero-slider')
+  const paginationElement = document.querySelector('.swiper-pagination')
+  const nextButton = document.querySelector('.swiper-button-next')
+  const prevButton = document.querySelector('.swiper-button-prev')
+  
+  if (!swiperElement) {
+    console.warn('[Hero] Swiper: .hero-slider elementi bulunamadı')
+    return
   }
   
-  swiperInstance = new Swiper('.hero-slider', {
-        modules: [Autoplay, EffectFade, Navigation, Pagination],
-        loop: true,
-        speed: 1000,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      })
+  // Swiper slide'larının varlığını kontrol et
+  const slides = swiperElement.querySelectorAll('.swiper-slide')
+  if (slides.length === 0) {
+    console.warn('[Hero] Swiper: Slide elementleri bulunamadı')
+    return
+  }
+  
+
+  // Mevcut instance'ı temizle
+  if (swiperInstance) {
+    swiperInstance.destroy(true, true)
+    swiperInstance = null
+  }
+  
+  
+  try {
+    swiperInstance = new Swiper('.hero-slider', {
+      modules: [Autoplay, EffectFade, Navigation, Pagination],
+      loop: slides.length > 1, // Sadece birden fazla slide varsa loop aktif
+      speed: 1000,
+      autoplay: slides.length > 1 ? {
+        delay: 5000,
+        disableOnInteraction: false,
+      } : false, // Sadece birden fazla slide varsa autoplay aktif
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      pagination: paginationElement ? {
+        el: '.swiper-pagination',
+        clickable: true,
+      } : false,
+      navigation: (nextButton && prevButton && slides.length > 1) ? {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      } : false,
+    })
+    
+  } catch (error) {
+    console.error('[Hero] Swiper: Oluşturulurken hata:', error)
+  }
 }
 
-// Component mount edildiğinde verileri yükle
+// Watch fonksiyonunu kaldırdık - sadece onMounted'da Swiper başlatılıyor
+
+// Component mount edildiğinde Swiper'ı başlat
 onMounted(() => {
-  loadHeroData()
+  // API'den veri çekmeye çalış (opsiyonel)
+  store.dispatch('gallery/fetchHeroImages').catch(() => {
+    // Hata olursa fallback veriler kullanılacak
+    console.log('[Hero] API\'den hero verileri alınamadı, fallback veriler kullanılıyor')
+  })
+  
+  // Swiper'ı başlat - DOM'un hazır olmasını bekle
+  setTimeout(() => {
+    initSwiper()
+  }, 1000) // Daha uzun gecikme ile DOM'un tamamen hazır olmasını bekle
 })
 </script>
 
