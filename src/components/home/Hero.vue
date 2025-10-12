@@ -78,7 +78,6 @@ const error = computed(() => store.getters['gallery/error'])
 const companyPhone = computed(() => {
   const apiPhone = store.getters['companyInfo/companyPhone']
   if (apiPhone) {
-    console.log('[Hero] Company Phone: API verisi kullanılıyor')
     return apiPhone
   }
   console.log('[Hero] Company Phone: Fallback verisi kullanılıyor')
@@ -90,7 +89,6 @@ const displaySlides = computed(() => {
   const apiImages = store.getters['gallery/heroImages']
   
   if (apiImages && apiImages.length > 0) {
-    console.log('[Hero] Slides: API verisi kullanılıyor (' + apiImages.length + ' slide)')
     return apiImages
   }
   
@@ -167,12 +165,6 @@ const initSwiper = () => {
 
 // Component mount edildiğinde Swiper'ı başlat
 onMounted(() => {
-  // API'den veri çekmeye çalış (opsiyonel)
-  store.dispatch('gallery/fetchHeroImages').catch(() => {
-    // Hata olursa fallback veriler kullanılacak
-    console.log('[Hero] API\'den hero verileri alınamadı, fallback veriler kullanılıyor')
-  })
-  
   // Swiper'ı başlat - DOM'un hazır olmasını bekle
   setTimeout(() => {
     initSwiper()

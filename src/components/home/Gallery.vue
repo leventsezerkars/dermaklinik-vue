@@ -125,7 +125,6 @@ const galleryImages = computed(() => {
   const apiImages = store.getters['gallery/galleryImages']
   
   if (apiImages && apiImages.length > 0) {
-    console.log('[Gallery] Images: API verisi kullanılıyor (' + apiImages.length + ' resim)')
     return apiImages
   }
   
@@ -166,7 +165,6 @@ onMounted(() => {
   // API'den veri çekmeye çalış (opsiyonel)
   store.dispatch('gallery/fetchGalleryImages').catch(() => {
     // Hata olursa fallback veriler kullanılacak
-    console.log('API\'den galeri verileri alınamadı, fallback veriler kullanılıyor')
   })
 })
 </script>

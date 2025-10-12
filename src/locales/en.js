@@ -351,7 +351,17 @@ export default {
         selectService: 'Select Service',
         hairTreatments: 'Hair Treatments',
         message: 'Your Message',
-        send: 'Send'
+        send: 'Send',
+        sending: 'Sending...',
+        success: 'Your message has been sent successfully! We will get back to you as soon as possible.',
+        validation: {
+          required: 'Please fill in all required fields.',
+          email: 'Please enter a valid email address.'
+        },
+        error: {
+          general: 'An error occurred while sending the message. Please try again.',
+          network: 'Connection error. Please check your internet connection.'
+        }
       },
       map: {
         getDirections: 'Get Directions',

@@ -7,37 +7,94 @@
             <h2>{{ $t('home.contact.form.title') }}</h2>
             <p>{{ $t('home.contact.form.subtitle') }}</p>
             <form class="contact-form" @submit.prevent="handleSubmit">
+              <!-- Success Message -->
+              <div v-if="isSuccess" class="alert alert-success" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                {{ $t('home.contact.form.success') }}
+              </div>
+
+              <!-- Error Message -->
+              <div v-if="errorMessage" class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                {{ errorMessage }}
+              </div>
+
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" v-model="form.firstName" :placeholder="$t('home.contact.form.firstName')">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      v-model="form.firstName" 
+                      :placeholder="$t('home.contact.form.firstName')"
+                      :disabled="isLoading"
+                      required
+                    >
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" v-model="form.lastName" :placeholder="$t('home.contact.form.lastName')">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      v-model="form.lastName" 
+                      :placeholder="$t('home.contact.form.lastName')"
+                      :disabled="isLoading"
+                      required
+                    >
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <input type="email" class="form-control" v-model="form.email" :placeholder="$t('home.contact.form.email')">
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  v-model="form.email" 
+                  :placeholder="$t('home.contact.form.email')"
+                  :disabled="isLoading"
+                  required
+                >
               </div>
               <div class="form-group">
-                <input type="tel" class="form-control" v-model="form.phone" :placeholder="$t('home.contact.form.phone')">
+                <input 
+                  type="tel" 
+                  class="form-control" 
+                  v-model="form.phone" 
+                  :placeholder="$t('home.contact.form.phone')"
+                  :disabled="isLoading"
+                >
               </div>
               <div class="form-group">
-                <select class="form-select" v-model="form.service">
+                <select 
+                  class="form-select" 
+                  v-model="form.service"
+                  :disabled="isLoading"
+                >
                   <option value="">{{ $t('home.contact.form.selectService') }}</option>
-                  <option value="genel">{{ $t('header.generalDermatology') }}</option>
-                  <option value="estetik">{{ $t('header.aestheticDermatology') }}</option>
-                  <option value="lazer">{{ $t('header.laserTreatments') }}</option>
-                  <option value="sac">{{ $t('home.contact.form.hairTreatments') }}</option>
+                  <option value="{{ $t('header.generalDermatology') }}">{{ $t('header.generalDermatology') }}</option>
+                  <option value="{{ $t('header.aestheticDermatology') }}">{{ $t('header.aestheticDermatology') }}</option>
+                  <option value="{{ $t('header.laserTreatments') }}">{{ $t('header.laserTreatments') }}</option>
                 </select>
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="5" v-model="form.message" :placeholder="$t('home.contact.form.message')"></textarea>
+                <textarea 
+                  class="form-control" 
+                  rows="5" 
+                  v-model="form.message" 
+                  :placeholder="$t('home.contact.form.message')"
+                  :disabled="isLoading"
+                  required
+                ></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">{{ $t('home.contact.form.send') }}</button>
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                :disabled="isLoading"
+              >
+                <span v-if="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <i v-if="!isLoading" class="fas fa-paper-plane me-2"></i>
+                {{ isLoading ? $t('home.contact.form.sending') : $t('home.contact.form.send') }}
+              </button>
             </form>
           </div>
         </div>
@@ -76,6 +133,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { EmailAPI } from '@/services/api.js'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const form = ref({
   firstName: '',
@@ -86,20 +147,58 @@ const form = ref({
   message: ''
 })
 
+const isLoading = ref(false)
+const isSuccess = ref(false)
+const errorMessage = ref('')
+
 const handleSubmit = async () => {
+  // Form validasyonu
+  if (!form.value.firstName || !form.value.lastName || !form.value.email || !form.value.message) {
+    errorMessage.value = t('home.contact.form.validation.required')
+    return
+  }
+
+  if (!isValidEmail(form.value.email)) {
+    errorMessage.value = t('home.contact.form.validation.email')
+    return
+  }
+
+  isLoading.value = true
+  errorMessage.value = ''
+  isSuccess.value = false
+
   try {
-    console.log('Form submitted:', form.value)
-    form.value = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
+    const response = await EmailAPI.sendContactEmail(form.value)
+    
+    if (response.result) {
+      isSuccess.value = true
+      form.value = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: ''
+      }
+      
+      // 3 saniye sonra success mesajını gizle
+      setTimeout(() => {
+        isSuccess.value = false
+      }, 3000)
+    } else {
+      errorMessage.value = response.errorMessage || t('home.contact.form.error.general')
     }
   } catch (error) {
     console.error('Form submission error:', error)
+    errorMessage.value = t('home.contact.form.error.network')
+  } finally {
+    isLoading.value = false
   }
+}
+
+const isValidEmail = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(email)
 }
 </script>
 

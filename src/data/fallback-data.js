@@ -504,6 +504,17 @@ export default {
     "address": "Ateşbaz Veli Mahallesi, Yeni Meram Cd. No:83 D:4, 42090 Meram / Konya",
     "workingHours": "Pazartesi-Cumartesi: 09:00-21:00",
     "logo": "/images/logo_beyaz.png",
-    "description": "Dermatoloji alanında 20+ yıllık deneyime sahip uzman doktorumuz, modern tıp teknolojilerini kullanarak hastalarına en iyi tedavi hizmetini sunmaktadır."
+    "description": "Dermatoloji alanında 20+ yıllık deneyime sahip uzman doktorumuz, modern tıp teknolojilerini kullanarak hastalarına en iyi tedavi hizmetini sunmaktadır.",
+    "socialMedia": {
+      "instagram": "https://www.instagram.com/doc.dr.mehmetunall",
+      "facebook": "https://www.facebook.com/doc.dr.mehmetunall",
+      "twitter": "https://www.twitter.com/doc.dr.mehmetunall",
+      "linkedIn": "https://www.linkedin.com/in/doc.dr.mehmetunall"
+    },
+    "seo": {
+      "defaultTitle": "Dermaklinik - Dermatoloji ve Estetik Uzmanı",
+      "defaultDescription": "Dermatoloji ve estetik alanında uzman hekimimizle modern tedavi yöntemleri. Cilt sağlığınız için profesyonel hizmet.",
+      "defaultKeywords": "dermatoloji, estetik, cilt sağlığı, tedavi, uzman doktor"
+    }
   }
 }

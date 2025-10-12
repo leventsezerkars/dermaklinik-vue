@@ -340,7 +340,17 @@ export default {
         selectService: 'Hizmet Seçiniz',
         hairTreatments: 'Saç Tedavileri',
         message: 'Mesajınız',
-        send: 'Gönder'
+        send: 'Gönder',
+        sending: 'Gönderiliyor...',
+        success: 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.',
+        validation: {
+          required: 'Lütfen tüm gerekli alanları doldurun.',
+          email: 'Lütfen geçerli bir e-posta adresi girin.'
+        },
+        error: {
+          general: 'Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.',
+          network: 'Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin.'
+        }
       },
       map: {
         getDirections: 'Yol Tarifi Al',

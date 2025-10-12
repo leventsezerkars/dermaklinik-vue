@@ -229,6 +229,7 @@ import { useHead } from '@vueuse/head'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import { MenuAPI } from '@/services/api/menu'
+import fallbackData from '@/data/fallback-data'
 
 const route = useRoute()
 const router = useRouter()
@@ -260,17 +261,10 @@ const updateSlugForNewLanguage = async (newLocale) => {
         // URL'yi yeni slug ile güncelle
         const newPath = `${translation.slug}`
         await router.replace(newPath)
-        
-        // Veriyi yeniden yükle
-        await fetchServiceData()
-      } else {
-        // Çeviri bulunamadı, sadece veriyi yeniden yükle
-        await fetchServiceData()
       }
-    } else {
-      // Hizmet bulunamadı, sadece veriyi yeniden yükle
-      await fetchServiceData()
-    }
+    } 
+    await fetchServiceData()
+
   } catch (err) {
     console.error('Slug update error:', err)
     // Hata durumunda sadece veriyi yeniden yükle
@@ -368,25 +362,94 @@ const fetchServiceData = async () => {
 // Company bilgilerini store'dan al
 const companyInfo = computed(() => store.getters['companyInfo/activeCompanyInfo'])
 
-// İletişim bilgileri
-const contactInfo = computed(() => ({
-  address: companyInfo.value?.address || 'Ateşbaz Veli Mahallesi, Yeni Meram Cd. No:83 D:4, 42090 Meram / Konya',
-  phone: companyInfo.value?.phone || '+90 546 529 76 77',
-  email: companyInfo.value?.email || 'dr.munal1101@gmail.com',
-  workingHours: companyInfo.value?.workingHours || 'Pazartesi - Cumartesi: 09:00 - 18:00'
-}))
+// İletişim bilgileri - önce companyInfo'dan, yoksa fallback'ten
+const contactInfo = computed(() => {
+  const company = companyInfo.value
+  const fallback = fallbackData.companyInfo
+  
+  const address = company?.address || fallback.address
+  const phone = company?.phone || fallback.phone
+  const email = company?.email || fallback.email
+  const workingHours = company?.workingHours || fallback.workingHours
+  
+  // Fallback kullanıldığında console log
+  if (!company?.address) {
+    console.log('[ServiceDetailView] ContactInfo Address: Fallback verisi kullanılıyor')
+  }
+  if (!company?.phone) {
+    console.log('[ServiceDetailView] ContactInfo Phone: Fallback verisi kullanılıyor')
+  }
+  if (!company?.email) {
+    console.log('[ServiceDetailView] ContactInfo Email: Fallback verisi kullanılıyor')
+  }
+  if (!company?.workingHours) {
+    console.log('[ServiceDetailView] ContactInfo WorkingHours: Fallback verisi kullanılıyor')
+  }
+  
+  return {
+    address,
+    phone,
+    email,
+    workingHours
+  }
+})
 
-// SEO için head bilgilerini ayarla
+// SEO için head bilgilerini ayarla - önce service'den, yoksa fallback'ten
 useHead({
-  title: computed(() => currentService.value ? `${currentService.value.seoTitle || currentService.value.title} - Dermaklinik` : 'Hizmet Bulunamadı - Dermaklinik'),
+  title: computed(() => {
+    if (currentService.value) {
+      const serviceTitle = currentService.value.seoTitle || currentService.value.title
+      const fallbackTitle = fallbackData.companyInfo.seo.defaultTitle
+      const title = serviceTitle || fallbackTitle
+      
+      if (!currentService.value.seoTitle) {
+        console.log('[ServiceDetailView] SEO Title: Fallback verisi kullanılıyor')
+      }
+      
+      return `${title} - Dermaklinik`
+    }
+    
+    console.log('[ServiceDetailView] SEO Title: Service bulunamadı, fallback verisi kullanılıyor')
+    return `${fallbackData.companyInfo.seo.defaultTitle} - Dermaklinik`
+  }),
   meta: [
     {
       name: 'description',
-      content: computed(() => currentService.value ? currentService.value.seoDescription || `${currentService.value.title} hakkında detaylı bilgi. Uzman dermatolog ekibimizle modern tedavi yöntemleri.` : 'Aradığınız hizmet bulunamadı.')
+      content: computed(() => {
+        if (currentService.value) {
+          const serviceDesc = currentService.value.seoDescription
+          const fallbackDesc = fallbackData.companyInfo.seo.defaultDescription
+          const description = serviceDesc || fallbackDesc
+          
+          if (!serviceDesc) {
+            console.log('[ServiceDetailView] SEO Description: Fallback verisi kullanılıyor')
+          }
+          
+          return description
+        }
+        
+        console.log('[ServiceDetailView] SEO Description: Service bulunamadı, fallback verisi kullanılıyor')
+        return fallbackData.companyInfo.seo.defaultDescription
+      })
     },
     {
       name: 'keywords',
-      content: computed(() => currentService.value ? currentService.value.seoKeywords || `${currentService.value.title}, dermatoloji, cilt hastalıkları, tedavi` : 'dermatoloji, cilt hastalıkları')
+      content: computed(() => {
+        if (currentService.value) {
+          const serviceKeywords = currentService.value.seoKeywords
+          const fallbackKeywords = fallbackData.companyInfo.seo.defaultKeywords
+          const keywords = serviceKeywords || fallbackKeywords
+          
+          if (!serviceKeywords) {
+            console.log('[ServiceDetailView] SEO Keywords: Fallback verisi kullanılıyor')
+          }
+          
+          return keywords
+        }
+        
+        console.log('[ServiceDetailView] SEO Keywords: Service bulunamadı, fallback verisi kullanılıyor')
+        return fallbackData.companyInfo.seo.defaultKeywords
+      })
     }
   ]
 })
@@ -417,9 +480,6 @@ watch(
 )
 
 onMounted(async () => {
-  // Company bilgilerini yükle
-  await store.dispatch('companyInfo/fetchActiveCompanyInfo')
-  
   // Hizmet verilerini yükle (watch zaten çalışacak ama emin olmak için)
   if (route.params.slug) {
     await fetchServiceData()

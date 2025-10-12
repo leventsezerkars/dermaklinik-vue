@@ -406,11 +406,10 @@
             }
           },
           {
-            "name": "languageId",
+            "name": "languageCode",
             "in": "query",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             }
           }
         ],
@@ -1250,6 +1249,83 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Email/contact": {
+      "post": {
+        "tags": [
+          "Email"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Email/test": {
+      "post": {
+        "tags": [
+          "Email"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailResponseDtoApiResponse"
                 }
               }
             }
@@ -2850,13 +2926,6 @@
             "format": "date-time",
             "nullable": true
           },
-          "blogs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BlogDto"
-            },
-            "nullable": true
-          },
           "translations": {
             "type": "array",
             "items": {
@@ -2916,6 +2985,9 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "language": {
+            "$ref": "#/components/schemas/LanguageDto"
           }
         },
         "additionalProperties": false
@@ -2989,21 +3061,9 @@
       "BlogTranslationDto": {
         "type": "object",
         "properties": {
-          "createdById": {
+          "id": {
             "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "updatedById": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "creator": {
-            "$ref": "#/components/schemas/User"
-          },
-          "updater": {
-            "$ref": "#/components/schemas/User"
+            "format": "uuid"
           },
           "isActive": {
             "type": "boolean"
@@ -3011,9 +3071,30 @@
           "isDeleted": {
             "type": "boolean"
           },
-          "id": {
+          "createdAt": {
             "type": "string",
-            "format": "uuid"
+            "format": "date-time"
+          },
+          "createdById": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "creator": {
+            "$ref": "#/components/schemas/User"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedById": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updater": {
+            "$ref": "#/components/schemas/User"
           },
           "blogId": {
             "type": "string",
@@ -3059,14 +3140,8 @@
             "type": "string",
             "nullable": true
           },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
+          "language": {
+            "$ref": "#/components/schemas/LanguageDto"
           }
         },
         "additionalProperties": false
@@ -3718,6 +3793,100 @@
             "nullable": true
           },
           "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmailRequestDto": {
+        "required": [
+          "email",
+          "message",
+          "name",
+          "subject"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "subject": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string"
+          },
+          "message": {
+            "maxLength": 5000,
+            "minLength": 0,
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmailResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "errorDetails": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmailResponseDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "data": {
+            "$ref": "#/components/schemas/EmailResponseDto"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNext": {
             "type": "boolean"
           }
         },

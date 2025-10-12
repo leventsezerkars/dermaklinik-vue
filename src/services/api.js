@@ -141,4 +141,35 @@ export const AppointmentAPI = {
   }
 }
 
+export const EmailAPI = {
+  // İletişim formu gönderme
+  async sendContactEmail(emailData) {
+    try {
+      const response = await apiClient.post('/Email/contact', {
+        name: `${emailData.firstName} ${emailData.lastName}`.trim(),
+        email: emailData.email,
+        phone: emailData.phone || null,
+        subject: emailData.service ? `Randevu Talebi - ${emailData.service}` : 'İletişim Formu',
+        message: emailData.message,
+        companyName: 'DermaKlinik'
+      })
+      return response.data
+    } catch (error) {
+      console.error('Email gönderme hatası:', error)
+      throw new Error('Email gönderilirken bir hata oluştu')
+    }
+  },
+
+  // Test email gönderme
+  async sendTestEmail() {
+    try {
+      const response = await apiClient.post('/api/Email/test')
+      return response.data
+    } catch (error) {
+      console.error('Test email hatası:', error)
+      throw new Error('Test email gönderilirken bir hata oluştu')
+    }
+  }
+}
+
 export default apiClient 

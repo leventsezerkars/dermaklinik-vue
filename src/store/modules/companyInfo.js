@@ -4,7 +4,6 @@ export default {
   namespaced: true,
   
   state: {
-    companyInfo: null,
     activeCompanyInfo: null,
     loading: false,
     error: null,
@@ -13,15 +12,6 @@ export default {
   },
 
   mutations: {
-    setCompanyInfo(state, companyInfo) {
-      state.companyInfo = companyInfo
-      state.lastFetch = new Date()
-      // localStorage'a kaydet
-      localStorage.setItem('companyInfo_cache', JSON.stringify({
-        data: companyInfo,
-        timestamp: new Date().toISOString()
-      }))
-    },
     setActiveCompanyInfo(state, companyInfo) {
       state.activeCompanyInfo = companyInfo
       state.lastFetch = new Date()
@@ -116,76 +106,10 @@ export default {
       }
     },
 
-    async fetchCompanyInfo({ commit, state }, id) {
-      commit('setLoading', true)
-      commit('clearError')
-      
-      try {
-        const response = await CompanyInfoAPI.getById(id)
-        commit('setCompanyInfo', response.data)
-        return response.data
-      } catch (error) {
-        commit('setError', error.message)
-        throw error
-      } finally {
-        commit('setLoading', false)
-      }
-    },
-
-    async fetchAllCompanyInfo({ commit }) {
-      commit('setLoading', true)
-      commit('clearError')
-      
-      try {
-        const response = await CompanyInfoAPI.getAll()
-        return response.data
-      } catch (error) {
-        commit('setError', error.message)
-        throw error
-      } finally {
-        commit('setLoading', false)
-      }
-    },
-
-    async fetchPagedCompanyInfo({ commit }, { page = 1, limit = 10, search = '' } = {}) {
-      commit('setLoading', true)
-      commit('clearError')
-      
-      try {
-        const response = await CompanyInfoAPI.getPaged(page, limit, search)
-        return response.data
-      } catch (error) {
-        commit('setError', error.message)
-        throw error
-      } finally {
-        commit('setLoading', false)
-      }
-    },
-
-    async checkNameUnique({ commit }, { name, excludeId = null }) {
-      try {
-        const response = await CompanyInfoAPI.checkNameUnique(name, excludeId)
-        return response.data
-      } catch (error) {
-        commit('setError', error.message)
-        throw error
-      }
-    },
-
-    async checkEmailUnique({ commit }, { email, excludeId = null }) {
-      try {
-        const response = await CompanyInfoAPI.checkEmailUnique(email, excludeId)
-        return response.data
-      } catch (error) {
-        commit('setError', error.message)
-        throw error
-      }
-    }
   },
 
   getters: {
     activeCompanyInfo: state => state.activeCompanyInfo,
-    companyInfo: state => state.companyInfo,
     isLoading: state => state.loading,
     isFetching: state => state.isFetching,
     hasError: state => state.error !== null,

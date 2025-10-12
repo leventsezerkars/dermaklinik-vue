@@ -4,7 +4,7 @@
     <a :href="whatsappUrl" class="social-button whatsapp" target="_blank" rel="noopener noreferrer">
       <i class="fab fa-whatsapp"></i>
     </a>
-    <a href="https://www.instagram.com/doc.dr.mehmetunall" class="social-button instagram" target="_blank" rel="noopener noreferrer">
+    <a :href="instagramUrl" class="social-button instagram" target="_blank" rel="noopener noreferrer">
       <i class="fab fa-instagram"></i>
     </a>
   </div>
@@ -13,9 +13,39 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import fallbackData from '@/data/fallback-data'
 
 const store = useStore()
-const phone = computed(() => store.state.siteInfo.phone.replace(/\D/g, ''))
+
+// Telefon numarasını al (önce companyInfo'dan, en son fallback)
+const phone = computed(() => {
+  const companyPhone = store.getters['companyInfo/companyPhone']
+  const fallbackPhone = fallbackData.companyInfo.phone
+  
+  const phoneNumber = companyPhone || fallbackPhone
+  
+  if (!companyPhone) {
+  }
+  
+  return phoneNumber.replace(/\D/g, '')
+})
+
+// Instagram linkini al (önce companyInfo'dan, en son fallback)
+const instagramUrl = computed(() => {
+  const companySocial = store.getters['companyInfo/socialMedia']
+  const fallbackSocial = fallbackData.companyInfo.socialMedia
+  
+  if (companySocial?.instagram) {
+    return companySocial.instagram
+  }
+  
+  if (fallbackSocial?.instagram) {
+    return fallbackSocial.instagram
+  }
+  
+  return 'https://www.instagram.com/doc.dr.mehmetunall'
+})
+
 const whatsappUrl = computed(() => `https://wa.me/${phone.value}`)
 </script>
 

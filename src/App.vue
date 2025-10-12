@@ -13,9 +13,10 @@ onMounted(async () => {
   // Uygulama başlangıcında temel verileri çek
   try {
     await Promise.all([
-      store.dispatch('fetchServices'),
       store.dispatch('companyInfo/fetchActiveCompanyInfo'),
-      store.dispatch('menu/fetchMenuItems')
+      store.dispatch('gallery/fetchHeroImages'),
+      store.dispatch('menu/fetchMenuItems'),
+      store.dispatch('gallery/fetchGalleryImages'),
     ])
   } catch (error) {
     console.error('Uygulama verileri yüklenirken hata:', error)

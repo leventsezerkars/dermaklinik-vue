@@ -78,19 +78,15 @@ const { locale } = useI18n()
 const companyName = computed(() => {
   const apiName = store.getters['companyInfo/companyName']
   if (apiName) {
-    console.log('[Navbar] Company Name: API verisi kullanılıyor')
     return apiName
   }
-  console.log('[Navbar] Company Name: Fallback verisi kullanılıyor')
   return fallbackData.companyInfo.name
 })
 const companyLogo = computed(() => {
   const apiLogo = store.getters['companyInfo/companyLogo']
   if (apiLogo) {
-    console.log('[Navbar] Company Logo: API verisi kullanılıyor')
     return apiLogo
   }
-  console.log('[Navbar] Company Logo: Fallback verisi kullanılıyor')
   return fallbackData.companyInfo.logo
 })
 
@@ -99,21 +95,11 @@ const hierarchicalMenu = computed(() => {
   const apiMenu = store.getters['menu/hierarchicalMenu']
   
   if (apiMenu && apiMenu.length > 0) {
-    console.log('[Navbar] Menu: API verisi kullanılıyor (' + apiMenu.length + ' menü öğesi)')
     return apiMenu
   }
-  
-  // Loading durumunda fallback kullanılıyor mesajını farklı göster
-  if (menuLoading.value) {
-    console.log('[Navbar] Menu: Loading durumunda fallback verisi kullanılıyor')
-  } else {
-    console.log('[Navbar] Menu: Fallback verisi kullanılıyor (API\'den menü verisi gelmedi)')
-  }
-  
+
   return fallbackData.menu.items
 })
-const menuLoading = computed(() => store.getters['menu/isLoading'])
-const menuError = computed(() => store.getters['menu/error'])
 
 // Menü linkini oluştur
 const getMenuLink = (menuItem: any) => {
