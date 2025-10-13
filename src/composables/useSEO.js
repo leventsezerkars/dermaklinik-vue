@@ -11,7 +11,7 @@ export function useSEO() {
 
   // Sayfa başlığını oluştur
   const getPageTitle = (pageTitle = '') => {
-    const baseTitle = companyName.value || 'DermaKlinik'
+    const baseTitle = companyName.value || 'Doç. Dr. Mehmet Ünal'
     const metaTitle = seoInfo.value?.metaTitle || ''
     
     if (pageTitle) {

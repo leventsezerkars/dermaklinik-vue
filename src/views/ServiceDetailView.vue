@@ -406,11 +406,11 @@ useHead({
         console.log('[ServiceDetailView] SEO Title: Fallback verisi kullanılıyor')
       }
       
-      return `${title} - Dermaklinik`
+      return `${title} - Doç. Dr. Mehmet Ünal`
     }
     
     console.log('[ServiceDetailView] SEO Title: Service bulunamadı, fallback verisi kullanılıyor')
-    return `${fallbackData.companyInfo.seo.defaultTitle} - Dermaklinik`
+    return `${fallbackData.companyInfo.seo.defaultTitle} - Doç. Dr. Mehmet Ünal`
   }),
   meta: [
     {

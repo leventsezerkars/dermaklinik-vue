@@ -250,7 +250,7 @@ export default {
       title: 'Expert Hands for Your Skin Health',
       subtitle: 'We protect your skin health with modern technology and expert staff',
       cta: 'Book Appointment',
-      defaultTitle: 'DermaKlinik',
+      defaultTitle: 'Dermatology Clinic',
       defaultSubtitle: 'Expert solutions for your skin health',
       slide1: {
         title: 'We Bring Science and Aesthetics Together for Your Skin',

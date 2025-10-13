@@ -251,7 +251,7 @@ export default {
       title: 'Cildinizin Sağlığı İçin Uzman Eller',
       subtitle: 'Modern teknoloji ve uzman kadromuzla cilt sağlığınızı koruyoruz',
       cta: 'Randevu Alın',
-      defaultTitle: 'DermaKlinik',
+      defaultTitle: 'Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı',
       defaultSubtitle: 'Cilt sağlığınız için uzman çözümler',
     },
     about: {

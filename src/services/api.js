@@ -151,7 +151,7 @@ export const EmailAPI = {
         phone: emailData.phone || null,
         subject: emailData.service ? `Randevu Talebi - ${emailData.service}` : 'İletişim Formu',
         message: emailData.message,
-        companyName: 'DermaKlinik'
+        companyName: 'Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı'
       })
       return response.data
     } catch (error) {

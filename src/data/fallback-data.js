@@ -524,7 +524,7 @@ export default {
       "linkedIn": "https://www.linkedin.com/in/doc.dr.mehmetunall"
     },
     "seo": {
-      "defaultTitle": "Dermaklinik - Dermatoloji ve Estetik Uzmanı",
+      "defaultTitle": "Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı",
       "defaultDescription": "Dermatoloji ve estetik alanında uzman hekimimizle modern tedavi yöntemleri. Cilt sağlığınız için profesyonel hizmet.",
       "defaultKeywords": "dermatoloji, estetik, cilt sağlığı, tedavi, uzman doktor"
     }
