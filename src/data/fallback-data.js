@@ -389,6 +389,7 @@ export default {
       {
         "id": "fallback-gallery-1",
         "title": "Klinik Görünümü",
+        "titleEn": "Clinic View",
         "altText": "Modern klinik ortamı",
         "imageUrl": "/images/clinic_images/DSCF4172.JPG",
         "sortOrder": 1,
@@ -398,6 +399,7 @@ export default {
       {
         "id": "fallback-gallery-2",
         "title": "Muayene Odası",
+        "titleEn": "Examination Room",
         "altText": "Profesyonel muayene ortamı",
         "imageUrl": "/images/clinic_images/DSCF4217.JPG",
         "sortOrder": 2,
@@ -407,6 +409,7 @@ export default {
       {
         "id": "fallback-gallery-3",
         "title": "Bekleme Salonu",
+        "titleEn": "Waiting Room",
         "altText": "Konforlu bekleme alanı",
         "imageUrl": "/images/clinic_images/DSCF4218.JPG",
         "sortOrder": 3,
@@ -416,6 +419,7 @@ export default {
       {
         "id": "fallback-gallery-4",
         "title": "Tedavi Odası",
+        "titleEn": "Treatment Room",
         "altText": "Modern tedavi ekipmanları",
         "imageUrl": "/images/clinic_images/DSCF4231.JPG",
         "sortOrder": 4,
@@ -425,6 +429,7 @@ export default {
       {
         "id": "fallback-gallery-5",
         "title": "Lazer Tedavi Ünitesi",
+        "titleEn": "Laser Treatment Unit",
         "altText": "Gelişmiş lazer teknolojisi",
         "imageUrl": "/images/clinic_images/DSCF4235.JPG",
         "sortOrder": 5,
@@ -434,6 +439,7 @@ export default {
       {
         "id": "fallback-gallery-6",
         "title": "Estetik Uygulama Alanı",
+        "titleEn": "Aesthetic Application Area",
         "altText": "Güvenli estetik uygulamalar",
         "imageUrl": "/images/clinic_images/DSCF4254.JPG",
         "sortOrder": 6,
@@ -443,6 +449,7 @@ export default {
       {
         "id": "fallback-gallery-7",
         "title": "Konsültasyon Odası",
+        "titleEn": "Consultation Room",
         "altText": "Hasta danışmanlık alanı",
         "imageUrl": "/images/clinic_images/DSCF4267.JPG",
         "sortOrder": 7,
@@ -452,6 +459,7 @@ export default {
       {
         "id": "fallback-gallery-8",
         "title": "Cilt Analiz Merkezi",
+        "titleEn": "Skin Analysis Center",
         "altText": "Dijital cilt analiz sistemi",
         "imageUrl": "/images/clinic_images/DSCF4268.JPG",
         "sortOrder": 8,
@@ -461,6 +469,7 @@ export default {
       {
         "id": "fallback-gallery-9",
         "title": "Sterilizasyon Ünitesi",
+        "titleEn": "Sterilization Unit",
         "altText": "Hijyenik sterilizasyon alanı",
         "imageUrl": "/images/clinic_images/DSCF4285.JPG",
         "sortOrder": 9,
@@ -470,6 +479,7 @@ export default {
       {
         "id": "fallback-gallery-10",
         "title": "Giriş Holü",
+        "titleEn": "Entrance Hall",
         "altText": "Modern ve şık giriş alanı",
         "imageUrl": "/images/clinic_images/DSCF4295.JPG",
         "sortOrder": 10,
@@ -479,6 +489,7 @@ export default {
       {
         "id": "fallback-gallery-11",
         "title": "Dinlenme Alanı",
+        "titleEn": "Rest Area",
         "altText": "Hastalar için konforlu dinlenme",
         "imageUrl": "/images/clinic_images/DSCF4301.JPG",
         "sortOrder": 11,
@@ -488,6 +499,7 @@ export default {
       {
         "id": "fallback-gallery-12",
         "title": "Resepsiyon",
+        "titleEn": "Reception",
         "altText": "Profesyonel resepsiyon hizmeti",
         "imageUrl": "/images/clinic_images/DSCF4303.JPG",
         "sortOrder": 12,

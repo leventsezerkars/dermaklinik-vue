@@ -60,7 +60,7 @@
                 @error="handleImageError"
               >
               <div class="gallery-item-title">
-                <h4>{{ image.title || $t('home.gallery.defaultTitle') }}</h4>
+                <h4>{{ getImageTitle(image) }}</h4>
               </div>
             </div>
           </swiper-slide>
@@ -158,6 +158,18 @@ const openLightbox = (index) => {
 // Lightbox kapatma fonksiyonu
 const closeLightbox = () => {
   lightboxVisible.value = false
+}
+
+// Dile göre resim başlığını getir
+const getImageTitle = (image) => {
+  const { locale } = useI18n()
+  // İngilizce ise titleEn kullan, yoksa title kullan
+  if (locale.value === 'en' && image.titleEn) {
+    return image.titleEn
+  }
+  
+  // Türkçe veya titleEn yoksa title kullan
+  return image.title || t('home.gallery.defaultTitle')
 }
 
 // Component mount edildiğinde API'den veri çekmeye çalış
