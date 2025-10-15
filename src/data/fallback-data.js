@@ -527,6 +527,8 @@ export default {
       "defaultTitle": "Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı",
       "defaultDescription": "Dermatoloji ve estetik alanında uzman hekimimizle modern tedavi yöntemleri. Cilt sağlığınız için profesyonel hizmet.",
       "defaultKeywords": "dermatoloji, estetik, cilt sağlığı, tedavi, uzman doktor"
-    }
+    },
+    "googleMapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1324.3769308986002!2d32.44742075994305!3d37.8622338918696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d08506268d51bd%3A0xd23e3de31bae298!2sDo%C3%A7.%20Dr.%20Mehmet%20Unal%20Dermatoloji%20Klini%C4%9Fi!5e0!3m2!1str!2str!4v1676893648669!5m2!1str!2str",
+    "directionsUrl": "https://www.google.com/maps/dir//Ate%C5%9Fbaz+Veli+Mahallesi,+Yeni+Meram+Cd.+No:83+D:4,+42090+Meram%2FKonya/@37.8746357,32.4565924,17z"
   }
 }

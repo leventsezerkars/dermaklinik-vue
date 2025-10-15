@@ -1,10 +1,10 @@
 <!-- Social Media Buttons Component -->
 <template>
   <div class="social-buttons">
-    <a :href="whatsappUrl" class="social-button whatsapp" target="_blank" rel="noopener noreferrer">
+    <a :href="whatsappUrl" class="social-button whatsapp" target="_blank" rel="noopener noreferrer" @click="handleWhatsAppClick">
       <i class="fab fa-whatsapp"></i>
     </a>
-    <a :href="instagramUrl" class="social-button instagram" target="_blank" rel="noopener noreferrer">
+    <a :href="instagramUrl" class="social-button instagram" target="_blank" rel="noopener noreferrer" @click="handleInstagramClick">
       <i class="fab fa-instagram"></i>
     </a>
   </div>
@@ -13,9 +13,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useGoogleAnalytics } from '@/composables/useGoogleAnalytics'
 import fallbackData from '@/data/fallback-data'
 
 const store = useStore()
+const { trackWhatsAppClick, trackEvent } = useGoogleAnalytics()
 
 // Telefon numarasını al (önce companyInfo'dan, en son fallback)
 const phone = computed(() => {
@@ -47,6 +49,17 @@ const instagramUrl = computed(() => {
 })
 
 const whatsappUrl = computed(() => `https://wa.me/${phone.value}`)
+
+// Event handlers
+const handleWhatsAppClick = () => {
+  trackWhatsAppClick(phone.value)
+}
+
+const handleInstagramClick = () => {
+  trackEvent('instagram_click', {
+    instagram_url: instagramUrl.value
+  })
+}
 </script>
 
 <style scoped>

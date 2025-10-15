@@ -101,6 +101,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+import { useGoogleAnalytics } from '@/composables/useGoogleAnalytics'
 import fallbackData from '@/data/fallback-data'
 
 const SwiperAutoplay = Autoplay
@@ -110,6 +111,7 @@ const SwiperNavigation = Navigation
 // Store ve i18n
 const store = useStore()
 const { t } = useI18n()
+const { trackGalleryView } = useGoogleAnalytics()
 
 // Lightbox state
 const lightboxVisible = ref(false)
@@ -153,6 +155,13 @@ const handleImageError = (event) => {
 const openLightbox = (index) => {
   lightboxIndex.value = index
   lightboxVisible.value = true
+  
+  // Google Analytics'e galeri görüntüleme eventi gönder
+  const image = galleryImages.value[index]
+  if (image) {
+    const imageTitle = getImageTitle(image)
+    trackGalleryView(imageTitle, image.id || index)
+  }
 }
 
 // Lightbox kapatma fonksiyonu

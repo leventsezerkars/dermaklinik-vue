@@ -126,11 +126,13 @@ import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@vueuse/head'
+import { useGoogleAnalytics } from '@/composables/useGoogleAnalytics'
 
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
 const { locale } = useI18n()
+const { trackBlogRead } = useGoogleAnalytics()
 
 // Computed properties
 const post = computed(() => store.getters['blog/currentPost'])
@@ -235,6 +237,10 @@ onMounted(async () => {
   // Blog detayı yüklendikten sonra görüntülenme sayısını artır
   if (post.value?.id) {
     await store.dispatch('blog/incrementPostView', post.value.id)
+    
+    // Google Analytics'e blog okuma eventi gönder
+    const postTitle = getPostTitle(post.value)
+    trackBlogRead(postTitle, post.value.id)
   }
 })
 

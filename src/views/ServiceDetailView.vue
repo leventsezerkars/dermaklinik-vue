@@ -229,12 +229,14 @@ import { useHead } from '@vueuse/head'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import { MenuAPI } from '@/services/api/menu'
+import { useGoogleAnalytics } from '@/composables/useGoogleAnalytics'
 import fallbackData from '@/data/fallback-data'
 
 const route = useRoute()
 const router = useRouter()
 const store = useStore()
 const { locale, t } = useI18n({ useScope: 'global' })
+const { trackServiceView } = useGoogleAnalytics()
 const loading = ref(false)
 const error = ref(null)
 
@@ -315,6 +317,9 @@ const fetchServiceData = async () => {
           seoKeywords: translation.seoKeywords,
           category: categoryTitle
         }
+        
+        // Google Analytics'e hizmet görüntüleme eventi gönder
+        trackServiceView(translation.title, service.id)
         
         // İlgili hizmetleri bul (aynı kategorideki diğer hizmetler)
         relatedServices.value = menuItems

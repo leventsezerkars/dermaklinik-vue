@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+import { useGoogleAnalytics } from './composables/useGoogleAnalytics'
 import TopBar from './components/layout/TopBar.vue'
 import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
@@ -8,6 +10,8 @@ import WhatsAppButton from './components/common/WhatsAppButton.vue'
 import CookieConsent from './components/common/CookieConsent.vue'
 
 const store = useStore()
+const route = useRoute()
+const { trackPageView, initializeGlobalGoogleAnalytics } = useGoogleAnalytics()
 
 onMounted(async () => {
   // Uygulama başlangıcında temel verileri çek
@@ -18,10 +22,24 @@ onMounted(async () => {
       store.dispatch('menu/fetchMenuItems'),
       store.dispatch('gallery/fetchGalleryImages'),
     ])
+    
+    // Google Analytics'i initialize et
+    await initializeGlobalGoogleAnalytics()
   } catch (error) {
     console.error('Uygulama verileri yüklenirken hata:', error)
   }
 })
+
+// Route değişikliklerini takip et ve Google Analytics'e bildir
+watch(
+  () => route.fullPath,
+  (newPath, oldPath) => {
+    if (newPath !== oldPath) {
+      // Sayfa değişikliğini Google Analytics'e bildir
+      trackPageView(document.title, window.location.href)
+    }
+  }
+)
 </script>
 
 <template>

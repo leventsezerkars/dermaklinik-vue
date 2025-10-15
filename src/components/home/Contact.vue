@@ -101,7 +101,7 @@
         <div class="col-lg-6">
           <div class="map-wrapper h-100">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1324.3769308986002!2d32.44742075994305!3d37.8622338918696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d08506268d51bd%3A0xd23e3de31bae298!2sDo%C3%A7.%20Dr.%20Mehmet%20Unal%20Dermatoloji%20Klini%C4%9Fi!5e0!3m2!1str!2str!4v1676893648669!5m2!1str!2str"
+              :src="googleMapsUrl"
               width="100%" 
               height="100%" 
               style="border:0;" 
@@ -111,14 +111,15 @@
             </iframe>
             <div class="map-info">
               <div class="map-buttons">
-                <a href="https://www.google.com/maps/dir//Ate%C5%9Fbaz+Veli+Mahallesi,+Yeni+Meram+Cd.+No:83+D:4,+42090+Meram%2FKonya/@37.8746357,32.4565924,17z" 
+                <a :href="directionsUrl" 
                    target="_blank" 
                    class="btn btn-primary">
                   <i class="fas fa-directions"></i>
                   <span>{{ $t('home.contact.map.getDirections') }}</span>
                 </a>
-                <a href="tel:+905465297677" 
-                   class="btn btn-outline-primary">
+                <a :href="`tel:${companyPhone}`" 
+                   class="btn btn-outline-primary"
+                   @click="handlePhoneCall">
                   <i class="fas fa-phone"></i>
                   <span>{{ $t('home.contact.map.callNow') }}</span>
                 </a>
@@ -132,11 +133,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { EmailAPI } from '@/services/api.js'
 import { useI18n } from 'vue-i18n'
+import { useGoogleAnalytics } from '@/composables/useGoogleAnalytics'
+import fallbackData from '@/data/fallback-data'
 
+const store = useStore()
 const { t } = useI18n()
+const { trackContactForm, trackPhoneCall } = useGoogleAnalytics()
 
 const form = ref({
   firstName: '',
@@ -150,6 +156,25 @@ const form = ref({
 const isLoading = ref(false)
 const isSuccess = ref(false)
 const errorMessage = ref('')
+
+// CompanyInfo'dan veri çek
+const companyPhone = computed(() => {
+  const phone = store.getters['companyInfo/companyPhone']
+  const fallbackPhone = fallbackData.companyInfo.phone
+  return phone || fallbackPhone
+})
+
+const googleMapsUrl = computed(() => {
+  const mapsUrl = store.getters['companyInfo/googleMapsUrl']
+  const fallbackMapsUrl = fallbackData.companyInfo.googleMapsUrl
+  return mapsUrl || fallbackMapsUrl
+})
+
+const directionsUrl = computed(() => {
+  const mapsUrl = store.getters['companyInfo/googleMapsUrl']
+  const fallbackDirectionsUrl = fallbackData.companyInfo.directionsUrl
+  return mapsUrl || fallbackDirectionsUrl
+})
 
 const handleSubmit = async () => {
   // Form validasyonu
@@ -172,6 +197,10 @@ const handleSubmit = async () => {
     
     if (response.result) {
       isSuccess.value = true
+      
+      // Google Analytics'e form gönderimi eventi gönder
+      trackContactForm('contact')
+      
       form.value = {
         firstName: '',
         lastName: '',
@@ -199,6 +228,11 @@ const handleSubmit = async () => {
 const isValidEmail = (email: string) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(email)
+}
+
+// Event handlers
+const handlePhoneCall = () => {
+  trackPhoneCall(companyPhone.value)
 }
 </script>
 
