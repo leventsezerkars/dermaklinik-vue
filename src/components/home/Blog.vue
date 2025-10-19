@@ -94,8 +94,8 @@
         </div>
       </div>
 
-      <!-- View All Button -->
-      <div v-if="blogPosts.length > 0" class="text-center mt-4" style="position: relative; z-index: 10;">
+      <!-- View All Button - Sadece 3'ten fazla blog varsa göster -->
+      <div v-if="blogPosts.length > 3" class="text-center mt-4" style="position: relative; z-index: 10;">
         <router-link to="/blog" class="btn btn-knowledge-home">
           {{ $t('home.blog.viewAll')}}
           <i class="fas fa-arrow-right ms-2"></i>
@@ -392,6 +392,7 @@ onUnmounted(() => {
           line-height: 1.4;
           display: -webkit-box;
           -webkit-line-clamp: 2;
+          line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
@@ -403,6 +404,7 @@ onUnmounted(() => {
           font-size: 0.9rem;
           display: -webkit-box;
           -webkit-line-clamp: 3;
+          line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }

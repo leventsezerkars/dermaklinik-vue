@@ -82,7 +82,7 @@
                   <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <h2>{{ $t('serviceDetail.error.title') }}</h2>
-                <p>{{ error }}</p>
+                <p>{{ $t(`serviceDetail.error.${errorType}`) }}</p>
                 <div class="error-actions">
                   <button @click="fetchServiceData" class="btn btn-primary">
                     <i class="fas fa-refresh me-2"></i>
@@ -239,6 +239,7 @@ const { locale, t } = useI18n({ useScope: 'global' })
 const { trackServiceView } = useGoogleAnalytics()
 const loading = ref(false)
 const error = ref(null)
+const errorType = ref('notFound') // 'notFound' veya 'loadingError'
 
 // Hizmet verisi - API'den gelecek
 const currentService = ref(null)
@@ -351,13 +352,16 @@ const fetchServiceData = async () => {
           })
           .slice(0, 3)
       } else {
-        error.value = 'Hizmet bulunamadı'
+        error.value = true
+        errorType.value = 'notFound'
       }
     } else {
-      error.value = 'Hizmet bulunamadı'
+      error.value = true
+      errorType.value = 'notFound'
     }
   } catch (err) {
-    error.value = 'Hizmet verileri yüklenirken bir hata oluştu'
+    error.value = true
+    errorType.value = 'loadingError'
     console.error('Service fetch error:', err)
   } finally {
     loading.value = false

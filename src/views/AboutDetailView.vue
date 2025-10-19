@@ -188,22 +188,22 @@
                   <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
-                      <strong>Adres:</strong>
-                      <p>Ateşbaz Veli Mahallesi, Yeni Meram Cd. No:83 D:4, 42090 Meram / Konya</p>
+                      <strong>{{ t('contact.info.address') }}:</strong>
+                      <p>{{ companyAddress }}</p>
                     </div>
                   </div>
                   <div class="contact-item">
                     <i class="fas fa-phone"></i>
                     <div>
-                      <strong>Telefon:</strong>
-                      <p>+90 546 529 76 77</p>
+                      <strong>{{ t('contact.info.phone') }}:</strong>
+                      <p>{{ companyPhone }}</p>
                     </div>
                   </div>
                   <div class="contact-item">
                     <i class="fas fa-envelope"></i>
                     <div>
-                      <strong>E-posta:</strong>
-                      <p>dr.munal1101@gmail.com</p>
+                      <strong>{{ t('contact.info.email') }}:</strong>
+                      <p>{{ companyEmail }}</p>
                     </div>
                   </div>
                 </div>
@@ -211,11 +211,10 @@
 
               <!-- Çalışma Saatleri -->
               <div class="sidebar-widget">
-                <h3>Çalışma Saatleri</h3>
+                <h3>{{ t('contact.info.workingHours') }}</h3>
                 <div class="working-hours">
                   <div class="time-item">
-                    <span>Pazartesi - Cumartesi:</span>
-                    <span>09:00 - 21:00</span>
+                    <span>{{ workingHours }}</span>
                   </div>
                 </div>
               </div>
@@ -236,11 +235,46 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+// @ts-ignore
+import fallbackData from '@/data/fallback-data.js'
 
-onMounted(() => {
+const store = useStore()
+const { t } = useI18n()
+
+// CompanyInfo'dan veri çek
+const companyAddress = computed(() => {
+  const address = store.getters['companyInfo/companyAddress']
+  const fallbackAddress = fallbackData.companyInfo.address
+  return address || fallbackAddress
+})
+
+const companyPhone = computed(() => {
+  const phone = store.getters['companyInfo/companyPhone']
+  const fallbackPhone = fallbackData.companyInfo.phone
+  return phone || fallbackPhone
+})
+
+const companyEmail = computed(() => {
+  const email = store.getters['companyInfo/companyEmail']
+  const fallbackEmail = fallbackData.companyInfo.email
+  return email || fallbackEmail
+})
+
+const workingHours = computed(() => {
+  const hours = store.getters['companyInfo/workingHours']
+  const fallbackHours = fallbackData.companyInfo.workingHours
+  return hours || fallbackHours
+})
+
+onMounted(async () => {
+  // CompanyInfo'yu yükle
+  await store.dispatch('companyInfo/fetchActiveCompanyInfo')
+  
   AOS.init({
     duration: 1000,
     once: true

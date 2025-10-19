@@ -223,7 +223,8 @@ export default {
     },
     error: {
       title: 'Service Loading Failed',
-      message: 'An error occurred while loading service data',
+      notFound: 'Service not found',
+      loadingError: 'An error occurred while loading service data',
       retry: 'Try Again',
       homeLink: 'Back to Home'
     },

@@ -224,7 +224,8 @@ export default {
     },
     error: {
       title: 'Hizmet Yüklenemedi',
-      message: 'Hizmet verileri yüklenirken bir hata oluştu',
+      notFound: 'Hizmet bulunamadı',
+      loadingError: 'Hizmet verileri yüklenirken bir hata oluştu',
       retry: 'Tekrar Dene',
       homeLink: 'Ana Sayfaya Dön'
     },
