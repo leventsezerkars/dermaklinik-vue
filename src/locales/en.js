@@ -29,7 +29,8 @@ export default {
     loading: 'Loading...',
     error: 'An error occurred',
     retry: 'Try Again',
-    close: 'Close'
+    close: 'Close',
+    fallbackMessage: 'There was a problem loading the data. Please refresh the page or try again later.'
   },
   cookie: {
     title: 'Cookie Usage',
@@ -47,6 +48,7 @@ export default {
   },
   blog: {
     title: 'Blog',
+    subtitle: 'Latest developments in dermatology and aesthetics, treatment methods and expert opinions',
     readMore: 'Read More',
     recentPosts: 'Recent Posts',
     categories: 'Categories',
@@ -60,6 +62,12 @@ export default {
     loading: 'Loading blog posts...',
     error: 'Error loading blog posts',
     retry: 'Retry',
+    detailError: {
+      title: 'Blog Post Not Found',
+      message: 'The blog post you are looking for was not found or an error occurred while loading',
+      retry: 'Try Again',
+      backToBlog: 'Back to Blog'
+    },
     searchPlaceholder: 'Search blog posts...',
     allCategories: 'All Categories'
   },
@@ -212,6 +220,12 @@ export default {
       title: 'Content Loading',
       message: 'The detailed content of this service will be loaded shortly. Please wait a moment.',
       icon: 'fas fa-clock'
+    },
+    error: {
+      title: 'Service Loading Failed',
+      message: 'An error occurred while loading service data',
+      retry: 'Try Again',
+      homeLink: 'Back to Home'
     },
     notFound: {
       title: 'Service Not Found',

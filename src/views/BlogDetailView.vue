@@ -9,18 +9,60 @@
         </div>
 
     <!-- Error State -->
-    <div v-else-if="hasError" class="text-center py-5">
-      <div class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">{{ $t('blog.error') }}</h4>
-        <p>{{ error }}</p>
-        <button @click="loadBlogData" class="btn btn-outline-danger">
-          {{ $t('blog.retry') }}
-        </button>
-      </div>
+    <div v-else-if="hasError">
+      <!-- Blog Style Header -->
+      <header class="blog-header">
+        <div class="container">
+          <div class="header-content">
+            <div class="breadcrumb">
+              <router-link to="/" class="breadcrumb-link">
+                <i class="fas fa-home"></i>
+                <span>{{ $t('serviceDetail.breadcrumb.home') }}</span>
+              </router-link>
+              <i class="fas fa-chevron-right separator"></i>
+              <router-link to="/blog" class="breadcrumb-link">
+                <span>{{ $t('blog.title') }}</span>
+              </router-link>
+              <i class="fas fa-chevron-right separator"></i>
+              <span class="current-page">{{ $t('blog.detailError.title') }}</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="blog-main">
+        <div class="container">
+          <div class="blog-layout">
+            <!-- Main Content -->
+            <article class="blog-content">
+              <div class="blog-error">
+                <div class="error-content">
+                  <div class="error-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <h1 class="blog-title">{{ $t('blog.detailError.title') }}</h1>
+                  <p class="error-message">{{ error || $t('blog.detailError.message') }}</p>
+                  <div class="error-actions">
+                    <button @click="loadBlogData" class="btn btn-primary">
+                      <i class="fas fa-refresh me-2"></i>
+                      {{ $t('blog.detailError.retry') }}
+                    </button>
+                    <router-link to="/blog" class="btn btn-secondary">
+                      <i class="fas fa-arrow-left me-2"></i>
+                      {{ $t('blog.detailError.backToBlog') }}
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Blog Detail Content -->
-    <div v-else-if="post">
+    <div v-else-if="post && !isPostEmpty">
       <!-- Blog Style Header -->
       <header class="blog-header">
         <div class="container">
@@ -108,14 +150,56 @@
     </div>
 
     <!-- No Post Found -->
-    <div v-else class="text-center py-5">
-      <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">{{ $t('blog.noPosts') }}</h4>
-        <p>{{ $t('blog.noPosts') }}</p>
-        <router-link to="/blog" class="btn btn-outline-primary">
-          {{ $t('blog.title') }}'a Dön
-        </router-link>
-      </div>
+    <div v-else>
+      <!-- Blog Style Header -->
+      <header class="blog-header">
+        <div class="container">
+          <div class="header-content">
+            <div class="breadcrumb">
+              <router-link to="/" class="breadcrumb-link">
+                <i class="fas fa-home"></i>
+                <span>{{ $t('serviceDetail.breadcrumb.home') }}</span>
+              </router-link>
+              <i class="fas fa-chevron-right separator"></i>
+              <router-link to="/blog" class="breadcrumb-link">
+                <span>{{ $t('blog.title') }}</span>
+              </router-link>
+              <i class="fas fa-chevron-right separator"></i>
+              <span class="current-page">{{ $t('blog.detailError.title') }}</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="blog-main">
+        <div class="container">
+          <div class="blog-layout">
+            <!-- Main Content -->
+            <article class="blog-content">
+              <div class="blog-error">
+                <div class="error-content">
+                  <div class="error-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <h1 class="blog-title">{{ $t('blog.detailError.title') }}</h1>
+                  <p class="error-message">{{ $t('blog.detailError.message') }}</p>
+                  <div class="error-actions">
+                    <button @click="loadBlogData" class="btn btn-primary">
+                      <i class="fas fa-refresh me-2"></i>
+                      {{ $t('blog.detailError.retry') }}
+                    </button>
+                    <router-link to="/blog" class="btn btn-secondary">
+                      <i class="fas fa-arrow-left me-2"></i>
+                      {{ $t('blog.detailError.backToBlog') }}
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </main>
     </div>
   </div>
 </template>
@@ -141,6 +225,13 @@ const categories = computed(() => store.getters['blog/categories'])
 const isLoading = computed(() => store.getters['blog/isLoading'])
 const hasError = computed(() => store.getters['blog/hasError'])
 const error = computed(() => store.getters['blog/error'])
+
+// Post var ama içeriği boşsa da error state'e geç
+const isPostEmpty = computed(() => {
+  if (!post.value) return true
+  const translation = getPostTranslation(post.value)
+  return !translation || !translation.title || translation.title === 'Başlık Yok'
+})
 
 // Helper functions
 const getPostTranslation = (post) => {

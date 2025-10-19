@@ -29,7 +29,8 @@ export default {
     loading: 'Yükleniyor...',
     error: 'Bir hata oluştu',
     retry: 'Tekrar Dene',
-    close: 'Kapat'
+    close: 'Kapat',
+    fallbackMessage: 'Veriler yüklenirken bir sorun oluştu. Lütfen sayfayı yenileyin veya daha sonra tekrar deneyin.'
   },
   cookie: {
     title: 'Çerez Kullanımı',
@@ -47,6 +48,7 @@ export default {
   },
   blog: {
     title: 'Blog',
+    subtitle: 'Dermatoloji ve estetik alanındaki son gelişmeler, tedavi yöntemleri ve uzman görüşleri',
     readMore: 'Devamını Oku',
     recentPosts: 'Son Yazılar',
     categories: 'Kategoriler',
@@ -60,6 +62,12 @@ export default {
     loading: 'Blog yazıları yükleniyor...',
     error: 'Blog yazıları yüklenirken hata oluştu',
     retry: 'Tekrar Dene',
+    detailError: {
+      title: 'Blog Yazısı Bulunamadı',
+      message: 'Aradığınız blog yazısı bulunamadı veya yüklenirken bir hata oluştu',
+      retry: 'Tekrar Dene',
+      backToBlog: 'Blog\'a Dön'
+    },
     searchPlaceholder: 'Blog yazılarında ara...',
     allCategories: 'Tüm Kategoriler',
     noCategory: 'Kategori Yok'
@@ -213,6 +221,12 @@ export default {
       title: 'İçerik Yükleniyor',
       message: 'Bu hizmetin detaylı içeriği en kısa sürede yüklenecektir. Lütfen kısa bir süre bekleyiniz.',
       icon: 'fas fa-clock'
+    },
+    error: {
+      title: 'Hizmet Yüklenemedi',
+      message: 'Hizmet verileri yüklenirken bir hata oluştu',
+      retry: 'Tekrar Dene',
+      homeLink: 'Ana Sayfaya Dön'
     },
     notFound: {
       title: 'Hizmet Bulunamadı',

@@ -1,122 +1,142 @@
 <template>
   <div class="blog-page">
-    <div class="page-header">
+    <!-- Blog Style Header -->
+    <header class="blog-header">
       <div class="container">
-        <h1>{{ t('blog.title') }}</h1>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <router-link to="/">{{ t('serviceDetail.breadcrumb.home') }}</router-link>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">{{ t('blog.title') }}</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-
-    <div class="container py-5">
-      <!-- Loading State -->
-      <div v-if="isLoading" class="text-center py-5">
-        <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">{{ t('blog.loading') }}</span>
-        </div>
-        <p class="mt-3">{{ t('blog.loading') }}</p>
-      </div>
-
-      <!-- Error State -->
-      <div v-else-if="hasError" class="text-center py-5">
-        <div class="alert alert-danger" role="alert">
-          <h4 class="alert-heading">{{ t('blog.error') }}</h4>
-          <p>{{ error }}</p>
-          <button @click="loadBlogData" class="btn btn-outline-danger">
-            {{ t('blog.retry') }}
-          </button>
+        <div class="header-content">
+          <div class="breadcrumb">
+            <router-link to="/" class="breadcrumb-link">
+              <i class="fas fa-home"></i>
+              <span>{{ t('serviceDetail.breadcrumb.home') }}</span>
+            </router-link>
+            <i class="fas fa-chevron-right separator"></i>
+            <span class="current-page">{{ t('blog.title') }}</span>
+          </div>
         </div>
       </div>
+    </header>
 
-      <!-- Search and Filter Section -->
-      <div v-if="blogPosts.length > 0" class="blog-filters mb-5">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="search-box">
-              <div class="input-group">
-                <input 
-                  v-model="searchQuery" 
-                  type="text" 
-                  class="form-control" 
-                  :placeholder="$t('blog.searchPlaceholder')"
-                  @input="handleSearch"
-                >
-                <button class="btn btn-outline-primary" type="button">
-                  <i class="fas fa-search"></i>
+    <!-- Main Content Area -->
+    <main class="blog-main">
+      <div class="container">
+        <div class="blog-layout">
+          <!-- Page Title -->
+          <div class="page-title-section">
+            <h1 class="page-title">{{ t('blog.title') }}</h1>
+            <p class="page-subtitle">{{ t('blog.subtitle') }}</p>
+          </div>
+
+          <!-- Loading State -->
+          <div v-if="isLoading" class="blog-loading">
+            <div class="loading-content">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">{{ t('blog.loading') }}</span>
+              </div>
+              <p class="mt-3">{{ t('blog.loading') }}</p>
+            </div>
+          </div>
+
+          <!-- Error State -->
+          <div v-else-if="hasError" class="blog-error">
+            <div class="error-content">
+              <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <h2 class="error-title">{{ t('blog.error') }}</h2>
+              <p class="error-message">{{ error }}</p>
+              <div class="error-actions">
+                <button @click="loadBlogData" class="btn btn-primary">
+                  <i class="fas fa-refresh me-2"></i>
+                  {{ t('blog.retry') }}
                 </button>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="category-filter">
-              <select v-model="selectedCategory" @change="handleCategoryFilter" class="form-select">
-                <option value="">{{ $t('blog.allCategories') }}</option>
-                <option v-for="category in categories" :key="category.id" :value="category.id">
-                  {{ getCategoryName(category) }}
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Blog Posts - Modern Knowledge Base Layout -->
-      <div v-if="filteredPosts.length > 0" class="knowledge-base">
-        <div class="row">
-          <div v-for="post in filteredPosts" :key="post.id" class="col-lg-4 col-md-6 mb-4">
-            <div class="knowledge-card">
-              <div class="card-image">
-                <img 
-                  :src="getPostImage(post)" 
-                  :alt="getPostTitle(post)"
-                  @error="handleImageError"
-                >
-                <div class="card-category">
-                  <span class="category-badge">{{ getPostCategory(post) }}</span>
-                </div>
-              </div>
-              <div class="card-content">
-                <h3 class="card-title">{{ getPostTitle(post) }}</h3>
-                <p class="card-excerpt">{{ getPostExcerpt(post) }}</p>
-                <div class="card-meta">
-                  <div class="meta-item">
-                    <i class="far fa-calendar"></i>
-                    <span>{{ formatDate(getPostDate(post)) }}</span>
-                  </div>
-                  <div class="meta-item">
-                    <i class="far fa-eye"></i>
-                    <span>{{ post.viewCount || 0 }}</span>
-                  </div>
-                </div>
-                <div class="card-actions">
-                  <router-link 
-                    :to="{ name: 'blog-detail', params: { slug: getPostSlug(post) } }" 
-                    class="btn btn-knowledge"
+          <!-- Search and Filter Section -->
+          <div v-if="blogPosts.length > 0" class="blog-filters">
+            <div class="filters-container">
+              <div class="search-box">
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fas fa-search"></i>
+                  </span>
+                  <input 
+                    v-model="searchQuery" 
+                    type="text" 
+                    class="form-control" 
+                    :placeholder="$t('blog.searchPlaceholder')"
+                    @input="handleSearch"
                   >
-                    <span>{{ $t('blog.readMore') }}</span>
-                    <i class="fas fa-arrow-right"></i>
-                </router-link>
+                </div>
+              </div>
+              <div class="category-filter">
+                <select v-model="selectedCategory" @change="handleCategoryFilter" class="form-select">
+                  <option value="">{{ $t('blog.allCategories') }}</option>
+                  <option v-for="category in categories" :key="category.id" :value="category.id">
+                    {{ getCategoryName(category) }}
+                  </option>
+                </select>
               </div>
             </div>
           </div>
+
+          <!-- Blog Posts Grid -->
+          <div v-if="filteredPosts.length > 0" class="blog-posts-grid">
+            <div class="row">
+              <div v-for="post in filteredPosts" :key="post.id" class="col-lg-4 col-md-6 mb-4">
+                <article class="blog-card">
+                  <div class="card-image">
+                    <img 
+                      :src="getPostImage(post)" 
+                      :alt="getPostTitle(post)"
+                      @error="handleImageError"
+                    >
+                    <div class="card-category">
+                      <span class="category-badge">{{ getPostCategory(post) }}</span>
+                    </div>
+                  </div>
+                  <div class="card-content">
+                    <h3 class="card-title">{{ getPostTitle(post) }}</h3>
+                    <p class="card-excerpt">{{ getPostExcerpt(post) }}</p>
+                    <div class="card-meta">
+                      <div class="meta-item">
+                        <i class="far fa-calendar"></i>
+                        <span>{{ formatDate(getPostDate(post)) }}</span>
+                      </div>
+                      <div class="meta-item">
+                        <i class="far fa-eye"></i>
+                        <span>{{ post.viewCount || 0 }}</span>
+                      </div>
+                    </div>
+                    <div class="card-actions">
+                      <router-link 
+                        :to="{ name: 'blog-detail', params: { slug: getPostSlug(post) } }" 
+                        class="btn btn-primary"
+                      >
+                        {{ t('blog.readMore') }}
+                        <i class="fas fa-arrow-right ms-2"></i>
+                      </router-link>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- No Posts -->
+          <div v-if="blogPosts.length === 0 && !isLoading && !hasError" class="blog-empty">
+            <div class="empty-content">
+              <div class="empty-icon">
+                <i class="fas fa-newspaper"></i>
+              </div>
+              <h3 class="empty-title">{{ $t('blog.noPosts') }}</h3>
+              <p class="empty-message">{{ $t('blog.noPosts') }}</p>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- No Posts -->
-      <div v-if="blogPosts.length === 0 && !isLoading && !hasError" class="text-center py-5">
-        <div class="alert alert-info" role="alert">
-          <h4 class="alert-heading">{{ $t('blog.noPosts') }}</h4>
-          <p>{{ $t('blog.noPosts') }}</p>
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -272,16 +292,4 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @use '@/assets/styles/views/Blog.scss' as *;
-
-.page-header {
-  @extend .blog-page-header;
-}
-
-.blog-loading {
-  @extend .blog-loading;
-}
-
-.blog-error {
-  @extend .blog-error;
-}
 </style> 
