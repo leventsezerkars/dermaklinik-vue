@@ -171,9 +171,10 @@ const googleMapsUrl = computed(() => {
 })
 
 const directionsUrl = computed(() => {
-  const mapsUrl = store.getters['companyInfo/googleMapsUrl']
+  //const mapsUrl = store.getters['companyInfo/googleMapsUrl']
   const fallbackDirectionsUrl = fallbackData.companyInfo.directionsUrl
-  return mapsUrl || fallbackDirectionsUrl
+  //return mapsUrl || fallbackDirectionsUrl
+  return fallbackDirectionsUrl
 })
 
 const handleSubmit = async () => {
