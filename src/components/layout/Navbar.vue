@@ -122,8 +122,6 @@ const closeNavbar = () => {
   const navbar = document.getElementById('navbarNav')
   if (!navbar) return
   
-  console.log('Closing navbar...')
-  
   // Bootstrap 5 Collapse API'sini kullan
   const bsCollapse = (window as any).bootstrap?.Collapse
   if (bsCollapse) {

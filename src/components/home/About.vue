@@ -63,7 +63,7 @@
             <div class="about-image-main">
               <img 
                 src="/images/dr_mu.jpg" 
-                alt="Doktor"
+                alt="Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı, 20+ yıllık deneyim"
                 loading="lazy"
               >
             </div>

@@ -64,7 +64,7 @@
             <div class="service-category-image">
               <img 
                 src="/images/w6.jpg" 
-                alt="Cilt Gençleştirme ve Yenileme"
+                alt="Genel Dermatoloji - Cilt hastalıkları tedavisi, akne, rozasea, siğil tedavisi"
                 loading="lazy"
               >
             </div>
@@ -130,7 +130,7 @@
             <div class="service-category-image">
               <img 
                 src="/images/w1.jpg" 
-                alt="Estetik Uygulamalar"
+                alt="Estetik Dermatoloji - Botoks, dolgu, leke tedavisi, iplik uygulamaları"
                 loading="lazy"
               >
             </div>
@@ -199,7 +199,7 @@
             <div class="service-category-image">
               <img 
                 src="/images/w7.jpg" 
-                alt="Saç ve Kaş Uygulamaları"
+                alt="Lazer Tedavileri - Veloce BB Light, CO2 lazer, altın iğne, piko saniye lazer"
                 loading="lazy"
               >
             </div>

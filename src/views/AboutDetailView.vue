@@ -20,7 +20,7 @@
             <div class="content-section">
               <div class="doctor-profile">
                 <div class="doctor-image">
-                  <img src="/images/dr_mu.jpg" alt="Doç. Dr. Mehmet Ünal" class="profile-img">
+                  <img src="/images/dr_mu.jpg" alt="Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı, 20+ yıllık deneyim" class="profile-img">
                 </div>
                 <div class="doctor-basic-info">
                   <h2>Doç. Dr. Mehmet Ünal</h2>
