@@ -242,9 +242,11 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 // @ts-ignore
 import fallbackData from '@/data/fallback-data.js'
+import { useSEO } from '@/composables/useSEO'
 
 const store = useStore()
 const { t } = useI18n()
+const { setSEOHead } = useSEO()
 
 // CompanyInfo'dan veri çek
 const companyAddress = computed(() => {
@@ -274,6 +276,14 @@ const workingHours = computed(() => {
 onMounted(async () => {
   // CompanyInfo'yu yükle
   await store.dispatch('companyInfo/fetchActiveCompanyInfo')
+  
+  // SEO bilgilerini ayarla
+  setSEOHead({
+    title: 'Hakkımızda',
+    description: 'Doç. Dr. Mehmet Ünal - Dermatoloji alanında 20+ yıllık deneyime sahip uzman doktorumuz hakkında bilgi alın.',
+    keywords: 'hakkımızda, doktor, dermatoloji, uzman, deneyim, kariyer',
+    type: 'website'
+  })
   
   AOS.init({
     duration: 1000,

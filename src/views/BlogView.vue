@@ -145,10 +145,12 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useSEO } from '@/composables/useSEO'
 
 const store = useStore()
 const route = useRoute()
 const { locale, t } = useI18n()
+const { setSEOHead } = useSEO()
 
 // Reactive data
 const searchQuery = ref('')
@@ -287,6 +289,14 @@ onMounted(() => {
   if (categoryParam) {
     selectedCategory.value = categoryParam
   }
+  
+  // SEO bilgilerini ayarla
+  setSEOHead({
+    title: t('blog.title'),
+    description: t('blog.subtitle'),
+    keywords: 'blog, dermatoloji, cilt sağlığı, estetik, tedavi',
+    type: 'website'
+  })
 })
 </script>
 

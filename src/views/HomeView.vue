@@ -34,15 +34,12 @@ import Blog from '@/components/home/Blog.vue'
 import Contact from '@/components/home/Contact.vue'
 import { useSEO } from '@/composables/useSEO'
 
-const { updatePageMeta } = useSEO()
+const { setSEOHead } = useSEO()
 
 onMounted(() => {
-  // Ana sayfa için SEO meta bilgilerini güncelle
-  updatePageMeta({
-    title: 'Ana Sayfa',
-    description: 'Dermatoloji ve Estetik Dermatoloji Kliniği. Cilt hastalıkları, akne tedavisi, botoks, dolgu ve lazer epilasyon uygulamaları.',
-    keywords: 'dermatoloji, estetik dermatoloji, cilt hastalıkları, akne tedavisi, botoks, dolgu, lazer epilasyon, Ankara',
-    url: window.location.href
+  // Ana sayfa için SEO meta bilgilerini güncelle - companyInfo'dan direkt kullan
+  setSEOHead({
+    type: 'website'
   })
 })
 </script>

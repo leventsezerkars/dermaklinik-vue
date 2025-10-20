@@ -209,14 +209,15 @@ import { computed, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useHead } from '@vueuse/head'
 import { useGoogleAnalytics } from '@/composables/useGoogleAnalytics'
+import { useSEO } from '@/composables/useSEO'
 
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
 const { locale } = useI18n()
 const { trackBlogRead } = useGoogleAnalytics()
+const { setSEOHead } = useSEO()
 
 // Computed properties
 const post = computed(() => store.getters['blog/currentPost'])
@@ -312,6 +313,9 @@ const loadBlogData = async () => {
     await store.dispatch('blog/fetchPostBySlug', { slug, languageCode: locale.value })
     await store.dispatch('blog/fetchRecentPosts', { languageCode: locale.value })
     await store.dispatch('blog/fetchCategories', locale.value)
+    
+    // SEO bilgilerini güncelle
+    updateBlogSEO()
   } catch (error) {
     console.error('Blog detay verileri yüklenirken hata:', error)
   }
@@ -335,74 +339,28 @@ onMounted(async () => {
   }
 })
 
-// SEO
-useHead({
-  title: computed(() => `${getPostTitle(post.value)} - Doç. Dr. Mehmet Ünal`),
-  meta: [
-    {
-      name: 'description',
-      content: computed(() => {
-        const translation = getPostTranslation(post.value)
-        if (!translation) return 'Blog yazısı'
-        const content = translation.content || ''
-        const cleanContent = content.replace(/<[^>]*>/g, '').trim()
-        return cleanContent.length > 160 ? cleanContent.substring(0, 160) + '...' : cleanContent
+// SEO için head bilgilerini ayarla
+const updateBlogSEO = () => {
+  if (post.value) {
+    const translation = getPostTranslation(post.value)
+    if (translation) {
+      const title = getPostTitle(post.value)
+      const content = translation.content || ''
+      const cleanContent = content.replace(/<[^>]*>/g, '').trim()
+      const description = cleanContent.length > 160 ? cleanContent.substring(0, 160) + '...' : cleanContent
+      const keywords = translation.tags?.join(', ') || ''
+      const image = getPostImage(post.value)
+      
+      setSEOHead({
+        title: title,
+        description: description,
+        keywords: keywords,
+        image: image,
+        type: 'article'
       })
-    },
-    {
-      name: 'keywords',
-      content: computed(() => {
-        const translation = getPostTranslation(post.value)
-        if (!translation) return 'dermatoloji, cilt sağlığı'
-        return translation.tags?.join(', ') || 'dermatoloji, cilt sağlığı'
-      })
-    },
-    {
-      property: 'og:title',
-      content: computed(() => getPostTitle(post.value))
-    },
-    {
-      property: 'og:description',
-      content: computed(() => {
-        const translation = getPostTranslation(post.value)
-        if (!translation) return 'Blog yazısı'
-        const content = translation.content || ''
-        const cleanContent = content.replace(/<[^>]*>/g, '').trim()
-        return cleanContent.length > 160 ? cleanContent.substring(0, 160) + '...' : cleanContent
-      })
-    },
-    {
-      property: 'og:image',
-      content: computed(() => getPostImage(post.value))
-    },
-    {
-      property: 'og:type',
-      content: 'article'
-    },
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image'
-    },
-    {
-      name: 'twitter:title',
-      content: computed(() => getPostTitle(post.value))
-    },
-    {
-      name: 'twitter:description',
-      content: computed(() => {
-        const translation = getPostTranslation(post.value)
-        if (!translation) return 'Blog yazısı'
-        const content = translation.content || ''
-        const cleanContent = content.replace(/<[^>]*>/g, '').trim()
-        return cleanContent.length > 160 ? cleanContent.substring(0, 160) + '...' : cleanContent
-      })
-    },
-    {
-      name: 'twitter:image',
-      content: computed(() => getPostImage(post.value))
     }
-  ]
-})
+  }
+}
 </script>
 
 <style lang="scss">

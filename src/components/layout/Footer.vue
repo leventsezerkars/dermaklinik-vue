@@ -13,7 +13,7 @@
                 >
                 <span class="brand-text">{{ companyName || $t('header.brand') }}</span>
               </div>
-              <p class="mt-3">{{ companyDescription || $t('footer.description') }}</p>
+              <p class="mt-3">{{ $t('footer.description') }}</p>
             </div>
           </div>
           <div class="col-lg-2 col-md-6 mb-4">
@@ -105,7 +105,6 @@ const companyAddress = computed(() => store.getters['companyInfo/companyAddress'
 const companyPhone = computed(() => store.getters['companyInfo/companyPhone'])
 const companyEmail = computed(() => store.getters['companyInfo/companyEmail'])
 const companyWorkingHours = computed(() => store.getters['companyInfo/workingHours'])
-const companyDescription = computed(() => store.getters['companyInfo/companyDescription'])
 
 onMounted(async () => {
   // Şirket bilgilerini çek

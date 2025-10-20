@@ -225,11 +225,11 @@
 <script setup>
 import { ref, onMounted, computed, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useHead } from '@vueuse/head'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import { MenuAPI } from '@/services/api/menu'
 import { useGoogleAnalytics } from '@/composables/useGoogleAnalytics'
+import { useSEO } from '@/composables/useSEO'
 import fallbackData from '@/data/fallback-data'
 
 const route = useRoute()
@@ -237,6 +237,7 @@ const router = useRouter()
 const store = useStore()
 const { locale, t } = useI18n({ useScope: 'global' })
 const { trackServiceView } = useGoogleAnalytics()
+const { setSEOHead } = useSEO()
 const loading = ref(false)
 const error = ref(null)
 const errorType = ref('notFound') // 'notFound' veya 'loadingError'
@@ -322,6 +323,9 @@ const fetchServiceData = async () => {
         // Google Analytics'e hizmet görüntüleme eventi gönder
         trackServiceView(translation.title, service.id)
         
+        // SEO bilgilerini güncelle
+        updateServiceSEO()
+        
         // İlgili hizmetleri bul (aynı kategorideki diğer hizmetler)
         relatedServices.value = menuItems
           .filter(item => 
@@ -403,65 +407,21 @@ const contactInfo = computed(() => {
   }
 })
 
-// SEO için head bilgilerini ayarla - önce service'den, yoksa fallback'ten
-useHead({
-  title: computed(() => {
-    if (currentService.value) {
-      const serviceTitle = currentService.value.seoTitle || currentService.value.title
-      const fallbackTitle = fallbackData.companyInfo.seo.defaultTitle
-      const title = serviceTitle || fallbackTitle
-      
-      if (!currentService.value.seoTitle) {
-        console.log('[ServiceDetailView] SEO Title: Fallback verisi kullanılıyor')
-      }
-      
-      return `${title} - Doç. Dr. Mehmet Ünal`
-    }
+// SEO için head bilgilerini ayarla
+const updateServiceSEO = () => {
+  if (currentService.value) {
+    const serviceTitle = currentService.value.seoTitle || currentService.value.title
+    const serviceDescription = currentService.value.seoDescription
+    const serviceKeywords = currentService.value.seoKeywords
     
-    console.log('[ServiceDetailView] SEO Title: Service bulunamadı, fallback verisi kullanılıyor')
-    return `${fallbackData.companyInfo.seo.defaultTitle} - Doç. Dr. Mehmet Ünal`
-  }),
-  meta: [
-    {
-      name: 'description',
-      content: computed(() => {
-        if (currentService.value) {
-          const serviceDesc = currentService.value.seoDescription
-          const fallbackDesc = fallbackData.companyInfo.seo.defaultDescription
-          const description = serviceDesc || fallbackDesc
-          
-          if (!serviceDesc) {
-            console.log('[ServiceDetailView] SEO Description: Fallback verisi kullanılıyor')
-          }
-          
-          return description
-        }
-        
-        console.log('[ServiceDetailView] SEO Description: Service bulunamadı, fallback verisi kullanılıyor')
-        return fallbackData.companyInfo.seo.defaultDescription
-      })
-    },
-    {
-      name: 'keywords',
-      content: computed(() => {
-        if (currentService.value) {
-          const serviceKeywords = currentService.value.seoKeywords
-          const fallbackKeywords = fallbackData.companyInfo.seo.defaultKeywords
-          const keywords = serviceKeywords || fallbackKeywords
-          
-          if (!serviceKeywords) {
-            console.log('[ServiceDetailView] SEO Keywords: Fallback verisi kullanılıyor')
-          }
-          
-          return keywords
-        }
-        
-        console.log('[ServiceDetailView] SEO Keywords: Service bulunamadı, fallback verisi kullanılıyor')
-        return fallbackData.companyInfo.seo.defaultKeywords
-      })
-    }
-  ]
-})
+    setSEOHead({
+      title: serviceTitle,
+      description: serviceDescription,
+      keywords: serviceKeywords,
+      type: 'article'
+    })
+  }
+}
 
 // Route parametrelerini dinle ve veriyi yeniden yükle
 watch(

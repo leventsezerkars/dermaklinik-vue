@@ -1,5 +1,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useHead } from '@vueuse/head'
+import fallbackData from '@/data/fallback-data'
 
 export function useSEO() {
   const store = useStore()
@@ -7,12 +9,15 @@ export function useSEO() {
   // Store'dan SEO bilgilerini al
   const seoInfo = computed(() => store.getters['companyInfo/seoInfo'])
   const companyName = computed(() => store.getters['companyInfo/companyName'])
-  const companyDescription = computed(() => store.getters['companyInfo/companyDescription'])
+  const companyInfo = computed(() => store.getters['companyInfo/activeCompanyInfo'])
+
+  // Fallback SEO bilgileri
+  const fallbackSEO = computed(() => fallbackData.companyInfo.seo)
 
   // Sayfa başlığını oluştur
   const getPageTitle = (pageTitle = '') => {
-    const baseTitle = companyName.value || 'Doç. Dr. Mehmet Ünal'
-    const metaTitle = seoInfo.value?.metaTitle || ''
+    const baseTitle = companyName.value || fallbackSEO.value.defaultTitle
+    const metaTitle = seoInfo.value?.metaTitle || fallbackSEO.value.defaultTitle
     
     if (pageTitle) {
       return `${pageTitle} - ${baseTitle}`
@@ -21,93 +26,132 @@ export function useSEO() {
     return metaTitle || baseTitle
   }
 
-  // Meta açıklamasını oluştur
+  // Meta açıklamasını oluştur - companyInfo'dan gelenler + sayfa özel açıklama
   const getMetaDescription = (pageDescription = '') => {
-    const metaDescription = seoInfo.value?.metaDescription || ''
-    const companyDesc = companyDescription.value || ''
+    const companyDescription = seoInfo.value?.metaDescription || fallbackSEO.value.defaultDescription
     
-    return pageDescription || metaDescription || companyDesc || 'Dermatoloji ve Estetik Dermatoloji Kliniği'
-  }
-
-  // Meta anahtar kelimelerini oluştur
-  const getMetaKeywords = (pageKeywords = '') => {
-    const metaKeywords = seoInfo.value?.metaKeywords || ''
-    
-    if (pageKeywords) {
-      return pageKeywords
+    if (pageDescription) {
+      // Company description + page description birleştir
+      const combinedDescription = companyDescription ? `${companyDescription} ${pageDescription}` : pageDescription
+      return combinedDescription
     }
     
-    return metaKeywords || 'dermatoloji, estetik dermatoloji, cilt hastalıkları, botoks, dolgu, lazer epilasyon'
+    return companyDescription || fallbackSEO.value.defaultDescription
   }
 
-  // Sayfa meta bilgilerini güncelle
-  const updatePageMeta = (options = {}) => {
+  // Meta anahtar kelimelerini oluştur - companyInfo'dan gelenler + sayfa özel kelimeler
+  const getMetaKeywords = (pageKeywords = '') => {
+    const companyKeywords = seoInfo.value?.metaKeywords || fallbackSEO.value.defaultKeywords
+    
+    if (pageKeywords) {
+      // Company keywords + page keywords birleştir
+      const combinedKeywords = companyKeywords ? `${companyKeywords}, ${pageKeywords}` : pageKeywords
+      return combinedKeywords
+    }
+    
+    return companyKeywords || fallbackSEO.value.defaultKeywords
+  }
+
+  // Open Graph image URL'ini oluştur
+  const getOGImage = (pageImage = '') => {
+    if (pageImage) return pageImage
+    
+    // Company logo varsa onu kullan
+    const companyLogo = companyInfo.value?.logoUrl
+    if (companyLogo) return companyLogo
+    
+    // Fallback image
+    return '/images/logo_beyaz.png'
+  }
+
+  // URL'yi oluştur
+  const getPageURL = (pageUrl = '') => {
+    if (pageUrl) return pageUrl
+    return window.location.href
+  }
+
+  // SEO head bilgilerini ayarla
+  const setSEOHead = (options = {}) => {
     const {
       title = '',
       description = '',
       keywords = '',
       image = '',
-      url = ''
+      url = '',
+      type = 'website'
     } = options
 
-    // Sayfa başlığını güncelle
-    document.title = getPageTitle(title)
+    const pageTitle = getPageTitle(title)
+    const pageDescription = getMetaDescription(description)
+    const pageKeywords = getMetaKeywords(keywords)
+    const pageImage = getOGImage(image)
+    const pageURL = getPageURL(url)
 
-    // Meta description'ı güncelle
-    updateMetaTag('description', getMetaDescription(description))
-
-    // Meta keywords'ü güncelle
-    updateMetaTag('keywords', getMetaKeywords(keywords))
-
-    // Open Graph meta etiketleri
-    if (title) updateMetaTag('og:title', getPageTitle(title))
-    if (description) updateMetaTag('og:description', getMetaDescription(description))
-    if (image) updateMetaTag('og:image', image)
-    if (url) updateMetaTag('og:url', url)
-
-    // Twitter Card meta etiketleri
-    if (title) updateMetaTag('twitter:title', getPageTitle(title))
-    if (description) updateMetaTag('twitter:description', getMetaDescription(description))
-    if (image) updateMetaTag('twitter:image', image)
-  }
-
-  // Meta etiketini güncelle veya oluştur
-  const updateMetaTag = (name, content) => {
-    if (!content) return
-
-    // Name attribute'u olan meta etiketler
-    let selector = `meta[name="${name}"]`
-    
-    // Property attribute'u olan meta etiketler (Open Graph, Twitter)
-    if (name.startsWith('og:') || name.startsWith('twitter:')) {
-      selector = `meta[property="${name}"]`
-    }
-
-    let metaTag = document.querySelector(selector)
-    
-    if (metaTag) {
-      metaTag.setAttribute('content', content)
-    } else {
-      metaTag = document.createElement('meta')
-      
-      if (name.startsWith('og:') || name.startsWith('twitter:')) {
-        metaTag.setAttribute('property', name)
-      } else {
-        metaTag.setAttribute('name', name)
-      }
-      
-      metaTag.setAttribute('content', content)
-      document.head.appendChild(metaTag)
-    }
+    useHead({
+      title: pageTitle,
+      meta: [
+        {
+          name: 'description',
+          content: pageDescription
+        },
+        {
+          name: 'keywords',
+          content: pageKeywords
+        },
+        {
+          property: 'og:title',
+          content: pageTitle
+        },
+        {
+          property: 'og:description',
+          content: pageDescription
+        },
+        {
+          property: 'og:image',
+          content: pageImage
+        },
+        {
+          property: 'og:url',
+          content: pageURL
+        },
+        {
+          property: 'og:type',
+          content: type
+        },
+        {
+          property: 'og:site_name',
+          content: companyName.value || fallbackSEO.value.defaultTitle
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          name: 'twitter:title',
+          content: pageTitle
+        },
+        {
+          name: 'twitter:description',
+          content: pageDescription
+        },
+        {
+          name: 'twitter:image',
+          content: pageImage
+        }
+      ]
+    })
   }
 
   return {
     seoInfo,
     companyName,
     companyDescription,
+    companyInfo,
     getPageTitle,
     getMetaDescription,
     getMetaKeywords,
-    updatePageMeta
+    getOGImage,
+    getPageURL,
+    setSEOHead,
   }
 }
