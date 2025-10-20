@@ -71,9 +71,9 @@
                   :disabled="isLoading"
                 >
                   <option value="">{{ $t('home.contact.form.selectService') }}</option>
-                  <option value="{{ $t('header.generalDermatology') }}">{{ $t('header.generalDermatology') }}</option>
-                  <option value="{{ $t('header.aestheticDermatology') }}">{{ $t('header.aestheticDermatology') }}</option>
-                  <option value="{{ $t('header.laserTreatments') }}">{{ $t('header.laserTreatments') }}</option>
+                  <option :value="$t('header.generalDermatology')">{{ $t('header.generalDermatology') }}</option>
+                  <option :value="$t('header.aestheticDermatology')">{{ $t('header.aestheticDermatology') }}</option>
+                  <option :value="$t('header.laserTreatments')">{{ $t('header.laserTreatments') }}</option>
                 </select>
               </div>
               <div class="form-group">
