@@ -58,6 +58,14 @@ const routes = [
     path: '/hizmetler/:slug',
     name: 'serviceDetail',
     component: ServiceDetailView
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'notFound',
+    component: () => import('../views/NotFoundView.vue'),
+    meta: {
+      title: 'Sayfa Bulunamadı - Doç. Dr. Mehmet Ünal'
+    }
   }
 ]
 

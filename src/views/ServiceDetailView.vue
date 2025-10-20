@@ -237,7 +237,7 @@ const router = useRouter()
 const store = useStore()
 const { locale, t } = useI18n({ useScope: 'global' })
 const { trackServiceView } = useGoogleAnalytics()
-const { setSEOHead } = useSEO()
+const { setSEOHead, getOGImage } = useSEO()
 const loading = ref(false)
 const error = ref(null)
 const errorType = ref('notFound') // 'notFound' veya 'loadingError'
@@ -418,7 +418,13 @@ const updateServiceSEO = () => {
       title: serviceTitle,
       description: serviceDescription,
       keywords: serviceKeywords,
-      type: 'article'
+      type: 'service',
+      serviceData: {
+        title: serviceTitle,
+        description: serviceDescription,
+        category: currentService.value.category,
+        image: getOGImage()
+      }
     })
   }
 }

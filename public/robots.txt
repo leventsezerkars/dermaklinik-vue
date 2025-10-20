@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.drmehmetunal.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_nuxt/
+Disallow: /dist/
+
+# Allow important pages
+Allow: /
+Allow: /hakkimizda
+Allow: /blog
+Allow: /iletisim
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp

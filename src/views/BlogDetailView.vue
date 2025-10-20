@@ -356,7 +356,14 @@ const updateBlogSEO = () => {
         description: description,
         keywords: keywords,
         image: image,
-        type: 'article'
+        type: 'article',
+        articleData: {
+          title: title,
+          description: description,
+          image: image,
+          datePublished: getPostDate(post.value),
+          dateModified: getPostDate(post.value)
+        }
       })
     }
   }
