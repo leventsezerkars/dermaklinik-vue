@@ -66,6 +66,9 @@
                 src="/images/w6.jpg" 
                 alt="Genel Dermatoloji - Cilt hastalıkları tedavisi, akne, rozasea, siğil tedavisi"
                 loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
               >
             </div>
           </div>
@@ -132,6 +135,9 @@
                 src="/images/w1.jpg" 
                 alt="Estetik Dermatoloji - Botoks, dolgu, leke tedavisi, iplik uygulamaları"
                 loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
               >
             </div>
           </div>
@@ -201,6 +207,9 @@
                 src="/images/w7.jpg" 
                 alt="Lazer Tedavileri - Veloce BB Light, CO2 lazer, altın iğne, piko saniye lazer"
                 loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
               >
             </div>
           </div>

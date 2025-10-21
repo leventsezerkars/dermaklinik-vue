@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg" >
     <div class="container">
-      <button class="navbar-toggler order-0 me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler order-0 me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="min-height: 44px; min-width: 44px;">
         <span class="navbar-toggler-icon"></span>
       </button>
       <router-link class="navbar-brand d-flex align-items-center order-1" to="/">
@@ -9,6 +9,9 @@
           :src="companyLogo || '/images/logo_beyaz.png'" 
           :alt="companyName || 'Doç. Dr. Mehmet Ünal Logo'" 
           height="70"
+          width="70"
+          loading="eager"
+          decoding="async"
         >
         <span class="ms-3 brand-text">{{ companyName || $t('header.brand') }}</span>
       </router-link>

@@ -10,6 +10,9 @@
                   :src="companyLogo || '/images/logo_beyaz.png'" 
                   :alt="companyName || 'Logo'" 
                   height="70"
+                  width="70"
+                  loading="eager"
+                  decoding="async"
                 >
                 <span class="brand-text">{{ companyName || $t('header.brand') }}</span>
               </div>
@@ -24,6 +27,7 @@
                 <li><router-link to="/#hakkimizda">{{ $t('common.about') }}</router-link></li>
                 <li><router-link to="/#hizmetler">{{ $t('common.services') }}</router-link></li>
                 <li><router-link to="/#galeri">{{ $t('footer.gallery') }}</router-link></li>
+                <li><router-link to="/blog">{{ $t('blog.title') }}</router-link></li>
                 <li><router-link to="/#contact">{{ $t('common.contact') }}</router-link></li>
               </ul>
             </div>
@@ -35,6 +39,9 @@
                 <li><router-link to="/#genel">{{ $t('header.generalDermatology') }}</router-link></li>
                 <li><router-link to="/#estetik">{{ $t('header.aestheticDermatology') }}</router-link></li>
                 <li><router-link to="/#lazer">{{ $t('header.laserTreatments') }}</router-link></li>
+                <li><router-link to="/hizmetler/akne-sivilce-tedavisi">Akne Tedavisi</router-link></li>
+                <li><router-link to="/hizmetler/botoks-uygulamasi">Botoks Uygulaması</router-link></li>
+                <li><router-link to="/hizmetler/dolgu-uygulamasi">Dolgu Uygulaması</router-link></li>
               </ul>
             </div>
           </div>

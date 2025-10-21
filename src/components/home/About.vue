@@ -6,7 +6,7 @@
           <div class="about-content">
             <span class="subtitle">{{ $t('common.about') }}</span>
             <h2>{{ $t('home.about.title', { years: experienceYears }) }}</h2>
-            <p class="lead">{{ $t('home.about.description') }}</p>
+            <p class="about-additional lead">{{ $t('home.about.description') }}</p>
             <div class="about-features">
               <div class="feature-item">
                 <div class="feature-icon">
@@ -65,6 +65,9 @@
                 src="/images/dr_mu.jpg" 
                 alt="Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı, 20+ yıllık deneyim"
                 loading="lazy"
+                decoding="async"
+                width="400"
+                height="500"
               >
             </div>
           </div>
