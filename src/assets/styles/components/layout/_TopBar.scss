@@ -118,16 +118,29 @@
     .row {
       display: flex;
       align-items: center;
-      flex-wrap: nowrap; // Tek satırda kalsın
+      justify-content: space-between; // Sol ve sağ arasında boşluk
+      flex-wrap: nowrap;
     }
 
-    // Bootstrap grid davranışını override et (md altı 100% olmasın)
-    .col-md-7 { flex: 1 1 0; width: auto; min-width: 0; }
-    .col-md-4 { flex: 0 0 auto; width: auto; }
-    .col-md-1 { flex: 0 0 auto; width: auto; }
-    .col-md-7,
+    // Mobilde layout'u yeniden düzenle
+    .col-md-7 { 
+      display: none !important; // Çalışma saatlerini gizle
+    }
+    .col-md-4 { 
+      flex: 0 0 auto; 
+      width: auto; 
+      order: 1; // Sol tarafa taşı
+    }
+    .col-md-1 { 
+      flex: 0 0 auto; 
+      width: auto; 
+      order: 2; // Sağ tarafa taşı
+    }
     .col-md-4,
-    .col-md-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+    .col-md-1 { 
+      padding-left: 0.25rem; 
+      padding-right: 0.25rem; 
+    }
 
     // Uzun metinlerin taşmasını engelle
     a, span {
@@ -139,9 +152,6 @@
       text-overflow: ellipsis;
     }
 
-    // Mobilde sadece telefon ve dil seçici kalsın, e-posta ve uzun saat metnini gizle
-    // Saat ve e-posta metinlerini küçült, tamamen gizleme yerine yer aç
-    .col-md-7 span { display: inline-flex; max-width: 46vw; }
     .col-md-4 a { display: none !important; } // Desktop linkleri gizle
     .support-wrapper .support-toggle {
       padding: 0.25rem 0.5rem;
@@ -153,9 +163,6 @@
       align-items: center;
       gap: 0.25rem;
     }
-
-    .col-md-4 { text-align: left !important; }
-    .col-md-1 { text-align: right !important; }
 
     .language-selector {
       margin: 0;

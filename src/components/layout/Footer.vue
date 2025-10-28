@@ -39,9 +39,9 @@
                 <li><router-link to="/#genel">{{ $t('header.generalDermatology') }}</router-link></li>
                 <li><router-link to="/#estetik">{{ $t('header.aestheticDermatology') }}</router-link></li>
                 <li><router-link to="/#lazer">{{ $t('header.laserTreatments') }}</router-link></li>
-                <li><router-link to="/hizmetler/akne-sivilce-tedavisi">Akne Tedavisi</router-link></li>
-                <li><router-link to="/hizmetler/botoks-uygulamasi">Botoks Uygulaması</router-link></li>
-                <li><router-link to="/hizmetler/dolgu-uygulamasi">Dolgu Uygulaması</router-link></li>
+                <li><router-link :to="getServiceLink('akne-sivilce-tedavisi')">{{ $t('services.general.items.acne') }}</router-link></li>
+                <li><router-link :to="getServiceLink('botoks-uygulamasi')">{{ $t('services.aesthetic.items.botox') }}</router-link></li>
+                <li><router-link :to="getServiceLink('dolgu-uygulamasi')">{{ $t('services.aesthetic.items.filler') }}</router-link></li>
               </ul>
             </div>
           </div>
@@ -100,10 +100,12 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 import LanguageSelector from '@/components/common/LanguageSelector.vue'
 import '@/assets/styles/components/layout/_Footer.scss';
 
 const store = useStore()
+const { locale } = useI18n()
 
 // Store'dan şirket bilgilerini al
 const companyName = computed(() => store.getters['companyInfo/companyName'])
@@ -112,6 +114,21 @@ const companyAddress = computed(() => store.getters['companyInfo/companyAddress'
 const companyPhone = computed(() => store.getters['companyInfo/companyPhone'])
 const companyEmail = computed(() => store.getters['companyInfo/companyEmail'])
 const companyWorkingHours = computed(() => store.getters['companyInfo/workingHours'])
+
+// Servis linklerini dil bazında oluştur
+const getServiceLink = (slug) => {
+  // Türkçe için Türkçe slug'ları kullan
+  if (locale.value === 'tr') {
+    return `/hizmetler/${slug}`
+  }
+  // İngilizce için İngilizce slug'ları kullan
+  const englishSlugs = {
+    'akne-sivilce-tedavisi': 'acne-treatment',
+    'botoks-uygulamasi': 'botox-treatment',
+    'dolgu-uygulamasi': 'filler-treatment'
+  }
+  return `/services/${englishSlugs[slug] || slug}`
+}
 
 onMounted(async () => {
   // Şirket bilgilerini çek
