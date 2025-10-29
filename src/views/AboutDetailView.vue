@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-            <h1 class="hero-title">Hakkımda</h1>
+            <h1 class="hero-title">{{ t('about.title') }}</h1>
           </div>
         </div>
       </div>
@@ -23,8 +23,8 @@
                   <img src="/images/dr_mu.jpg" alt="Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı, 20+ yıllık deneyim" class="profile-img">
                 </div>
                 <div class="doctor-basic-info">
-                  <h2>Doç. Dr. Mehmet Ünal</h2>
-                  <p class="lead">Dermatoloji alanında 20+ yıllık deneyime sahip uzman doktorumuz, modern tıp teknolojilerini kullanarak hastalarına en iyi tedavi hizmetini sunmaktadır.</p>
+                  <h2>{{ t('about.doctorProfile.name') }}</h2>
+                  <p class="lead">{{ t('about.doctorProfile.description') }}</p>
                 </div>
               </div>
               
@@ -130,30 +130,30 @@
 
             <!-- Klinik Hakkında -->
             <div class="content-section">
-              <h2>Kliniğimiz</h2>
-              <p>2021 yılından bu yana Konya'da hizmet veren kliniğimiz, modern teknoloji ve uzman kadrosuyla dermatoloji alanında öncü kuruluşlardan biridir.</p>
+              <h2>{{ t('about.clinic.title') }}</h2>
+              <p>{{ t('about.clinic.description') }}</p>
               
               <div class="clinic-features">
                 <div class="feature-grid">
                   <div class="feature-item">
                     <i class="fas fa-microscope"></i>
-                    <h4>Modern Laboratuvar</h4>
-                    <p>En son teknoloji cihazlarla donatılmış laboratuvarımızda kesin tanı ve tedavi imkanı.</p>
+                    <h4>{{ t('about.clinic.features.laboratory.title') }}</h4>
+                    <p>{{ t('about.clinic.features.laboratory.description') }}</p>
                   </div>
                   <div class="feature-item">
                     <i class="fas fa-laser"></i>
-                    <h4>Lazer Tedavileri</h4>
-                    <p>Gelişmiş lazer sistemleri ile etkili ve güvenli tedavi seçenekleri.</p>
+                    <h4>{{ t('about.clinic.features.laser.title') }}</h4>
+                    <p>{{ t('about.clinic.features.laser.description') }}</p>
                   </div>
                   <div class="feature-item">
                     <i class="fas fa-shield-alt"></i>
-                    <h4>Steril Ortam</h4>
-                    <p>Hijyenik ve steril ortamda güvenli tedavi hizmeti.</p>
+                    <h4>{{ t('about.clinic.features.sterile.title') }}</h4>
+                    <p>{{ t('about.clinic.features.sterile.description') }}</p>
                   </div>
                   <div class="feature-item">
                     <i class="fas fa-clock"></i>
-                    <h4>7/24 Hizmet</h4>
-                    <p>Acil durumlar için 7/24 hizmet veren uzman kadromuz.</p>
+                    <h4>{{ t('about.clinic.features.service24.title') }}</h4>
+                    <p>{{ t('about.clinic.features.service24.description') }}</p>
                   </div>
                 </div>
               </div>
@@ -164,14 +164,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="mission-vision">
-                    <h3>Misyonumuz</h3>
-                    <p>Hastalarımıza en yüksek kalitede dermatolojik hizmet sunarak, cilt sağlığı ve estetiği konusunda güvenilir çözümler üretmek.</p>
+                    <h3>{{ t('about.mission.title') }}</h3>
+                    <p>{{ t('about.mission.description') }}</p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mission-vision">
-                    <h3>Vizyonumuz</h3>
-                    <p>Dermatoloji alanında Türkiye'nin önde gelen merkezlerinden biri olmak ve uluslararası standartlarda hizmet vermek.</p>
+                    <h3>{{ t('about.vision.title') }}</h3>
+                    <p>{{ t('about.vision.description') }}</p>
                   </div>
                 </div>
               </div>
@@ -183,26 +183,26 @@
             <div class="sidebar">
               <!-- İletişim Bilgileri -->
               <div class="sidebar-widget">
-                <h3>İletişim</h3>
+                <h3>{{ t('about.contactTitle') }}</h3>
                 <div class="contact-info">
                   <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
-                      <strong>{{ t('contact.info.address') }}:</strong>
+                      <strong>{{ t('common.address') }}:</strong>
                       <p>{{ companyAddress }}</p>
                     </div>
                   </div>
                   <div class="contact-item">
                     <i class="fas fa-phone"></i>
                     <div>
-                      <strong>{{ t('contact.info.phone') }}:</strong>
+                      <strong>{{ t('common.phone') }}:</strong>
                       <p>{{ companyPhone }}</p>
                     </div>
                   </div>
                   <div class="contact-item">
                     <i class="fas fa-envelope"></i>
                     <div>
-                      <strong>{{ t('contact.info.email') }}:</strong>
+                      <strong>{{ t('common.email') }}:</strong>
                       <p>{{ companyEmail }}</p>
                     </div>
                   </div>
@@ -211,7 +211,7 @@
 
               <!-- Çalışma Saatleri -->
               <div class="sidebar-widget">
-                <h3>{{ t('contact.info.workingHours') }}</h3>
+                <h3>{{ t('common.workingHours') }}</h3>
                 <div class="working-hours">
                   <div class="time-item">
                     <span>{{ workingHours }}</span>
@@ -221,9 +221,9 @@
 
               <!-- Randevu Butonu -->
               <div class="sidebar-widget">
-                <a href="#randevu" class="btn btn-primary btn-block">
+                <a :href="`tel:${companyPhone}`" class="btn btn-primary btn-block">
                   <i class="fas fa-calendar-check me-2"></i>
-                  Randevu Al
+                  {{ t('about.bookAppointment') }}
                 </a>
               </div>
             </div>
@@ -242,10 +242,11 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 // @ts-ignore
 import fallbackData from '@/data/fallback-data.js'
+// @ts-ignore
 import { useSEO } from '@/composables/useSEO'
 
 const store = useStore()
-const { t } = useI18n()
+const { locale, t } = useI18n()
 const { setSEOHead } = useSEO()
 
 // CompanyInfo'dan veri çek
@@ -273,6 +274,22 @@ const workingHours = computed(() => {
   return hours || fallbackHours
 })
 
+// Store'dan menü öğelerini al
+const menuItems = computed(() => store.getters['menu/menuItems'])
+
+// Target'i "/hakkimizda-detay" olan menü öğesini bul
+const aboutMenu = computed(() => {
+  return menuItems.value.find(item => item.target === '/hakkimizda-detay')
+})
+
+// About menüsünün translations content'ini dile göre al
+const aboutMenuContent = computed(() => {
+  if (!aboutMenu.value || !aboutMenu.value.translations) return ''
+  
+  const translation = aboutMenu.value.translations.find(t => t.language?.code === locale.value)
+  return translation?.content || aboutMenu.value.content || ''
+})
+
 onMounted(async () => {
   // CompanyInfo'yu yükle
   await store.dispatch('companyInfo/fetchActiveCompanyInfo')
@@ -293,15 +310,17 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/_variables.scss' as *;
+
 .about-detail-page {
-  background-color: #111111;
+  background-color: $about-background;
   min-height: 100vh;
-  color: #ffffff;
+  color: $white;
   padding-top: 120px; /* Header yüksekliği kadar üstten boşluk */
 
   .hero-section {
-    background: linear-gradient(135deg, #111111 0%, #2c2c2c 100%);
-    color: white;
+    background: $about-hero-bg;
+    color: $white;
     padding: 4rem 0;
     text-align: center;
     position: relative;
@@ -314,7 +333,7 @@ onMounted(async () => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      background: $about-hero-overlay;
       z-index: 0;
     }
 
@@ -325,55 +344,55 @@ onMounted(async () => {
 
     .hero-title {
       font-size: 3.5rem;
-      font-weight: 700;
-      color: #D4AF37;
+      font-weight: $font-weight-bold;
+      color: $gold;
       margin-bottom: 1rem;
     }
 
     .hero-subtitle {
       font-size: 1.3rem;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba($white, 0.8);
       margin: 0;
     }
   }
 
   .main-content {
     padding: 4rem 0;
-    background-color: #111111;
+    background-color: $about-background;
 
     .content-section {
-      background: rgba(255, 255, 255, 0.05);
+      background: $about-content-bg;
       padding: 2.5rem;
       border-radius: 15px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba($gold, 0.2);
       margin-bottom: 2rem;
-      transition: all 0.3s ease;
+      transition: $transition-base;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(212, 175, 55, 0.4);
+        background: rgba($white, 0.08);
+        border-color: rgba($gold, 0.4);
         transform: translateY(-2px);
       }
 
       h2 {
-        color: #D4AF37;
+        color: $gold;
         font-size: 2.5rem;
-        font-weight: 700;
+        font-weight: $font-weight-bold;
         margin-bottom: 1.5rem;
-        border-bottom: 3px solid #D4AF37;
+        border-bottom: 3px solid $gold;
         padding-bottom: 1rem;
       }
 
       h3 {
-        color: #D4AF37;
+        color: $gold;
         font-size: 1.8rem;
-        font-weight: 600;
+        font-weight: $font-weight-semibold;
         margin-bottom: 1rem;
       }
 
       .lead {
         font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba($white, 0.8);
         margin-bottom: 2rem;
       }
 
@@ -383,7 +402,7 @@ onMounted(async () => {
         gap: 2rem;
         margin-bottom: 2rem;
         padding-bottom: 2rem;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        border-bottom: 1px solid rgba($gold, 0.2);
 
                  .doctor-image {
            flex-shrink: 0;
@@ -391,7 +410,7 @@ onMounted(async () => {
            height: 200px;
            border-radius: 15px;
            overflow: hidden;
-           box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+           box-shadow: $shadow-lg;
 
            .profile-img {
              width: 100%;
@@ -402,20 +421,25 @@ onMounted(async () => {
 
         .doctor-basic-info {
           h2 {
-            color: #D4AF37;
+            color: $gold;
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: $font-weight-bold;
             margin-bottom: 0.5rem;
           }
 
           .lead {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba($white, 0.8);
             margin-bottom: 0;
           }
         }
       }
 
+      // İçerideki doctor-info class'ları için stil
+      :deep(.doctor-info) {
+        margin-bottom: 2rem;
+      }
+      
       .doctor-info {
         margin-bottom: 2rem;
 
@@ -425,20 +449,20 @@ onMounted(async () => {
 
           li {
             padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba($gold, 0.2);
+            color: rgba($white, 0.8);
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            transition: $transition-base;
 
             &:hover {
-              color: #ffffff;
+              color: $white;
               padding-left: 0.5rem;
             }
 
             &:before {
               content: '✓';
-              color: #D4AF37;
-              font-weight: bold;
+              color: $gold;
+              font-weight: $font-weight-bold;
               margin-right: 1rem;
             }
 
@@ -461,7 +485,7 @@ onMounted(async () => {
           top: 0;
           bottom: 0;
           width: 3px;
-          background-color: #D4AF37;
+          background-color: $gold;
           border-radius: 3px;
         }
 
@@ -481,11 +505,11 @@ onMounted(async () => {
             top: 1.5rem;
             width: 20px;
             height: 20px;
-            background-color: #D4AF37;
+            background-color: $gold;
             border-radius: 50%;
-            border: 4px solid #111111;
+            border: 4px solid $about-background;
             z-index: 1;
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 0 2px rgba($gold, 0.3);
           }
 
           .timeline-year {
@@ -494,44 +518,44 @@ onMounted(async () => {
             top: 0;
             width: 140px;
             text-align: left;
-            color: #D4AF37;
+            color: $gold;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: $font-weight-semibold;
             margin-top: 1rem;
-            background: rgba(212, 175, 55, 0.15);
+            background: rgba($gold, 0.15);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            border: 1px solid rgba($gold, 0.4);
             white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: $shadow-sm;
           }
 
           .timeline-content {
-            background: rgba(212, 175, 55, 0.1);
+            background: $about-timeline-bg;
             padding: 1.8rem;
             border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
+            border: 1px solid rgba($gold, 0.2);
+            transition: $transition-base;
             position: relative;
             margin-left: 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: $shadow-md;
 
             &:hover {
-              background: rgba(212, 175, 55, 0.15);
-              border-color: #D4AF37;
-              box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+              background: rgba($gold, 0.15);
+              border-color: $gold;
+              box-shadow: $shadow-lg;
               transform: translateX(8px);
             }
 
             h4 {
-              color: #D4AF37;
+              color: $gold;
               font-size: 1.3rem;
-              font-weight: 600;
+              font-weight: $font-weight-semibold;
               margin-bottom: 0.8rem;
             }
 
             p {
-              color: rgba(255, 255, 255, 0.8);
+              color: rgba($white, 0.8);
               margin: 0;
               line-height: 1.6;
               font-size: 1rem;
@@ -550,33 +574,33 @@ onMounted(async () => {
           .feature-item {
             text-align: center;
             padding: 1.5rem;
-            background: rgba(212, 175, 55, 0.1);
+            background: $about-feature-bg;
             border-radius: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
+            border: 1px solid rgba($gold, 0.2);
+            transition: $transition-base;
 
             &:hover {
               transform: translateY(-5px);
-              background: rgba(212, 175, 55, 0.15);
-              border-color: #D4AF37;
-              box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+              background: rgba($gold, 0.15);
+              border-color: $gold;
+              box-shadow: $shadow-lg;
             }
 
             i {
               font-size: 2.5rem;
-              color: #D4AF37;
+              color: $gold;
               margin-bottom: 1rem;
             }
 
             h4 {
-              color: #D4AF37;
+              color: $gold;
               font-size: 1.3rem;
-              font-weight: 600;
+              font-weight: $font-weight-semibold;
               margin-bottom: 1rem;
             }
 
             p {
-              color: rgba(255, 255, 255, 0.8);
+              color: rgba($white, 0.8);
               margin: 0;
             }
           }
@@ -584,25 +608,25 @@ onMounted(async () => {
       }
 
       .mission-vision {
-        background: rgba(212, 175, 55, 0.1);
+        background: rgba($gold, 0.1);
         padding: 1.5rem;
         border-radius: 10px;
-        border-left: 4px solid #D4AF37;
-        transition: all 0.3s ease;
+        border-left: 4px solid $gold;
+        transition: $transition-base;
 
         &:hover {
-          background: rgba(212, 175, 55, 0.15);
+          background: rgba($gold, 0.15);
           transform: translateX(5px);
         }
 
         h3 {
-          color: #D4AF37;
+          color: $gold;
           font-size: 1.5rem;
           margin-bottom: 1rem;
         }
 
         p {
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba($white, 0.8);
           margin: 0;
         }
       }
@@ -610,25 +634,25 @@ onMounted(async () => {
 
     .sidebar {
       .sidebar-widget {
-        background: rgba(255, 255, 255, 0.05);
+        background: $about-content-bg;
         padding: 2rem;
         border-radius: 15px;
-        border: 1px solid rgba(212, 175, 55, 0.2);
+        border: 1px solid rgba($gold, 0.2);
         margin-bottom: 2rem;
-        transition: all 0.3s ease;
+        transition: $transition-base;
 
         &:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(212, 175, 55, 0.4);
+          background: rgba($white, 0.08);
+          border-color: rgba($gold, 0.4);
           transform: translateY(-2px);
         }
 
         h3 {
-          color: #D4AF37;
+          color: $gold;
           font-size: 1.5rem;
-          font-weight: 600;
+          font-weight: $font-weight-semibold;
           margin-bottom: 1.5rem;
-          border-bottom: 2px solid #D4AF37;
+          border-bottom: 2px solid $gold;
           padding-bottom: 0.5rem;
         }
 
@@ -643,25 +667,25 @@ onMounted(async () => {
             transition: all 0.3s ease;
 
             &:hover {
-              background: rgba(212, 175, 55, 0.1);
+              background: rgba($gold, 0.1);
             }
 
             i {
-              color: #D4AF37;
+              color: $gold;
               font-size: 1.2rem;
               margin-top: 0.2rem;
             }
 
             div {
               strong {
-                color: #D4AF37;
+                color: $gold;
                 font-size: 0.9rem;
                 text-transform: uppercase;
                 letter-spacing: 1px;
               }
 
               p {
-                color: rgba(255, 255, 255, 0.8);
+                color: rgba($white, 0.8);
                 margin: 0.5rem 0 0 0;
               }
             }
@@ -673,11 +697,11 @@ onMounted(async () => {
             display: flex;
             justify-content: space-between;
             padding: 0.8rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba($gold, 0.2);
+            transition: $transition-base;
 
             &:hover {
-              background: rgba(212, 175, 55, 0.1);
+              background: rgba($gold, 0.1);
               padding-left: 1rem;
             }
 
@@ -686,12 +710,12 @@ onMounted(async () => {
             }
 
             span {
-              color: rgba(255, 255, 255, 0.8);
+              color: rgba($white, 0.8);
               font-size: 1rem;
 
               &:first-child {
-                font-weight: 500;
-                color: #D4AF37;
+                font-weight: $font-weight-medium;
+                color: $gold;
               }
             }
           }
@@ -701,20 +725,20 @@ onMounted(async () => {
           width: 100%;
           padding: 1rem;
           font-size: 1.1rem;
-          font-weight: 600;
+          font-weight: $font-weight-semibold;
           text-transform: uppercase;
           letter-spacing: 1px;
           border-radius: 50px;
-          background: #D4AF37;
-          color: #111111;
+          background: $gold;
+          color: $dark;
           border: none;
-          transition: all 0.3s ease;
+          transition: $transition-base;
 
           &:hover {
-            background: #ffffff;
-            color: #111111;
+            background: $white;
+            color: $dark;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+            box-shadow: $shadow-lg;
           }
         }
       }
