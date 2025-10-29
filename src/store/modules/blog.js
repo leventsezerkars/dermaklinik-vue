@@ -81,7 +81,7 @@ const actions = {
       commit('setLoading', true);
       commit('clearError');
       
-      const response = await BlogAPI.getAll(page, limit, search, currentLanguage);
+      const response = await BlogAPI.getAll(page, limit, search, currentLanguage,true);
       
       // API response'undan data array'ini al
       const posts = response.data.data || response.data;

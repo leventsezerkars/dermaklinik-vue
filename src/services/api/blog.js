@@ -1,9 +1,9 @@
 import apiClient from '../api.js'
 
 export const BlogAPI = {
-  async getAll(page = 1, limit = 10, search = '', languageCode = 'tr') {
+  async getAll(page = 1, limit = 10, search = '', languageCode = 'tr',isActive = true) {
     try {
-      const response = await apiClient.get(`/Blog?Page=${page}&Take=${limit}&Search=${search}&LanguageCode=${languageCode}`)
+      const response = await apiClient.get(`/Blog?Page=${page}&Take=${limit}&Search=${search}&LanguageCode=${languageCode}&IsActive=${isActive}`)
       return response
     } catch (error) {
       console.error('Blog API hatası:', error)

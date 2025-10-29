@@ -20,78 +20,69 @@
 
       <!-- Blog Posts Slider -->
       <div v-else-if="blogPosts.length > 0" class="blog-slider">
-        <div class="blog-slider-container">
-          <div class="blog-slider-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-            <div 
-              v-for="post in blogPosts" 
-              :key="post.id" 
-              class="blog-slide"
-            >
-              <div class="blog-card">
-                <div class="blog-image">
-                  <img 
-                    :src="getPostImage(post)" 
-                    :alt="getPostTitle(post)"
-                    @error="handleImageError"
-                  >
-                  <div class="blog-overlay">
-                    <div class="blog-category">
-                      <span class="badge">{{ getPostCategory(post) }}</span>
-                    </div>
+        <swiper
+          :modules="[SwiperAutoplay, SwiperPagination, SwiperNavigation]"
+          :slides-per-view="1"
+          :space-between="20"
+          :loop="blogPosts.length > 3"
+          :autoplay="blogPosts.length > 3 ? {
+            delay: 5000,
+            disableOnInteraction: false
+          } : false"
+          :pagination="blogPosts.length > 3 ? {
+            clickable: true
+          } : false"
+          :navigation="blogPosts.length > 3"
+          :breakpoints="{
+            '640': {
+              slidesPerView: 1,
+            },
+            '768': {
+              slidesPerView: 2,
+            },
+            '1024': {
+              slidesPerView: 3,
+            }
+          }"
+        >
+          <swiper-slide v-for="post in blogPosts" :key="post.id">
+            <div class="blog-card">
+              <div class="blog-image">
+                <img 
+                  :src="getPostImage(post)" 
+                  :alt="getPostTitle(post)"
+                  @error="handleImageError"
+                >
+                <div class="blog-overlay">
+                  <div class="blog-category">
+                    <span class="badge">{{ getPostCategory(post) }}</span>
                   </div>
-                </div>
-                <div class="blog-content">
-                  <h3 class="blog-title">{{ getPostTitle(post) }}</h3>
-                  <p class="blog-excerpt">{{ getPostExcerpt(post) }}</p>
-                  <div class="blog-meta">
-                    <div class="blog-date">
-                      <i class="far fa-calendar"></i>
-                      <span>{{ formatDate(getPostDate(post)) }}</span>
-                    </div>
-                    <div class="blog-views">
-                      <i class="far fa-eye"></i>
-                      <span>{{ post.viewCount || 0 }}</span>
-                    </div>
-                  </div>
-                  <router-link 
-                    :to="{ name: 'blog-detail', params: { slug: getPostSlug(post) } }" 
-                    class="btn btn-primary"
-                  >
-                    {{ $t('blog.readMore') }}
-                    <i class="fas fa-arrow-right ms-2"></i>
-                  </router-link>
                 </div>
               </div>
+              <div class="blog-content">
+                <h3 class="blog-title">{{ getPostTitle(post) }}</h3>
+                <p class="blog-excerpt">{{ getPostExcerpt(post) }}</p>
+                <div class="blog-meta">
+                  <div class="blog-date">
+                    <i class="far fa-calendar"></i>
+                    <span>{{ formatDate(getPostDate(post)) }}</span>
+                  </div>
+                  <div class="blog-views">
+                    <i class="far fa-eye"></i>
+                    <span>{{ post.viewCount || 0 }}</span>
+                  </div>
+                </div>
+                <router-link 
+                  :to="{ name: 'blog-detail', params: { slug: getPostSlug(post) } }" 
+                  class="btn btn-primary"
+                >
+                  {{ $t('blog.readMore') }}
+                  <i class="fas fa-arrow-right ms-2"></i>
+                </router-link>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <button 
-          @click="previousSlide" 
-          class="slider-btn slider-btn-prev"
-          :disabled="currentSlide === 0"
-        >
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button 
-          @click="nextSlide" 
-          class="slider-btn slider-btn-next"
-          :disabled="currentSlide >= maxSlides - 1"
-        >
-          <i class="fas fa-chevron-right"></i>
-        </button>
-
-        <!-- Dots Indicator -->
-        <div class="slider-dots">
-          <button 
-            v-for="(dot, index) in maxSlides" 
-            :key="index"
-            @click="goToSlide(index)"
-            :class="{ active: currentSlide === index }"
-            class="slider-dot"
-          ></button>
-        </div>
+          </swiper-slide>
+        </swiper>
       </div>
 
       <!-- View All Button - Sadece 3'ten fazla blog varsa göster -->
@@ -110,14 +101,19 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+
+const SwiperAutoplay = Autoplay
+const SwiperPagination = Pagination
+const SwiperNavigation = Navigation
 
 const store = useStore()
 const { locale, t } = useI18n()
 const router = useRouter()
-
-// Reactive data
-const currentSlide = ref(0)
-const autoSlideInterval = ref(null)
 
 // Computed properties
 const blogPosts = computed(() => {
@@ -128,7 +124,6 @@ const blogPosts = computed(() => {
   return []
 })
 const isLoading = computed(() => store.getters['blog/isLoading'])
-const maxSlides = computed(() => Math.ceil(blogPosts.value.length / 3)) // 3 posts per slide
 
 // Blog gösterilip gösterilmeyeceğini belirle
 const shouldShowBlog = computed(() => {
@@ -202,54 +197,14 @@ const handleImageError = (event) => {
 
 
 
-// Slider functions
-const nextSlide = () => {
-  if (currentSlide.value < maxSlides.value - 1) {
-    currentSlide.value++
-  } else {
-    currentSlide.value = 0
-  }
-}
-
-const previousSlide = () => {
-  if (currentSlide.value > 0) {
-    currentSlide.value--
-  } else {
-    currentSlide.value = maxSlides.value - 1
-  }
-}
-
-const goToSlide = (index) => {
-  currentSlide.value = index
-}
-
-const startAutoSlide = () => {
-  autoSlideInterval.value = setInterval(() => {
-    nextSlide()
-  }, 5000) // 5 saniyede bir değişsin
-}
-
-const stopAutoSlide = () => {
-  if (autoSlideInterval.value) {
-    clearInterval(autoSlideInterval.value)
-    autoSlideInterval.value = null
-  }
-}
 
 // Lifecycle
 onMounted(async () => {
   try {
     await store.dispatch('blog/fetchPosts', { limit: 6, languageCode: locale.value })
-    if (blogPosts.value.length > 3) {
-      startAutoSlide()
-    }
   } catch (error) {
     console.error('Home blog verileri yüklenirken hata:', error)
   }
-})
-
-onUnmounted(() => {
-  stopAutoSlide()
 })
 </script>
 
@@ -308,45 +263,56 @@ onUnmounted(() => {
   .blog-slider {
     position: relative;
     margin: 3rem 0;
+    padding: 0 2rem;
 
-    .blog-slider-container {
-      overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba($dark, 0.1);
-    }
-
-    .blog-slider-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .blog-slide {
-      flex: 0 0 100%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      padding: 2rem;
-
-      @media (max-width: 992px) {
-        grid-template-columns: repeat(2, 1fr);
+    // Swiper navigation butonları için özel stiller
+    :deep(.swiper-button-next),
+    :deep(.swiper-button-prev) {
+      color: $gold;
+      background: rgba($dark, 0.9);
+      border: 2px solid rgba($gold, 0.3);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      backdrop-filter: blur(10px);
+      
+      &:after {
+        font-size: 18px;
+        font-weight: bold;
       }
+      
+      &:hover {
+        background: $gold;
+        color: $dark;
+        border-color: $gold;
+      }
+    }
 
-      @media (max-width: 768px) {
-        grid-template-columns: 1fr;
+    // Swiper pagination için özel stiller
+    :deep(.swiper-pagination-bullet) {
+      background: rgba($gold, 0.3);
+      opacity: 1;
+      
+      &.swiper-pagination-bullet-active {
+        background: $gold;
+        box-shadow: 0 0 10px rgba($gold, 0.5);
       }
     }
 
     .blog-card {
-      background: $white;
+      background: linear-gradient(135deg, rgba($dark, 0.9) 0%, rgba($dark, 0.95) 100%);
+      border: 1px solid rgba($gold, 0.2);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba($dark, 0.08);
+      box-shadow: 0 4px 20px rgba($dark, 0.3);
       transition: all $transition-base;
       height: 100%;
+      backdrop-filter: blur(10px);
 
       &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba($dark, 0.15);
+        box-shadow: 0 15px 35px rgba($gold, 0.2);
+        border-color: rgba($gold, 0.4);
       }
 
       .blog-image {
@@ -387,26 +353,30 @@ onUnmounted(() => {
         .blog-title {
           font-size: 1.1rem;
           font-weight: 600;
-          color: $dark;
+          color: $white;
           margin-bottom: 0.8rem;
           line-height: 1.4;
+          height: 1.4em; // Sabit yükseklik - 1 satır
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .blog-excerpt {
+          color: rgba($white, 0.8);
+          line-height: 1.5;
+          margin-bottom: 1rem;
+          font-size: 0.9rem;
+          height: 3em; // Sabit yükseklik - 2 satır (1.5 * 2)
           display: -webkit-box;
           -webkit-line-clamp: 2;
           line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-        }
-
-        .blog-excerpt {
-          color: $gray-600;
-          line-height: 1.5;
-          margin-bottom: 1rem;
-          font-size: 0.9rem;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .blog-meta {
@@ -415,14 +385,14 @@ onUnmounted(() => {
           justify-content: space-between;
           margin-bottom: 1rem;
           padding-top: 0.8rem;
-          border-top: 1px solid $gray-200;
+          border-top: 1px solid rgba($gold, 0.2);
 
           .blog-date,
           .blog-views {
             display: flex;
             align-items: center;
             font-size: 0.8rem;
-            color: $gray-600;
+            color: rgba($white, 0.7);
 
             i {
               color: $gold;
@@ -439,91 +409,20 @@ onUnmounted(() => {
           border-radius: 8px;
           font-weight: 600;
           transition: all $transition-base;
+          background: linear-gradient(135deg, $gold, $gold-dark);
+          color: $dark;
+          border: none;
 
           &:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba($primary, 0.3);
+            box-shadow: 0 8px 20px rgba($gold, 0.4);
+            background: linear-gradient(135deg, $gold-dark, $gold);
+            color: $dark;
           }
         }
       }
     }
 
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: $white;
-      border: 2px solid $gray-200;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all $transition-base;
-      z-index: 3;
-      box-shadow: 0 4px 15px rgba($dark, 0.1);
-
-      &:hover:not(:disabled) {
-        background: $primary;
-        border-color: $primary;
-        color: $white;
-        transform: translateY(-50%) scale(1.1);
-      }
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      &.slider-btn-prev {
-        left: -25px;
-      }
-
-      &.slider-btn-next {
-        right: -25px;
-      }
-
-      @media (max-width: 768px) {
-        width: 40px;
-        height: 40px;
-
-        &.slider-btn-prev {
-          left: -20px;
-        }
-
-        &.slider-btn-next {
-          right: -20px;
-        }
-      }
-    }
-
-    .slider-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-
-      .slider-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: none;
-        background: $gray-300;
-        cursor: pointer;
-        transition: all $transition-base;
-
-        &.active {
-          background: $primary;
-          transform: scale(1.2);
-        }
-
-        &:hover:not(.active) {
-          background: $gray-400;
-        }
-      }
-    }
   }
 
   // Knowledge Home Button
