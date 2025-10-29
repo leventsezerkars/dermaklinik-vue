@@ -69,56 +69,8 @@ export default {
       backToBlog: 'Back to Blog'
     },
     searchPlaceholder: 'Search blog posts...',
-    allCategories: 'All Categories'
-  },
-
-  // Service Detail
-  serviceDetail: {
-    breadcrumb: {
-      home: 'Home',
-      service: 'Service'
-    },
-    meta: {
-      expertDermatologist: 'Expert Dermatologist',
-      updated: 'Updated',
-      professionalTreatment: 'Professional Treatment'
-    },
-    introText: 'Detailed information about {title} and modern treatment methods.',
-    loading: 'Loading service information...',
-    error: {
-      title: 'An Error Occurred',
-      retry: 'Try Again',
-      homeLink: 'Back to Home'
-    },
-    notFound: {
-      title: 'Service Not Found',
-      description: 'The service you are looking for was not found or may have been removed.',
-      homeLink: 'Back to Home'
-    },
-    sidebar: {
-      quickAppointment: {
-        title: 'Quick Appointment',
-        description: 'Contact our expert team immediately and book your appointment.',
-        stats: {
-          quickResponse: 'Quick Response',
-          expertStaff: 'Expert Staff',
-          highSatisfaction: 'High Satisfaction'
-        },
-        whatsapp: 'WhatsApp',
-        call: 'Call'
-      },
-      relatedServices: {
-        title: 'Related Services'
-      },
-      contactInfo: {
-        title: 'Contact Information',
-        address: 'Address',
-        phone: 'Phone',
-        email: 'Email',
-        workingHours: 'Working Hours',
-        workingHoursValue: 'Monday - Saturday: 09:00 - 18:00'
-      }
-    }
+    allCategories: 'All Categories',
+    noCategory: 'No Category'
   },
 
   // Header
@@ -203,7 +155,7 @@ export default {
     }
   },
 
-  // Service Detail Page
+  // Service Detail
   serviceDetail: {
     breadcrumb: {
       home: 'Home',
@@ -247,14 +199,6 @@ export default {
       },
       relatedServices: {
         title: 'Related Services'
-      },
-      contactInfo: {
-        title: 'Contact Information',
-        address: 'Address',
-        phone: 'Phone',
-        email: 'Email',
-        workingHours: 'Working Hours',
-        workingHoursValue: 'Monday - Saturday: 09:00 - 21:00'
       }
     }
   },
@@ -265,20 +209,8 @@ export default {
       title: 'Expert Hands for Your Skin Health',
       subtitle: 'We protect your skin health with modern technology and expert staff',
       cta: 'Book Appointment',
-      defaultTitle: 'Dermatology Clinic',
-      defaultSubtitle: 'Expert solutions for your skin health',
-      slide1: {
-        title: 'We Bring Science and Aesthetics Together for Your Skin',
-        subtitle: 'We provide you with the best dermatological service with our expert staff'
-      },
-      slide2: {
-        title: 'Your Skin Health is Our Area of Expertise',
-        subtitle: 'Effective results with the latest technology devices'
-      },
-      slide3: {
-        title: 'Reveal Your Natural Beauty',
-        subtitle: 'Safe and effective aesthetic dermatology applications'
-      }
+      defaultTitle: 'Assoc. Prof. Dr. Mehmet Ünal - Dermatology and Aesthetics Specialist',
+      defaultSubtitle: 'Expert solutions for your skin health'
     },
     about: {
       title: 'Your Dermatology Specialist with {years} Years of Experience',
@@ -434,34 +366,50 @@ export default {
     }
   },
 
-  // Contact
-  contact: {
-    title: 'Contact',
-    subtitle: 'Get in Touch with Us',
-    form: {
-      name: 'Full Name',
-      email: 'Email',
-      phone: 'Phone',
-      message: 'Your Message',
-      send: 'Send'
-    },
-    info: {
-      title: 'Contact Information',
-      address: 'Address',
-      phone: 'Phone',
-      email: 'Email',
-      workingHours: 'Working Hours'
-    }
-  },
-
   // About
   about: {
     title: 'About Us',
     subtitle: 'Assoc. Prof. Dr. Mehmet Ünal',
     description: 'We provide the best service to our patients using modern technology with our experienced dermatologist team.',
+    doctorProfile: {
+      name: 'Assoc. Prof. Dr. Mehmet Ünal',
+      description: 'Our expert doctor, with over 20 years of experience in the field of dermatology, provides the best treatment service to patients using modern medical technologies.'
+    },
     expertise: 'Areas of Expertise',
     experience: 'Experience',
     education: 'Education',
-    memberships: 'Memberships'
+    memberships: 'Memberships',
+    clinic: {
+      title: 'Our Clinic',
+      description: 'Our clinic, which has been serving in Konya since 2021, is one of the leading institutions in the field of dermatology with modern technology and expert staff.',
+      features: {
+        laboratory: {
+          title: 'Modern Laboratory',
+          description: 'Accurate diagnosis and treatment in our laboratory equipped with the latest technology devices.'
+        },
+        laser: {
+          title: 'Laser Treatments',
+          description: 'Effective and safe treatment options with advanced laser systems.'
+        },
+        sterile: {
+          title: 'Sterile Environment',
+          description: 'Safe treatment service in a hygienic and sterile environment.'
+        },
+        service24: {
+          title: '24/7 Service',
+          description: 'Our expert staff providing 24/7 service for emergencies.'
+        }
+      }
+    },
+    mission: {
+      title: 'Our Mission',
+      description: 'To provide the highest quality dermatological services to our patients and produce reliable solutions in skin health and aesthetics.'
+    },
+    vision: {
+      title: 'Our Vision',
+      description: 'To be one of Turkey\'s leading centers in the field of dermatology and provide service at international standards.'
+    },
+    contactTitle: 'Contact',
+    bookAppointment: 'Book Appointment'
   }
 }

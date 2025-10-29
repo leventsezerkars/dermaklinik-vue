@@ -126,7 +126,7 @@
                 <h3>{{ $t('blog.categories') }}</h3>
               <ul class="blog-categories">
                   <li v-for="category in categories" :key="category.id">
-                    <a @click="goToCategory(category)" href="#" class="category-link">
+                    <a @click.prevent="goToCategory(category)" href="javascript:void(0)" class="category-link">
                       {{ getCategoryName(category) }} <span>({{ getCategoryCount(category) }})</span>
                     </a>
                 </li>
@@ -221,7 +221,13 @@ const { setSEOHead } = useSEO()
 
 // Computed properties
 const post = computed(() => store.getters['blog/currentPost'])
-const recentPosts = computed(() => store.getters['blog/relatedPosts'])
+const allRecentPosts = computed(() => store.getters['blog/relatedPosts'])
+// Recent posts'ta current post'u filtrele
+const recentPosts = computed(() => {
+  const posts = allRecentPosts.value || []
+  if (!post.value) return posts
+  return posts.filter(p => p.id !== post.value.id)
+})
 const categories = computed(() => store.getters['blog/categories'])
 const isLoading = computed(() => store.getters['blog/isLoading'])
 const hasError = computed(() => store.getters['blog/hasError'])
@@ -321,15 +327,8 @@ const loadBlogData = async () => {
   }
 }
 
-// Watch for language changes
-watch(locale, async (newLocale) => {
-  await loadBlogData()
-})
-
-// Load data on mount
-onMounted(async () => {
-  await loadBlogData()
-  // Blog detayı yüklendikten sonra görüntülenme sayısını artır
+// View count artırma ve analytics fonksiyonu
+const incrementViewAndTrack = async () => {
   if (post.value?.id) {
     await store.dispatch('blog/incrementPostView', post.value.id)
     
@@ -337,6 +336,26 @@ onMounted(async () => {
     const postTitle = getPostTitle(post.value)
     trackBlogRead(postTitle, post.value.id)
   }
+}
+
+// Watch for language changes
+watch(locale, async (newLocale) => {
+  await loadBlogData()
+  await incrementViewAndTrack()
+})
+
+// Watch for route params changes (URL değiştiğinde içeriği güncelle)
+watch(() => route.params.slug, async (newSlug, oldSlug) => {
+  if (newSlug && newSlug !== oldSlug) {
+    await loadBlogData()
+    await incrementViewAndTrack()
+  }
+}, { immediate: false })
+
+// Load data on mount
+onMounted(async () => {
+  await loadBlogData()
+  await incrementViewAndTrack()
 })
 
 // SEO için head bilgilerini ayarla

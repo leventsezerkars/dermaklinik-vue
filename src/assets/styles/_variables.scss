@@ -149,10 +149,11 @@ $service-card-shadow: rgba(0, 0, 0, 0.3);
 
 // About Detail Colors
 $about-background: #111111;
-$about-hero-bg: linear-gradient(135deg, #111111 0%, #2c2c2c 100%);
+$about-hero-bg: linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #1a1a1a 100%);
 $about-content-bg: rgba(255, 255, 255, 0.05);
 $about-timeline-bg: rgba($gold, 0.1);
 $about-feature-bg: rgba($gold, 0.1);
+$about-hero-overlay: linear-gradient(135deg, rgba($gold, 0.08) 0%, rgba($gold, 0.03) 100%);
 
 // Gradients
 $gold-gradient: linear-gradient(to right, 

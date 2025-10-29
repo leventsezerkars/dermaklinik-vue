@@ -73,55 +73,6 @@ export default {
     noCategory: 'Kategori Yok'
   },
 
-  // Service Detail
-  serviceDetail: {
-    breadcrumb: {
-      home: 'Ana Sayfa',
-      service: 'Hizmet'
-    },
-    meta: {
-      expertDermatologist: 'Uzman Dermatolog',
-      updated: 'Güncellendi',
-      professionalTreatment: 'Profesyonel Tedavi'
-    },
-    introText: '{title} hakkında detaylı bilgi ve modern tedavi yöntemleri.',
-    loading: 'Hizmet bilgileri yükleniyor...',
-    error: {
-      title: 'Bir Hata Oluştu',
-      retry: 'Tekrar Dene',
-      homeLink: 'Ana Sayfaya Dön'
-    },
-    notFound: {
-      title: 'Hizmet Bulunamadı',
-      description: 'Aradığınız hizmet bulunamadı veya kaldırılmış olabilir.',
-      homeLink: 'Ana Sayfaya Dön'
-    },
-    sidebar: {
-      quickAppointment: {
-        title: 'Hızlı Randevu',
-        description: 'Uzman ekibimizle hemen iletişime geçin ve randevunuzu alın.',
-        stats: {
-          quickResponse: 'Hızlı Yanıt',
-          expertStaff: 'Uzman Kadro',
-          highSatisfaction: 'Yüksek Memnuniyet'
-        },
-        whatsapp: 'WhatsApp',
-        call: 'Ara'
-      },
-      relatedServices: {
-        title: 'İlgili Hizmetler'
-      },
-      contactInfo: {
-        title: 'İletişim Bilgileri',
-        address: 'Adres',
-        phone: 'Telefon',
-        email: 'E-posta',
-        workingHours: 'Çalışma Saatleri',
-        workingHoursValue: 'Pazartesi - Cumartesi: 09:00 - 18:00'
-      }
-    }
-  },
-
   // Header
   header: {
     brand: 'DOÇ. DR. MEHMET ÜNAL',
@@ -204,7 +155,7 @@ export default {
     }
   },
 
-  // Service Detail Page
+  // Service Detail
   serviceDetail: {
     breadcrumb: {
       home: 'Ana Sayfa',
@@ -212,7 +163,7 @@ export default {
     },
     meta: {
       expertDermatologist: 'Uzman Dermatolog',
-      updated: 'Güncel',
+      updated: 'Güncellendi',
       professionalTreatment: 'Profesyonel Tedavi'
     },
     introText: 'Bu sayfada {title} hakkında detaylı bilgi bulabilir, tedavi süreçlerini öğrenebilir ve uzman ekibimizle iletişime geçebilirsiniz.',
@@ -248,14 +199,6 @@ export default {
       },
       relatedServices: {
         title: 'İlgili Hizmetler'
-      },
-      contactInfo: {
-        title: 'İletişim Bilgileri',
-        address: 'Adres',
-        phone: 'Telefon',
-        email: 'E-posta',
-        workingHours: 'Çalışma Saatleri',
-        workingHoursValue: 'Pazartesi - Cumartesi: 09:00 - 21:00'
       }
     }
   },
@@ -267,7 +210,7 @@ export default {
       subtitle: 'Modern teknoloji ve uzman kadromuzla cilt sağlığınızı koruyoruz',
       cta: 'Randevu Alın',
       defaultTitle: 'Doç. Dr. Mehmet Ünal - Dermatoloji ve Estetik Uzmanı',
-      defaultSubtitle: 'Cilt sağlığınız için uzman çözümler',
+      defaultSubtitle: 'Cilt sağlığınız için uzman çözümler'
     },
     about: {
       title: '{years} Yıllık Tecrübe ile Dermatoloji Uzmanınız',
@@ -423,34 +366,50 @@ export default {
     }
   },
 
-  // Contact
-  contact: {
-    title: 'İletişim',
-    subtitle: 'Bizimle İletişime Geçin',
-    form: {
-      name: 'Ad Soyad',
-      email: 'E-posta',
-      phone: 'Telefon',
-      message: 'Mesajınız',
-      send: 'Gönder'
-    },
-    info: {
-      title: 'İletişim Bilgileri',
-      address: 'Adres',
-      phone: 'Telefon',
-      email: 'E-posta',
-      workingHours: 'Çalışma Saatleri'
-    }
-  },
-
   // About
   about: {
     title: 'Hakkımızda',
     subtitle: 'Doç. Dr. Mehmet Ünal',
     description: 'Deneyimli dermatolog ekibimizle modern teknoloji kullanarak hastalarımıza en iyi hizmeti sunuyoruz.',
+    doctorProfile: {
+      name: 'Doç. Dr. Mehmet Ünal',
+      description: 'Dermatoloji alanında 20+ yıllık deneyime sahip uzman doktorumuz, modern tıp teknolojilerini kullanarak hastalarına en iyi tedavi hizmetini sunmaktadır.'
+    },
     expertise: 'Uzmanlık Alanları',
     experience: 'Deneyim',
     education: 'Eğitim',
-    memberships: 'Üyelikler'
+    memberships: 'Üyelikler',
+    clinic: {
+      title: 'Kliniğimiz',
+      description: '2021 yılından bu yana Konya\'da hizmet veren kliniğimiz, modern teknoloji ve uzman kadrosuyla dermatoloji alanında öncü kuruluşlardan biridir.',
+      features: {
+        laboratory: {
+          title: 'Modern Laboratuvar',
+          description: 'En son teknoloji cihazlarla donatılmış laboratuvarımızda kesin tanı ve tedavi imkanı.'
+        },
+        laser: {
+          title: 'Lazer Tedavileri',
+          description: 'Gelişmiş lazer sistemleri ile etkili ve güvenli tedavi seçenekleri.'
+        },
+        sterile: {
+          title: 'Steril Ortam',
+          description: 'Hijyenik ve steril ortamda güvenli tedavi hizmeti.'
+        },
+        service24: {
+          title: '7/24 Hizmet',
+          description: 'Acil durumlar için 7/24 hizmet veren uzman kadromuz.'
+        }
+      }
+    },
+    mission: {
+      title: 'Misyonumuz',
+      description: 'Hastalarımıza en yüksek kalitede dermatolojik hizmet sunarak, cilt sağlığı ve estetiği konusunda güvenilir çözümler üretmek.'
+    },
+    vision: {
+      title: 'Vizyonumuz',
+      description: 'Dermatoloji alanında Türkiye\'nin önde gelen merkezlerinden biri olmak ve uluslararası standartlarda hizmet vermek.'
+    },
+    contactTitle: 'İletişim',
+    bookAppointment: 'Randevu Al'
   }
 }

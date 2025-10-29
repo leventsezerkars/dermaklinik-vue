@@ -180,35 +180,35 @@
             <div class="sidebar-card">
               <div class="card-header">
                 <i class="fas fa-info-circle"></i>
-                <h3>{{ $t('serviceDetail.sidebar.contactInfo.title') }}</h3>
+                <h3>{{ $t('common.contactInfo') }}</h3>
               </div>
               <div class="card-content">
                 <div class="info-list">
                 <div class="info-item">
                   <i class="fas fa-map-marker-alt"></i>
                   <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.address') }}</strong>
+                    <strong>{{ $t('common.address') }}</strong>
                       <span>{{ contactInfo.address }}</span>
                   </div>
                 </div>
                 <div class="info-item">
                   <i class="fas fa-phone"></i>
                   <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.phone') }}</strong>
+                    <strong>{{ $t('common.phone') }}</strong>
                       <span>{{ contactInfo.phone }}</span>
                   </div>
                 </div>
                 <div class="info-item">
                   <i class="fas fa-envelope"></i>
                   <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.email') }}</strong>
+                    <strong>{{ $t('common.email') }}</strong>
                       <span>{{ contactInfo.email }}</span>
                   </div>
                 </div>
                 <div class="info-item">
                   <i class="fas fa-clock"></i>
                   <div>
-                    <strong>{{ $t('serviceDetail.sidebar.contactInfo.workingHours') }}</strong>
+                    <strong>{{ $t('common.workingHours') }}</strong>
                       <span>{{ contactInfo.workingHours }}</span>
                     </div>
                   </div>
