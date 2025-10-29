@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import Swiper from 'swiper'
@@ -105,8 +105,42 @@ const displaySlides = computed(() => {
 // Swiper instance
 let swiperInstance = null
 
+// Resimlerin yüklenmesini bekle
+const waitForImages = () => {
+  return new Promise((resolve) => {
+    const slides = document.querySelectorAll('.swiper-slide')
+    if (slides.length === 0) {
+      resolve()
+      return
+    }
+
+    let loadedImages = 0
+    const totalImages = slides.length
+
+    const checkComplete = () => {
+      loadedImages++
+      if (loadedImages >= totalImages) {
+        console.log('[Hero] Tüm resimler yüklendi')
+        resolve()
+      }
+    }
+
+    slides.forEach((slide, index) => {
+      const backgroundImage = slide.style.backgroundImage
+      if (backgroundImage && backgroundImage !== 'none') {
+        const img = new Image()
+        img.onload = checkComplete
+        img.onerror = checkComplete
+        img.src = backgroundImage.replace(/url\(['"]?(.+?)['"]?\)/, '$1')
+      } else {
+        checkComplete()
+      }
+    })
+  })
+}
+
 // Swiper'ı başlat
-const initSwiper = () => {
+const initSwiper = async () => {
   // DOM elementlerinin varlığını kontrol et
   const swiperElement = document.querySelector('.hero-slider')
   const paginationElement = document.querySelector('.swiper-pagination')
@@ -124,7 +158,6 @@ const initSwiper = () => {
     console.warn('[Hero] Swiper: Slide elementleri bulunamadı')
     return
   }
-  
 
   // Mevcut instance'ı temizle
   if (swiperInstance) {
@@ -132,42 +165,67 @@ const initSwiper = () => {
     swiperInstance = null
   }
   
+  // Resimlerin yüklenmesini bekle
+  await waitForImages()
   
-  try {
-    swiperInstance = new Swiper('.hero-slider', {
-      modules: [Autoplay, EffectFade, Navigation, Pagination],
-      loop: slides.length > 1, // Sadece birden fazla slide varsa loop aktif
-      speed: 1000,
-      autoplay: slides.length > 1 ? {
-        delay: 5000,
-        disableOnInteraction: false,
-      } : false, // Sadece birden fazla slide varsa autoplay aktif
-      effect: 'fade',
-      fadeEffect: {
-        crossFade: true
-      },
-      pagination: paginationElement ? {
-        el: '.swiper-pagination',
-        clickable: true,
-      } : false,
-      navigation: (nextButton && prevButton && slides.length > 1) ? {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      } : false,
-    })
-    
-  } catch (error) {
-    console.error('[Hero] Swiper: Oluşturulurken hata:', error)
-  }
+  // DOM'un tamamen hazır olmasını bekle
+  setTimeout(() => {
+    try {
+      swiperInstance = new Swiper('.hero-slider', {
+        modules: [Autoplay, EffectFade, Navigation, Pagination],
+        loop: slides.length > 1, // Sadece birden fazla slide varsa loop aktif
+        speed: 1000,
+        autoplay: slides.length > 1 ? {
+          delay: 5000,
+          disableOnInteraction: false,
+        } : false, // Sadece birden fazla slide varsa autoplay aktif
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        pagination: paginationElement ? {
+          el: '.swiper-pagination',
+          clickable: true,
+        } : false,
+        navigation: (nextButton && prevButton && slides.length > 1) ? {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        } : false,
+        // Swiper'ın tamamen yüklenmesini bekle
+        on: {
+          init: function () {
+            console.log('[Hero] Swiper: Başarıyla başlatıldı')
+          },
+          slideChange: function () {
+            console.log('[Hero] Swiper: Slide değişti')
+          }
+        }
+      })
+      
+    } catch (error) {
+      console.error('[Hero] Swiper: Oluşturulurken hata:', error)
+    }
+  }, 200) // Resimler yüklendikten sonra biraz daha bekle
 }
 
-// Watch fonksiyonunu kaldırdık - sadece onMounted'da Swiper başlatılıyor
+// Display slides değiştiğinde Swiper'ı yeniden başlat
+watch(displaySlides, async (newSlides) => {
+  if (newSlides && newSlides.length > 0) {
+    console.log('[Hero] Slides değişti, Swiper yeniden başlatılıyor:', newSlides.length)
+    // DOM'un güncellenmesini bekle
+    await nextTick()
+    // Resimlerin yüklenmesini bekle ve Swiper'ı yeniden başlat
+    setTimeout(async () => {
+      await initSwiper()
+    }, 300)
+  }
+}, { immediate: false })
 
 // Component mount edildiğinde Swiper'ı başlat
-onMounted(() => {
+onMounted(async () => {
   // Swiper'ı başlat - DOM'un hazır olmasını bekle
-  setTimeout(() => {
-    initSwiper()
+  setTimeout(async () => {
+    await initSwiper()
   }, 1000) // Daha uzun gecikme ile DOM'un tamamen hazır olmasını bekle
 })
 </script>
